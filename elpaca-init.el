@@ -1,7 +1,11 @@
 ;; elpaca-init.el -*- lexical-binding: t; -*-
 ;; https://github.com/progfolio/elpaca/blob/master/doc/init.el
 (defvar elpaca-installer-version 0.4)
-(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+
+(defvar user-cache-directory (expand-file-name ".cache/" user-emacs-directory))
+(setq native-comp-eln-load-path `(,(expand-file-name "eln-cache" user-cache-directory)))
+
+(defvar elpaca-directory (expand-file-name "elpaca/" user-cache-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
