@@ -13,6 +13,8 @@
 (setq x-stretch-cursor t)
 (setq indicate-buffer-boundaries nil)
 (setq indicate-empty-lines nil)
+(setq scroll-margin 10)
+(setq scroll-conservatively 50)
 
 (setq enable-recursive-minibuffers t)
 

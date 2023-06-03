@@ -4,16 +4,10 @@
   (setq evil-undo-system 'undo-fu
         evil-split-window-below t
         evil-vsplit-window-right t)
-;;  (defun evil-window-split-follow ()
-;;    (interactive)
-;;    (let ((evil-split-window-below (not evil-split-window-below)))
-;;      (call-interactively #'evil-window-split)))
-;;  (defun evil-window-vsplit-follow ()
-;;    (interactive)
-;;    (let ((evil-vsplit-window-right (not evil-vsplit-window-right)))
-;;      (call-interactively #'evil-window-vsplit)))
-;;  (global-set-key [remap evil-window-split] #'evil-window-split-follow)
-;;  (global-set-key [remap evil-window-vsplit] #'evil-window-vsplit-follow)
+
+  (evil-define-text-object evil-textobj-whole-buffer (count &optional _beg _end type)
+    "Text object to select the whole buffer."
+    (evil-range (point-min) (point-max) type))
 
   :init
   (setq evil-want-keybinding nil)

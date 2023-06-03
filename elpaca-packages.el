@@ -69,6 +69,10 @@
 (elpacaLF "moody")
 ;;;; Minions (hide modes on modeline)
 (elpacaLF "minions")
+;;; Ligature
+(elpacaLF "ligature")
+;;; Mixed-Pitch
+(elpacaLF "mixed-pitch")
 
 
 ;;; Dired

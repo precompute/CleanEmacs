@@ -47,6 +47,7 @@
   
   "o" '(:ignore t :wk "other")
   "oo" 'dired-jump
+  "of" 'make-frame
 
   "h" '(:ignore t :wk "help")
   "hv" 'describe-variable
@@ -56,9 +57,13 @@
   "hk" 'describe-key
   "ht" 'load-theme
   "hb" 'describe-bindings
+  "h'" 'describe-char
+  "hF" 'describe-face
+  "hm" 'describe-mode
 
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
+  "qf" 'delete-frame
   )
 
 (general-define-key
@@ -73,3 +78,18 @@
   "C-w u" 'winner-undo
   "C-w C-r" 'winner-redo
   "C-w r" 'winner-redo)
+
+(general-define-key
+  :states 'normal
+  :keymaps 'emacs-lisp-mode-map
+  "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
+
+(general-define-key
+  :states 'normal
+  "g" '(:ignore t)
+  "g c" 'evilnc-comment-operator
+  "g g" 'evil-goto-first-line)
+
+(general-define-key
+ :states 'motion
+ "a g" 'evil-textobj-whole-buffer)
