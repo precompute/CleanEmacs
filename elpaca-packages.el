@@ -83,17 +83,19 @@
 (elpacaLF "highlight-quoted")
 ;;; imenu
 (elpacaLF "imenu-list")
-;; (elpacaLF "flimenu") ;; flatten imenu
-;; (elpacaLF "keycast") ;; show keys in modeline
-;; (elpacaLF "bicycle") ;; cyclic imenu entries
+(elpacaLF "flimenu") ;; flatten imenu
+(elpacaLF "keycast") ;; show keys in modeline
+(elpacaLF "bicycle") ;; cyclic imenu entries
 ;;; perspective (workspace)
-;; (elpacaLF "perspective")
+(elpacaLF "perspective")
 ;;; diff-hl (git info in fringe)
 (elpacaLF "diff-hl")
 ;;; smart modeline
 ;; (elpacaLF "smart-mode-line")
 ;;; mood-line
 (elpacaLF "mood-line")
+;;; transpose-frame
+(elpacaLF "transpose-frame")
 
 
 
@@ -101,6 +103,8 @@
 (elpacaLF "dired" t)
 ;;;; Dired Faces (font lock)
 (elpacaLF "diredfl")
+;;;; Dired Sidebar
+(elpacaLF "dired-sidebar")
 ;;; Savehist (for minibuffers)
 (elpacaLF "savehist" t)
 ;;; Transient
