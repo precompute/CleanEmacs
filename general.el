@@ -37,7 +37,6 @@
 (setcache-c bookmark-default-file  "bookmarks")
 
 (winner-mode)
-;; (global-hl-line-mode)
 (electric-pair-mode)
 (fringe-mode '(3 . 0))
-(vc-mode-line -1)
+(savehist-mode)

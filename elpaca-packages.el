@@ -33,19 +33,19 @@
 (elpacaLF "evil-visualstar") ;; search with *
 ;;; Themes
 ;;;; Sculpture-Themes 
-(elpaca (sculpture-themes :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
+(elpaca (sculpture-themes-local :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
 ;;; Keybinds
 ;;;; General
 (elpacaLF "general")
 ;;; Completion
 ;;;; Vertico
-(elpacaLF "vertico")
+(load-file (expand-file-name "packages/vertico.el" user-emacs-directory))
 ;;;;; Orderless (sorting)
 (elpacaLF "orderless")
 ;;;;; Marginalia (vertico hints)
 (elpacaLF "marginalia")
 ;;;;; Corfu (hints)
-(elpacaLF "corfu")
+(load-file (expand-file-name "packages/corfu.el" user-emacs-directory))
 ;;;;; Consult (incremental functions)
 (elpacaLF "consult")
 ;;; Magit

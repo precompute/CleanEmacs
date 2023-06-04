@@ -2,26 +2,7 @@
 (require-theme 'sculpture-themes)
 (load-theme 'sculpture-themes-dark t)
 
-;; ;;; eldoc
-;; (defadvice :around #'elisp-get-var-docstring
-;;             "Display variable value next to documentation in eldoc."
-;;             emacs-lisp-append-value-to-eldoc-a (fn sym)
-;;             (when-let (ret (funcall fn sym))
-;;               (if (boundp sym)
-;;                   (concat ret " "
-;;                           (let* ((truncated " [...]")
-;;                                  (print-escape-newlines t)
-;;                                  (str (symbol-value sym))
-;;                                  (str (prin1-to-string str))
-;;                                  (limit (- (frame-width) (length ret) (length truncated) 1)))
-;;                             (format (format "%%0.%ds%%s" (max limit 0))
-;;                                     (propertize str 'face 'warning)
-;;                                     (if (< (length str) limit) "" truncated))))
-;;                 ret)))
-
-
 ;;; Custom Faces
-;; (require 'org-mode)
 (custom-set-faces
  '(org-level-1 ((t (:extend t :height 1.5))))
  '(org-level-2 ((t (:extend t :height 1.3))))

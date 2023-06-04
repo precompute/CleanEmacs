@@ -1,4 +1,7 @@
 (use-package consult
+  :custom
+  (consult-ripgrep-args "rg --null --line-buffered --color=never --max-columns=10000 --path-separator /   --smart-case --no-heading --with-filename --line-number")
+  (consult-async-split-style 'semicolon)
   :preface
   (global-set-key [remap bookmark-jump] #'consult-bookmark)
   (global-set-key [remap evil-show-marks] #'consult-mark)
@@ -13,4 +16,9 @@
   (global-set-key [remap switch-to-buffer] #'consult-buffer)
   (global-set-key [remap switch-to-buffer-other-window] #'consult-buffer-other-window)
   (global-set-key [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame)
-  (global-set-key [remap yank-pop] #'consult-yank-pop))
+  (global-set-key [remap yank-pop] #'consult-yank-pop)
+  :config
+  (consult-customize consult-theme
+                     :preview-key
+                     '("C-SPC"
+                       :debounce 0.5 any)))

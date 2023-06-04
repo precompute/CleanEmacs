@@ -7,6 +7,8 @@
       create-lockfiles nil
       make-backup-files nil)
 
+(setq warning-minimum-level :error)
+
 (set-face-attribute 'default nil :background "#000000" :foreground "#ffffff")
 (set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)
 

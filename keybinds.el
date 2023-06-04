@@ -33,24 +33,63 @@
   "bp" 'previous-buffer
   "bn" 'next-buffer
   
-  "s" '(:ignore t :wk "search")
+  "s" '(:ignore t :wk "show")
   "s_" 'consult-keep-lines
   "s-" 'consult-focus-lines
   "ss" 'consult-line
+  "sS" 'consult-line-multi
   "si" 'consult-imenu
-  ;; "sp"
-  ;; "sd"
+  "sm" 'consult-global-mark
+  "sd" '(lambda ()
+          (let ((consult-project-function nil))
+            (consult-ripgrep)))
+  "sp" 'consult-ripgrep
+  "se" '(:ignore t :wk "evil-show")
+  "sem" 'evil-show-marks
+  "sej" 'evil-show-jumps
+  "ser" 'evil-show-registers
 
-  "RET" 'consult-bookmark
+  "TAB" '(:ignore t :wk "perspective")
+  "TAB TAB" 'persp-switch
+  "TAB d" 'persp-kill
+  "TAB r" 'persp-rename
+  "TAB n" 'persp-next
+  "TAB p" 'persp-prev
+  "TAB a" 'persp-add-buffer
+  "TAB A" 'persp-set-buffer
+  "TAB b" 'persp-switch-to-buffer
+  "TAB a" 'persp-remove-buffer
   
+  "RET" 'consult-bookmark  
+
+  "'" 'vertico-repeat
+
   "i" '(:ignore t :wk "insert")
-  "iy" 'yank-pop
+  "iy" 'consult-yank-from-kill-ring
   "ii" 'kill-new-from-global-paste-c
   
   "o" '(:ignore t :wk "other")
   "oo" 'dired-jump
+  "od" 'dired-jump
   "of" 'make-frame
   "oi" 'imenu-list-smart-toggle
+  "op" 'dired-sidebar-toggle-sidebar
+  "o'" 'vertico-repeat
+  "o\"" 'vertico-repeat-select
+
+  "t" '(:ignore t :wk "toggle")
+  "tl" 'display-line-numbers-mode
+  "ti" 'highlight-indent-guides-mode
+  "tf" 'follow-mode
+
+  "!" '(:ignore t :wk "exclaim")
+  "!R" 'make-window-larger-c
+  ;; "!_" 'flip-frame
+  ;; "!|" 'flop-frame
+  "!?" 'transpose-frame
+  ;; "!>" 'rotate-frame-clockwise
+  ;; "!<" 'rotate-frame-anticlockwise
+  ;; "!f" 'follow-mode
 
   "h" '(:ignore t :wk "help")
   "hv" 'describe-variable
@@ -96,3 +135,10 @@
 (general-define-key
  :states 'motion
  "a g" 'evil-textobj-whole-buffer)
+
+(global-set-key (kbd "C-H-s--")  #'flip-frame)
+(global-set-key (kbd "C-H-s-\\") #'flop-frame)
+(global-set-key (kbd "C-H-s-/")  #'transpose-frame)
+(global-set-key (kbd "C-H-s-.")  #'rotate-frame-clockwise)
+(global-set-key (kbd "C-H-s-,")  #'rotate-frame-anticlockwise)
+(global-set-key (kbd "\\") 'repeat)
