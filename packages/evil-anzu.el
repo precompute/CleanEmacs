@@ -1,2 +1,6 @@
-(use-package evil-anzu)
+(use-package evil-anzu
+  :after evil
+  :init
+  (global-anzu-mode))
   
+

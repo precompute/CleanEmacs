@@ -33,7 +33,7 @@
 (elpacaLF "evil-visualstar") ;; search with *
 ;;; Themes
 ;;;; Sculpture-Themes 
-(elpacaLF "sculpture-themes")
+(elpaca (sculpture-themes :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
 ;;; Keybinds
 ;;;; General
 (elpacaLF "general")
@@ -50,6 +50,8 @@
 (elpacaLF "consult")
 ;;; Magit
 (elpacaLF "magit")
+;;;; Magit Section
+(elpacaLF "magit-section")
 ;;; Undo
 ;; (elpacaLF "undo-tree")
 (elpacaLF "undo-fu")
@@ -66,13 +68,33 @@
 ;;; Helpful (help buffers)
 (elpacaLF "helpful")
 ;;; Moody (modeline)
-(elpacaLF "moody")
+;; (elpacaLF "moody") ;; doesn't work on the header-line
 ;;;; Minions (hide modes on modeline)
-(elpacaLF "minions")
+;; (elpacaLF "minions")
 ;;; Ligature
 (elpacaLF "ligature")
 ;;; Mixed-Pitch
 (elpacaLF "mixed-pitch")
+;;; Faces for `outline-mode'
+(elpacaLF "outline-minor-faces")
+;;; Highlight Numbers
+(elpacaLF "highlight-numbers")
+;;; Highlight Quoted
+(elpacaLF "highlight-quoted")
+;;; imenu
+(elpacaLF "imenu-list")
+;; (elpacaLF "flimenu") ;; flatten imenu
+;; (elpacaLF "keycast") ;; show keys in modeline
+;; (elpacaLF "bicycle") ;; cyclic imenu entries
+;;; perspective (workspace)
+;; (elpacaLF "perspective")
+;;; diff-hl (git info in fringe)
+(elpacaLF "diff-hl")
+;;; smart modeline
+;; (elpacaLF "smart-mode-line")
+;;; mood-line
+(elpacaLF "mood-line")
+
 
 
 ;;; Dired
@@ -83,9 +105,23 @@
 (elpacaLF "savehist" t)
 ;;; Transient
 (elpacaLF "transient" t)
+;;; Outline
+(elpacaLF "outline" t)
+
+;;;; Org
+(elpacaLF "org" t)
+;;;;; Org Bullets
+(elpacaLF "org-bullets")
+;;;;; Org Super Agenda
+(elpacaLF "org-super-agenda")
 
 ;;; Language
-;;;; Markdown
-(elpacaLF "markdown-mode")
 ;;;; Elisp
 (elpacaLF "elisp-slime-nav")
+;;;; Markdown
+(elpacaLF "markdown-mode")
+
+
+;;; Misc
+;;;; sqlite3
+(elpacaLF "sqlite3")

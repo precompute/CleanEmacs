@@ -9,6 +9,7 @@
 
 (setq ring-bell-function #'ignore)
 (setq visible-bell nil)
+(setq initial-buffer-choice t)
 
 (setq x-stretch-cursor t)
 (setq indicate-buffer-boundaries nil)
@@ -36,6 +37,7 @@
 (setcache-c bookmark-default-file  "bookmarks")
 
 (winner-mode)
-(global-hl-line-mode)
+;; (global-hl-line-mode)
 (electric-pair-mode)
-
+(fringe-mode '(3 . 0))
+(vc-mode-line -1)

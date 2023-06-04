@@ -1,6 +1,6 @@
 (use-package corfu
   :config
-  (setq corfu-auto nil
+  (setq corfu-auto t
         corfu-cycle t
         corfu-quit-no-match t)
   ;; (setq corfu-popupinfo-delay (cons nil 1.0))
@@ -22,5 +22,7 @@
                         (insert " "))
                     (corfu-insert-separator)))))
   (global-set-key (kbd "C-SPC") 'completion-at-point)
+  (with-eval-after-load 'evil
+    (setq evil-complete-next-func (lambda (_) (completion-at-point))))
   :hook (prog-mode . corfu-mode))
   ;; (corfu-popupinfo-mode 1))

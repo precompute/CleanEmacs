@@ -37,6 +37,7 @@
   "s_" 'consult-keep-lines
   "s-" 'consult-focus-lines
   "ss" 'consult-line
+  "si" 'consult-imenu
   ;; "sp"
   ;; "sd"
 
@@ -44,10 +45,12 @@
   
   "i" '(:ignore t :wk "insert")
   "iy" 'yank-pop
+  "ii" 'kill-new-from-global-paste-c
   
   "o" '(:ignore t :wk "other")
   "oo" 'dired-jump
   "of" 'make-frame
+  "oi" 'imenu-list-smart-toggle
 
   "h" '(:ignore t :wk "help")
   "hv" 'describe-variable
