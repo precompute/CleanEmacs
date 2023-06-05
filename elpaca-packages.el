@@ -111,6 +111,8 @@
 (elpacaLF "whitespace-cleanup-mode")
 ;;; outshine-mode (custom headings in arbitrary code files)
 (elpacaLF "outshine")
+;;; PDF Tools
+(elpacaLF "pdf-tools")
 
 
 

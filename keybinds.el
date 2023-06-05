@@ -139,6 +139,11 @@
  [backtab] 'bicycle-cycle-global)
 
 (general-define-key
+ :states 'normal
+ :keymaps 'dired-mode-map
+ "_" 'locate-git-file-c)
+
+(general-define-key
   :states 'normal
   "g" '(:ignore t)
   "g c" 'evilnc-comment-operator
@@ -161,4 +166,12 @@
   "C-s-k" 'evil-window-increase-height
   "C-s-l" 'evil-window-increase-width
   "H-s-'" 'delete-other-windows
+  "s-[" 'outline-previous-heading
+  "s-]" 'outline-next-heading
+  "H-c" 'git-auto-time-commit
+  "H-C" 'git-prompt-commit
   "\\" 'repeat)
+
+(general-define-key
+  :states 'insert
+  "C-S-u" 'insert-char-5-discard-end)
