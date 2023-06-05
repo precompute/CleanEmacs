@@ -5,6 +5,8 @@
           vertico-mode
           magit-mode
           helpful-mode
+          help-mode
+          ibuffer-mode
 	  minibuffer-mode) . olivetti-mode)
   :config
   (setq-default olivetti-body-width 130

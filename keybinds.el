@@ -8,8 +8,7 @@
   "s-h" 'evil-backward-char
   "s-l" 'evil-forward-char
   "s-j" 'evil-next-line
-  "s-k" 'evil-previous-line
-  )
+  "s-k" 'evil-previous-line)
 
 (general-create-definer evil-keymaps-c
   :states '(normal insert visual emacs)
@@ -23,10 +22,13 @@
   "ff" 'find-file
   "fr" 'recentf-open
 
-  "g" '(:ignore t :wk "magit")
+  "g" '(:ignore t :wk "Version Control")
   "gg" 'magit-status
   "g[" 'diff-hl-previous-hunk
   "g]" 'diff-hl-next-hunk
+  "gr" 'diff-hl-revert-hunk
+  "g+" 'evil-numbers/inc-at-pt
+  "g-" 'evil-numbers/dec-at-pt
 
   "b" '(:ignore t :wk "buffer")
   "br" 'revert-buffer
@@ -83,6 +85,7 @@
   "ti" 'highlight-indent-guides-mode
   "tf" 'follow-mode
   "tc" 'corfu-mode
+  "teb" 'toggle-eldoc-box
 
   "!" '(:ignore t :wk "exclaim")
   "!R" 'make-window-larger-c
@@ -130,6 +133,12 @@
   "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
 
 (general-define-key
+ :states 'normal
+ :keymaps 'outline-minor-mode-map
+ [tab] 'bicycle-cycle
+ [backtab] 'bicycle-cycle-global)
+
+(general-define-key
   :states 'normal
   "g" '(:ignore t)
   "g c" 'evilnc-comment-operator
@@ -138,15 +147,18 @@
 (general-define-key
  :states 'motion
  "a g" 'evil-textobj-whole-buffer
- "a f" 'evil-textobj-defun)
+ "a f" 'evil-textobj-get-func)
 
-(global-set-key (kbd "C-H-s--")  #'flip-frame)
-(global-set-key (kbd "C-H-s-\\") #'flop-frame)
-(global-set-key (kbd "C-H-s-/")  #'transpose-frame)
-(global-set-key (kbd "C-H-s-.")  #'rotate-frame-clockwise)
-(global-set-key (kbd "C-H-s-,")  #'rotate-frame-anticlockwise)
-;; (global-set-key (kbd "\\") 'repeat)
-(global-set-key (kbd "C-s-h") 'evil-window-decrease-width)
-(global-set-key (kbd "C-s-j") 'evil-window-decrease-height)
-(global-set-key (kbd "C-s-k") 'evil-window-increase-height)
-(global-set-key (kbd "C-s-l") 'evil-window-increase-width)
+(general-define-key
+  :states 'normal
+  "C-H-s--" 'flip-frame
+  "C-H-s-\\" 'flop-frame
+  "C-H-s-/" 'transpose-frame
+  "C-H-s-." 'rotate-frame-clockwise
+  "C-H-s-," 'rotate-frame-anticlockwise
+  "C-s-h" 'evil-window-decrease-width
+  "C-s-j" 'evil-window-decrease-height
+  "C-s-k" 'evil-window-increase-height
+  "C-s-l" 'evil-window-increase-width
+  "H-s-'" 'delete-other-windows
+  "\\" 'repeat)

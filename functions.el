@@ -5,6 +5,28 @@
   (let ((consult-project-function nil))
     (consult-ripgrep)))
 
+(defun toggle-eldoc-box ()
+  (interactive)
+  (if (boundp 'toggle-eldoc-box--history)
+      (progn
+        (if (eq 1 (car toggle-eldoc-box--history))
+            (funcall-interactively #'eldoc-box-hover-mode)
+          (if (eq 1 (cdr toggle-eldoc-box--history))
+              (funcall-interactively #'eldoc-box-hover-at-point-mode))))
+    (defvar-local toggle-eldoc-box--history '(0 0))
+    (let ((msg ""))
+      (if eldoc-box-hover-mode
+          (progn
+            (setq-local toggle-eldoc-box--history
+                        (list 1 (cdr toggle-eldoc-box--history)))
+            (concat msg " `eldoc-box-hover-mode' disabled.")))
+      (if eldoc-box-hover-at-point-mode
+          (progn
+            (setq-local toggle-eldoc-box--history
+                        (list (car toggle-eldoc-box--history) 1))
+            (concat msg " `eldoc-box-hover-at-point-mode' disabled.")))
+      (message msg))))
+
 ;;;; completion
 ;;;;; kill-new from global paste
 (defun kill-new-from-global-paste-c ()
@@ -12,7 +34,7 @@
   (require 'sqlite3)
   (let ((mylist '()))
     (let* ((dbh (sqlite3-open "/home/sys2/.local/share/zeitgeist/activity.sqlite" sqlite-open-readonly))
-           (stmt (sqlite3-prepare dbh "select * from text order by id desc limit 500")))
+           (stmt (sqlite3-prepare dbh "select * from text order by id desc limit 1000")))
       (while (= sqlite-row (sqlite3-step stmt))
         (cl-destructuring-bind (id text) (sqlite3-fetch stmt)
           (setq mylist (nconc mylist (list text)))))

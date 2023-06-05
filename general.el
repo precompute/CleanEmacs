@@ -10,6 +10,7 @@
 (setq ring-bell-function #'ignore)
 (setq visible-bell nil)
 (setq initial-buffer-choice t)
+(setq coding-system-for-write 'raw-text)
 
 (setq x-stretch-cursor t)
 (setq indicate-buffer-boundaries nil)
@@ -19,11 +20,16 @@
 
 (setq history-length 99999)
 
+(setq recentf-max-menu-items 9999999
+      recentf-max-saved-items 9999999)
+
 (setq enable-recursive-minibuffers t)
 
 (setq vc-follow-symlinks t) ;; no prompting for changing VC'd files
 
 (setq-default indent-tabs-mode nil)
+
+(setq display-line-numbers-width 5)
 
 (setq revert-without-query '(".")) ;; no query for revert
 
@@ -39,6 +45,7 @@
 (setcache-c bookmark-default-file  "bookmarks")
 
 (winner-mode)
-(electric-pair-mode)
-(fringe-mode '(3 . 0))
+(fringe-mode '(6 . 0))
 (savehist-mode)
+(minibuffer-depth-indicate-mode)
+;; (global-display-line-numbers-mode) ;; Don’t need it.

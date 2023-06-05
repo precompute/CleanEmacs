@@ -17,7 +17,7 @@
     "Text object to select the whole buffer."
     (evil-range (point-min) (point-max) type))
 
-  (evil-define-text-object evil-txtobj-defun (count &optional _beg _end type)
+  (evil-define-text-object evil-textobj-get-func (count &optional _beg _end type)
     "Text object to select the top-level Lisp form or function definition at
 point."
     (cl-destructuring-bind (beg . end)

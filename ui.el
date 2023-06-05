@@ -15,28 +15,10 @@
  '(helpful-heading ((t (:extend t))))
  '(org-meta-line ((t (:extend t)))))
 
-;;; Header Line
-;; (setq mode-line-percent-position '(-3 "%p"))
-;; (setq mode-line-position-column-line-format '("%l,%c"))
-;; (setq mode-line-compact t)
-;; ;; (setq evil-mode-line-format nil)
-;; (setq-default mode-line-format
-;;               '("%e"
-;;                 mode-line-modified
-;;                 " A "
-;;                 mode-name
-;;                 " A "
-;;                 mode-line-remote
-;;                 " A "
-;;                 mode-line-buffer-identification
-;;                 " A "
-;;                 mode-line-position
-;;                 " A "
-;;                 (vc-mode vc-mode)
-;;                 " A "
-;;                 mode-line-misc-info))
-;; (setq header-line-format mode-line-format)
-;; (setq mode-line-format nil)
+;;; other
+;;;; show-paren
+(setq show-paren-delay 0.2
+      show-paren-style 'expression)
 
 ;;; Fonts
 (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))

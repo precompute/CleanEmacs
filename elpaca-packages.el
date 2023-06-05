@@ -12,8 +12,8 @@
           (save-excursion
             (write-region (concat "(use-package "
                                   package
-                                  (if inbuilt? "\n:elpaca nil")
-                                  ")")
+                                  (if inbuilt? "\n:elpaca nil)"
+                                    "\n:elpaca (:depth 1)\n)"))
                           nil
                           path))))
     (load-file path)))
@@ -46,6 +46,8 @@
 (elpacaLF "marginalia")
 ;;;;; Corfu (hints)
 (load-file (expand-file-name "packages/corfu.el" user-emacs-directory))
+;;;;; Consult (incremental functions)
+(elpacaLF "embark")
 ;;;;; Consult (incremental functions)
 (elpacaLF "consult")
 ;;; Magit
@@ -99,12 +101,16 @@
 ;; (elpacaLF "smart-mode-line")
 ;;; mood-line
 ;; (elpacaLF "mood-line")
+;;; pulsar (pulse line)
+;; (elpacaLF "pulsar") ;; Don’t really need it
 ;;; transpose-frame
 (elpacaLF "transpose-frame")
 ;;; rainbow-mode (highlight colors)
 (elpacaLF "rainbow-mode")
 ;;; whitespace-cleanup-mode
 (elpacaLF "whitespace-cleanup-mode")
+;;; outshine-mode (custom headings in arbitrary code files)
+(elpacaLF "outshine")
 
 
 
@@ -120,6 +126,18 @@
 (elpacaLF "transient" t)
 ;;; Outline
 (elpacaLF "outline" t)
+;;; Flymake (syntax errors)
+(elpacaLF "flymake" t)
+;;; Tree-Sitter (syntax highlighting)
+;; (elpacaLF "treesit" t)
+;;; Eldoc (documentation in echo area)
+(elpacaLF "eldoc" t)
+;;;; Eldoc Box (documentation in childframe)
+(elpacaLF "eldoc-box")
+;;; Electric Indent
+(elpacaLF "electric" t)
+;;; imenu
+(elpacaLF "imenu" t)
 
 ;;;; Org
 (elpacaLF "org" t)
