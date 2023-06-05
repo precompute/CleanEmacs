@@ -25,6 +25,8 @@
 
   "g" '(:ignore t :wk "magit")
   "gg" 'magit-status
+  "g[" 'diff-hl-previous-hunk
+  "g]" 'diff-hl-next-hunk
 
   "b" '(:ignore t :wk "buffer")
   "br" 'revert-buffer
@@ -32,6 +34,7 @@
   "bB" 'switch-to-buffer-other-window
   "bp" 'previous-buffer
   "bn" 'next-buffer
+  "bi" 'ibuffer-other-window
   
   "s" '(:ignore t :wk "show")
   "s_" 'consult-keep-lines
@@ -40,9 +43,7 @@
   "sS" 'consult-line-multi
   "si" 'consult-imenu
   "sm" 'consult-global-mark
-  "sd" '(lambda ()
-          (let ((consult-project-function nil))
-            (consult-ripgrep)))
+  "sd" 'consult-ripgrep-local
   "sp" 'consult-ripgrep
   "se" '(:ignore t :wk "evil-show")
   "sem" 'evil-show-marks
@@ -70,7 +71,7 @@
   
   "o" '(:ignore t :wk "other")
   "oo" 'dired-jump
-  "od" 'dired-jump
+  ;; "od" 'dired-jump
   "of" 'make-frame
   "oi" 'imenu-list-smart-toggle
   "op" 'dired-sidebar-toggle-sidebar
@@ -81,6 +82,7 @@
   "tl" 'display-line-numbers-mode
   "ti" 'highlight-indent-guides-mode
   "tf" 'follow-mode
+  "tc" 'corfu-mode
 
   "!" '(:ignore t :wk "exclaim")
   "!R" 'make-window-larger-c
@@ -111,7 +113,8 @@
 (general-define-key
   :states 'normal
   "z" '(:ignore t :wk "end")
-  "zx" 'kill-current-buffer)
+  "zx" 'kill-current-buffer
+  "zZ" 'bury-buffer)
 
 (general-define-key
   :states 'normal
@@ -134,11 +137,16 @@
 
 (general-define-key
  :states 'motion
- "a g" 'evil-textobj-whole-buffer)
+ "a g" 'evil-textobj-whole-buffer
+ "a f" 'evil-textobj-defun)
 
 (global-set-key (kbd "C-H-s--")  #'flip-frame)
 (global-set-key (kbd "C-H-s-\\") #'flop-frame)
 (global-set-key (kbd "C-H-s-/")  #'transpose-frame)
 (global-set-key (kbd "C-H-s-.")  #'rotate-frame-clockwise)
 (global-set-key (kbd "C-H-s-,")  #'rotate-frame-anticlockwise)
-(global-set-key (kbd "\\") 'repeat)
+;; (global-set-key (kbd "\\") 'repeat)
+(global-set-key (kbd "C-s-h") 'evil-window-decrease-width)
+(global-set-key (kbd "C-s-j") 'evil-window-decrease-height)
+(global-set-key (kbd "C-s-k") 'evil-window-increase-height)
+(global-set-key (kbd "C-s-l") 'evil-window-increase-width)

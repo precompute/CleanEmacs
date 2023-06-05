@@ -17,6 +17,8 @@
 (setq scroll-margin 10)
 (setq scroll-conservatively 50)
 
+(setq history-length 99999)
+
 (setq enable-recursive-minibuffers t)
 
 (setq vc-follow-symlinks t) ;; no prompting for changing VC'd files

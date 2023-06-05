@@ -1,4 +1,10 @@
 ;;; Functions
+;;;; convenience
+(defun consult-ripgrep-local ()
+  (interactive)
+  (let ((consult-project-function nil))
+    (consult-ripgrep)))
+
 ;;;; completion
 ;;;;; kill-new from global paste
 (defun kill-new-from-global-paste-c ()

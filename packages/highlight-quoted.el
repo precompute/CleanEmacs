@@ -1,3 +1,2 @@
 (use-package highlight-quoted
-  ;; :hook (elisp-mode . highlight-numbers-mode)
-  )
+  :hook (emacs-lisp-mode . highlight-quoted-mode))

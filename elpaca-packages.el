@@ -32,7 +32,7 @@
 (elpacaLF "evil-surround") ;; delimiter add/remove/replace
 (elpacaLF "evil-visualstar") ;; search with *
 ;;; Themes
-;;;; Sculpture-Themes 
+;;;; Sculpture-Themes
 (elpaca (sculpture-themes-local :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
 ;;; Keybinds
 ;;;; General
@@ -54,9 +54,10 @@
 (elpacaLF "magit-section")
 ;;; Undo
 ;; (elpacaLF "undo-tree")
-(elpacaLF "undo-fu")
+;; (elpacaLF "undo-fu")
+(elpacaLF "vundo")
 ;;;; Undo persistence
-(elpacaLF "undo-fu-session")
+;; (elpacaLF "undo-fu-session")
 ;;; Olivetti
 (elpacaLF "olivetti")
 ;;; Indent Guides
@@ -67,6 +68,10 @@
 (elpacaLF "rainbow-delimiters")
 ;;; Helpful (help buffers)
 (elpacaLF "helpful")
+;;; Shackle (popup rules)
+(elpacaLF "shackle")
+;;; Popwin (popup rules)
+;; (elpacaLF "popwin")
 ;;; Moody (modeline)
 ;; (elpacaLF "moody") ;; doesn't work on the header-line
 ;;;; Minions (hide modes on modeline)
@@ -93,9 +98,13 @@
 ;;; smart modeline
 ;; (elpacaLF "smart-mode-line")
 ;;; mood-line
-(elpacaLF "mood-line")
+;; (elpacaLF "mood-line")
 ;;; transpose-frame
 (elpacaLF "transpose-frame")
+;;; rainbow-mode (highlight colors)
+(elpacaLF "rainbow-mode")
+;;; whitespace-cleanup-mode
+(elpacaLF "whitespace-cleanup-mode")
 
 
 

@@ -5,13 +5,14 @@
   :bind
   (:map corfu-map ("SPC" . corfu-insert-separator))
   :config
-  (setq corfu-auto t
+  (setq corfu-auto nil
         corfu-cycle t
         corfu-quit-no-match 'separator
         corfu-quit-at-boundary 'separator
         corfu-preview-current nil
         corfu-scroll-margin 2)
   (setq corfu-popupinfo-delay (cons 0 0.1)
+        corfu-popupinfo-max-height 30
         corfu-popupinfo-hide nil)
   (setq corfu-separator ?\s)
   ;; (define-key corfu-map (kbd "SPC") ;; Max lisp eval nesting depth

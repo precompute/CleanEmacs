@@ -1,2 +1,2 @@
 (use-package transient
-:elpaca nil)
+  :elpaca nil)
