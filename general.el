@@ -47,5 +47,4 @@
 (winner-mode)
 (fringe-mode '(6 . 0))
 (savehist-mode)
-(minibuffer-depth-indicate-mode)
 ;; (global-display-line-numbers-mode) ;; Don’t need it.

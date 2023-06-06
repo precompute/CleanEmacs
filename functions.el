@@ -465,5 +465,5 @@ It switches the width before the height."
   ["Ops"
    [("o" "cycle local" org-cycle)
     ("O" "cycle global" org-shifttab)]
-   [("C" "equalize" org-headings-equalize)
+   [;; ("C" "equalize" org-headings-equalize)
     ("-" "timelogrefile" org-timelogrefile-c)]])
