@@ -57,6 +57,10 @@ accept."
   (fset (intern (format "headerline-set-%s-format-h" name))
         (lambda (&rest _) (set-headerline name))))
 
+(defun update-face-remapping-alist (face target)
+  (face-remap-reset-base target)
+  (push (list target face) face-remapping-alist))
+
 ;;;; Macros
 (defmacro def-headerline-var (name body &optional docstring &rest plist)
   "Define a headerline segment variable."
@@ -76,6 +80,13 @@ accept."
   "Get the :background property of a FACE."
   `(face-attribute ,face :background))
 
+;; (defun define-face-c (face)
+;;   "Define a FACE."
+;;   (defface ,face
+;;     '((t :foreground "#000"
+;;          :background "#000"
+;;          :box (:line-width 1 :color "#000")))))
+
 ;;; Segments
 (def-headerline-var headerline-format-left nil
                     "The left-hand side of the headerline."
@@ -88,39 +99,85 @@ accept."
                     :local t)
 
 ;;; Faces
-;; (defface headerline-active
-;;   '((t (:foreground (get-color-fg 'default)
-;;                     :background (get-color-bg 'font-lock-keyword-face)
-;;                     :box (:line-width 1 :color (get-color-fg 'font-lock-keyword-face)))))
-;;   "Headerline of current buffer.")
+;; (define-face-c header-line--dummy)
+;; (define-face-c headerline-modified-inactive)
+;; (define-face-c headerline-modified-active)
+;; (define-face-c headerline-unmodified-inactive)
+;; (define-face-c headerline-unmodified-active)
 
-;; (defface headerline-inactive
-;;   '((t (:foreground ,(get-color-fg 'default)
-;;                     :background ,(get-color-bg 'default)
-;;                     :box (:line-width 1 :color ,(get-color-fg 'font-lock-keyword-face)))))
-;;   "Headerline of another buffer.")
+(defun set-headerline-faces ()
+  (interactive)
+  (let ((fl-keyword (get-color-fg 'font-lock-keyword-face)) ;; green
+        (fl-builtin (get-color-fg 'font-lock-builtin-face)) ;; blue
+        (fl-type (get-color-fg 'font-lock-type-face)) ;; brown
+        (fl-variable (get-color-fg 'font-lock-variable-name-face)) ;; off-white
+        (fl-string (get-color-fg 'font-lock-string-face)) ;; dark red
+        (errorface (get-color-fg 'error)) ;; red
+        (matchface (get-color-fg 'match)) ;; green
+        (defaultfg (get-color-fg 'default)) ;; white
+        (defaultbg (get-color-bg 'default))) ;; black
+    ;; (message (concat fl-keyword fl-builtin fl-type))
+    (set-face-attribute 'headerline-modified-inactive nil
+                        :foreground fl-builtin
+                        :background defaultbg
+                        :box (list :line-width 1 :color fl-builtin))
+    (set-face-attribute 'headerline-modified-active nil
+                        :foreground fl-variable
+                        :background fl-builtin
+                        :box (list :line-width 1 :color fl-builtin))
+    (set-face-attribute 'headerline-unmodified-inactive nil
+                        :foreground fl-keyword
+                        :background defaultbg
+                        :box (list :line-width 1 :color fl-keyword))
+    (set-face-attribute 'headerline-unmodified-active nil
+                        :foreground fl-variable
+                        :background fl-keyword
+                        :box (list :line-width 1 :color fl-keyword))))
+(set-headerline-faces) ;; init during load
+(add-hook 'load-theme 'set-headerline-faces)
+(add-hook 'enable-theme 'set-headerline-faces)
 
-;; (defface headerline-active-modified
-;;   '((t (:foreground ,(get-color-fg 'default)
-;;                     :background ,(get-color-bg 'font-lock-builtin-face)
-;;                     :box (:line-width 1 :color ,(get-color-fg 'font-lock-builtin-face)))))
-;;   "Headerline of current buffer.")
+;; (add-hook 'pre-redisplay-functions
+;; (add-hook 'redisplay
+;; (defun headerline-set-selected-window (&rest _)
+;;   "what"
+;;   (progn
+;;     (setq headerline--active-window (frame-selected-window))
+;;     (if (eq (selected-window) (frame-selected-window))
+;;         (if (buffer-modified-p)
+;;             (update-face-remapping-alist 'headerline-modified-active 'header-line)
+;;           (update-face-remapping-alist 'headerline-unmodified-active 'header-line))
+;;       (if (buffer-modified-p)
+;;           (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
+;;         (update-face-remapping-alist 'headerline-unmodified-inactive 'header-line)))))
+;; (with-current-buffer (current-buffer)
+;;         (if (buffer-modified-p)
+;;             (update-face-remapping-alist 'headerline-modified-active 'header-line)
+;;           (update-face-remapping-alist 'headerline-unmodified-active 'header-line)))
 
-;; (defface headerline-inactive-modified
-;;   '((t (:foreground ,(get-color-fg 'default)
-;;                     :background ,(get-color-bg 'default)
-;;                     :box (:line-width 1 :color ,(get-color-fg 'font-lock-builtin-face)))))
-;;   "Headerline of another buffer.")
+;; window-prev-sibling
+;; select-window
+;; selected-window
+;; old-selected-window
+;; (add-hook 'pre-redisplay-functions
+          (defun headerline-set-selected-window (&rest _)
+            "what"
+            (progn
+              ;; (setq headerline--active-window (frame-selected-window))
+              ;; select-window (selected-window)
+              (if (buffer-modified-p)
+                  (update-face-remapping-alist 'headerline-modified-active 'header-line)
+                (update-face-remapping-alist 'headerline-unmodified-active 'header-line))
+              ;; (save-excursion
+              (save-selected-window
+               (select-window (old-selected-window))
+               (if (buffer-modified-p)
+                   (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
+                 (update-face-remapping-alist 'headerline-unmodified-inactive 'header-line)))));;)
+              ;; (select-window (old-selected-window))
+;; (add-to-list 'window-selection-change-functions 'headerline-set-selected-window)
+;; (add-to-list 'window-state-change-functions 'headerline-set-selected-window)
 
-;; (defface headerline-modes-face
-;;   '(((((headerline-active))) :foreground "green")
-;;     ((((headerline-inactive))) :foreground "yellow"))
-;;   "Face for headerline-modes.")
-;; (defface realgud-overlay-arrow1
-;;   '((((background  dark)) :foreground "green" :weight bold)
-;;     (((background light)) :foreground "black" :weight bold))
-;;   "Fringe face for current position."
-;;   :group 'realgud)
 ;;;; headerline-modes
 (def-headerline-var headerline-modes ; remove minor modes
                     '(" "
@@ -132,34 +189,53 @@ accept."
                       "%n"
                       " "))
 
-(def-headerline-var headerline-modified
-                    `(:eval
-                      (propertize "   "
-                                  'face (if (buffer-modified-p)
-                                            '(:background green)
-                                          '(:background blue)))))
+;; (def-headerline-var headerline-modified
+;;                     `(:eval
+;;                       (propertize "   "
+;;                                   'face (if (buffer-modified-p)
+;;                                             '(:background green)
+;;                                           '(:background blue)))))
 
-(def-headerline-var headerline-percent
-                    `(" "
-                      (:propertize ,(window-start)
-                                   face ,(if (eq (point) (point-min))
-                                             'error
-                                           (if (eq (point) (point-max))
-                                               'region
-                                             'bold)))))
+;; (def-headerline-var headerline-percent
+;;                     `(" "
+;;                       (:propertize ,(window-start)
+;;                                    face ,(if (eq (point) (point-min))
+;;                                              'error
+;;                                            (if (eq (point) (point-max))
+;;                                                'region
+;;                                              'bold)))))
+
+;; (def-headerline-var headerline-modes
+;;                   `(" "
+;;                     ,mode-name
+;;                     ,mode-line-process
+;;                     "%n "))
+
+(def-headerline-var headerline-line
+                  `(" %l %c "))
+
+(def-headerline-var headerline-name
+                  `(" "
+                    ,(buffer-file-name (buffer-base-buffer))
+                    " "))
 
 ;;; Default modeline
 (def-headerline :main
-                `("A"
+                `(;; "A"
+                  ;; mode-line-percent
                   ;; headerline-percent
-                  "A"
+                  ;; "A"
                   headerline-modes
+                  ;; "A"
+                  ;; headerline-modified
                   )
                 `(
                   ;; mode-line-buffer-identification
+                  headerline-name
                   )
                 `(
                   ;; mode-line-misc-info
+                  headerline-line
                   ))
 
 (set-headerline :main 'default)
@@ -193,31 +269,34 @@ accept."
                                           (format-mode-line '("" headerline-format-right))))))))
                 headerline-format-right))))))
 (defvar mode-line-format--old (default-value 'mode-line-format))
-;; (setq mode-line-format aaa)
 ;; (setq-default mode-line-format nil)
 
-(define-global-minor-mode headerline-global-mode headerline-mode headerline-mode)
-;; (add-hook 'elpaca-after-init-hook 'headerline-global-mode)
-(add-hook 'server-after-make-frame-hook 'headerline-global-mode)
+;; (define-global-minor-mode headerline-global-mode headerline-mode headerline-mode)
 
-;; (setq mode-line-percent-position '(-3 "%p"))
-;; (setq mode-line-position-column-line-format '("%l,%c"))
-;; (setq mode-line-compact t)
-;; ;; (setq evil-mode-line-format nil)
-;; (setq-default mode-line-format
-;;               '("%e"
-;;                 mode-line-modified
-;;                 " modename "
-;;                 mode-name
-;;                 " remote "
-;;                 mode-line-remote
-;;                 " buffer "
-;;                 mode-line-buffer-identification
-;;                 " position "
-;;                 mode-line-position
-;;                 " VC "
-;;                 (vc-mode vc-mode)
-;;                 " misc "
-;;                 mode-line-misc-info))
-;; ;; (setq header-line-format mode-line-format)
-;; ;; (setq mode-line-format nil)
+;; (add-hook 'elpaca-after-init-hook 'headerline-global-mode)
+;; (add-hook 'server-after-make-frame-hook 'headerline-global-mode)
+;; (add-hook 'window-setup-hook 'headerline-global-mode)
+
+;; (add-hook 'buffer-list-update-hook 'headerline-global-mode)
+
+(setq mode-line-percent-position '(-3 "%p"))
+(setq mode-line-position-column-line-format '("%l,%c"))
+(setq mode-line-compact t)
+;; (setq evil-mode-line-format nil)
+(setq-default mode-line-format
+              '("%e"
+                mode-line-modified
+                " modename "
+                mode-name
+                " remote "
+                mode-line-remote
+                " buffer "
+                mode-line-buffer-identification
+                " position "
+                mode-line-position
+                " VC "
+                (vc-mode vc-mode)
+                " misc "
+                mode-line-misc-info))
+(setq-default header-line-format mode-line-format)
+(setq-default mode-line-format nil)
