@@ -1,1 +1,2 @@
-(use-package transpose-frame)
+(use-package transpose-frame
+  :defer t)

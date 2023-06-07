@@ -12,6 +12,7 @@
         evil-vsplit-window-right t)
   (setq evil-symbol-word-search t
         evil-shift-width 2)
+  (setq evil-want-Y-yank-to-eol t)
 
   (evil-define-text-object evil-textobj-whole-buffer (count &optional _beg _end type)
     "Text object to select the whole buffer."

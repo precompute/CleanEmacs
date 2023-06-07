@@ -9,14 +9,23 @@
 
 (setq ring-bell-function #'ignore)
 (setq visible-bell nil)
-(setq initial-buffer-choice t)
+(setq initial-buffer-choice t) ;; start with scratch buffer
+(setq initial-scratch-message (concat
+                               ";; Scratch Buffer.\n"
+                               ";; Startup Time: " (emacs-init-time) "\n"
+                               ";; Time: " (current-time-string)))
 (setq coding-system-for-write 'raw-text)
+
+(setq frame-title-format "Emacs - %f")
 
 (setq x-stretch-cursor t)
 (setq indicate-buffer-boundaries nil)
 (setq indicate-empty-lines nil)
 (setq scroll-margin 10)
-(setq scroll-conservatively 50)
+(setq scroll-conservatively 3)
+(setq window-divider-default-right-width 10
+      window-divider-default-bottom-width 0)
+(setq-default left-fringe-width 5) ;; Will it work?
 
 (setq history-length 99999)
 
@@ -45,6 +54,6 @@
 (setcache-c bookmark-default-file  "bookmarks")
 
 (winner-mode)
-(fringe-mode '(6 . 0))
+(fringe-mode '(3 . 0))
 (savehist-mode)
 ;; (global-display-line-numbers-mode) ;; Don’t need it.

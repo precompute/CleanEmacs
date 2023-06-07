@@ -1,4 +1,5 @@
 (use-package highlight-indent-guides
+  :defer t
   :config
   (setq highlight-indent-guides-responsive 'stack)
   (setq highlight-indent-guides-method 'character)

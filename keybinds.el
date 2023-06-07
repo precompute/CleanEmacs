@@ -18,12 +18,14 @@
 
 (evil-keymaps-c
   "SPC" 'project-find-file
+  "S-SPC" 'project-switch-project
   "f"  '(:ignore t :wk "file")
   "ff" 'find-file
   "fr" 'recentf-open
 
   "g" '(:ignore t :wk "Version Control")
   "gg" 'magit-status
+  "gL" 'magit-log-buffer-file
   "g[" 'diff-hl-previous-hunk
   "g]" 'diff-hl-next-hunk
   "gr" 'diff-hl-revert-hunk
@@ -116,6 +118,8 @@
 (general-define-key
   :states 'normal
   "z" '(:ignore t :wk "end")
+  "zp" 'delete-window
+  "zs" 'save-buffer
   "zx" 'kill-current-buffer
   "zZ" 'bury-buffer)
 

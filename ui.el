@@ -22,6 +22,7 @@
 
 ;;; Fonts
 (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
-(set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
+;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
+(set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 17))
 (copy-face 'default 'fixed-pitch)
 

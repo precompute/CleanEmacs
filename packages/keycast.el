@@ -1,1 +1,2 @@
-(use-package keycast)
+(use-package keycast
+  :defer t)

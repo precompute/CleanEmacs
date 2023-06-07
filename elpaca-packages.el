@@ -46,8 +46,10 @@
 (elpacaLF "marginalia")
 ;;;;; Corfu (hints)
 (load-file (expand-file-name "packages/corfu.el" user-emacs-directory))
-;;;;; Consult (incremental functions)
+;;;;; Embark (Add-on functions)
 (elpacaLF "embark")
+;;;; wgrep (for embark-occur)
+(elpacaLF "wgrep")
 ;;;;; Consult (incremental functions)
 (elpacaLF "consult")
 ;;; Magit
@@ -113,6 +115,8 @@
 (elpacaLF "outshine")
 ;;; PDF Tools
 (elpacaLF "pdf-tools")
+;;; Alarm Clock
+(elpacaLF "alarm-clock")
 
 
 
@@ -122,6 +126,10 @@
 (elpacaLF "diredfl")
 ;;;; Dired Sidebar
 (elpacaLF "dired-sidebar")
+;;;; Dired Narrow
+(elpacaLF "dired-narrow")
+;;;; Dired Collapse (skip empty directories)
+(elpacaLF "dired-collapse")
 ;;; Savehist (for minibuffers)
 (elpacaLF "savehist" t)
 ;;; Transient
