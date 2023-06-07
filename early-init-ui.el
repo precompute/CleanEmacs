@@ -8,26 +8,38 @@
 (defface header-line--dummy
   '((t :foreground "#000"
        :background "#000"
-       :box (:line-width 1 :color "#000")))
+       :box (:line-width (1 . 3) :color "#000")))
   "Dummy header-line face")
 
 (defface headerline-modified-inactive
   '((t :foreground "#000"
        :background "#000"
-       :box (:line-width 1 :color "#000")))
+       :box (:line-width (1 . 3) :color "#000")))
   "Headerline when buffer is modified and active.")
 (defface headerline-modified-active
   '((t :foreground "#000"
        :background "#000"
-       :box (:line-width 1 :color "#000")))
+       :box (:line-width (1 . 3) :color "#000")))
   "Headerline when buffer is modified and inactive.")
 (defface headerline-unmodified-inactive
   '((t :foreground "#000"
        :background "#000"
-       :box (:line-width 1 :color "#000")))
+       :box (:line-width (1 . 3) :color "#000")))
   "Headerline when buffer is unmodified and active.")
 (defface headerline-unmodified-active
   '((t :foreground "#000"
        :background "#000"
-       :box (:line-width 1 :color "#000")))
+       :box (:line-width (1 . 3) :color "#000")))
   "Headerline when buffer is unmodified and inactive.")
+(defface headerline-active-indicator
+  '((t :foreground "#000"
+       :background "#000"))
+  "Indicator for active window")
+(defface headerline-inactive-modified-indicator
+  '((t :foreground "#000"
+       :background "#000"))
+  "Indicator for inactive, modified window")
+(defface headerline-inactive-unmodified-indicator
+  '((t :foreground "#000"
+       :background "#000"))
+  "Indicator for inactive, unmodified window")

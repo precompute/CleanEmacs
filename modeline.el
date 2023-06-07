@@ -1,77 +1,8 @@
 ;;; Header Line
-;; Doom's +light modeline properly modified for header-line
 ;;;; Variables
-(defvar headerline-format-alist ())
+(defvar modeline-active-window (selected-window))
 
-;;;; Helper Functions
-(defvar headerline--active-window (selected-window))
-
-(defun headerline-active ()
-  "Return non-nil if the selected window has an active headerline."
-  (eq (selected-window) headerline--active-window))
-
-(defun headerline-inactive ()
-  "Return non-nil if the selected window has an inactive headerline."
-  (not (headerline-active)))
-
-(add-hook 'pre-redisplay-functions
-          (defun headerline-set-selected-window-h (&rest _)
-            "Track the active headerline's window in `headerline--active-window'."
-            (let ((win (selected-window)))
-              (unless (minibuffer-window-active-p win)
-                (setq headerline--active-window (frame-selected-window))))))
-
-(defun set-headerline (name &optional default)
-  "Set the headerline to NAME.
-If DEFAULT is non-nil, apply to all future buffers.  Headerlines
-are defined with `def-headerline'."
-  (if-let (format (assq name headerline-format-alist))
-      (cl-destructuring-bind (lhs . (cen . rhs)) (cdr format)
-        (if default
-            (setq-default headerline-format-left lhs
-                          headerline-format-center cen
-                          headerline-format-right rhs)
-          (setq headerline-format-left lhs
-                headerline-format-center cen
-                headerline-format-right rhs)))
-    (error "Could not find %S headerline format" name)))
-
-(defun set-headerline-hook (hooks name)
-  "Set the headerline to NAME on HOOKS.
-See `def-headerline' on how headerlines are defined."
-  (let ((fn (intern (format "headerline-set-%s-format-h" name))))
-    (dolist (hook (ensure-list hooks))
-      (when after-init-time
-        (dolist (name (mapcar #'car headerline-format-alist))
-          (remove-hook hook (intern (format "headerline-set-%s-format-h" name)))))
-      (add-hook hook fn))))
-
-(defun def-headerline (name lhs cen rhs)
-  "Define a headerline format by NAME.
-LHS, CEN and RHS are the formats representing the left, center
-and right hand side of the mode-line, respectively. See the
-variable `format-mode-line' for details on what LHS and RHS will
-accept."
-  (setf (alist-get name headerline-format-alist)
-        (cons lhs (cons cen rhs)))
-  (fset (intern (format "headerline-set-%s-format-h" name))
-        (lambda (&rest _) (set-headerline name))))
-
-(defun update-face-remapping-alist (face target)
-  (face-remap-reset-base target)
-  (push (list target face) face-remapping-alist))
-
-;;;; Macros
-(defmacro def-headerline-var (name body &optional docstring &rest plist)
-  "Define a headerline segment variable."
-  (unless (stringp docstring)
-    (push docstring plist)
-    (setq docstring nil))
-  `(progn
-     (defconst ,name ,body ,docstring)
-     ,@(if (plist-get plist :local) `((make-variable-buffer-local ',name)))
-     (put ',name 'risky-local-variable t)))
-
+;;;; functions
 (defmacro get-color-fg (face)
   "Get the :foreground property of a FACE."
   `(face-attribute ,face :foreground))
@@ -80,31 +11,23 @@ accept."
   "Get the :background property of a FACE."
   `(face-attribute ,face :background))
 
-;; (defun define-face-c (face)
-;;   "Define a FACE."
-;;   (defface ,face
-;;     '((t :foreground "#000"
-;;          :background "#000"
-;;          :box (:line-width 1 :color "#000")))))
+(defun modeline-active ()
+  "Return non-nil if the selected window has an active modeline."
+  (eq (selected-window) modeline-active-window))
 
-;;; Segments
-(def-headerline-var headerline-format-left nil
-                    "The left-hand side of the headerline."
-                    :local t)
-(def-headerline-var headerline-format-center nil
-                    "The center of the headerline."
-                    :local t)
-(def-headerline-var headerline-format-right nil
-                    "The right-hand side of the headerline."
-                    :local t)
+(defun modeline-inactive ()
+  "Return non-nil if the selected window has an inactive modeline."
+  (not (modeline-active)))
 
-;;; Faces
-;; (define-face-c header-line--dummy)
-;; (define-face-c headerline-modified-inactive)
-;; (define-face-c headerline-modified-active)
-;; (define-face-c headerline-unmodified-inactive)
-;; (define-face-c headerline-unmodified-active)
+;; from Doom-modeline
+(defun modeline-set-selected-window-h (&rest _)
+  "Track the active modeline's window in `modeline-active-window'."
+  (let ((win (selected-window)))
+    (unless (minibuffer-window-active-p win)
+      (setq modeline-active-window (frame-selected-window)))))
+(add-hook 'pre-redisplay-functions 'modeline-set-selected-window-h)
 
+;;;; Faces
 (defun set-headerline-faces ()
   (interactive)
   (let ((fl-keyword (get-color-fg 'font-lock-keyword-face)) ;; green
@@ -116,162 +39,264 @@ accept."
         (matchface (get-color-fg 'match)) ;; green
         (defaultfg (get-color-fg 'default)) ;; white
         (defaultbg (get-color-bg 'default))) ;; black
-    ;; (message (concat fl-keyword fl-builtin fl-type))
-    (set-face-attribute 'headerline-modified-inactive nil
-                        :foreground fl-builtin
-                        :background defaultbg
-                        :box (list :line-width 1 :color fl-builtin))
     (set-face-attribute 'headerline-modified-active nil
                         :foreground fl-variable
+                        ;; :foreground defaultbg
                         :background fl-builtin
-                        :box (list :line-width 1 :color fl-builtin))
-    (set-face-attribute 'headerline-unmodified-inactive nil
-                        :foreground fl-keyword
-                        :background defaultbg
-                        :box (list :line-width 1 :color fl-keyword))
+                        :box (list :line-width '(1 . 3) :color fl-builtin))
     (set-face-attribute 'headerline-unmodified-active nil
-                        :foreground fl-variable
+                        ;; :foreground fl-variable
+                        :foreground defaultbg
                         :background fl-keyword
-                        :box (list :line-width 1 :color fl-keyword))))
+                        :box (list :line-width '(1 . 3) :color fl-keyword))
+    (set-face-attribute 'headerline-active-indicator nil
+                        :height 1.4
+                        :foreground defaultfg
+                        :background defaultfg)
+    (set-face-attribute 'headerline-inactive-modified-indicator nil
+                        :height 1.4
+                        :foreground fl-builtin
+                        :background fl-builtin)
+    (set-face-attribute 'headerline-inactive-unmodified-indicator nil
+                        :height 1.4
+                        :foreground fl-keyword
+                        :background fl-keyword)))
 (set-headerline-faces) ;; init during load
 (add-hook 'load-theme 'set-headerline-faces)
 (add-hook 'enable-theme 'set-headerline-faces)
 
-;; (add-hook 'pre-redisplay-functions
-;; (add-hook 'redisplay
-;; (defun headerline-set-selected-window (&rest _)
-;;   "what"
-;;   (progn
-;;     (setq headerline--active-window (frame-selected-window))
-;;     (if (eq (selected-window) (frame-selected-window))
-;;         (if (buffer-modified-p)
-;;             (update-face-remapping-alist 'headerline-modified-active 'header-line)
-;;           (update-face-remapping-alist 'headerline-unmodified-active 'header-line))
-;;       (if (buffer-modified-p)
-;;           (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
-;;         (update-face-remapping-alist 'headerline-unmodified-inactive 'header-line)))))
-;; (with-current-buffer (current-buffer)
-;;         (if (buffer-modified-p)
-;;             (update-face-remapping-alist 'headerline-modified-active 'header-line)
-;;           (update-face-remapping-alist 'headerline-unmodified-active 'header-line)))
+(defun update-face-remapping-alist (face target)
+  (if (member face face-remapping-alist)
+      (face-remap-reset-base target)
+    (push (list target face) face-remapping-alist)))
 
+;;;; Modeline Constructs
+;; Referenced from https://git.sr.ht/~protesilaos/dotfiles/tree/master/item/emacs/.emacs.d/
+
+(defvar modeline-bg-color-change-c
+  '(:eval
+    (if (modeline-active)
+        (if (buffer-modified-p)
+            (update-face-remapping-alist 'headerline-modified-active 'header-line)
+          (update-face-remapping-alist 'headerline-unmodified-active 'header-line))))
+  "Change the background color of the modeline.")
+
+(defvar modeline-active-indicator-c
+  '(:eval
+    (let ((text "  "))
+      (if (modeline-active)
+          (propertize text
+                      'face 'headerline-active-indicator)
+        (if (buffer-modified-p)
+            (propertize text
+                        'face 'headerline-inactive-modified-indicator)
+          (propertize text
+                      'face 'headerline-inactive-unmodified-indicator))))))
+
+(defvar modeline-modes-c
+  (list (propertize "%[" 'face 'error)
+        `(:propertize (concat "" mode-name)
+                      face (:inherit variable-pitch :height 1.4 :weight black))
+        mode-line-process
+        (propertize "%]" 'face 'error)
+        " ")
+  "Mode line construct for displaying major modes.")
+
+(defvar modeline-current-buffer-property-c
+  '(:eval
+    (if buffer-read-only
+        (propertize "RO " 'face '(:inherit error :height 1.2 :weight bold))))
+  "Show read-only status")
+
+(defvar modeline-current-buffer-name-c
+  '(:eval
+    (if buffer-file-truename
+        (propertize buffer-file-truename 'face '(:inherit variable-pitch :width condensed :height 1.12))))
+  "Show the name of the current buffer")
+
+(defvar modeline-percentage-c
+  '(:propertize
+    "%3p"
+    display (min-width (8.0))
+    face (:weight bold :height 1.2)))
+;; '(:eval (propertize
+;;          "%p"
+;;          'display
+;;          ;; `((min-width (5.0)))
+;;          `((space :width
+;;                   (- 7 ,(string-width
+;;                          (format-mode-line "%p")))))
+;;          'face '(:weight bold :height 1.25))))
+
+(defvar modeline-line-c
+  '(:propertize
+    "%l"
+    display (min-width (5.0))
+    face (:weight bold :height 1.2)))
+
+(defvar modeline-column-c
+  '(:propertize
+    "%c"
+    display (min-width (3.0))
+    face (:weight bold :height 1.2)))
+
+(defvar modeline-buffer-size-c
+  '(:propertize
+    "%I"
+    display (min-width (3.0))
+    face (:weight bold)))
+
+(defvar modeline-macro-recording-c
+  `(:eval
+    (when (and (modeline-active)
+               (or defining-kbd-macro
+                   executing-kbd-macro))
+      (let ((sep (propertize ""
+                             'face '( :inherit variable-pitch
+                                      :height 1.1))))
+        (concat sep
+                (propertize (if (bound-and-true-p evil-this-macro)
+                                (char-to-string evil-this-macro)
+                              "Macro")
+                            'face '( :inherit variable-pitch
+                                     :weight bold
+                                     :underline t
+                                     :height 1.2))
+                sep))))
+  "Display current Emacs or evil macro being recorded.")
+
+(defvar modeline-anzu-count-c
+  `(:eval
+    (when (and (bound-and-true-p anzu--state)
+               (not (bound-and-true-p iedit-mode)))
+      (propertize
+       (let ((here anzu--current-position)
+             (total anzu--total-matched))
+         (cond ((eq anzu--state 'replace-query)
+                (format "%d replace" anzu--cached-count))
+               ((eq anzu--state 'replace)
+                (format "%d/%d" (1+ here) total))
+               (anzu--overflow-p
+                (format "%s+" total))
+               (t
+                (format "%s/%d" here total))))
+       'face '( :height 1.2
+                :underline t))))
+  "Show the match index and total number thereof.
+Requires `anzu', also `evil-anzu' if using `evil-mode' for
+compatibility with `evil-search'.")
+
+(defvar modeline-flymake-c
+  '(:eval
+    ;; (propertize
+    ;; ,
+    (when (bound-and-true-p flymake-mode)
+      '(flymake-mode-line-exception
+        flymake-mode-line-counters))
+    ;; 'face '(:height 1.2))
+    )
+  "Mode line construct displaying `flymake-mode-line-format'.
+Specific to the current window's mode line.")
+
+(defvar modeline-align-right-c
+  '(:eval (propertize
+           " " 'display
+           `((space :align-to
+                    (- (+ right right-fringe right-margin)
+                       2 ;; indicator
+                       5 ;; spaces
+                       1 ;; magic number
+                       ,(string-width
+                         (format-mode-line modeline-buffer-size-c))
+                       ,(when (bound-and-true-p flymake-mode)
+                          (string-width
+                           (format-mode-line modeline-flymake-c)))
+                       ,(string-width
+                         (format-mode-line mode-line-misc-info)))))))
+  "Mode line construct to align following elements to the right.
+Read Info node `(elisp) Pixel Specification'.")
+
+(defvar modeline-misc-info-c
+  mode-line-misc-info
+  "Mode line construct displaying `mode-line-misc-info'.
+Specific to the current window's mode line.")
+
+;;;;; Set `risky-local-variable'
+(dolist (construct '( modeline-bg-color-change-c
+                      modeline-active-indicator-c
+                      modeline-modes-c
+                      modeline-current-buffer-property-c
+                      modeline-current-buffer-name-c
+                      modeline-percentage-c
+                      modeline-line-c
+                      modeline-column-c
+                      modeline-buffer-size-c
+                      modeline-macro-recording-c
+                      modeline-anzu-count-c
+                      modeline-align-right-c
+                      modeline-flymake-c
+                      modeline-misc-info-c
+                      ))
+  (put construct 'risky-local-variable t))
+
+(setq-default header-line-format
+              '("%e "
+                modeline-active-indicator-c
+                " "
+                modeline-bg-color-change-c
+                modeline-current-buffer-property-c
+                " "
+                modeline-modes-c
+                "  "
+                modeline-percentage-c
+                " "
+                modeline-line-c
+                " "
+                modeline-column-c
+                " "
+                modeline-current-buffer-name-c
+                " "
+                modeline-macro-recording-c
+                modeline-anzu-count-c
+                modeline-align-right-c
+                " "
+                modeline-buffer-size-c
+                " "
+                modeline-flymake-c
+                " "
+                modeline-misc-info-c
+                " "
+                modeline-active-indicator-c
+                " "
+                ))
+
+(setq-default mode-line-format nil)
+
+;;; Archive
+;; (setq-default header-line-format mode-line-format)
 ;; window-prev-sibling
 ;; select-window
 ;; selected-window
 ;; old-selected-window
 ;; (add-hook 'pre-redisplay-functions
-          (defun headerline-set-selected-window (&rest _)
-            "what"
-            (progn
-              ;; (setq headerline--active-window (frame-selected-window))
-              ;; select-window (selected-window)
-              (if (buffer-modified-p)
-                  (update-face-remapping-alist 'headerline-modified-active 'header-line)
-                (update-face-remapping-alist 'headerline-unmodified-active 'header-line))
-              ;; (save-excursion
-              (save-selected-window
-               (select-window (old-selected-window))
-               (if (buffer-modified-p)
-                   (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
-                 (update-face-remapping-alist 'headerline-unmodified-inactive 'header-line)))));;)
-              ;; (select-window (old-selected-window))
+;; (defun headerline-set-selected-window (&rest _)
+;;   "what"
+;;   (progn
+;;     ;; (setq headerline--active-window (frame-selected-window))
+;;     ;; select-window (selected-window)
+;;     (if (buffer-modified-p)
+;;         (update-face-remapping-alist 'headerline-modified-active 'header-line)
+;;       (update-face-remapping-alist 'headerline-unmodified-active 'header-line))
+;;     ;; (save-excursion
+;;     (save-selected-window
+;;      (select-window (old-selected-window))
+;;      (if (buffer-modified-p)
+;;          (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
+;;        (update-face-remapping-alist 'headerline-unmodified-inactive 'header-line)))));;)
+;; (select-window (old-selected-window))
 ;; (add-to-list 'window-selection-change-functions 'headerline-set-selected-window)
 ;; (add-to-list 'window-state-change-functions 'headerline-set-selected-window)
-
-;;;; headerline-modes
-(def-headerline-var headerline-modes ; remove minor modes
-                    '(" "
-                      (:propertize mode-name
-                                   face ,(if (headerline-active)
-                                             '(region bold font-lock-keyword-face)
-                                           '(region bold font-lock-builtin-face)))
-                      mode-line-process
-                      "%n"
-                      " "))
-
-;; (def-headerline-var headerline-modified
-;;                     `(:eval
-;;                       (propertize "   "
-;;                                   'face (if (buffer-modified-p)
-;;                                             '(:background green)
-;;                                           '(:background blue)))))
-
-;; (def-headerline-var headerline-percent
-;;                     `(" "
-;;                       (:propertize ,(window-start)
-;;                                    face ,(if (eq (point) (point-min))
-;;                                              'error
-;;                                            (if (eq (point) (point-max))
-;;                                                'region
-;;                                              'bold)))))
-
-;; (def-headerline-var headerline-modes
-;;                   `(" "
-;;                     ,mode-name
-;;                     ,mode-line-process
-;;                     "%n "))
-
-(def-headerline-var headerline-line
-                  `(" %l %c "))
-
-(def-headerline-var headerline-name
-                  `(" "
-                    ,(buffer-file-name (buffer-base-buffer))
-                    " "))
-
-;;; Default modeline
-(def-headerline :main
-                `(;; "A"
-                  ;; mode-line-percent
-                  ;; headerline-percent
-                  ;; "A"
-                  headerline-modes
-                  ;; "A"
-                  ;; headerline-modified
-                  )
-                `(
-                  ;; mode-line-buffer-identification
-                  headerline-name
-                  )
-                `(
-                  ;; mode-line-misc-info
-                  headerline-line
-                  ))
-
-(set-headerline :main 'default)
-
-;;; minor-mode
-(define-minor-mode headerline-mode
-  "Header Line Config."
-  :init-value nil
-  :global t
-  (cond
-   (headerline-mode
-    (setq header-line-format
-          (cons
-           "" '(headerline-format-left
-                (let ((sw (string-width (format-mode-line '("" headerline-format-center)))))
-                  (:eval
-                   (propertize
-                    " "
-                    'display
-                    `((space :align-to (- (+
-                                           center)
-                                          ,(string-width
-                                            (format-mode-line '("" headerline-format-right)))))))))
-                headerline-format-center
-                (:eval
-                 (propertize
-                  " "
-                  'display
-                  `((space :align-to (- (+ right right-fringe right-margin)
-                                        ,(string-width
-                                          (format-mode-line '("" headerline-format-right))))))))
-                headerline-format-right))))))
-(defvar mode-line-format--old (default-value 'mode-line-format))
-;; (setq-default mode-line-format nil)
-
-;; (define-global-minor-mode headerline-global-mode headerline-mode headerline-mode)
+;; (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
 
 ;; (add-hook 'elpaca-after-init-hook 'headerline-global-mode)
 ;; (add-hook 'server-after-make-frame-hook 'headerline-global-mode)
@@ -279,24 +304,43 @@ accept."
 
 ;; (add-hook 'buffer-list-update-hook 'headerline-global-mode)
 
-(setq mode-line-percent-position '(-3 "%p"))
-(setq mode-line-position-column-line-format '("%l,%c"))
-(setq mode-line-compact t)
-;; (setq evil-mode-line-format nil)
-(setq-default mode-line-format
-              '("%e"
-                mode-line-modified
-                " modename "
-                mode-name
-                " remote "
-                mode-line-remote
-                " buffer "
-                mode-line-buffer-identification
-                " position "
-                mode-line-position
-                " VC "
-                (vc-mode vc-mode)
-                " misc "
-                mode-line-misc-info))
-(setq-default header-line-format mode-line-format)
-(setq-default mode-line-format nil)
+;; (set-face-attribute 'headerline-modified-inactive nil
+;;                     :foreground fl-builtin
+;;                     :background defaultbg
+;;                     :box (list :line-width '(1 . 3) :color fl-builtin))
+;; (set-face-attribute 'headerline-unmodified-inactive nil
+;;                     :foreground fl-keyword
+;;                     :background defaultbg
+;;                     :box (list :line-width '(1 . 3) :color fl-keyword))
+
+;; (if (buffer-modified-p)
+;;     (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
+;;   (update-face-remapping-alist 'headerline-unmodified-inactive 'header-line))
+;;   "Active"
+;; "Inactive"))
+;; '(:eval
+;;   ;; (if (eq (selected-window) (frame-selected-window))
+;;   (if ;; (modeline-active)
+;;       (or (not (mode-line-window-selected-p))
+;;       ;; (or (eq (selected-window) (frame-selected-window))
+;;           (modeline-active))
+;;       (if (buffer-modified-p)
+;;           (update-face-remapping-alist 'headerline-modified-active 'header-line)
+;;         (update-face-remapping-alist 'headerline-unmodified-active 'header-line))
+;;     (if (buffer-modified-p)
+;;         (update-face-remapping-alist 'headerline-modified-inactive 'header-line)
+;;       (update-face-remapping-alist 'headerline-unmodified-inactive 'header-line))))
+
+;; (defvar modeline-column-c
+;;   '(:eval (propertize
+;;            "%c"
+;;            'display
+;;            ;; `((min-width (5.0)))
+;;            `((space :width
+;;                     (- 7 ,(string-width
+;;                            (format-mode-line "%c")))))
+;;            'face '(:weight bold :height 1.25))))
+
+;; '(:eval
+;;   (when (mode-line-window-selected-p)
+;;     mode-line-misc-info))
