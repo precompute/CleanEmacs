@@ -20,12 +20,73 @@
   (not (modeline-active)))
 
 ;; from Doom-modeline
-(defun modeline-set-selected-window-h (&rest _)
+(defun modeline-set-selected-window-c (&rest _)
   "Track the active modeline's window in `modeline-active-window'."
   (let ((win (selected-window)))
     (unless (minibuffer-window-active-p win)
       (setq modeline-active-window (frame-selected-window)))))
-(add-hook 'pre-redisplay-functions 'modeline-set-selected-window-h)
+(add-hook 'pre-redisplay-functions 'modeline-set-selected-window-c)
+
+(defvar-local modeline-buffer-id-cache-c nil)
+
+(defun modeline-generate-buffer-id-cache-c ()
+  (when after-init-time
+    (setq modeline-buffer-id-cache-c
+          (if buffer-file-truename
+              (let ((g-root (locate-dominating-file buffer-file-truename ".git")))
+                (if (not g-root)
+                    (propertize buffer-file-truename
+                                'face '( :weight bold
+                                         :inherit variable-pitch
+                                         :height 1.15))
+                  (let* ((buf (file-truename buffer-file-truename))
+                         (gitroot (file-truename g-root))
+                         (gitroot-nodash (substring gitroot 0 -1))
+                         (gitroot-a (replace-regexp-in-string
+                                     (rx (seq (* anychar) "/"))
+                                     "" gitroot-nodash))
+                         (dirbefore (substring
+                                     gitroot-nodash
+                                     0
+                                     (* -1
+                                        (+ 1
+                                           (length gitroot-a))))))
+                    (cons gitroot-a
+                          (substring buf
+                                     (length gitroot)
+                                     nil)))))
+            nil))))
+(dolist (hook '(change-major-mode-after-body-hook
+                after-save-hook ;; In case the user saves the file to a new location
+                focus-in-hook ;; ...or makes external changes then returns to Emacs
+                projectile-after-switch-project-hook ;; ...or when we change the current project!
+                after-set-visited-file-name-hook ;; ...when the visited file changes (e.g. it's renamed)
+                after-revert-hook)) ;; ...when the underlying file changes
+  (add-hook hook 'modeline-generate-buffer-id-cache-c))
+
+(defun colortovar-c (var color)
+  (if color
+      (defvar var color)
+    (defvar var "#000000")))
+
+(defun headerline-flymake-count-c (type)
+  "Get Error/Warning/Note counts from Flycheck.
+Modified from `flymake--mode-line-counter'.
+`type' can be `:error', `:warning' or `:note'."
+  (let ((count 0))
+    (dolist (d (flymake-diagnostics))
+      (when (= (flymake--severity type)
+               (flymake--severity (flymake-diagnostic-type d)))
+        (cl-incf count)))
+    (when (or (cl-plusp count)
+              (cond ((eq flymake-suppress-zero-counters t)
+                     nil)
+                    (flymake-suppress-zero-counters
+                     (>= (flymake--severity type)
+                         (warning-numeric-level
+                          flymake-suppress-zero-counters)))
+                    (t t))))
+    (number-to-string count)))
 
 ;;;; Faces
 (defun set-headerline-faces ()
@@ -37,6 +98,8 @@
         (fl-string (get-color-fg 'font-lock-string-face)) ;; dark red
         (errorface (get-color-fg 'error)) ;; red
         (matchface (get-color-fg 'match)) ;; green
+        (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
+        (noteface (get-color-fg 'diary)) ;; yellow
         (defaultfg (get-color-fg 'default)) ;; white
         (defaultbg (get-color-bg 'default))) ;; black
     (set-face-attribute 'headerline-modified-active nil
@@ -60,7 +123,11 @@
     (set-face-attribute 'headerline-inactive-unmodified-indicator nil
                         :height 1.4
                         :foreground fl-keyword
-                        :background fl-keyword)))
+                        :background fl-keyword)
+    (defvar headerline--err-face (if errorface errorface "#000000"))
+    (defvar headerline--warn-face (if warnface warnface "#000000"))
+    (defvar headerline--note-face (if noteface noteface "#000000"))
+    (defvar headerline--default-face (if defaultfg defaultfg "#000000"))))
 (set-headerline-faces) ;; init during load
 (add-hook 'load-theme 'set-headerline-faces)
 (add-hook 'enable-theme 'set-headerline-faces)
@@ -110,8 +177,24 @@
 
 (defvar modeline-current-buffer-name-c
   '(:eval
-    (if buffer-file-truename
-        (propertize buffer-file-truename 'face '(:inherit variable-pitch :width condensed :height 1.12))))
+    (if modeline-buffer-id-cache-c
+        (list
+         (propertize (car modeline-buffer-id-cache-c)
+                     'face '( :inherit variable-pitch
+                              :weight bold
+                              :height 1.15))
+         (propertize "/"
+                     'face '( :inherit variable-pitch
+                              :height 1.15))
+         (propertize
+          (cdr modeline-buffer-id-cache-c)
+          'face '( :inherit variable-pitch
+                   :height 1.15)))
+      (if buffer-file-truename
+          (propertize buffer-file-truename
+                      'face '( :inherit variable-pitch
+                               :height 1.15))
+        "")))
   "Show the name of the current buffer")
 
 (defvar modeline-percentage-c
@@ -119,14 +202,6 @@
     "%3p"
     display (min-width (8.0))
     face (:weight bold :height 1.2)))
-;; '(:eval (propertize
-;;          "%p"
-;;          'display
-;;          ;; `((min-width (5.0)))
-;;          `((space :width
-;;                   (- 7 ,(string-width
-;;                          (format-mode-line "%p")))))
-;;          'face '(:weight bold :height 1.25))))
 
 (defvar modeline-line-c
   '(:propertize
@@ -187,16 +262,37 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for
 compatibility with `evil-search'.")
 
 (defvar modeline-flymake-c
-  '(:eval
-    ;; (propertize
-    ;; ,
-    (when (bound-and-true-p flymake-mode)
-      '(flymake-mode-line-exception
-        flymake-mode-line-counters))
-    ;; 'face '(:height 1.2))
-    )
+  `(:eval
+    (when (and (bound-and-true-p flymake-mode)
+               (flymake-running-backends))
+      (list
+       flymake-mode-line-exception
+       " "
+       (propertize
+        (headerline-flymake-count-c :error)
+        'face '( :weight bold
+                 :foreground ,headerline--err-face))
+       " "
+       (propertize
+        (headerline-flymake-count-c :warning)
+        'face '( :weight bold
+                 :foreground ,headerline--warn-face))
+       " "
+       (propertize
+        (headerline-flymake-count-c :note)
+        'face '( :weight bold
+                 :foreground ,headerline--note-face)))))
   "Mode line construct displaying `flymake-mode-line-format'.
 Specific to the current window's mode line.")
+
+;; (defun flymake--mode-line-counters ()
+;;   (when (flymake-running-backends) flymake-mode-line-counter-format))
+
+;; (defcustom flymake-mode-line-counter-format
+;;   '("["
+;;     flymake-mode-line-error-counter
+;;     flymake-mode-line-warning-counter
+;;     flymake-mode-line-note-counter "]")
 
 (defvar modeline-align-right-c
   '(:eval (propertize
@@ -205,7 +301,7 @@ Specific to the current window's mode line.")
                     (- (+ right right-fringe right-margin)
                        2 ;; indicator
                        5 ;; spaces
-                       1 ;; magic number
+                       2 ;; magic number
                        ,(string-width
                          (format-mode-line modeline-buffer-size-c))
                        ,(when (bound-and-true-p flymake-mode)
@@ -344,3 +440,54 @@ Specific to the current window's mode line.")
 ;; '(:eval
 ;;   (when (mode-line-window-selected-p)
 ;;     mode-line-misc-info))
+
+;; (if buffer-file-truename
+;;     (propertize buffer-file-truename 'face '(:inherit variable-pitch :width condensed :height 1.12))))
+
+;; (concat
+;;  "buffer: " buffer-file-truename
+;;  "\ngitroot: " gitroot
+;;  "\ngitroot-nodash: " gitroot-nodash
+;;  "\ngitroot-a: " gitroot-a
+;;  "\ndirbefore: " dirbefore)
+;; buffer: ~/.emacsclean/modeline.el
+;; buf: /home/sys2/.emacsclean/modeline.el
+;; gitroot: /home/sys2/.emacsclean/
+;; gitroot-nodash: /home/sys2/.emacsclean
+;; gitroot-a: .emacsclean
+;; dirbefore: /home/sys2
+;; (let* ((buf (buffer-file-name))
+;;        (gitfolder (locate-dominating-file ".git" buffer-file-name))
+;;        (gitroot (substring gitfolder 0 -5)))
+;;   (concat "buf: " buf "\ngitfolder: " gitfolder "\ngitroot " gitroot "\n"
+;;           (file-name-nondirectory
+;;            (file-truename gitfolder))
+;;           "XX"
+;;           (file-truename (file-relative-name buf gitroot))))
+
+;; (let ((file-name (buffer-file-name (buffer-base-buffer))))
+;;   (unless (or (null default-directory)
+;;               (null file-name)
+;;               (file-remote-p file-name))
+;;     ;; (when-let (project-root (project-root buffer-file-name))
+;;     (when-let (project-root (locate-dominating-file ".git" file-name))
+;;       (file-relative-name (or buffer-file-truename (file-truename file-name))
+;;                           (concat project-root "..")))))
+;; (file-relative-name (buffer-file-name) (substring (locate-dominating-file ".git" buffer-file-name) 0 -5))
+
+;; (let ((buf (if modeline-buffer-id-cache-c modeline-buffer-id-cache-c
+;;              (if buffer-file-truename buffer-file-truename
+;;                ""))))
+;; (propertize buf 'face
+;;             '( :inherit variable-pitch
+;;                :width condensed
+;;                :height 1.12))
+
+;; '(:eval (propertize
+;;          "%p"
+;;          'display
+;;          ;; `((min-width (5.0)))
+;;          `((space :width
+;;                   (- 7 ,(string-width
+;;                          (format-mode-line "%p")))))
+;;          'face '(:weight bold :height 1.25))))

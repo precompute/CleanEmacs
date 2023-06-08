@@ -89,6 +89,9 @@
   "tc" 'corfu-mode
   "teb" 'toggle-eldoc-box
 
+  "c" '(:ignore t :wk "code diagnostics")
+  "cr" 'flymake-show-buffer-diagnostics
+
   "!" '(:ignore t :wk "exclaim")
   "!R" 'make-window-larger-c
   ;; "!_" 'flip-frame
