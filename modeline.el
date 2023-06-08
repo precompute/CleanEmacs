@@ -219,7 +219,7 @@ Modified from `flymake--mode-line-counter'.
   '(:propertize
     "%I"
     display (min-width (3.0))
-    face (:weight bold)))
+    face (:weight bold :height 1.2)))
 
 (defvar modeline-macro-recording-c
   `(:eval
@@ -271,16 +271,22 @@ compatibility with `evil-search'.")
        (propertize
         (headerline-flymake-count-c :error)
         'face '( :weight bold
+                 :inherit variable-pitch
+                 :height 1.2
                  :foreground ,headerline--err-face))
        " "
        (propertize
         (headerline-flymake-count-c :warning)
         'face '( :weight bold
+                 :inherit variable-pitch
+                 :height 1.2
                  :foreground ,headerline--warn-face))
        " "
        (propertize
         (headerline-flymake-count-c :note)
         'face '( :weight bold
+                 :inherit variable-pitch
+                 :height 1.2
                  :foreground ,headerline--note-face)))))
   "Mode line construct displaying `flymake-mode-line-format'.
 Specific to the current window's mode line.")
@@ -301,7 +307,7 @@ Specific to the current window's mode line.")
                     (- (+ right right-fringe right-margin)
                        2 ;; indicator
                        5 ;; spaces
-                       2 ;; magic number
+                       3 ;; magic number
                        ,(string-width
                          (format-mode-line modeline-buffer-size-c))
                        ,(when (bound-and-true-p flymake-mode)
