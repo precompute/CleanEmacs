@@ -178,6 +178,7 @@
   "s-]" 'outline-next-heading
   "H-c" 'git-auto-time-commit
   "H-C" 'git-prompt-commit
+  "H-r" 'refile3-main-transient
   "\\" 'repeat)
 
 (general-define-key

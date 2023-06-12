@@ -133,7 +133,7 @@
 ;;; Savehist (for minibuffers)
 (elpacaLF "savehist" t)
 ;;; Transient
-(elpacaLF "transient" t)
+(elpacaLF "transient")
 ;;; Outline
 (elpacaLF "outline" t)
 ;;; Flymake (syntax errors)
@@ -151,6 +151,8 @@
 
 ;;;; Org
 (elpacaLF "org" t)
+;;;;; Org Agenda
+(elpacaLF "org-agenda" t)
 ;;;;; Org Bullets
 (elpacaLF "org-bullets")
 ;;;;; Org Super Agenda

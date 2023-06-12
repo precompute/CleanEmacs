@@ -98,7 +98,8 @@ Modified from `flymake--mode-line-counter'.
         (fl-string (get-color-fg 'font-lock-string-face)) ;; dark red
         (errorface (get-color-fg 'error)) ;; red
         (matchface (get-color-fg 'match)) ;; green
-        (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
+        ;; (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
+        (warnface (get-color-fg 'font-lock-type-face)) ;; red-ish
         (noteface (get-color-fg 'diary)) ;; yellow
         (defaultfg (get-color-fg 'default)) ;; white
         (defaultbg (get-color-bg 'default))) ;; black
@@ -144,8 +145,11 @@ Modified from `flymake--mode-line-counter'.
   '(:eval
     (if (modeline-active)
         (if (buffer-modified-p)
-            (update-face-remapping-alist 'headerline-modified-active 'header-line)
-          (update-face-remapping-alist 'headerline-unmodified-active 'header-line))))
+            (progn
+              (update-face-remapping-alist 'headerline-modified-active 'header-line)
+              "")
+          (update-face-remapping-alist 'headerline-unmodified-active 'header-line)
+          "")))
   "Change the background color of the modeline.")
 
 (defvar modeline-active-indicator-c
@@ -270,35 +274,27 @@ compatibility with `evil-search'.")
        " "
        (propertize
         (headerline-flymake-count-c :error)
-        'face '( :weight bold
-                 :inherit variable-pitch
-                 :height 1.2
+        ;; (concat "E" (headerline-flymake-count-c :error))
+        'face '( :weight black
+                 ;; :inherit variable-pitch
+                 :height 1.3
                  :foreground ,headerline--err-face))
-       " "
        (propertize
         (headerline-flymake-count-c :warning)
-        'face '( :weight bold
-                 :inherit variable-pitch
-                 :height 1.2
+        ;; (concat "W" (headerline-flymake-count-c :warning))
+        'face '( :weight black
+                 ;; :inherit variable-pitch
+                 :height 1.3
                  :foreground ,headerline--warn-face))
-       " "
        (propertize
         (headerline-flymake-count-c :note)
-        'face '( :weight bold
-                 :inherit variable-pitch
-                 :height 1.2
+        ;; (concat "N" (headerline-flymake-count-c :note))
+        'face '( :weight black
+                 ;; :inherit variable-pitch
+                 :height 1.3
                  :foreground ,headerline--note-face)))))
   "Mode line construct displaying `flymake-mode-line-format'.
 Specific to the current window's mode line.")
-
-;; (defun flymake--mode-line-counters ()
-;;   (when (flymake-running-backends) flymake-mode-line-counter-format))
-
-;; (defcustom flymake-mode-line-counter-format
-;;   '("["
-;;     flymake-mode-line-error-counter
-;;     flymake-mode-line-warning-counter
-;;     flymake-mode-line-note-counter "]")
 
 (defvar modeline-align-right-c
   '(:eval (propertize
@@ -360,6 +356,7 @@ Specific to the current window's mode line.")
                 " "
                 modeline-macro-recording-c
                 modeline-anzu-count-c
+                '(which-function-mode ("" which-func-format "--"))
                 modeline-align-right-c
                 " "
                 modeline-buffer-size-c
@@ -497,3 +494,12 @@ Specific to the current window's mode line.")
 ;;                   (- 7 ,(string-width
 ;;                          (format-mode-line "%p")))))
 ;;          'face '(:weight bold :height 1.25))))
+
+;; (defun flymake--mode-line-counters ()
+;;   (when (flymake-running-backends) flymake-mode-line-counter-format))
+
+;; (defcustom flymake-mode-line-counter-format
+;;   '("["
+;;     flymake-mode-line-error-counter
+;;     flymake-mode-line-warning-counter
+;;     flymake-mode-line-note-counter "]")
