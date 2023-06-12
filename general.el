@@ -22,15 +22,15 @@
 (setq indicate-buffer-boundaries nil)
 (setq indicate-empty-lines nil)
 (setq scroll-margin 10)
-(setq scroll-conservatively 3)
+(setq scroll-conservatively 101)
 (setq window-divider-default-right-width 10
       window-divider-default-bottom-width 0)
 (setq-default left-fringe-width 5) ;; Will it work?
 
-(setq history-length 99999)
+(setq history-length 999)
 
-(setq recentf-max-menu-items 9999999
-      recentf-max-saved-items 9999999)
+(setq recentf-max-menu-items 999
+      recentf-max-saved-items 999)
 
 (setq enable-recursive-minibuffers t)
 
@@ -53,7 +53,13 @@
 (setcache-c transient-values-file  "transient/values")
 (setcache-c bookmark-default-file  "bookmarks")
 
-(winner-mode)
+(winner-mode 1)
 (fringe-mode '(3 . 0))
-(savehist-mode)
+(savehist-mode 1)
 ;; (global-display-line-numbers-mode) ;; Don’t need it.
+
+;; (help-at-pt-set-timer) ;; hints in the echo area
+(setq-default help-at-pt-display-when-idle t
+              help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+;; (setq help-at-pt-display-when-idle t)

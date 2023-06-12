@@ -2,9 +2,9 @@
   [f5] 'delete-window
   [s-f5] 'delete-other-windows
   [f9] 'save-buffer
- 
+
   "C-f" 'hippie-expand
- 
+
   "s-h" 'evil-backward-char
   "s-l" 'evil-forward-char
   "s-j" 'evil-next-line
@@ -39,7 +39,7 @@
   "bp" 'previous-buffer
   "bn" 'next-buffer
   "bi" 'ibuffer-other-window
-  
+
   "s" '(:ignore t :wk "show")
   "s_" 'consult-keep-lines
   "s-" 'consult-focus-lines
@@ -64,15 +64,15 @@
   "TAB A" 'persp-set-buffer
   "TAB b" 'persp-switch-to-buffer
   "TAB a" 'persp-remove-buffer
-  
-  "RET" 'consult-bookmark  
+
+  "RET" 'consult-bookmark
 
   "'" 'vertico-repeat
 
   "i" '(:ignore t :wk "insert")
   "iy" 'consult-yank-from-kill-ring
   "ii" 'kill-new-from-global-paste-c
-  
+
   "o" '(:ignore t :wk "other")
   "oo" 'dired-jump
   ;; "od" 'dired-jump
@@ -112,6 +112,7 @@
   "h'" 'describe-char
   "hF" 'describe-face
   "hm" 'describe-mode
+  "hi" 'info
 
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal

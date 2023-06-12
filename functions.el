@@ -357,7 +357,6 @@ It switches the width before the height."
      mixed-pitch-mode)]
    [("L" (lambda () (toggle-modes-transient--description 'hl-line-mode "Highlight Lines"))
      hl-line-mode)
-    ;;  git-gutter-mode)
     ]
    ]
   ["Major Modes"

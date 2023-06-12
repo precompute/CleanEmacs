@@ -1,4 +1,8 @@
 (setq package-enable-at-startup nil)
+
+(setq native-comp-always-compile t
+      native-comp-async-jobs-number 12)
+
 (setq frame-resize-pixelwise t
       frame-inhibit-implied-resize t
       inhibit-splash-screen t
