@@ -15,6 +15,7 @@
         org-id-locations-file "/home/sys2/46/.orgids"
         org-time-stamp-custom-formats '("<%y-%m-%d %H:%M:%S>" . "<%y-%m-%d %H:%M:%S>")
         org-support-shift-select t
+        org-imenu-depth 90
         org-capture-mode-hook nil
         org-cycle-separator-lines 0
         org-todo-log-states t

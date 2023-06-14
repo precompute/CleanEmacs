@@ -133,7 +133,7 @@
 ;;; Savehist (for minibuffers)
 (elpacaLF "savehist" t)
 ;;; Transient
-(elpacaLF "transient")
+(elpacaLF "transient" t)
 ;;; Outline
 (elpacaLF "outline" t)
 ;;; Flymake (syntax errors)

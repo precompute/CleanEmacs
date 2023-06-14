@@ -32,6 +32,8 @@
 (setq recentf-max-menu-items 999
       recentf-max-saved-items 999)
 
+(setq load-prefer-newer t)
+
 (setq enable-recursive-minibuffers t)
 
 (setq vc-follow-symlinks t) ;; no prompting for changing VC'd files
@@ -52,10 +54,12 @@
 (setcache-c transient-levels-file  "transient/levels")
 (setcache-c transient-values-file  "transient/values")
 (setcache-c bookmark-default-file  "bookmarks")
+(setcache-c save-place-file        "places")
 
 (winner-mode 1)
 (fringe-mode '(3 . 0))
 (savehist-mode 1)
+(save-place-mode 1)
 ;; (global-display-line-numbers-mode) ;; Don’t need it.
 
 ;; (help-at-pt-set-timer) ;; hints in the echo area
