@@ -1,0 +1,68 @@
+#+TITLE: CleanEmacs
+
+[[file:.assets/logo.png]]
+
+[23-06-14 21:38:16]
+
+This is my personal Emacs config.  I migrated from [[https://github.com/doomemacs/][DOOM]] because updating it was a hassle owing to my extensive config.
+
+I’ve been using Doom Emacs for four years, and I wanted my config to be a lighter version of the same.  Hence, I’ve tried to stick as close to the keybinds I’m used to.  Other parts of this config also offer Doom-like functionality.
+
+We don’t aim this config to be minimal, but instead to be easy to understand.
+
+- Recommended Emacs Version :: =30.0.50=
+
+- Current Emacs commit :: =c8e527cbeeea6be9bb713af33a3f40408b261234=
+
+- Recommended OS :: I use Debian Stable.  This config /might/ work on MacOS and WSL.  I don’t use either, so no guarantees.
+
+* General Outline
+** Hierarchy
+- =early-init.el= :: Sets some defaults, calls =early-init-ui.el=
+- =early-init-ui.el= :: Defines some faces for =modeline.el= and disables the menu bar and other stuff.
+- =init.el= :: Only loads files.  Loads =elpaca-init.el= first, and other package-agnostic configuration files are called after.
+- =general.el= :: Defines emacs-wide user options and enables some global minor-modes.
+- =functions.el= :: Dumping ground for functions and Transients.
+- =keybinds.el= :: Defines keybinds, uses =general-def=.
+- =ui.el= :: Sets the theme, fonts and modifies a few faces.
+- =modeline.el= :: Should be named "=headerline.el=".  Defines and =propertize= s functions that show information about the buffer, and =display= s them.  Disables the =mode-line= and instead uses the =header-line=.  Light-weight and inherits colors from the active theme.
+- =loads.el= :: Loads files that aren’t tracked in this project.
+
+** Package Management
+We use [[https://github.com/progfolio/elpaca/][Elpaca]] to manage packages.  It’s very easy to set up, and works well with native-compilation.  The user does not need to intervene.
+
+Inspired by Doom, this config uses separate module-like configuration files for every package.  This is aided by a small custom function (=elpacaLF=) that creates a config file for a package when it is installed for the first time, and loads the file.  The config is just a =use-package= block with =:elpaca= (if necessary).
+
+Internal packages can also be configured.  They use =:elpaca nil= .
+
+If you don’t like the package, you can remove the corresponding =elpacaLF= invocation and the package will be completely ignored on the next startup / eval.  Packages can also be installed by =eval= ing a new =elpacaLF= invocation.
+
+All packages will be =:pin= ned shortly, to make this reproducible.
+
+** Vim Emulation
+We use =evil= for Vim Emulation.  As a Vim refugee, I’ve tried many times to get used to Emacs’ keybinds, but I keep going back to the simplicity of modal editing.
+
+*** Keybinds
+We use [[https://github.com/noctuid/general.el][general.el]] for keybinds. 
+
+- Additional modifiers used :: *Hyper*.  Use /xmodmap/ to convert a key to *Hyper*.
+
+** Headerline
+The Headerline is mostly just a propertized default modeline.  It uses =face-remapping-alist= to change the face for the header-line depending on =(buffer-modified-p)=.  The name of the current buffer is relative to the project root (if found).  We also cache the name of the current buffer (picked up from doom-modeline’s "light" variant).  The active buffer also has two indicators on either extreme end.
+
+* Making it your own
+
+As of [23-06-14 22:28:53] , this config is still a work in progress but ~90% to *STABLE* status.  It lacks language-specific configuration and some ease-of-use modifications.  Those will be added in time, but if you’re a former Doom Emacs user, you can use this config as a starting point.
+
+What you need to do:
+
+- Clone to =~/.emacs.d=.  Alternatively, use [[https://github.com/plexus/chemacs2][Chemacs]] to enable multiple configs.
+  
+- Search for =~/= and =sys2= and remove / modify all local filesystem calls.
+
+* Screenshots
+
+[[file:.assets/screenshot1.jpg]]
+[[file:.assets/screenshot2.jpg]]
+[[file:.assets/screenshot3.jpg]]
+[[file:.assets/screenshot4.jpg]]

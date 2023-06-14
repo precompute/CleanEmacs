@@ -1,6 +1,7 @@
 (general-define-key
   [f5] 'delete-window
   [s-f5] 'delete-other-windows
+  [f6] 'timestamp
   [f9] 'save-buffer
 
   "C-f" 'hippie-expand
@@ -116,8 +117,7 @@
 
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
-  "qf" 'delete-frame
-  )
+  "qf" 'delete-frame)
 
 (general-define-key
   :states 'normal
