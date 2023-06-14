@@ -62,8 +62,6 @@
 (save-place-mode 1)
 ;; (global-display-line-numbers-mode) ;; Don’t need it.
 
-;; (help-at-pt-set-timer) ;; hints in the echo area
 (setq-default help-at-pt-display-when-idle t
               help-at-pt-timer-delay 0.1)
-(help-at-pt-set-timer)
-;; (setq help-at-pt-display-when-idle t)
+(help-at-pt-set-timer) ;; hints in the echo area
