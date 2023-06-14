@@ -73,7 +73,7 @@
 ;;; Helpful (help buffers)
 (elpacaLF "helpful")
 ;;; Shackle (popup rules)
-(elpacaLF "shackle")
+;; (elpacaLF "shackle")
 ;;; Popwin (popup rules)
 ;; (elpacaLF "popwin")
 ;;; Moody (modeline)
