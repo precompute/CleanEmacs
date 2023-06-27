@@ -13,6 +13,7 @@
     ;; (loadfile-c "hooks.el")
     (loadfile-c "ui.el")
     (loadfile-c "modeline.el")
+    (loadfile-c "modes.el")
     (loadfile-c "loads.el")))
 
 (add-hook 'elpaca-after-init-hook 'after-init-load-file)
