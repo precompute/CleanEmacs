@@ -15,6 +15,39 @@
  '(helpful-heading ((t (:extend t))))
  '(org-meta-line ((t (:extend t)))))
 
+;;; display-buffer-alist
+(setq window-sides-slots '(0 0 0 1)) ;; LTRB; This is a good enough default.
+(setq display-buffer-alist nil)
+(dolist (prop '(("\\*info\\*" display-buffer-in-direction
+                 (direction . bottom)
+                 (window-height . 0.3)
+                 (window-parameters (no-delete-other-windows . t)))
+                ("\\*Help\\*" display-buffer-in-direction
+                 (direction . bottom)
+                 (window-height . 0.3)
+                 (window-parameters (no-delete-other-windows . t)))
+                ("\\*helpful[^z-a]*" display-buffer-in-direction ;; (rx "*helpful" (* anything))
+                 (direction . bottom)
+                 (window-height . 0.35)
+                 (window-parameters (no-delete-other-windows . t)))
+                ("\\*Messages\\*" display-buffer-in-direction
+                 (direction . bottom)
+                 (window-height . 0.40)
+                 (window-parameters (no-delete-other-windows . t)))
+                ("\\*[^z-a]*" display-buffer-in-direction ;; (rx "*" (* anything))
+                 (direction . bottom)
+                 (window-height . 0.40)
+                 (window-parameters (no-delete-other-windows . t)))))
+  (add-to-list 'display-buffer-alist prop))
+;; ("[^z-a]*" display-buffer-in-direction ;; (rx (* anything)) ;; don’t
+                ;; ((rx (| "*xref*"
+                ;;         "*grep*"
+                ;;         "*info*"
+                ;;         "*help*"
+                ;;         "*Occur*"))
+                ;;  display-buffer-reuse-window
+                ;;  (inhibit-same-window . nil))
+
 ;;; other
 ;;;; show-paren
 (setq show-paren-delay 0.2

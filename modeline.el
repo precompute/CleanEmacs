@@ -35,10 +35,7 @@
           (if buffer-file-truename
               (let ((g-root (locate-dominating-file buffer-file-truename ".git")))
                 (if (not g-root)
-                    (propertize buffer-file-truename
-                                'face '( :weight bold
-                                         :inherit variable-pitch
-                                         :height 1.15))
+                    nil
                   (let* ((buf (file-truename buffer-file-truename))
                          (gitroot (file-truename g-root))
                          (gitroot-nodash (substring gitroot 0 -1))

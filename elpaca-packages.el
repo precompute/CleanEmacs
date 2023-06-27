@@ -49,7 +49,9 @@
 (load-file (expand-file-name "packages/corfu.el" user-emacs-directory))
 ;;;;; Embark (Add-on functions)
 (elpacaLF "embark")
-;;;; wgrep (for embark-occur)
+;;;;;; embark-consult
+(elpacaLF "embark-consult")
+;;;;;; wgrep (for embark-occur)
 (elpacaLF "wgrep")
 ;;;;; Consult (incremental functions)
 (elpacaLF "consult")
