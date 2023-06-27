@@ -369,7 +369,7 @@ It switches the width before the height."
     ;; ("z" "*scratch*" scratch-pop)
     ]
    [;; ("@" "Ref. Proj. cache" projectile-invalidate-cache)
-    ;; ("#" "Open Terminal here" open-external-term-here-c)
+    ("#" "Open Terminal here" open-external-term-here-c)
     ("F" "Find File" find-file)]
    [("$$" "Highlight regexp" highlight-regexp :transient nil) ;;buffer operations DO NOT WORK
     ("%%" "Highlight phrase" highlight-phrase :transient nil)

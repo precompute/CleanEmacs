@@ -33,7 +33,8 @@
 (elpacaLF "evil-visualstar") ;; search with *
 ;;; Themes
 ;;;; Sculpture-Themes
-(elpaca (sculpture-themes-local :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
+;; (elpaca (sculpture-themes-local :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
+(elpacaLF "sculpture-themes")
 ;;; Keybinds
 ;;;; General
 (elpacaLF "general")
@@ -163,8 +164,16 @@
 (elpacaLF "elisp-slime-nav")
 ;;;; Markdown
 (elpacaLF "markdown-mode")
+;;;; Lua
+(elpacaLF "lua-mode")
+;;;; Go
+(elpacaLF "go-mode")
 
 
 ;;; Misc
 ;;;; sqlite3
 (elpacaLF "sqlite3")
+;;;; xr (inverse of rx)
+(elpacaLF "xr")
+;;;; relint (regexp linter)
+(elpacaLF "relint")

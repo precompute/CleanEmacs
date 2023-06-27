@@ -179,7 +179,8 @@
   "H-c" 'git-auto-time-commit
   "H-C" 'git-prompt-commit
   "H-r" 'refile3-main-transient
-  "\\" 'repeat)
+  "\\" 'repeat
+  "C-/" 'toggle-modes-transient-c)
 
 (general-define-key
   :states 'insert
