@@ -180,4 +180,4 @@
 ;;;; relint (regexp linter)
 (elpacaLF "relint")
 ;;;; occurx (filter lines in buffer)
-(elpacaLF "occurx")
+(elpacaLF "occurx-mode")
