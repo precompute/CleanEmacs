@@ -411,15 +411,15 @@ It switches the width before the height."
   :transient-non-suffix 'transient--do-warn
   ["Date"
    [("q" (lambda () (interactive)
-           (unless (boundp 'main-log-init-date)
-             (setq main-log-init-date (format-time-string
-                                       "%y-%m-%d")))
-           (concat "Current Date: "
-                   (propertize main-log-init-date
-                               'face 'font-lock-keyword-face)))
-     (lambda () (interactive)
-       (let ((datevar (read-string "Init Date: ")))
-         (setq main-log-init-date datevar))))
+           (let ((datevar (read-string "Init Date: ")))
+             (setq main-log-init-date datevar)))
+     :description (lambda () (interactive)
+                    (unless (boundp 'main-log-init-date)
+                      (setq main-log-init-date (format-time-string
+                                                "%y-%m-%d")))
+                    (concat "Current Date: "
+                            (propertize main-log-init-date
+                                        'face 'font-lock-keyword-face))))
     ("b" "Insert L1 Above Current"
      (lambda () (interactive)
        (save-excursion

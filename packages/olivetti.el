@@ -7,7 +7,7 @@
           helpful-mode
           help-mode
           ibuffer-mode
-          info-mode
+          Info-mode
 	  minibuffer-mode) . olivetti-mode)
   :config
   (setq-default olivetti-body-width 130

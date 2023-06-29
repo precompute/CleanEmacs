@@ -91,7 +91,7 @@ Modified from `flymake--mode-line-counter'.
   (let ((fl-keyword (get-color-fg 'font-lock-keyword-face)) ;; green
         (fl-builtin (get-color-fg 'font-lock-builtin-face)) ;; blue
         (fl-type (get-color-fg 'font-lock-type-face)) ;; brown
-        (fl-variable (get-color-fg 'font-lock-variable-name-face)) ;; off-white
+        (fl-variable (get-color-fg 'font-lock-punctuation-face)) ;; off-white
         (fl-string (get-color-fg 'font-lock-string-face)) ;; dark red
         (errorface (get-color-fg 'error)) ;; red
         (matchface (get-color-fg 'match)) ;; green
