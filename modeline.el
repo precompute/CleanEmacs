@@ -86,7 +86,7 @@ Modified from `flymake--mode-line-counter'.
     (number-to-string count)))
 
 ;;;; Faces
-(defun set-headerline-faces ()
+(defun set-headerline-faces (&rest rest)
   (interactive)
   (let ((fl-keyword (get-color-fg 'font-lock-keyword-face)) ;; green
         (fl-builtin (get-color-fg 'font-lock-builtin-face)) ;; blue
@@ -127,8 +127,7 @@ Modified from `flymake--mode-line-counter'.
     (defvar headerline--note-face (if noteface noteface "#000000"))
     (defvar headerline--default-face (if defaultfg defaultfg "#000000"))))
 (set-headerline-faces) ;; init during load
-(add-hook 'load-theme 'set-headerline-faces)
-(add-hook 'enable-theme 'set-headerline-faces)
+(add-to-list 'enable-theme-functions 'set-headerline-faces)
 
 (defun update-face-remapping-alist (face target)
   (if (member face face-remapping-alist)
