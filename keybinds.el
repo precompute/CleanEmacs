@@ -180,7 +180,10 @@
   "H-C" 'git-prompt-commit
   "H-r" 'refile3-main-transient
   "\\" 'repeat
-  "C-/" 'toggle-modes-transient-c)
+  "C-/" 'toggle-modes-transient-c
+
+  "<backspace>" 'scroll-up-command
+  "S-<backspace>" 'scroll-down-command)
 
 (general-define-key
   :states 'insert

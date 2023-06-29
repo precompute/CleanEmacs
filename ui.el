@@ -32,6 +32,8 @@
  '(org-meta-line ((t (:extend t)))))
 
 ;;; display-buffer-alist
+(setq switch-to-buffer-obey-display-actions t) ;; makes cursor jump to new window
+
 (setq window-sides-slots '(0 0 0 1)) ;; LTRB; This is a good enough default.
 (setq display-buffer-alist nil)
 (dolist (prop '(("\\*info\\*" display-buffer-in-direction
