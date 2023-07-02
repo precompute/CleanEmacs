@@ -1,8 +1,12 @@
+;;;; General
+;;;;; Global nice-to-haves
 (general-define-key
   [f5] 'delete-window
   [s-f5] 'delete-other-windows
   [f6] 'timestamp
   [f9] 'save-buffer
+  [f10] 'save-and-delete-window
+  [f12] 'save-and-kill-buffer
 
   "C-f" 'hippie-expand
 
@@ -11,12 +15,15 @@
   "s-j" 'evil-next-line
   "s-k" 'evil-previous-line)
 
+;;;;; Evil-Mode
+;;;;;; Leader
 (general-create-definer evil-keymaps-c
   :states '(normal insert visual emacs)
   :keymaps 'override
   :prefix "SPC"
   :global-prefix "s-SPC")
 
+;;;;;; Keys under Evil-mode Leader
 (evil-keymaps-c
   "SPC" 'project-find-file
   "S-SPC" 'project-switch-project
@@ -119,6 +126,8 @@
   "qq" 'save-buffers-kill-terminal
   "qf" 'delete-frame)
 
+;;;;;; Sans leader
+;;;;;;; Buffer
 (general-define-key
   :states 'normal
   "z" '(:ignore t :wk "end")
@@ -127,6 +136,7 @@
   "zx" 'kill-current-buffer
   "zZ" 'bury-buffer)
 
+;;;;;;; Undo / Redo
 (general-define-key
   :states 'normal
   "C-w" '(:ignore t)
@@ -135,33 +145,39 @@
   "C-w C-r" 'winner-redo
   "C-w r" 'winner-redo)
 
+;;;;;;; Nav/other
 (general-define-key
   :states 'normal
   :keymaps 'emacs-lisp-mode-map
   "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
 
+;;;;;;; bicycle-cycle
 (general-define-key
  :states 'normal
  :keymaps 'outline-minor-mode-map
  [tab] 'bicycle-cycle
  [backtab] 'bicycle-cycle-global)
 
+;;;;;;; misc
 (general-define-key
  :states 'normal
  :keymaps 'dired-mode-map
  "_" 'locate-git-file-c)
 
+;;;;;;; Evil operators
 (general-define-key
   :states 'normal
   "g" '(:ignore t)
   "g c" 'evilnc-comment-operator
-  "g g" 'evil-goto-first-line)
+  "g g" 'evil-goto-first-line
+  "g e" 'evil-operator-eval-region)
 
 (general-define-key
  :states 'motion
  "a g" 'evil-textobj-whole-buffer
  "a f" 'evil-textobj-get-func)
 
+;;;;;;; Misc/Custom
 (general-define-key
   :states 'normal
   "C-H-s--" 'flip-frame
@@ -188,3 +204,12 @@
 (general-define-key
   :states 'insert
   "C-S-u" 'insert-char-5-discard-end)
+
+;;;; Evil
+;;;;; ge (eval) Operator
+
+(evil-define-operator evil-operator-eval-region (beg end)
+  "Evaluate selection."
+  :move-point nil
+  (interactive "<r>")
+  (eval-region beg end))

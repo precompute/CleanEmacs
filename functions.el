@@ -18,6 +18,18 @@
   (let ((consult-project-function nil))
     (consult-ripgrep)))
 
+(defun save-and-kill-buffer ()
+  (interactive)
+  (progn
+    (save-buffer)
+    (kill-current-buffer)))
+
+(defun save-and-delete-window ()
+  (interactive)
+  (progn
+    (save-buffer)
+    (delete-window)))
+
 (defun toggle-eldoc-box ()
   (interactive)
   (if (boundp 'toggle-eldoc-box--history)
