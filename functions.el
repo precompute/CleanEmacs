@@ -99,6 +99,18 @@ Saves to a temp file and puts the filename in the kill ring."
     (kill-new filename)
     (message filename)))
 
+;;;; transparency
+(defun set-transparency-c (&optional value)
+  "Set the transparency of the selected window.
+Needs frame-parameter alpha-background."
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha-background))
+        (value (if value value 0.7)))
+    (set-frame-parameter nil 'alpha-background value)))
+(defun turn-off-transparency-c ()
+  (interactive)
+  (set-transparency-c 1.0))
+
 ;;;; git
 ;;;;; auto-commit
 (defun git-auto-time-commit ()
@@ -351,26 +363,19 @@ It switches the width before the height."
   :transient-non-suffix 'transient--do-warn
   ["Minor Modes"
    [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
-     olivetti-mode)
-    ;; ("OO" "'fancy local" olivetti-fancy-local-c :transient nil)
-    ;; ("Oo" "'fancy global" olivetti-fancy-c :transient nil)
-    ]
+     olivetti-mode)]
    [("t" (lambda () (toggle-modes-transient--description 'truncate-lines "Truncate Lines"))
      toggle-truncate-lines)
-    ;; ("f" (lambda () (toggle-modes-transient--description 'flycheck-mode "Flycheck"))
-    ;;  flycheck-mode)
-    ("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides"))
-     highlight-indent-guides-mode)]
-   [;; ("l" (lambda () (toggle-modes-transient--description 'display-line-numbers "Line Numbers"))
-    ;;  doom/toggle-line-numbers)
     ("v" (lambda () (toggle-modes-transient--description 'visual-line-mode "Visual Lines"))
-     visual-line-mode)
+     visual-line-mode)]
+   [("ll" (lambda () (toggle-modes-transient--description 'display-line-numbers "Line Numbers")) display-line-numbers-mode)
+    ("lL" (lambda () (toggle-modes-transient--description 'global-display-line-numbers "Line Numbers")) global-display-line-numbers-mode)]
+   [("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides"))
+     highlight-indent-guides-mode)
     ("m" (lambda () (toggle-modes-transient--description 'mixed-pitch--applied-p "Mixed Pitch"))
      mixed-pitch-mode)]
-   [("L" (lambda () (toggle-modes-transient--description 'hl-line-mode "Highlight Lines"))
-     hl-line-mode)
-    ]
-   ]
+    ("L" (lambda () (toggle-modes-transient--description 'hl-line-mode "Highlight Lines"))
+     hl-line-mode)]
   ["Major Modes"
    [("0" "Clean Mode" clean-mode)]
    [("1" "Fundamental Mode" fundamental-mode)]]
@@ -378,18 +383,15 @@ It switches the width before the height."
    [("B" "Revert Buffer" revert-buffer)
     ;; ("!" (lambda () (toggle-modes-transient--description 'custom-transparency "Transparency"))
     ;;  toggle-transparency-c)
-    ;; ("z" "*scratch*" scratch-pop)
+    ("z" "*scratch*" scratch-buffer)
     ]
-   [;; ("@" "Ref. Proj. cache" projectile-invalidate-cache)
-    ("#" "Open Terminal here" open-external-term-here-c)
+   [("#" "Open Terminal here" open-external-term-here-c)
     ("F" "Find File" find-file)]
    [("$$" "Highlight regexp" highlight-regexp :transient nil) ;;buffer operations DO NOT WORK
     ("%%" "Highlight phrase" highlight-phrase :transient nil)
     ("$%" "Unhighlight regexp/phrase" unhighlight-regexp :transient nil)]
    [("<f9>" "Save Buffer" save-buffer)
-    ;; (";" "Sudo file" doom/sudo-this-file)
-    ("T" "Switch theme" load-theme)]
-   ]
+    ("T" "Switch theme" load-theme)]]
   ;; ["+"
   ;;  [("+" "New Id" (lambda () (interactive) (find-file "~/46/da/id")) :transient nil)
   ;;   ("<return>" "New TimeLog" new-timelog-c :transient nil)]
