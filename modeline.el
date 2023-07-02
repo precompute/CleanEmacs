@@ -128,6 +128,7 @@ Modified from `flymake--mode-line-counter'.
     (defvar headerline--default-face (if defaultfg defaultfg "#000000"))))
 (set-headerline-faces) ;; init during load
 (add-to-list 'enable-theme-functions 'set-headerline-faces)
+(add-to-list 'enable-theme-functions 'set-fonts-c)
 
 (defun update-face-remapping-alist (face target)
   (if (member face face-remapping-alist)

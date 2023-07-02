@@ -197,8 +197,8 @@
                             ("^ *\\(#\\+end.*\\)" 1 '(face nil display "END"))
                             ("^ *\\(#\\+BEGIN_QUOTE\\)" 1 '(face nil display "QUOTE"))
                             ("^ *\\(#\\+begin_quote\\)" 1 '(face nil display "QUOTE"))
-                            ("^\\( *\\)\\(+\\) " 2 '(face nil display "⊣"))
-                            ("^\\( *\\)\\(-\\) " 2 '(face nil display "⊢"))
+                            ("^\\( *\\)\\(+\\) " 2 '(face font-lock-keyword-face display "⊣"))
+                            ("^\\( *\\)\\(-\\) " 2 '(face font-lock-builtin-face display "⊢"))
                             ;; ("^\\(\\( *\\(+\\|-\\)\\)\\|\\(\\**\\)\\) \\(\\[ \\]\\)"
                             ;;  5 '(face (:background "#1979EA"
                             ;;            :box (:line-width -1 :color "#000")

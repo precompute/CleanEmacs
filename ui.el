@@ -1,6 +1,11 @@
 ;;; Theme
-(require-theme 'sculpture-themes)
-(load-theme 'sculpture-themes-dark t)
+(defun set-theme-c ()
+  "Set theme for Emacs."
+  (interactive)
+  (progn
+    (require-theme 'sculpture-themes)
+    (load-theme 'sculpture-themes-dark t)))
+(set-theme-c)
 
 ;;; Custom Faces
 (custom-set-faces
@@ -28,8 +33,10 @@
  '(outline-minor-6 ((t (:extend t :height 1.08))))
  '(outline-minor-7 ((t (:extend t :height 1.05))))
  '(outline-minor-8 ((t (:extend t :height 1.05))))
- '(helpful-heading ((t (:extend t))))
- '(org-meta-line ((t (:extend t)))))
+ '(helpful-heading ((t (:extend t :height 1.25 :inherit 'variable-pitch))))
+ '(transient-heading ((t (:height 1.25 :inherit 'variable-pitch))))
+ '(org-meta-line ((t (:extend t))))
+ '(org-date ((t (:inherit (list bold fixed-pitch))))))
 
 ;;; display-buffer-alist
 (setq switch-to-buffer-obey-display-actions t) ;; makes cursor jump to new window
@@ -57,14 +64,6 @@
                  (window-height . 0.40)
                  (window-parameters (no-delete-other-windows . t)))))
   (add-to-list 'display-buffer-alist prop))
-;; ("[^z-a]*" display-buffer-in-direction ;; (rx (* anything)) ;; don’t
-                ;; ((rx (| "*xref*"
-                ;;         "*grep*"
-                ;;         "*info*"
-                ;;         "*help*"
-                ;;         "*Occur*"))
-                ;;  display-buffer-reuse-window
-                ;;  (inhibit-same-window . nil))
 
 ;;; other
 ;;;; show-paren
@@ -72,9 +71,13 @@
       show-paren-style 'expression)
 
 ;;; Fonts
-(set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
-;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
-;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 17))
-(set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
-(copy-face 'default 'fixed-pitch)
-
+(defun set-fonts-c (&rest rest)
+  "Set fonts for Emacs."
+  (interactive)
+  (progn
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 17))
+    (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
+    (copy-face 'default 'fixed-pitch)))
+(set-fonts-c)
