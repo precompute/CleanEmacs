@@ -65,6 +65,12 @@
                  (window-parameters (no-delete-other-windows . t)))))
   (add-to-list 'display-buffer-alist prop))
 
+;;; Revert on focus-in
+(if (fboundp 'revert-buffer-if-not-modified)
+    (add-function
+     :after after-focus-change-function
+     'revert-buffer-if-not-modified))
+
 ;;; other
 ;;;; show-paren
 (setq show-paren-delay 0.2

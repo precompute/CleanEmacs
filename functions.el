@@ -30,6 +30,28 @@
     (save-buffer)
     (delete-window)))
 
+(defun revert-buffer-if-not-modified ()
+  "Revert the buffer if it isn’t modified."
+  (interactive)
+  (let ((changed? (not (verify-visited-file-modtime))))
+    (if (buffer-modified-p)
+        (if changed?
+            (message
+             (concat
+              (propertize "Buffer " 'face 'variable-pitch)
+              (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
+              (propertize " changed on disk.  " 'face 'variable-pitch)
+              (propertize "You have unsaved changes." 'face '(variable-pitch success)))))
+      (if changed?
+          (progn
+            (message
+             (concat
+              (propertize "Buffer " 'face 'variable-pitch)
+              (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
+              (propertize " changed on disk.  " 'face 'variable-pitch)
+              (propertize "REVERTING." 'face '(variable-pitch success))))
+            (revert-buffer t t))))))
+
 (defun toggle-eldoc-box ()
   (interactive)
   (if (boundp 'toggle-eldoc-box--history)
@@ -369,13 +391,13 @@ It switches the width before the height."
     ("v" (lambda () (toggle-modes-transient--description 'visual-line-mode "Visual Lines"))
      visual-line-mode)]
    [("ll" (lambda () (toggle-modes-transient--description 'display-line-numbers "Line Numbers")) display-line-numbers-mode)
-    ("lL" (lambda () (toggle-modes-transient--description 'global-display-line-numbers "Line Numbers")) global-display-line-numbers-mode)]
+    ("lL" (lambda () (toggle-modes-transient--description 'global-display-line-numbers-mode "Line Numbers")) global-display-line-numbers-mode)]
    [("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides"))
      highlight-indent-guides-mode)
     ("m" (lambda () (toggle-modes-transient--description 'mixed-pitch--applied-p "Mixed Pitch"))
-     mixed-pitch-mode)]
+     mixed-pitch-mode)
     ("L" (lambda () (toggle-modes-transient--description 'hl-line-mode "Highlight Lines"))
-     hl-line-mode)]
+     hl-line-mode)]]
   ["Major Modes"
    [("0" "Clean Mode" clean-mode)]
    [("1" "Fundamental Mode" fundamental-mode)]]

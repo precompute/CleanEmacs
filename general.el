@@ -44,6 +44,8 @@
 
 (setq revert-without-query '(".")) ;; no query for revert
 
+(setq confirm-kill-emacs 'y-or-n-p)
+
 (defmacro setcache-c (var file)
   "Macro to set file location to `user-cache-directory'"
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))

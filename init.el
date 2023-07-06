@@ -18,6 +18,10 @@
 
 (add-hook 'elpaca-after-init-hook 'after-init-load-file)
 
+(progn
+  (setq server-name (format-time-string "%y%m%d%H%M%S"))
+  (server-start))
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
