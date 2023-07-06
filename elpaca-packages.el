@@ -152,13 +152,13 @@
 ;;; imenu
 (elpacaLF "imenu" t)
 
-;;;; Org
+;;; Org
 (elpacaLF "org" t)
-;;;;; Org Agenda
+;;;; Org Agenda
 (elpacaLF "org-agenda" t)
-;;;;; Org Bullets
+;;;; Org Bullets
 (elpacaLF "org-bullets")
-;;;;; Org Super Agenda
+;;;; Org Super Agenda
 (elpacaLF "org-super-agenda")
 
 ;;; Language

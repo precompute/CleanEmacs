@@ -30,6 +30,7 @@
   "f"  '(:ignore t :wk "file")
   "ff" 'find-file
   "fr" 'recentf-open
+  "fD" 'make-directory
 
   "g" '(:ignore t :wk "Version Control")
   "gg" 'magit-status

@@ -391,7 +391,7 @@ It switches the width before the height."
     ("v" (lambda () (toggle-modes-transient--description 'visual-line-mode "Visual Lines"))
      visual-line-mode)]
    [("ll" (lambda () (toggle-modes-transient--description 'display-line-numbers "Line Numbers")) display-line-numbers-mode)
-    ("lL" (lambda () (toggle-modes-transient--description 'global-display-line-numbers-mode "Line Numbers")) global-display-line-numbers-mode)]
+    ("lL" (lambda () (toggle-modes-transient--description 'global-display-line-numbers-mode "Global Line Numbers")) global-display-line-numbers-mode)]
    [("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides"))
      highlight-indent-guides-mode)
     ("m" (lambda () (toggle-modes-transient--description 'mixed-pitch--applied-p "Mixed Pitch"))
