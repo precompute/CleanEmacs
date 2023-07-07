@@ -47,6 +47,10 @@
 (elpacaLF "marginalia")
 ;;;;; Corfu (hints)
 (load-file (expand-file-name "packages/corfu.el" user-emacs-directory))
+;;;;;; Candidate overlay
+(elpacaLF "corfu-candidate-overlay")
+;;;;;; Icons
+(elpacaLF "kind-icon")
 ;;;;; Embark (Add-on functions)
 (elpacaLF "embark")
 ;;;;;; embark-consult
@@ -75,14 +79,6 @@
 (elpacaLF "rainbow-delimiters")
 ;;; Helpful (help buffers)
 (elpacaLF "helpful")
-;;; Shackle (popup rules)
-;; (elpacaLF "shackle")
-;;; Popwin (popup rules)
-;; (elpacaLF "popwin")
-;;; Moody (modeline)
-;; (elpacaLF "moody") ;; doesn't work on the header-line
-;;;; Minions (hide modes on modeline)
-;; (elpacaLF "minions")
 ;;; Ligature
 (elpacaLF "ligature")
 ;;; Mixed-Pitch
@@ -102,12 +98,6 @@
 (elpacaLF "perspective")
 ;;; diff-hl (git info in fringe)
 (elpacaLF "diff-hl")
-;;; smart modeline
-;; (elpacaLF "smart-mode-line")
-;;; mood-line
-;; (elpacaLF "mood-line")
-;;; pulsar (pulse line)
-;; (elpacaLF "pulsar") ;; Don’t really need it
 ;;; transpose-frame
 (elpacaLF "transpose-frame")
 ;;; rainbow-mode (highlight colors)

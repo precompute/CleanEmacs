@@ -18,9 +18,9 @@
 
 (add-hook 'elpaca-after-init-hook 'after-init-load-file)
 
-(progn
-  (setq server-name (format-time-string "%y%m%d%H%M%S"))
-  (server-start))
+(if (not (file-exists-p "/run/user/1000/emacs/server"))
+    (server-start)
+  (message "Emacs Server already running, run (server-start) after setting `server-name’ otherwise."))
 
 ;; Local Variables:
 ;; no-byte-compile: t
