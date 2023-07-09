@@ -171,3 +171,7 @@
 (elpacaLF "relint")
 ;;;; occurx (filter lines in buffer)
 (elpacaLF "occurx-mode")
+;;;; Terminal (if I ever use it)
+(elpacaLF "vterm")
+;;;; Fontification and colors for info-mode
+(elpacaLF "info-colors")

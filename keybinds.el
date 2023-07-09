@@ -90,12 +90,14 @@
   "op" 'dired-sidebar-toggle-sidebar
   "o'" 'vertico-repeat
   "o\"" 'vertico-repeat-select
+  "o-" 'echo-current-buffer-path
 
   "t" '(:ignore t :wk "toggle")
   "tl" 'display-line-numbers-mode
   "ti" 'highlight-indent-guides-mode
   "tf" 'follow-mode
   "tc" 'corfu-mode
+  "tC" 'corfu-toggle-autocomplete
   "teb" 'toggle-eldoc-box
 
   "c" '(:ignore t :wk "code diagnostics")
@@ -125,7 +127,8 @@
 
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
-  "qf" 'delete-frame)
+  "qf" 'delete-frame
+  "qr" 'restart-emacs)
 
 ;;;;;; Sans leader
 ;;;;;;; Buffer

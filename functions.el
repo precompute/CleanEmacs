@@ -74,6 +74,19 @@
             (concat msg " `eldoc-box-hover-at-point-mode' disabled.")))
       (message msg))))
 
+(defun corfu-toggle-autocomplete ()
+  (interactive)
+  (setq corfu-auto (not corfu-auto))
+  (if corfu-mode
+      (progn
+        (corfu-mode -1)
+        (corfu-mode 1))))
+
+(defun echo-current-buffer-path ()
+  (interactive)
+  (message (propertize buffer-file-name
+                       'face '(:inherit '(font-lock-keyword-face bold)))))
+
 ;;;; completion
 ;;;;; kill-new from global paste
 (defun kill-new-from-global-paste-c ()
@@ -128,7 +141,10 @@ Needs frame-parameter alpha-background."
   (interactive)
   (let ((alpha (frame-parameter nil 'alpha-background))
         (value (if value value 0.7)))
-    (set-frame-parameter nil 'alpha-background value)))
+    (set-frame-parameter nil 'alpha-background value))
+  ;; (with-selected-frame ;; Quits the frame
+  ;;     (frame-initialize))
+  )
 (defun turn-off-transparency-c ()
   (interactive)
   (set-transparency-c 1.0))
@@ -180,13 +196,13 @@ Needs frame-parameter alpha-background."
   "Split window and open shell"
   (interactive)
   (evil-window-split)
-  (eshell))
+  (vterm))
 
 (defun open-shell-vsplit-c ()
   "Vsplit window and open shell"
   (interactive)
   (evil-window-vsplit)
-  (eshell))
+  (vterm))
 
 (defun open-external-term-here-c ()
   "Open `ter' in the current directory."
@@ -386,7 +402,7 @@ It switches the width before the height."
   ["Minor Modes"
    [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
      olivetti-mode)]
-   [("t" (lambda () (toggle-modes-transient--description 'truncate-lines "Truncate Lines"))
+   [("tl" (lambda () (toggle-modes-transient--description 'truncate-lines "Truncate Lines"))
      toggle-truncate-lines)
     ("v" (lambda () (toggle-modes-transient--description 'visual-line-mode "Visual Lines"))
      visual-line-mode)]
@@ -403,17 +419,18 @@ It switches the width before the height."
    [("1" "Fundamental Mode" fundamental-mode)]]
   ["Other"
    [("B" "Revert Buffer" revert-buffer)
-    ;; ("!" (lambda () (toggle-modes-transient--description 'custom-transparency "Transparency"))
-    ;;  toggle-transparency-c)
     ("z" "*scratch*" scratch-buffer)
-    ]
-   [("#" "Open Terminal here" open-external-term-here-c)
     ("F" "Find File" find-file)]
+   [("#" "Open Terminal here" open-external-term-here-c :transient nil)
+    ("sv" "Open VTerm here" project-vterm :transient nil)
+    ("se" "Open EShell here" project-eshell :transient nil)]
    [("$$" "Highlight regexp" highlight-regexp :transient nil) ;;buffer operations DO NOT WORK
     ("%%" "Highlight phrase" highlight-phrase :transient nil)
     ("$%" "Unhighlight regexp/phrase" unhighlight-regexp :transient nil)]
    [("<f9>" "Save Buffer" save-buffer)
-    ("T" "Switch theme" load-theme)]]
+    ("T" "Switch theme" load-theme)]
+   [("tt" "Turn on Transparency" set-transparency-c)
+    ("tT" "Turn off Transparency" turn-off-transparency-c)]]
   ;; ["+"
   ;;  [("+" "New Id" (lambda () (interactive) (find-file "~/46/da/id")) :transient nil)
   ;;   ("<return>" "New TimeLog" new-timelog-c :transient nil)]
