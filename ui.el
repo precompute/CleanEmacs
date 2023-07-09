@@ -39,29 +39,34 @@
  '(org-date ((t (:inherit (list bold fixed-pitch))))))
 
 ;;; display-buffer-alist
-(setq switch-to-buffer-obey-display-actions t) ;; makes cursor jump to new window
-
 (setq window-sides-slots '(0 0 0 1)) ;; LTRB; This is a good enough default.
 (setq display-buffer-alist nil)
 (dolist (prop '(("\\*info\\*" display-buffer-in-direction
                  (direction . bottom)
                  (window-height . 0.3)
+                 (body-function . select-window)
                  (window-parameters (no-delete-other-windows . t)))
                 ("\\*Help\\*" display-buffer-in-direction
                  (direction . bottom)
                  (window-height . 0.3)
+                 (body-function . select-window)
                  (window-parameters (no-delete-other-windows . t)))
                 ("\\*helpful[^z-a]*" display-buffer-in-direction ;; (rx "*helpful" (* anything))
                  (direction . bottom)
                  (window-height . 0.35)
+                 (body-function . select-window)
                  (window-parameters (no-delete-other-windows . t)))
                 ("\\*Messages\\*" display-buffer-in-direction
                  (direction . bottom)
                  (window-height . 0.40)
+                 (body-function . select-window)
                  (window-parameters (no-delete-other-windows . t)))
+                ((mode . vterm-mode) display-buffer-same-window
+                 (body-function . select-window))
                 ("\\*[^z-a]*" display-buffer-in-direction ;; (rx "*" (* anything))
                  (direction . bottom)
                  (window-height . 0.40)
+                 (body-function . select-window)
                  (window-parameters (no-delete-other-windows . t)))))
   (add-to-list 'display-buffer-alist prop))
 

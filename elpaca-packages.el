@@ -150,6 +150,8 @@
 (elpacaLF "org-bullets")
 ;;;; Org Super Agenda
 (elpacaLF "org-super-agenda")
+;;;; Show Markup when under point
+(elpacaLF "org-appear")
 
 ;;; Language
 ;;;; Elisp
