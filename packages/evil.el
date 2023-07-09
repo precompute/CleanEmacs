@@ -12,7 +12,9 @@
         evil-vsplit-window-right t)
   (setq evil-symbol-word-search t
         evil-shift-width 2)
-  (setq evil-want-Y-yank-to-eol t)
+  (setq evil-want-Y-yank-to-eol t) ;; Doesn’t work
+
+  (evil-put-command-property 'evil-yank-line :motion 'evil-end-of-line-or-visual-line) ;; workaround for evil-want-Y-yank-to-eol
 
   (evil-define-text-object evil-textobj-whole-buffer (count &optional _beg _end type)
     "Text object to select the whole buffer."

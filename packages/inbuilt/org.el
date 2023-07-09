@@ -5,6 +5,8 @@
         org-hide-leading-stars t
         org-startup-indented t
         org-hide-drawer-startup t
+        org-use-sub-superscripts "{}"
+        org-pretty-entities t
         org-directory "~/46/org/"
         org-attach-id-dir "~/46/org/.attach/"
         org-startup-with-inline-images t
