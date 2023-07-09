@@ -141,7 +141,8 @@
 (elpacaLF "electric" t)
 ;;; imenu
 (elpacaLF "imenu" t)
-
+;;; project
+(elpacaLF "project" t)
 ;;; Org
 (elpacaLF "org" t)
 ;;;; Org Agenda
