@@ -46,6 +46,10 @@
 
 (setq confirm-kill-emacs 'y-or-n-p)
 
+(setq blink-cursor-delay 0.2
+      blink-cursor-interval 0.1
+      blink-cursor-blinks 0)
+
 (defmacro setcache-c (var file)
   "Macro to set file location to `user-cache-directory'"
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))
