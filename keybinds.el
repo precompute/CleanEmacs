@@ -183,7 +183,10 @@
 (general-define-key
  :states 'motion
  "a g" 'evil-textobj-whole-buffer
- "a f" 'evil-textobj-get-func)
+ "a f" 'evil-textobj-get-func
+ "a l" 'evil-textobj-entire-line
+ "a N P" 'evil-textobj-forward-until-empty-line
+ "a P P" 'evil-textobj-backward-until-empty-line)
 
 ;;;;;;; Misc/Custom
 (general-define-key
