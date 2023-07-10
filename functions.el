@@ -149,6 +149,15 @@ Needs frame-parameter alpha-background."
   (interactive)
   (set-transparency-c 1.0))
 
+;;;; Debug
+(defun toggle-debug-mode ()
+  (interactive)
+  (setq debug-on-error (not debug-on-error))
+  (message (concat
+            "Debug mode set to "
+            (propertize (format "%s" debug-on-error)
+                        'face (if debug-on-error 'success 'error)))))
+
 ;;;; git
 ;;;;; auto-commit
 (defun git-auto-time-commit ()
@@ -414,9 +423,18 @@ It switches the width before the height."
      mixed-pitch-mode)
     ("L" (lambda () (toggle-modes-transient--description 'hl-line-mode "Highlight Lines"))
      hl-line-mode)]]
-  ["Major Modes"
-   [("0" "Clean Mode" clean-mode)]
-   [("1" "Fundamental Mode" fundamental-mode)]]
+  ["Modes and Utility"
+   ["Major Modes"
+    ("0" "Clean Mode" clean-mode)
+    ("1" "Fundamental Mode" fundamental-mode)]
+   ["Alarm"
+    ("-aa" "Set Alarm" alarm-clock-set)
+    ;; ("-aa" (lambda ()
+    ;;          (concat "Alarms:" (propertize `(format "%s" (length alarm-clock--alist))
+    ;;                                        'face 'success)))
+    ;;  alarm-clock-set)
+    ("-al" "List Alarms" alarm-clock-list-view)
+    ("-ak" "Kill Alarms" alarm-clock-kill)]]
   ["Other"
    [("B" "Revert Buffer" revert-buffer)
     ("z" "*scratch*" scratch-buffer)
@@ -431,6 +449,12 @@ It switches the width before the height."
     ("T" "Switch theme" load-theme)]
    [("tt" "Turn on Transparency" set-transparency-c)
     ("tT" "Turn off Transparency" turn-off-transparency-c)]]
+  ["Misc"
+   ["Corfu"
+    ("cc" (lambda () (toggle-modes-transient--description 'corfu-mode "Corfu")) corfu-mode)
+    ("cC" (lambda () (toggle-modes-transient--description 'corfu-auto "Autocomplete")) corfu-toggle-autocomplete)
+    ("co" (lambda () (toggle-modes-transient--description 'corfu-candidate-overlay-mode "Candidate Overlay")) corfu-candidate-overlay-mode)
+    ]]
   ;; ["+"
   ;;  [("+" "New Id" (lambda () (interactive) (find-file "~/46/da/id")) :transient nil)
   ;;   ("<return>" "New TimeLog" new-timelog-c :transient nil)]

@@ -20,17 +20,28 @@
 
 ;;; Evil
 (elpacaLF "evil")
-(elpacaLF "evil-anzu") ;; number of matches
-(elpacaLF "evil-args") ;; textobjects
-(elpacaLF "evil-collection") ;; keybinds
-(elpacaLF "evil-exchange") ;; exchange
-(elpacaLF "evil-lion") ;; align
-(elpacaLF "evil-nerd-commenter") ;; comments
-(elpacaLF "evil-numbers") ;; numbers
-(elpacaLF "evil-goggles") ;; visual hints
-(elpacaLF "evil-snipe") ;; quick jump
-(elpacaLF "evil-surround") ;; delimiter add/remove/replace
-(elpacaLF "evil-visualstar") ;; search with *
+;;;; number of matches
+(elpacaLF "evil-anzu")
+;;;; textobjects
+(elpacaLF "evil-args")
+;;;; keybinds
+(elpacaLF "evil-collection")
+;;;; exchange
+(elpacaLF "evil-exchange")
+;;;; align
+(elpacaLF "evil-lion")
+;;;; comments
+(elpacaLF "evil-nerd-commenter")
+;;;; numbers
+(elpacaLF "evil-numbers")
+;;;; visual hints
+(elpacaLF "evil-goggles")
+;;;; quick jump
+(elpacaLF "evil-snipe")
+;;;; delimiter add/remove/replace
+(elpacaLF "evil-surround")
+;;;; search with *
+(elpacaLF "evil-visualstar")
 ;;; Themes
 ;;;; Sculpture-Themes
 ;; (elpaca (sculpture-themes-local :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))

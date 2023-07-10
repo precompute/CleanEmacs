@@ -124,6 +124,7 @@
   "hF" 'describe-face
   "hm" 'describe-mode
   "hi" 'info
+  "hD" 'toggle-debug-mode
 
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
