@@ -130,6 +130,8 @@
 (elpacaLF "diredfl")
 ;;;; Dired Sidebar
 (elpacaLF "dired-sidebar")
+;;;;; Dired Subtree
+(elpacaLF "dired-hacks-utils")
 ;;;; Dired Narrow
 (elpacaLF "dired-narrow")
 ;;;; Dired Collapse (skip empty directories)
@@ -189,3 +191,5 @@
 (elpacaLF "vterm")
 ;;;; Fontification and colors for info-mode
 (elpacaLF "info-colors")
+;;;; Browse older revisions of a file in a git repo
+(elpacaLF "git-timemachine")

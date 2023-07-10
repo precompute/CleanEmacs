@@ -38,8 +38,11 @@
   "g[" 'diff-hl-previous-hunk
   "g]" 'diff-hl-next-hunk
   "gr" 'diff-hl-revert-hunk
+  "gs" 'diff-hl-stage-current-hunk
+  "gh" 'diff-hl-diff-goto-hunk
   "g+" 'evil-numbers/inc-at-pt
   "g-" 'evil-numbers/dec-at-pt
+  "gt" 'toggle-git-timemachine-c
 
   "b" '(:ignore t :wk "buffer")
   "br" 'revert-buffer
