@@ -13,4 +13,4 @@
   (setq-default olivetti-body-width 130
                 olivetti-margin-width 0
                 olivetti-recall-visual-line-mode-entry-state t
-                olivetti-style nil))
+                olivetti-style 'fancy))

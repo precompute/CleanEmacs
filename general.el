@@ -25,7 +25,6 @@
 (setq scroll-conservatively 101)
 (setq window-divider-default-right-width 10
       window-divider-default-bottom-width 0)
-(setq-default left-fringe-width 5) ;; Will it work?
 
 (setq history-length 999)
 
@@ -63,7 +62,7 @@
 (setcache-c save-place-file        "places")
 
 (winner-mode 1)
-(fringe-mode '(3 . 0))
+(fringe-mode '(7 . 7))
 (savehist-mode 1)
 (save-place-mode 1)
 ;; (global-display-line-numbers-mode) ;; Don’t need it.
