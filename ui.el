@@ -39,7 +39,7 @@
  '(org-date ((t (:inherit (list bold fixed-pitch))))))
 
 ;;; display-buffer-alist
-(setq window-sides-slots '(0 0 0 1)) ;; LTRB; This is a good enough default.
+(setq window-sides-slots '(1 1 1 1)) ;; LTRB; This is a good enough default.
 (setq display-buffer-alist
       '(("\\*info\\*" display-buffer-in-direction
          (direction . bottom)
@@ -63,6 +63,8 @@
          (window-parameters (no-delete-other-windows . t)))
         ("\\*transient\\*")
         ("[[:space:]][^z-a]*transient\\*") ;; transient--buffer-name
+        ("[[:space:]]\\*undo-tree\\*")
+        ("[[:space:]]\\*vundo tree\\*")
         ((mode . vterm-mode) display-buffer-same-window
          (body-function . select-window))
         ("\\*[^z-a]*" display-buffer-in-direction ;; (rx "*" (* anything))

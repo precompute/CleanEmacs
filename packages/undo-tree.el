@@ -1,4 +1,6 @@
 (use-package undo-tree
+  :bind ("C-x u" . undo-tree-visualize)
+  :defer t
   :config
   (setq undo-tree-history-directory-alist
         `(("." . ,(expand-file-name ".undo-tree/"

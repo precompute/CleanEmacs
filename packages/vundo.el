@@ -1,5 +1,6 @@
 (use-package vundo
   :bind ("C-x u" . vundo)
+  :defer t
   :config
   (setq vundo-window-side 'top
         vundo-compact-display t

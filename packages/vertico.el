@@ -3,7 +3,10 @@
                  :repo "minad/vertico"
                  :files ("*.el" "extensions/*.el"))
   :bind
-  (:map vertico-map ("DEL" . vertico-directory-delete-char)) ;; delete entire folder names
+  (:map vertico-map
+        ("DEL" . vertico-directory-delete-char) ;; delete entire folder names
+        ("C-SPC" . vertico-quick-insert)
+        ("C-q" . vertico-quick-exit))
   :custom
   (vertico-count 20)
   (vertico-cycle t)
@@ -12,6 +15,8 @@
          (concat
           (propertize "  %s" 'face 'font-lock-builtin-face)
           " %s")))
+  (vertico-quick1 "mneio;")
+  (vertico-quick2 "jlukh,")
   :config
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy) ;; entering ~/ or //
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save) ;; save vertico for reinvocation
