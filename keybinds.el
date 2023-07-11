@@ -35,6 +35,7 @@
   "g" '(:ignore t :wk "Version Control")
   "gg" 'magit-status
   "gL" 'magit-log-buffer-file
+  "g*" 'magit-list-repositories
   "g[" 'diff-hl-previous-hunk
   "g]" 'diff-hl-next-hunk
   "gr" 'diff-hl-revert-hunk
@@ -94,6 +95,8 @@
   "o'" 'vertico-repeat
   "o\"" 'vertico-repeat-select
   "o-" 'echo-current-buffer-path
+  "ot" 'vterm
+  "oT" 'project-vterm
 
   "t" '(:ignore t :wk "toggle")
   "tl" 'display-line-numbers-mode

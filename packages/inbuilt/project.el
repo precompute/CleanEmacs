@@ -1,8 +1,10 @@
 (use-package project
   :elpaca nil
+  :defer t
   :bind
   (:map project-prefix-map
-        ("V" . project-vterm)
+        ("T" . project-vterm)
+        ("V" . project-magit)
         ("D" . project-dired))
   :config
   (defun project-dired ()
@@ -11,5 +13,6 @@
     (let ((default-directory (project-root (project-current t))))
       (dired default-directory)))
   (dolist (project-command '((project-vterm "VTerm")
+                             (project-magit "Magit")
                              (project-dired "Dired")))
     (add-to-list 'project-switch-commands project-command)))
