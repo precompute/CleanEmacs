@@ -34,7 +34,9 @@
 
   "g" '(:ignore t :wk "Version Control")
   "gg" 'magit-status
-  "gL" 'magit-log-buffer-file
+  "gG" 'magit-dispatch
+  "gF" 'magit-file-dispatch
+  "gl" 'magit-log-buffer-file
   "g*" 'magit-list-repositories
   "g[" 'diff-hl-previous-hunk
   "g]" 'diff-hl-next-hunk
@@ -111,12 +113,7 @@
 
   "!" '(:ignore t :wk "exclaim")
   "!R" 'make-window-larger-c
-  ;; "!_" 'flip-frame
-  ;; "!|" 'flop-frame
   "!?" 'transpose-frame
-  ;; "!>" 'rotate-frame-clockwise
-  ;; "!<" 'rotate-frame-anticlockwise
-  ;; "!f" 'follow-mode
 
   "h" '(:ignore t :wk "help")
   "hv" 'describe-variable
@@ -181,7 +178,8 @@
   "g" '(:ignore t)
   "g c" 'evilnc-comment-operator
   "g g" 'evil-goto-first-line
-  "g e" 'evil-operator-eval-region)
+  "g e" 'evil-operator-eval-region
+  "g p" 'evil-reselect-paste)
 
 (general-define-key
  :states 'motion
@@ -219,11 +217,7 @@
   :states 'insert
   "C-S-u" 'insert-char-5-discard-end)
 
-;;;; Evil
-;;;;; ge (eval) Operator
-
-(evil-define-operator evil-operator-eval-region (beg end)
-  "Evaluate selection."
-  :move-point nil
-  (interactive "<r>")
-  (eval-region beg end))
+(general-define-key
+ :states 'visual
+ "<" 'evil-shift-left-c
+ ">" 'evil-shift-right-c)

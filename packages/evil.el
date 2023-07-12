@@ -52,6 +52,33 @@ point."
     "Text object until the start of the current paragraph"
     (evil-range (point) (re-search-backward "\\(?:$\\)\\(?:^\\)[[:space:]]*$") type))
 
+  (evil-define-operator evil-operator-eval-region (beg end)
+    "Evaluate selection."
+    :move-point nil
+    (interactive "<r>")
+    (eval-region beg end))
+
+  (defun evil-reselect-paste ()
+    "Return to visual mode and reselect the last pasted region.
+Copied from Doom’s +evil/reselect-paste."
+    (interactive)
+    (cl-destructuring-bind (_ _ _ beg end &optional _) evil-last-paste
+      (evil-visual-make-selection (save-excursion (goto-char beg) (point-marker)) end)))
+
+  (defun evil-shift-left-c ()
+    "Disable disabling visual selection after shifting left."
+    (interactive)
+    (call-interactively #'evil-shift-left)
+    (evil-normal-state)
+    (evil-visual-restore))
+
+  (defun evil-shift-right-c ()
+    "Disable disabling visual selection after shifting right."
+    (interactive)
+    (call-interactively #'evil-shift-right)
+    (evil-normal-state)
+    (evil-visual-restore))
+
   :init
   (setq evil-want-keybinding nil)
   (evil-mode))
