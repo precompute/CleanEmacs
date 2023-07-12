@@ -220,4 +220,5 @@
 (general-define-key
  :states 'visual
  "<" 'evil-shift-left-c
- ">" 'evil-shift-right-c)
+ ">" 'evil-shift-right-c
+ "C-x C-e" 'eval-region)

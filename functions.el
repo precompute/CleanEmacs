@@ -1,16 +1,14 @@
 ;;; Functions
 ;;;; timestamp
 (defun timestamp ()
-  "Insert string for the current time formatted like '2:34 PM' or 1507121460 https://emacs.stackexchange.com/questions/7250/in-org-mode-how-to-insert-timestamp-with-todays-date"
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "[%02y-%02m-%02d %02H:%02M:%02S] ")) ;;space at end
-  )
+  "Insert string for the current time."
+  (interactive)
+  (insert (format-time-string "[%02y-%02m-%02d %02H:%02M:%02S] ")))
 
 (defun timestamp-no-time ()
   "timestamp without time"
   (interactive)
-  (insert (format-time-string "[%02y-%02m-%02d]")) ;;no space at end
-  )
+  (insert (format-time-string "[%02y-%02m-%02d]")))
 
 ;;;; convenience
 (defun consult-ripgrep-local ()
@@ -429,10 +427,6 @@ It switches the width before the height."
     ("1" "Fundamental Mode" fundamental-mode)]
    ["Alarm"
     ("-aa" "Set Alarm" alarm-clock-set)
-    ;; ("-aa" (lambda ()
-    ;;          (concat "Alarms:" (propertize `(format "%s" (length alarm-clock--alist))
-    ;;                                        'face 'success)))
-    ;;  alarm-clock-set)
     ("-al" "List Alarms" alarm-clock-list-view)
     ("-ak" "Kill Alarms" alarm-clock-kill)]]
   ["Other"
@@ -455,22 +449,21 @@ It switches the width before the height."
     ("cC" (lambda () (toggle-modes-transient--description 'corfu-auto "Autocomplete")) corfu-toggle-autocomplete)
     ("co" (lambda () (toggle-modes-transient--description 'corfu-candidate-overlay-mode "Candidate Overlay")) corfu-candidate-overlay-mode)
     ]]
-  ;; ["+"
-  ;;  [("+" "New Id" (lambda () (interactive) (find-file "~/46/da/id")) :transient nil)
-  ;;   ("<return>" "New TimeLog" new-timelog-c :transient nil)]
-  ;;  [("-" "Open da.org" (lambda () (interactive) (find-file "~/46/da/da.org")) :transient nil)]
-  ;;  [("r" "Refresh Agenda" (lambda () (interactive)
-  ;;                           (progn
-  ;;                             (let ((filelist (directory-files-recursively
-  ;;                                              "~/46/da/timelog" (rx ".org" eos))))
-  ;;                               (setq org-agenda-files nil)
-  ;;                               (setq org-agenda-files filelist)
-  ;;                               (message "Agenda refreshed")))))
-  ;;   ("." "New TimeLog Log" org-todo-today-timestamp-c :transient nil)]
-  ;;  [("/" "New TimeLog TODO" org-todo-today-timestamp-todo-c :transient nil)
-  ;;   ("a" "Agenda+Todo" (lambda () (interactive) (org-agenda nil "o")
-  ;;                        ) :transient nil)]
-  ;;  ]
+  ["+"
+   [("+" "New Id" (lambda () (interactive) (find-file "~/46/da/id")) :transient nil)
+    ("<return>" "New TimeLog" new-timelog-c :transient nil)]
+   [("-" "Open da.org" (lambda () (interactive) (find-file "~/46/da/da.org")) :transient nil)]
+   [("r" "Refresh Agenda" (lambda () (interactive)
+                            (progn
+                              (let ((filelist (directory-files-recursively
+                                               "~/46/da/timelog" (rx ".org" eos))))
+                                (setq org-agenda-files nil)
+                                (setq org-agenda-files filelist)
+                                (message "Agenda refreshed")))))
+    ("." "New TimeLog Log" org-todo-today-timestamp-c :transient nil)]
+   [("/" "New TimeLog TODO" org-todo-today-timestamp-todo-c :transient nil)
+    ("a" "Agenda+Todo" (lambda () (interactive) (org-agenda nil "o")) :transient nil)]
+   ]
   )
 
 ;;;;;;; description function
@@ -543,3 +536,50 @@ It switches the width before the height."
     ("O" "cycle global" org-shifttab)]
    [;; ("C" "equalize" org-headings-equalize)
     ("-" "timelogrefile" org-timelogrefile-c)]])
+
+;;;; org-agenda
+;;;;; New timelog file
+(defun new-timelog-c ()
+  "Make/Open today's timelog file"
+  (interactive)
+  (let* ((givendate (format-time-string "%y-%m-%d"))
+         (filedate (format-time-string "%y%m%d"))
+         (basefile (concat "~/46/da/timelog/" filedate ".log.org")))
+    (if (file-directory-p basefile)
+        (progn
+          (find-file basefile)
+          (write-region (concat "#+TITLE: [" givendate "]\n\n")
+                        nil basefile t)
+          (end-of-buffer))
+      (progn
+        (find-file basefile)
+        (end-of-buffer)))))
+
+;;;;; todo timestamp
+(defun org-todo-timestamp-c (&optional todo)
+  "Insert new heading with timestamp and open line below."
+  (interactive)
+  (progn
+    (goto-char (point-max))
+    (if todo (insert "\n* TODO [#B]\nOPENED: ") (insert "\n* "))
+    (timestamp)
+    (newline)))
+
+(defun org-todo-timestamp-todo-c ()
+  "Insert new TODO heading with timestamp and open line below."
+  (interactive)
+  (org-todo-timestamp-c t))
+
+(defun org-todo-today-timestamp-c ()
+  "Open today's file and execute `org-todo-timestamp-c'"
+  (interactive)
+  (find-file (concat "~/46/da/timelog/"
+                     (format-time-string "%y%m%d") ".log.org"))
+  (org-todo-timestamp-c))
+
+(defun org-todo-today-timestamp-todo-c ()
+  "Open today's file and execute `org-todo-timestamp-todo-c'"
+  (interactive)
+  (find-file (concat "~/46/da/timelog/"
+                     (format-time-string "%y%m%d") ".log.org"))
+  (org-todo-timestamp-todo-c))
