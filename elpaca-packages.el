@@ -79,7 +79,7 @@
 ;; (elpacaLF "undo-fu")
 (elpacaLF "vundo")
 ;;;; Undo persistence
-;; (elpacaLF "undo-fu-session")
+(elpacaLF "undo-fu-session")
 ;;; Olivetti
 (elpacaLF "olivetti")
 ;;; Indent Guides
