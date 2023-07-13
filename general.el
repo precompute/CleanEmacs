@@ -49,6 +49,8 @@
       blink-cursor-interval 0.1
       blink-cursor-blinks 0)
 
+(setq disabled-command-function nil)
+
 (defmacro setcache-c (var file)
   "Macro to set file location to `user-cache-directory'"
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))

@@ -211,7 +211,10 @@
   "C-/" 'toggle-modes-transient-c
 
   "<backspace>" 'scroll-up-command
-  "S-<backspace>" 'scroll-down-command)
+  "S-<backspace>" 'scroll-down-command
+
+  "g n" 'narrow-to-page
+  "g N" 'widen)
 
 (general-define-key
   :states 'insert
@@ -221,4 +224,6 @@
  :states 'visual
  "<" 'evil-shift-left-c
  ">" 'evil-shift-right-c
- "C-x C-e" 'eval-region)
+ "C-x C-e" 'eval-region
+ "g n" 'narrow-to-region
+ "g N" 'widen)

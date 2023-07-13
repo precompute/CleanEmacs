@@ -97,7 +97,7 @@ Modified from `flymake--mode-line-counter'.
         (matchface (get-color-fg 'match)) ;; green
         ;; (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
         (warnface (get-color-fg 'font-lock-type-face)) ;; red-ish
-        (noteface (get-color-fg 'diary)) ;; yellow
+        (noteface (get-color-bg 'hi-yellow)) ;; yellow
         (defaultfg (get-color-fg 'default)) ;; white
         (defaultbg (get-color-bg 'default))) ;; black
     (set-face-attribute 'headerline-modified-active nil
