@@ -125,10 +125,15 @@ Modified from `flymake--mode-line-counter'.
     (defvar headerline--err-face (if errorface errorface "#000000"))
     (defvar headerline--warn-face (if warnface warnface "#000000"))
     (defvar headerline--note-face (if noteface noteface "#000000"))
-    (defvar headerline--default-face (if defaultfg defaultfg "#000000"))))
+    (defvar headerline--default-face (if defaultfg defaultfg "#000000"))
+    (if (and (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
+        (progn
+          (setq-default mlscroll-in-color fl-string)
+          (setq-default mlscroll-out-color defaultbg)
+          (mlscroll-mode -1) (mlscroll-mode 1)))))
 (set-headerline-faces) ;; init during load
 (add-to-list 'enable-theme-functions 'set-headerline-faces)
-(add-to-list 'enable-theme-functions 'set-fonts-c)
+(if (fboundp 'set-fonts-c) (add-to-list 'enable-theme-functions 'set-fonts-c))
 
 (defun update-face-remapping-alist (face target)
   (if (member face face-remapping-alist)
@@ -316,6 +321,10 @@ Read Info node `(elisp) Pixel Specification'.")
   "Mode line construct displaying `mode-line-misc-info'.
 Specific to the current window's mode line.")
 
+(defvar modeline-mlscroll-c
+  '(:eval (mlscroll-mode-line))
+  "Show mlscroll window scroll indicator.")
+
 ;;;;; Set `risky-local-variable'
 (dolist (construct '( modeline-bg-color-change-c
                       modeline-active-indicator-c
@@ -329,9 +338,9 @@ Specific to the current window's mode line.")
                       modeline-macro-recording-c
                       modeline-anzu-count-c
                       modeline-align-right-c
+                      modeline-mlscroll-c
                       modeline-flymake-c
-                      modeline-misc-info-c
-                      ))
+                      modeline-misc-info-c))
   (put construct 'risky-local-variable t))
 
 (setq-default header-line-format
@@ -343,7 +352,8 @@ Specific to the current window's mode line.")
                 " "
                 modeline-modes-c
                 "  "
-                modeline-percentage-c
+                ;; modeline-percentage-c
+                modeline-mlscroll-c
                 " "
                 modeline-line-c
                 " "
