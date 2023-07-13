@@ -42,6 +42,8 @@
 (elpacaLF "evil-surround")
 ;;;; search with *
 (elpacaLF "evil-visualstar")
+;;;; indentation textobjects
+(elpacaLF "evil-indent-plus")
 ;;; Themes
 ;;;; Sculpture-Themes
 ;; (elpaca (sculpture-themes-local :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
