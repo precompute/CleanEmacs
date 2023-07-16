@@ -4,6 +4,7 @@
   [f5] 'delete-window
   [s-f5] 'delete-other-windows
   [f6] 'timestamp
+  [s-f6] 'timestamp-no-time
   [f9] 'save-buffer
   [f10] 'save-and-delete-window
   [f12] 'save-and-kill-buffer
@@ -38,11 +39,14 @@
   "gF" 'magit-file-dispatch
   "gl" 'magit-log-buffer-file
   "g*" 'magit-list-repositories
+  "gb" 'magit-branch-checkout
+  "gB" 'magit-blame-addition
   "g[" 'diff-hl-previous-hunk
   "g]" 'diff-hl-next-hunk
   "gr" 'diff-hl-revert-hunk
   "gs" 'diff-hl-stage-current-hunk
   "gh" 'diff-hl-diff-goto-hunk
+  "gp" 'consult-git-grep
   "g+" 'evil-numbers/inc-at-pt
   "g-" 'evil-numbers/dec-at-pt
   "gt" 'toggle-git-timemachine-c
@@ -61,12 +65,15 @@
   "ss" 'consult-line
   "sS" 'consult-line-multi
   "si" 'consult-imenu
+  "sI" 'consult-imenu-multi
+  "s C-i" 'consult-outline
   "sm" 'consult-global-mark
   "sd" 'consult-ripgrep-local
   "sp" 'consult-ripgrep
+  "s C-h i" 'consult-info
   "se" '(:ignore t :wk "evil-show")
   "sem" 'evil-show-marks
-  "sej" 'evil-show-jumps
+  "sej" 'evil-collection-consult-jump-list
   "ser" 'evil-show-registers
 
   "TAB" '(:ignore t :wk "perspective")
@@ -110,6 +117,7 @@
 
   "c" '(:ignore t :wk "code diagnostics")
   "cr" 'flymake-show-buffer-diagnostics
+  "cR" 'consult-flymake
 
   "!" '(:ignore t :wk "exclaim")
   "!R" 'make-window-larger-c

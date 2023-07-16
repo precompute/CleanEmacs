@@ -11,6 +11,7 @@
 	  minibuffer-mode) . olivetti-mode)
   :config
   (setq-default olivetti-body-width 130
-                olivetti-margin-width 0
+                olivetti-margin-width 2
                 olivetti-recall-visual-line-mode-entry-state t
-                olivetti-style 'fancy))
+                olivetti-style 'fancy)
+  (add-hook 'org-mode-hook #'(lambda () (interactive) (setq-local olivetti-body-width 80))))

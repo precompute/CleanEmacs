@@ -5,7 +5,7 @@
         which-key-idle-secondary-delay 0.05
         which-key-show-prefix 'left
         which-key-popup-type 'minibuffer
-        which-key-min-display-lines 4
+        which-key-min-display-lines 7
         which-key-allow-imprecise-window-fit t)
   :init
   (which-key-mode))

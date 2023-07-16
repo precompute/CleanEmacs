@@ -452,7 +452,7 @@ It switches the width before the height."
   ["+"
    [("+" "New Id" (lambda () (interactive) (find-file "~/46/da/id")) :transient nil)
     ("<return>" "New TimeLog" new-timelog-c :transient nil)]
-   [("-" "Open da.org" (lambda () (interactive) (find-file "~/46/da/da.org")) :transient nil)]
+   [("--" "Open da.org" (lambda () (interactive) (find-file "~/46/da/da.org")) :transient nil)]
    [("r" "Refresh Agenda" (lambda () (interactive)
                             (progn
                               (let ((filelist (directory-files-recursively
