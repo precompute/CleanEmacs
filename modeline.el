@@ -6,13 +6,25 @@
   "Cached `evil-state’ for display in modeline.")
 
 ;;;; functions
-(defmacro get-color-fg (face)
-  "Get the :foreground property of a FACE."
-  `(face-attribute ,face :foreground))
+(defun get-color-fg (face &optional fallback)
+  "Get the :foreground property of a FACE.
+If FACE is nil, set to FALLBACK."
+  (let ((face? (face-attribute face :foreground)))
+    (if (or (eq nil face?) (string-equal "unspecified" face?))
+        (if fallback
+            (face-attribute fallback :foreground)
+          face?)
+      face?)))
 
-(defmacro get-color-bg (face)
-  "Get the :background property of a FACE."
-  `(face-attribute ,face :background))
+(defun get-color-bg (face &optional fallback)
+  "Get the :background property of a FACE.
+If FACE is nil, set to FALLBACK."
+  (let ((face? (face-attribute face :background)))
+    (if (or (eq nil face?) (string-equal "unspecified" face?))
+        (if fallback
+            (face-attribute fallback :background)
+          face?)
+      face?)))
 
 (defun modeline-active ()
   "Return non-nil if the selected window has an active modeline."
@@ -108,14 +120,14 @@ Modified from `flymake--mode-line-counter'.
                     (symbol-value (intern (format "%s-state-tag" e)))
                   (symbol-value (intern (format "visual-%s-state-tag" evil-visual-selection)))))))
 
-(dolist (h '(evil-emacs-state-entry-hook
-             evil-insert-state-entry-hook
-             evil-motion-state-entry-hook
-             evil-normal-state-entry-hook
-             evil-visual-state-entry-hook
-             evil-replace-state-entry-hook
-             evil-operator-state-entry-hook))
-  (add-hook h 'modeline-evil-state-set-cache))
+;; (dolist (h '(evil-emacs-state-entry-hook
+;;              evil-insert-state-entry-hook
+;;              evil-motion-state-entry-hook
+;;              evil-normal-state-entry-hook
+;;              evil-visual-state-entry-hook
+;;              evil-replace-state-entry-hook
+;;              evil-operator-state-entry-hook))
+;;   (add-hook h 'modeline-evil-state-set-cache))
 
 ;;;; Faces
 (defface headerline-modified-active
@@ -147,7 +159,7 @@ Modified from `flymake--mode-line-counter'.
         (fl-builtin (get-color-fg 'font-lock-builtin-face)) ;; blue
         (fl-type (get-color-fg 'font-lock-type-face)) ;; brown
         (fl-variable (get-color-fg 'font-lock-punctuation-face)) ;; off-white
-        (fl-regexp (get-color-fg 'font-lock-regexp-face)) ;; dark red
+        (fl-regexp (get-color-fg 'font-lock-regexp-face 'font-lock-string-face)) ;; dark red
         (errorface (get-color-fg 'error)) ;; red
         (matchface (get-color-fg 'match)) ;; green
         ;; (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
@@ -425,12 +437,10 @@ Specific to the current window's mode line.")
 (setq-default header-line-format
               '("%e "
                 modeline-active-indicator-c
-                " "
                 modeline-bg-color-change-c
                 modeline-current-buffer-property-c
                 " "
                 modeline-modes-c
-                "  "
                 ;; modeline-percentage-c
                 modeline-mlscroll-c
                 " "

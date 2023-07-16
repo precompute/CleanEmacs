@@ -1,3 +1,5 @@
 /.cache/
 /undo-fu-session/
 /tree-sitter/
+/.private/
+/url/
