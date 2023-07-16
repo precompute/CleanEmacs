@@ -2,6 +2,9 @@
 ;;;; Variables
 (defvar modeline-active-window (selected-window))
 
+(defvar modeline-evil-state-cached ""
+  "Cached `evil-state’ for display in modeline.")
+
 ;;;; functions
 (defmacro get-color-fg (face)
   "Get the :foreground property of a FACE."
@@ -85,14 +88,66 @@ Modified from `flymake--mode-line-counter'.
                     (t t))))
     (number-to-string count)))
 
+(defun modeline-evil-state-set-cache ()
+  "Cached value for Evil State for the modeline."
+  (interactive)
+  (let ((normal-state-tag "N")
+        (insert-state-tag "I")
+        (visual-state-tag "V")
+        (visual-char-state-tag "VC")
+        (visual-line-state-tag "VL")
+        (visual-screen-line-state-tag "VSL")
+        (visual-block-state-tag "VB")
+        (motion-state-tag "M")
+        (replace-state-tag "R")
+        (operator-state-tag "O")
+        (emacs-state-tag "E")
+        (e evil-state))
+    (setq-local modeline-evil-state-cached
+                (if (not (string-equal e "visual"))
+                    (symbol-value (intern (format "%s-state-tag" e)))
+                  (symbol-value (intern (format "visual-%s-state-tag" evil-visual-selection)))))))
+
+(dolist (h '(evil-emacs-state-entry-hook
+             evil-insert-state-entry-hook
+             evil-motion-state-entry-hook
+             evil-normal-state-entry-hook
+             evil-visual-state-entry-hook
+             evil-replace-state-entry-hook
+             evil-operator-state-entry-hook))
+  (add-hook h 'modeline-evil-state-set-cache))
+
 ;;;; Faces
+(defface headerline-modified-active
+  '((t :foreground "#000"
+       :background "#000"
+       :box (:line-width (1 . 3) :color "#000")))
+  "Headerline when buffer is modified and inactive.")
+(defface headerline-unmodified-active
+  '((t :foreground "#000"
+       :background "#000"
+       :box (:line-width (1 . 3) :color "#000")))
+  "Headerline when buffer is unmodified and inactive.")
+(defface headerline-active-indicator
+  '((t :foreground "#000"
+       :background "#000"))
+  "Indicator for active window.")
+(defface headerline-inactive-modified-indicator
+  '((t :foreground "#000"
+       :background "#000"))
+  "Indicator for inactive, modified window.")
+(defface headerline-inactive-unmodified-indicator
+  '((t :foreground "#000"
+       :background "#000"))
+  "Indicator for inactive, unmodified window.")
+
 (defun set-headerline-faces (&rest rest)
   (interactive)
   (let ((fl-keyword (get-color-fg 'font-lock-keyword-face)) ;; green
         (fl-builtin (get-color-fg 'font-lock-builtin-face)) ;; blue
         (fl-type (get-color-fg 'font-lock-type-face)) ;; brown
         (fl-variable (get-color-fg 'font-lock-punctuation-face)) ;; off-white
-        (fl-string (get-color-fg 'font-lock-string-face)) ;; dark red
+        (fl-regexp (get-color-fg 'font-lock-regexp-face)) ;; dark red
         (errorface (get-color-fg 'error)) ;; red
         (matchface (get-color-fg 'match)) ;; green
         ;; (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
@@ -126,9 +181,10 @@ Modified from `flymake--mode-line-counter'.
     (defvar headerline--warn-face (if warnface warnface "#000000"))
     (defvar headerline--note-face (if noteface noteface "#000000"))
     (defvar headerline--default-face (if defaultfg defaultfg "#000000"))
+    (defvar headerline--evil-state-face fl-regexp)
     (if (and (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
         (progn
-          (setq-default mlscroll-in-color fl-string)
+          (setq-default mlscroll-in-color fl-regexp)
           (setq-default mlscroll-out-color defaultbg)
           (mlscroll-mode -1) (mlscroll-mode 1)))))
 (set-headerline-faces) ;; init during load
@@ -157,6 +213,18 @@ Modified from `flymake--mode-line-counter'.
 (defvar modeline-active-indicator-c
   '(:eval
     (let ((text "  "))
+      (if (modeline-active)
+          (propertize text
+                      'face 'headerline-active-indicator)
+        (if (buffer-modified-p)
+            (propertize text
+                        'face 'headerline-inactive-modified-indicator)
+          (propertize text
+                      'face 'headerline-inactive-unmodified-indicator))))))
+
+(defvar modeline-active-indicator-with-state-c
+  '(:eval
+    (let ((text (concat " " modeline-evil-state-cached " ")))
       (if (modeline-active)
           (propertize text
                       'face 'headerline-active-indicator)
@@ -202,6 +270,15 @@ Modified from `flymake--mode-line-counter'.
                                :height 1.15))
         "")))
   "Show the name of the current buffer")
+
+(defvar modeline-evil-state-indicator
+  '(:propertize
+    modeline-evil-state-cached
+    display (min-width (2))
+    face ( :inherit variable-pitch
+           :weight bold
+           :height 1.4
+           :foreground headerline--evil-state-face)))
 
 (defvar modeline-percentage-c
   '(:propertize
@@ -327,10 +404,12 @@ Specific to the current window's mode line.")
 
 ;;;;; Set `risky-local-variable'
 (dolist (construct '( modeline-bg-color-change-c
+                      modeline-active-indicator-with-state-c
                       modeline-active-indicator-c
                       modeline-modes-c
                       modeline-current-buffer-property-c
                       modeline-current-buffer-name-c
+                      modeline-evil-state-indicator
                       modeline-percentage-c
                       modeline-line-c
                       modeline-column-c
@@ -356,14 +435,14 @@ Specific to the current window's mode line.")
                 modeline-mlscroll-c
                 " "
                 modeline-line-c
-                " "
-                modeline-column-c
-                " "
+                ;; modeline-column-c
                 modeline-current-buffer-name-c
                 " "
                 modeline-macro-recording-c
                 modeline-anzu-count-c
-                '(which-function-mode ("" which-func-format "--"))
+                ;; " "
+                ;; modeline-evil-state-indicator
+                ;; '(which-function-mode ("" which-func-format "--"))
                 modeline-align-right-c
                 " "
                 modeline-buffer-size-c
