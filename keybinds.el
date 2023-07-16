@@ -172,6 +172,12 @@
  :keymaps 'dired-mode-map
  "_" 'locate-git-file-c)
 
+(general-define-key
+ :states 'normal
+ :keymaps '(elfeed-show-mode-map
+            elfeed-search-mode-map)
+ "C-/" 'elfeed-transient-c)
+
 ;;;;;;; Evil operators
 (general-define-key
   :states 'normal

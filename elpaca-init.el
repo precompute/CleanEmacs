@@ -4,6 +4,7 @@
 
 (defvar user-cache-directory (expand-file-name ".cache/" user-emacs-directory))
 (setq native-comp-eln-load-path `(,(expand-file-name "eln-cache" user-cache-directory)))
+(defvar user-private-directory (expand-file-name ".private/" user-emacs-directory))
 
 (defvar elpaca-directory (expand-file-name "elpaca/" user-cache-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
