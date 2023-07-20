@@ -67,7 +67,9 @@ If FACE is nil, set to FALLBACK."
                           (substring buf
                                      (length gitroot)
                                      nil)))))
-            nil))))
+            (if (eq major-mode 'dired-mode)
+                (cons nil dired-directory)
+              nil)))))
 (dolist (hook '(change-major-mode-after-body-hook
                 after-save-hook ;; In case the user saves the file to a new location
                 focus-in-hook ;; ...or makes external changes then returns to Emacs
@@ -265,11 +267,13 @@ Modified from `flymake--mode-line-counter'.
   '(:eval
     (if modeline-buffer-id-cache-c
         (list
-         (propertize (car modeline-buffer-id-cache-c)
+         (propertize (if (car modeline-buffer-id-cache-c)
+                         (car modeline-buffer-id-cache-c)
+                       "")
                      'face '( :inherit variable-pitch
                               :weight bold
                               :height 1.15))
-         (propertize "/"
+         (propertize (if (car modeline-buffer-id-cache-c) "/" "")
                      'face '( :inherit variable-pitch
                               :height 1.15))
          (propertize
@@ -295,25 +299,25 @@ Modified from `flymake--mode-line-counter'.
 (defvar modeline-percentage-c
   '(:propertize
     "%3p"
-    display (min-width (8.0))
+    display (min-width (8))
     face (:weight bold :height 1.2)))
 
 (defvar modeline-line-c
   '(:propertize
     "%l"
-    display (min-width (5.0))
+    display (min-width (5))
     face (:weight bold :height 1.2)))
 
 (defvar modeline-column-c
   '(:propertize
     "%c"
-    display (min-width (3.0))
+    display (min-width (3))
     face (:weight bold :height 1.2)))
 
 (defvar modeline-buffer-size-c
   '(:propertize
     "%I"
-    display (min-width (3.0))
+    display (min-width (3))
     face (:weight bold :height 1.2)))
 
 (defvar modeline-macro-recording-c
@@ -445,6 +449,7 @@ Specific to the current window's mode line.")
                 modeline-mlscroll-c
                 " "
                 modeline-line-c
+                " "
                 ;; modeline-column-c
                 modeline-current-buffer-name-c
                 " "
