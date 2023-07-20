@@ -24,5 +24,6 @@
             (let ((tempgcval gc-cons-threshold)
                   (gc-cons-threshold most-positive-fixnum))
               (setq gc-cons-threshold tempgcval))))
+(setq gc-cons-threshold (* 1024 1024 512))
 
 (load-file (expand-file-name "early-init-ui.el" user-emacs-directory))
