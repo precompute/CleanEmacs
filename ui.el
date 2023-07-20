@@ -38,6 +38,54 @@
  '(org-meta-line ((t (:extend t))))
  '(org-date ((t (:inherit (list bold fixed-pitch))))))
 
+(defun get-face-colors-c (&rest rest)
+  (interactive)
+  (defvar current--default-face-foreground (face-attribute 'default :foreground))
+  (defvar current--builtin-face-foreground (face-attribute 'font-lock-builtin-face :foreground))
+  (defvar current--keyword-face-foreground (face-attribute 'font-lock-keyword-face :foreground))
+  (defvar current--constant-face-foreground (face-attribute 'font-lock-constant-face :foreground))
+  (defvar current--string-face-foreground (face-attribute 'font-lock-string-face :foreground))
+  (defvar current--default-face-background (face-attribute 'default :background))
+  (defvar current--builtin-face-background (face-attribute 'font-lock-builtin-face :background))
+  (defvar current--keyword-face-background (face-attribute 'font-lock-keyword-face :background))
+  (defvar current--constant-face-background (face-attribute 'font-lock-constant-face :background))
+  (defvar current--string-face-background (face-attribute 'font-lock-string-face :background)))
+(get-face-colors-c)
+(add-to-list 'enable-theme-functions 'get-face-colors-c)
+
+(defun set-org-mode-faces-c (&rest rest)
+  (interactive)
+  (set-face-attribute 'org-todo nil
+                      :underline nil
+                      :inherit nil
+                      :background nil)
+  (set-face-attribute 'org-done nil
+                      :underline nil
+                      :inherit nil
+                      :background nil)
+  (if (facep 'custom--org-mode-face-1)
+      (set-face-attribute 'custom--org-mode-face-1 nil
+                          :inherit 'fixed-pitch
+                          :box `(:color ,current--default-face-background)
+                          :background current--builtin-face-foreground))
+  (if (facep 'custom--org-mode-face-2)
+      (set-face-attribute 'custom--org-mode-face-2 nil
+                          :inherit 'fixed-pitch
+                          :box `(:color ,current--default-face-background)
+                          :background current--keyword-face-foreground))
+  (if (facep 'custom--org-mode-face-3)
+      (set-face-attribute 'custom--org-mode-face-3 nil
+                          :inherit 'fixed-pitch
+                          :box `(:color ,current--default-face-background)
+                          :background current--constant-face-foreground))
+  (if (facep 'custom--org-mode-face-4)
+      (set-face-attribute 'custom--org-mode-face-4 nil
+                          :inherit 'fixed-pitch
+                          :box `(:color ,current--default-face-background)
+                          :background current--string-face-foreground)))
+(set-org-mode-faces-c)
+(add-to-list 'enable-theme-functions 'set-org-mode-faces-c)
+
 ;;; display-buffer-alist
 (setq window-sides-slots '(1 1 1 1)) ;; LTRB; This is a good enough default.
 (setq display-buffer-alist
@@ -89,9 +137,9 @@
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 12 :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 17))
-    (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
+    (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
     (copy-face 'default 'fixed-pitch)))
 (set-fonts-c)

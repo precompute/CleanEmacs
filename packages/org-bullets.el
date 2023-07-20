@@ -2,4 +2,5 @@
   :hook (org-mode . org-bullets-mode)
   :config
   (setq org-bullets-bullet-list
-        '("●" "○" "◊" "◇" "◆")))
+        '("●" "○")))
+        ;; '("●" "○" "◊" "◇" "◆")

@@ -241,3 +241,8 @@
  "C-x C-e" 'eval-region
  "g n" 'narrow-to-region
  "g N" 'widen)
+
+(general-define-key
+ :map 'org-mode-map
+ :states 'normal
+ "RET" 'org-ret-dwim)
