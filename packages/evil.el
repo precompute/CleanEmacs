@@ -79,6 +79,83 @@ Copied from Doom’s +evil/reselect-paste."
     (evil-normal-state)
     (evil-visual-restore))
 
+  (evil-define-operator evil-org-> (beg end count)
+    "Demote, indent, move column right.
+In items or headings, demote heading/item.
+In code blocks, indent lines
+In tables, move column to the right."
+    :move-point nil
+    (interactive "<r><vc>")
+    (when (null count) (setq count 1))
+    (cond
+     ;; Work with subtrees and headings
+     ((org-with-limited-levels
+       (or (org-at-heading-p)
+           (save-excursion (goto-char beg) (org-at-heading-p))))
+      (if (> count 0)
+          (org-map-region 'org-do-demote beg end)
+        (org-map-region 'org-do-promote beg end)))
+     ;; Shifting table columns
+     ((and (org-at-table-p)
+           (save-excursion
+             (goto-char beg)
+             (<= (line-beginning-position) end (line-end-position))))
+      (evil-org-table-move-column beg end count))
+     ;; Work with items
+     ((and (org-at-item-p)
+           (<= end (save-excursion (org-end-of-item-list))))
+      (evil-org-indent-items beg end count))
+     ;; Default indentation
+     (t
+      ;; special casing tables
+      (when (and (not (region-active-p)) (org-at-table-p))
+        (setq beg (min beg (org-table-begin)))
+        (setq end (max end (org-table-end))))
+      (evil-shift-right beg end count)))
+    (when (and evil-org-retain-visual-state-on-shift (evil-visual-state-p))
+      (evil-normal-state)
+      (evil-visual-restore)))
+
+  (evil-define-operator evil-org-< (beg end count)
+    "Promote, dedent, move column left.
+In items or headings, promote heading/item.
+In code blocks, indent lines
+In tables, move column to the left."
+    (interactive "<r><vc>")
+    (evil-org-> beg end (- (or count 1))))
+
+  (defun evil-org-indent-items (beg end count)
+    "Indent all selected items in itemlist.
+Argument BEG Begin of subtree items to indent.
+Argument END End of subtree items to indent.
+Argument COUNT if negative, items are dedented instead."
+    (when (null count) (setq count 1))
+    (let* ((struct (save-excursion (goto-char beg) (org-list-struct)))
+           (region-p (region-active-p)))
+      ;; special case: indenting all items
+      (if (and struct org-list-automatic-rules (not region-p)
+               (= (point-at-bol) (org-list-get-top-point struct)))
+          (org-list-indent-item-generic count nil struct)
+        ;; indenting selected items
+        (save-excursion
+          (when region-p (deactivate-mark))
+          (set-mark beg)
+          (goto-char end)
+          (org-list-indent-item-generic count t struct)))))
+
+  (defun evil-org-table-move-column (beg end arg)
+    "Move org table column.
+Argument BEG, first column
+Argument END, second column
+If ARG > 0, move column BEG to END.
+If ARG < 0, move column END to BEG"
+    (let* ((text (buffer-substring beg end))
+           (n-cells-selected (max 1 (count ?| text)))
+           (n-columns-to-move (* n-cells-selected (abs arg)))
+           (move-left-p (< arg 0)))
+      (goto-char (if move-left-p end beg))
+      (dotimes (_ n-columns-to-move) (org-table-move-column move-left-p))))
+
   :init
   (setq evil-want-keybinding nil)
   (evil-mode))

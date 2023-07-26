@@ -245,4 +245,10 @@
 (general-define-key
  :map 'org-mode-map
  :states 'normal
- "RET" 'org-ret-dwim)
+ "RET" 'org-dwim-c)
+
+(general-define-key
+ :map 'org-mode-map
+ :states '(visual normal)
+ ">" 'evil-org->
+ "<" 'evil-org-<)
