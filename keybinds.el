@@ -58,6 +58,7 @@
   "bp" 'previous-buffer
   "bn" 'next-buffer
   "bi" 'ibuffer-other-window
+  "bc" 'clone-indirect-buffer-other-window
 
   "s" '(:ignore t :wk "show")
   "s_" 'consult-keep-lines
@@ -97,6 +98,7 @@
 
   "o" '(:ignore t :wk "other")
   "oo" 'dired-jump
+  "oO" 'dired-jump-other-window
   ;; "od" 'dired-jump
   "of" 'make-frame
   "oi" 'imenu-list-smart-toggle
@@ -119,6 +121,19 @@
   "cr" 'flymake-show-buffer-diagnostics
   "cR" 'consult-flymake
 
+  "w" '(:ignore t :wk "window")
+  "wm" 'rotate-frame-anticlockwise
+  "wi" 'rotate-frame-clockwise
+  "wr" 'flip-frame
+  "ws" 'flop-frame
+  "wk" 'transpose-frame
+  "wn" 'rotate-frame
+  "we" 'rotate-frame
+  "wj" 'windmove-swap-states-left
+  "wl" 'windmove-swap-states-down
+  "wu" 'windmove-swap-states-up
+  "wy" 'windmove-swap-states-right
+
   "!" '(:ignore t :wk "exclaim")
   "!R" 'make-window-larger-c
   "!?" 'transpose-frame
@@ -139,6 +154,7 @@
 
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
+  "qQ" 'clean-exit
   "qf" 'delete-frame
   "qr" 'restart-emacs)
 
@@ -222,6 +238,7 @@
   "H-C" 'git-prompt-commit
   "H-r" 'refile3-main-transient
   "\\" 'repeat
+  "-" 'repeat
   "C-/" 'toggle-modes-transient-c
 
   "<backspace>" 'scroll-up-command

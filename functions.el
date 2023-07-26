@@ -85,6 +85,47 @@
   (message (propertize buffer-file-name
                        'face '(:inherit '(font-lock-keyword-face bold)))))
 
+(defun dired-jump-other-window ()
+  "`dired-jump’ with OTHER-WINDOW as t."
+  (interactive)
+  (dired-jump t))
+
+;; (defun clone-indirect-buffer-with-action (&optional action)
+;;   (interactive)
+;;   (let* ((newname  (buffer-name))
+;;          ;; (newname (if (string-match "<[0-9]+>\\’" newname)
+;;          ;;              (substring newname 0 (match-beginning 0))))
+;;          (newname (generate-new-buffer-name newname))
+;;          (newbuffer (make-indirect-buffer (current-buffer) newname)))
+;;     (if action
+;;         (pop-to-buffer newbuffer action t)
+;;       (pop-to-buffer newbuffer nil t))
+;;     (message (concat "New indirect buffer "
+;;                      (propertize newname 'face 'success)
+;;                      " created."))))
+
+;; (defun clone-indirect-buffer-with-action-split ()
+;;   (interactive)
+;;   (clone-indirect-buffer-with-action 'display-buffer-below-selected))
+
+;;;; Exit Emacs
+(defun clean-exit ()
+  "Exit Emacs cleanly.
+If there are unsaved buffer, pop up a list for them to be saved
+before existing. Replaces ‘save-buffers-kill-terminal’.
+From https://archive.casouri.cc/note/2021/clean-exit/index.html"
+  (interactive)
+  (if (frame-parameter nil 'client)
+      (server-save-buffers-kill-terminal arg)
+    (if-let ((buf-list (seq-filter (lambda (buf)
+                                     (and (buffer-modified-p buf)
+                                          (buffer-file-name buf)))
+                                   (buffer-list))))
+        (progn
+          (pop-to-buffer (list-buffers-noselect t buf-list))
+          (message "s to save, C-k to kill, x to execute"))
+      (save-buffers-kill-terminal))))
+
 ;;;; completion
 ;;;;; kill-new from global paste
 (defun kill-new-from-global-paste-c ()
