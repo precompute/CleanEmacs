@@ -33,10 +33,12 @@
  '(outline-minor-6 ((t (:extend t :height 1.08))))
  '(outline-minor-7 ((t (:extend t :height 1.05))))
  '(outline-minor-8 ((t (:extend t :height 1.05))))
- '(helpful-heading ((t (:extend t :height 1.25 :inherit 'variable-pitch))))
- '(transient-heading ((t (:height 1.25 :inherit 'variable-pitch))))
+ '(helpful-heading ((t (:extend t :height 1.25 :inherit variable-pitch))))
+ '(transient-heading ((t (:height 1.25 :inherit variable-pitch))))
  '(org-meta-line ((t (:extend t))))
- '(org-date ((t (:inherit (list bold fixed-pitch))))))
+ '(org-date ((t (:inherit (list bold fixed-pitch)))))
+ '(org-special-keyword ((t (:inherit (list bold fixed-pitch)))))
+ '(org-ellipsis ((t (:height 1.29 :weight bold)))))
 
 (defun get-face-colors-c (&rest rest)
   (interactive)
@@ -137,9 +139,9 @@
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 12 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 13 :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
-    (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 14))
+    (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
     (copy-face 'default 'fixed-pitch)))
 (set-fonts-c)

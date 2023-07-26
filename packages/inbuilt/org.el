@@ -12,15 +12,20 @@
         org-startup-with-inline-images t
         org-fontify-done-headline t
         org-fontify-todo-headline t
-        org-time-stamp-formats org-time-stamp-custom-formats
+        org-ellipsis " ＋＋"
         org-tsr-regexp-both "[[<]\\([[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\(?: .*?\\)?\\)[]>]\\(--?-?[[<]\\([[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\(?: .*?\\)?\\)[]>]\\)?"
         org-id-locations-file "/home/sys2/46/.orgids"
         org-time-stamp-custom-formats '("<%y-%m-%d %H:%M:%S>" . "<%y-%m-%d %H:%M:%S>")
+        org-time-stamp-formats org-time-stamp-custom-formats
         org-support-shift-select t
         org-imenu-depth 90
         org-capture-mode-hook nil
         org-cycle-separator-lines 0
+        org-enforce-todo-checkbox-dependencies t
+        org-enforce-todo-dependencies t
         org-todo-log-states t
+        org-log-done 'time
+        org-tags-column 0
         org-treat-insert-todo-heading-as-state-change t
         org-lowest-priority ?L
         org-priority-faces '((65 . error)
@@ -175,20 +180,20 @@
            "[?](W)"
            "|"
            "[X](D)"))
-        ;; org-todo-keyword-faces
-         ;; '(("[-]"  . +org-todo-active)
-         ;;  ("DONE" . +org-todo-done)
-         ;;  ("INPR" . +org-todo-active)
-         ;;  ("[?]"  . +org-todo-onhold)
-         ;;  ("WAIT" . +org-todo-onhold)
-         ;;  ("TO-READ" . org-todo)
-         ;;  ("READING" . +org-todo-active)
-         ;;  ("REGULAR" . +org-todo-onhold)
-         ;;  ("SUSPEND" . +org-todo-onhold)
-         ;;  ("PRTL" . +org-todo-onhold)
-         ;;  ("MYBE" . +org-todo-cancel)
-         ;;  ("PROJ" . +org-todo-project))
-        )
+        org-todo-keyword-faces
+        '(("[-]"  . custom--org-todo-active)
+          ("DONE" . custom--org-todo-done)
+          ("INPR" . custom--org-todo-active)
+          ("[?]"  . custom--org-todo-onhold)
+          ("WAIT" . custom--org-todo-onhold)
+          ("READ" . custom--org-todo-done)
+          ("TO-READ" . custom--org-todo-project)
+          ("READING" . custom--org-todo-active)
+          ("REGULAR" . custom--org-todo-onhold)
+          ("SUSPEND" . custom--org-todo-onhold)
+          ("PRTL" . custom--org-todo-onhold)
+          ("MYBE" . custom--org-todo-cancel)
+          ("PROJ" . custom--org-todo-project)))
 ;;;;; propertize
   (font-lock-add-keywords 'org-mode
                           '(("^:PROPERTIES:\n" 0 '(face nil display "∷"))
@@ -199,8 +204,8 @@
                             ("^[[:space:]]*\\(#\\+end.*\\)" 1 '(face nil display "END"))
                             ("^[[:space:]]*\\(#\\+BEGIN_QUOTE\\)" 1 '(face nil display "QUOTE"))
                             ("^[[:space:]]*\\(#\\+begin_quote\\)" 1 '(face nil display "QUOTE"))
-                            ("^[[:space:]]*\\(+\\) " 2 '(face font-lock-keyword-face display "⊣"))
-                            ("^[[:space:]]*\\(-\\) " 2 '(face font-lock-builtin-face display "⊢"))
+                            ("^[[:space:]]*\\(+\\) " 1 '(face font-lock-keyword-face display "⊣"))
+                            ("^[[:space:]]*\\(-\\) " 1 '(face font-lock-builtin-face display "⊢"))
                             ("^[*+-]+[[:space:]]\\(\\[ \\]\\)" 1 '(face custom--org-mode-face-1 display "   "))
                             ("^[*+-]+[[:space:]]\\(\\[X\\]\\)" 1 '(face custom--org-mode-face-2 display "   "))
                             ("^[*+-]+[[:space:]]\\(\\[-\\]\\)" 1 '(face custom--org-mode-face-3 display "   "))
@@ -299,16 +304,31 @@
 ;;;;; faces
 (defface custom--org-mode-face-1
   '((t :underline nil))
-  "Custom org-mode face 1")
+  "Custom org-mode face 1.")
 (defface custom--org-mode-face-2
   '((t :underline nil))
-  "Custom org-mode face 2")
+  "Custom org-mode face 2.")
 (defface custom--org-mode-face-3
   '((t :underline nil))
-  "Custom org-mode face 3")
+  "Custom org-mode face 3.")
 (defface custom--org-mode-face-4
   '((t :underline nil))
-  "Custom org-mode face 4")
+  "Custom org-mode face 4.")
+(defface custom--org-todo-active
+  '((t (:inherit (bold font-lock-constant-face org-todo fixed-pitch))))
+  "Custom org-mode todo-active face.")
+(defface custom--org-todo-done
+  '((t (:inherit (bold success org-todo fixed-pitch))))
+  "Custom org-mode todo-done face.")
+(defface custom--org-todo-onhold
+  '((t (:inherit (bold warning org-todo fixed-pitch))))
+  "Custom org-mode todo-onhold face.")
+(defface custom--org-todo-cancel
+  '((t (:inherit (bold font-lock-builtin-face org-todo fixed-pitch))))
+  "Custom org-mode todo-cancel face.")
+(defface custom--org-todo-project
+  '((t (:inherit (bold font-lock-doc-face org-todo fixed-pitch))))
+  "Custom org-mode todo-project face.")
 
 ;;;;; Functions
 ;;;;;; agenda
@@ -572,121 +592,27 @@
      nil nil "*Org Agenda*")))
 
 ;;;;;; org-dwim
-(defun org-ret-dwim ()
-  "Do whatever is possible for current point.
-Copied from +org/dwim-at-point in Doom."
+(defun org-dwim-c ()
+  "Do the best possible thing for POINT.
+- Toggle checkbox if available."
   (interactive)
   (if (button-at (point))
       (call-interactively #'push-button)
     (let* ((context (org-element-context))
            (type (org-element-type context)))
-      ;; skip over unimportant contexts
       (while (and context (memq type '(verbatim code bold italic underline strike-through subscript superscript)))
         (setq context (org-element-property :parent context)
               type (org-element-type context)))
       (pcase type
-        ((or `citation `citation-reference)
-         (org-cite-follow context arg))
-
         (`headline
-         (cond ((memq (bound-and-true-p org-goto-map)
-                      (current-active-maps))
-                (org-goto-ret))
-               ((and (fboundp 'toc-org-insert-toc)
-                     (member "TOC" (org-get-tags)))
-                (toc-org-insert-toc)
-                (message "Updating table of contents"))
-               ((string= "ARCHIVE" (car-safe (org-get-tags)))
-                (org-force-cycle-archived))
-               ((or (org-element-property :todo-type context)
+         (cond ((or (org-element-property :todo-type context)
                     (org-element-property :scheduled context))
                 (org-todo
-                 (if (eq (org-element-property :todo-type context) 'done)
-                     (or (car (+org-get-todo-keywords-for (org-element-property :todo-keyword context)))
-                         'todo)
-                   'done))))
-         ;; Update any metadata or inline previews in this subtree
+                 (if (eq (org-element-property :todo-type context) 'done) 'todo 'done))))
          (org-update-checkbox-count)
-         (org-update-parent-todo-statistics)
-         (when (and (fboundp 'toc-org-insert-toc)
-                    (member "TOC" (org-get-tags)))
-           (toc-org-insert-toc)
-           (message "Updating table of contents"))
-         (let* ((beg (if (org-before-first-heading-p)
-                         (line-beginning-position)
-                       (save-excursion (org-back-to-heading) (point))))
-                (end (if (org-before-first-heading-p)
-                         (line-end-position)
-                       (save-excursion (org-end-of-subtree) (point))))
-                (overlays (ignore-errors (overlays-in beg end)))
-                (latex-overlays
-                 (cl-find-if (lambda (o) (eq (overlay-get o 'org-overlay-type) 'org-latex-overlay))
-                             overlays))
-                (image-overlays
-                 (cl-find-if (lambda (o) (overlay-get o 'org-image-overlay))
-                             overlays)))
-           (+org--toggle-inline-images-in-subtree beg end)
-           (if (or image-overlays latex-overlays)
-               (org-clear-latex-preview beg end)
-             (org--latex-preview-region beg end))))
-
-        (`clock (org-clock-update-time-maybe))
-
-        (`footnote-reference
-         (org-footnote-goto-definition (org-element-property :label context)))
-
-        (`footnote-definition
-         (org-footnote-goto-previous-reference (org-element-property :label context)))
-
-        ((or `planning `timestamp)
-         (org-follow-timestamp-link))
-
-        ((or `table `table-row)
-         (if (org-at-TBLFM-p)
-             (org-table-calc-current-TBLFM)
-           (ignore-errors
-             (save-excursion
-               (goto-char (org-element-property :contents-begin context))
-               (org-call-with-arg 'org-table-recalculate (or arg t))))))
-
-        (`table-cell
-         (org-table-blank-field)
-         (org-table-recalculate arg)
-         (when (and (string-empty-p (string-trim (org-table-get-field)))
-                    (bound-and-true-p evil-local-mode))
-           (evil-change-state 'insert)))
-
-        (`babel-call
-         (org-babel-lob-execute-maybe))
-
-        (`statistics-cookie
-         (save-excursion (org-update-statistics-cookies arg)))
-
-        ((or `src-block `inline-src-block)
-         (org-babel-execute-src-block arg))
-
-        ((or `latex-fragment `latex-environment)
-         (org-latex-preview arg))
-
-        (`link
-         (let* ((lineage (org-element-lineage context '(link) t))
-                (path (org-element-property :path lineage)))
-           (if (or (equal (org-element-property :type lineage) "img")
-                   (and path (image-type-from-file-name path)))
-               (+org--toggle-inline-images-in-subtree
-                (org-element-property :begin lineage)
-                (org-element-property :end lineage))
-             (org-open-at-point arg))))
-
+         (org-update-parent-todo-statistics))
         ((guard (org-element-property :checkbox (org-element-lineage context '(item) t)))
          (let ((match (and (org-at-item-checkbox-p) (match-string 1))))
-           (org-toggle-checkbox (if (equal match "[ ]") '(16)))))
-
-        (_
-         (if (or (org-in-regexp org-ts-regexp-both nil t)
-                 (org-in-regexp org-tsr-regexp-both nil  t)
-                 (org-in-regexp org-link-any-re nil t))
-             (call-interactively #'org-open-at-point)
-           (+org--toggle-inline-images-in-subtree
-            (org-element-property :begin context)
-            (org-element-property :end context))))))))
+           (org-toggle-checkbox (if (equal match "[ ]") '(16))))
+         (org-update-checkbox-count)
+         (org-update-parent-todo-statistics))))))

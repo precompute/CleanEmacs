@@ -18,12 +18,6 @@
 (set-face-attribute 'default nil :background "#000000" :foreground "#ffffff")
 (set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)
 
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            "Makes startup faster."
-            (let ((tempgcval gc-cons-threshold)
-                  (gc-cons-threshold most-positive-fixnum))
-              (setq gc-cons-threshold tempgcval))))
 (setq gc-cons-threshold (* 1024 1024 512))
 
 (load-file (expand-file-name "early-init-ui.el" user-emacs-directory))
