@@ -170,6 +170,8 @@
 (elpacaLF "org-appear")
 
 ;;; Language
+;;;; Eglot
+(elpacaLF "eglot" t)
 ;;;; Elisp
 (elpacaLF "elisp-slime-nav")
 ;;;; Markdown
@@ -178,6 +180,12 @@
 (elpacaLF "lua-mode")
 ;;;; Go
 (elpacaLF "go-mode")
+;;;; Julia
+(elpacaLF "julia-mode")
+;;;;; eglot support
+(elpacaLF "eglot-jl")
+;;;; CSV
+(elpacaLF "csv-mode")
 
 
 ;;; Misc
