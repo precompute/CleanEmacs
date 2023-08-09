@@ -616,3 +616,17 @@
            (org-toggle-checkbox (if (equal match "[ ]") '(16))))
          (org-update-checkbox-count)
          (org-update-parent-todo-statistics))))))
+
+;;;;; images in org-mode
+;; (defun dynamic-image-size-org-mode ()
+;;   (interactive)
+;;   (if (eq major-mode 'org-mode)
+;;       (if olivetti-mode
+;;           (setq-local org-image-actual-width ;; (* (window-pixel-width)
+;;                       ;;    (/ (float olivetti-body-width)
+;;                       ;;       (float (window-width))))
+;;                       olivetti-body-width))
+;;     (setq-local org-image-actual-width (* (/ 3.0 4.0) (window-pixel-width))))
+;;   (if (eq major-mode 'org-mode)
+;;       (org-redisplay-inline-images)))
+;; (add-to-list 'window-size-change-functions 'dynamic-image-size-org-mode)

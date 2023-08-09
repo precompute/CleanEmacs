@@ -85,7 +85,8 @@
 ;;; Olivetti
 (elpacaLF "olivetti")
 ;;; Indent Guides
-(elpacaLF "highlight-indent-guides")
+;; (elpacaLF "highlight-indent-guides")
+(load-file (expand-file-name "packages/indent-bars.el" user-emacs-directory))
 ;;; Which-Key
 (elpacaLF "which-key")
 ;;; Rainbow Delimiters
