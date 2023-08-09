@@ -139,9 +139,10 @@
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 13 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 12 :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
-    (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 15))
+    (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
     (copy-face 'default 'fixed-pitch)))
 (set-fonts-c)
+(set-fontset-font t 'unicode (font-spec :family "Symbola"))

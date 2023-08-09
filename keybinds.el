@@ -151,6 +151,7 @@
   "hm" 'describe-mode
   "hi" 'info
   "hD" 'toggle-debug-mode
+  "hM" 'woman
 
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
@@ -166,6 +167,7 @@
   "zp" 'delete-window
   "zs" 'save-buffer
   "zx" 'kill-current-buffer
+  "zX" 'kill-current-buffer-and-window-c
   "zZ" 'bury-buffer)
 
 ;;;;;;; Undo / Redo
@@ -260,12 +262,12 @@
  "g N" 'widen)
 
 (general-define-key
- :map 'org-mode-map
+ :keymaps 'org-mode-map
  :states 'normal
  "RET" 'org-dwim-c)
 
 (general-define-key
- :map 'org-mode-map
+ :keymaps 'org-mode-map
  :states '(visual normal)
  ">" 'evil-org->
  "<" 'evil-org-<)

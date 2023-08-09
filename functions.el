@@ -28,6 +28,12 @@
     (save-buffer)
     (delete-window)))
 
+(defun kill-current-buffer-and-window-c ()
+  (interactive)
+  (progn
+    (kill-current-buffer)
+    (delete-window)))
+
 (defun revert-buffer-if-not-modified ()
   "Revert the buffer if it isn’t modified."
   (interactive)
@@ -457,8 +463,8 @@ It switches the width before the height."
    [("ll" (lambda () (toggle-modes-transient--description 'display-line-numbers "Line Numbers")) display-line-numbers-mode)
     ("lL" (lambda () (toggle-modes-transient--description 'global-display-line-numbers-mode "Global Line Numbers")) global-display-line-numbers-mode)
     ("lg" (lambda () (toggle-modes-transient--description 'diff-hl-mode "Diff Highlight")) diff-hl-mode)]
-   [("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides"))
-     highlight-indent-guides-mode)
+   [("i" (lambda () (toggle-modes-transient--description 'indent-bars-mode "Indent Guides")) indent-bars-mode)
+   ;; [("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides")) highlight-indent-guides-mode)
     ("m" (lambda () (toggle-modes-transient--description 'mixed-pitch--applied-p "Mixed Pitch"))
      mixed-pitch-mode)
     ("L" (lambda () (toggle-modes-transient--description 'hl-line-mode "Highlight Lines"))

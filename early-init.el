@@ -19,5 +19,6 @@
 (set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)
 
 (setq gc-cons-threshold (* 1024 1024 512))
+(add-hook 'focus-out-hook 'garbage-collect)
 
 (load-file (expand-file-name "early-init-ui.el" user-emacs-directory))
