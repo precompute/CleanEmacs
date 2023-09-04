@@ -60,11 +60,11 @@
   (set-face-attribute 'org-todo nil
                       :underline nil
                       :inherit nil
-                      :background nil)
+                      :background 'unspecified)
   (set-face-attribute 'org-done nil
                       :underline nil
                       :inherit nil
-                      :background nil)
+                      :background 'unspecified)
   (if (facep 'custom--org-mode-face-1)
       (set-face-attribute 'custom--org-mode-face-1 nil
                           :inherit 'fixed-pitch
@@ -139,7 +139,9 @@
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 12 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "Gohu GohuFont" :size 12 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "Cozette" :size 14 :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
     (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))

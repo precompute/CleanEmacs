@@ -154,6 +154,9 @@ Modified from `flymake--mode-line-counter'.
   '((t :foreground "#000"
        :background "#000"))
   "Indicator for inactive, unmodified window.")
+(defface headerline-narrow-indicator
+  '((t :foreground "#000"))
+  "Indicator for narrowing.")
 
 (defun set-headerline-faces (&rest rest)
   (interactive)
@@ -191,6 +194,11 @@ Modified from `flymake--mode-line-counter'.
                         :height 1.4
                         :foreground fl-keyword
                         :background fl-keyword)
+    (set-face-attribute 'headerline-narrow-indicator nil
+                        :height 1.4
+                        :foreground fl-regexp
+                        :weight 'bold
+                        :inherit 'variable-pitch)
     (defvar headerline--err-face (if errorface errorface "#000000"))
     (defvar headerline--warn-face (if warnface warnface "#000000"))
     (defvar headerline--note-face (if noteface noteface "#000000"))
@@ -260,8 +268,12 @@ Modified from `flymake--mode-line-counter'.
 (defvar modeline-current-buffer-property-c
   '(:eval
     (if buffer-read-only
-        (propertize "RO " 'face '(:inherit error :height 1.2 :weight bold))))
+        (propertize " RO" 'face '(:inherit error :height 1.2 :weight bold))))
   "Show read-only status")
+
+(defvar modeline-current-buffer-narrowed-c
+  '(:propertize "%n " face headerline-narrow-indicator)
+  "Show narrowing status")
 
 (defvar modeline-current-buffer-name-c
   '(:eval
@@ -304,8 +316,7 @@ Modified from `flymake--mode-line-counter'.
 
 (defvar modeline-line-c
   '(:propertize
-    "%l"
-    display (min-width (5))
+    "%4l"
     face (:weight bold :height 1.2)))
 
 (defvar modeline-column-c
@@ -424,6 +435,7 @@ Specific to the current window's mode line.")
                       modeline-active-indicator-c
                       modeline-modes-c
                       modeline-current-buffer-property-c
+                      modeline-current-buffer-narrowed-c
                       modeline-current-buffer-name-c
                       modeline-evil-state-indicator
                       modeline-percentage-c
@@ -447,7 +459,7 @@ Specific to the current window's mode line.")
                 modeline-modes-c
                 ;; modeline-percentage-c
                 modeline-mlscroll-c
-                " "
+                modeline-current-buffer-narrowed-c
                 modeline-line-c
                 " "
                 ;; modeline-column-c
