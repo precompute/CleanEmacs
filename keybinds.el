@@ -247,11 +247,15 @@
   "S-<backspace>" 'scroll-down-command
 
   "g n" 'narrow-to-page
-  "g N" 'widen)
+  "g N" 'widen
+
+  "C-S-t" 'xref-go-forward)
 
 (general-define-key
   :states 'insert
-  "C-S-u" 'insert-char-5-discard-end)
+  "C-S-u" 'insert-char-5-discard-end
+  "M-o" 'evil-open-below
+  "M-O" 'evil-open-above)
 
 (general-define-key
  :states 'visual
@@ -259,7 +263,9 @@
  ">" 'evil-shift-right-c
  "C-x C-e" 'eval-region
  "g n" 'narrow-to-region
- "g N" 'widen)
+ "g N" 'widen
+ "u" 'undo-with-prefix
+ "C-r" 'undo-redo-with-prefix)
 
 (general-define-key
  :keymaps 'org-mode-map
@@ -271,3 +277,9 @@
  :states '(visual normal)
  ">" 'evil-org->
  "<" 'evil-org-<)
+
+(general-define-key
+ ;; Modifications and global stuff
+ "M-c" 'capitalize-dwim
+ "M-u" 'upcase-dwim
+ "H-a" 'org-capture)

@@ -88,8 +88,10 @@
 
 (defun echo-current-buffer-path ()
   (interactive)
-  (message (propertize buffer-file-name
-                       'face '(:inherit '(font-lock-keyword-face bold)))))
+  (message (propertize (concat " " (if buffer-file-name buffer-file-name "nil") " ")
+                       'face '( :inherit '(font-lock-keyword-face bold)
+                                :height 1.5
+                                :box (list :line-width 1)))))
 
 (defun dired-jump-other-window ()
   "`dired-jump’ with OTHER-WINDOW as t."
@@ -113,6 +115,26 @@
 ;; (defun clone-indirect-buffer-with-action-split ()
 ;;   (interactive)
 ;;   (clone-indirect-buffer-with-action 'display-buffer-below-selected))
+
+(defun undo-with-prefix ()
+  (interactive)
+  (let ((current-prefix-arg '(4))
+        (p (point))
+        (m (mark)))
+    (call-interactively #'undo)
+    (set-mark m)
+    (goto-char p)
+    (call-interactively #'activate-mark)))
+
+(defun undo-redo-with-prefix ()
+  (interactive)
+  (let ((current-prefix-arg '(4))
+        (p (point))
+        (m (mark)))
+    (call-interactively #'undo-redo)
+    (set-mark m)
+    (goto-char p)
+    (call-interactively #'activate-mark)))
 
 ;;;; Exit Emacs
 (defun clean-exit ()
