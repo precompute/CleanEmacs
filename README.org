@@ -12,9 +12,29 @@ We don’t aim this config to be minimal, but instead to be easy to understand.
 
 - Recommended Emacs Version :: =30.0.50=
 
-- Current Emacs commit :: =c8e527cbeeea6be9bb713af33a3f40408b261234=
+- Current Emacs commit :: =d3e650d33709c6323b9e2346a951d5eb5ff82b44=
 
 - Recommended OS :: I use Debian Stable.  This config /might/ work on MacOS and WSL.  I don’t use either, so no guarantees.
+
+  #+BEGIN_QUOTE
+In GNU Emacs 30.0.50 (build 1, x86_64-pc-linux-gnu, GTK+ Version
+ 3.24.37, cairo version 1.16.0) of 2023-09-06 built on debhost2
+Repository revision: d3e650d33709c6323b9e2346a951d5eb5ff82b44
+Repository branch: master
+Windowing system distributor 'The X.Org Foundation', version 11.0.12101007
+System Description: Debian GNU/Linux 12 (bookworm)
+
+Configured using:
+ 'configure --with-native-compilation=aot 'CFLAGS=-flto -O3
+ -mtune=native -march=native -fomit-frame-pointer' --enable-autodepend
+ --enable-link-time-optimization --with-dbus --with-gif --with-gnutls
+ --with-gpm=no --with-imagemagick --with-jpeg --with-json
+ --with-libotf --with-mailutils --with-modules
+ --without-compress-install --without-gconf --without-gsettings
+ --without-xaw3d --with-png --with-sound --with-sqlite3 --with-tiff
+ --with-toolkit-scroll-bars --with-webp --with-xft --with-xim
+ --with-xpm --with-tree-sitter --with-x-toolkit --with-xwidgets'
+  #+END_QUOTE
 
 * General Outline
 ** Hierarchy
@@ -60,6 +80,8 @@ What you need to do:
   
 - Search for =~/= and =sys2= and remove / modify all local filesystem calls.
 
+  Update [23-09-06 18:07:21] : This project is about ~95% stable.  There are no overt bugs or surprises, almost everything works well and with speed.  Language support has been added, along with many small improvements.  The emacs version has also been bumped, but no changes have been necessary.
+  
 * Screenshots
 
 [[file:.assets/screenshot1.jpg]]

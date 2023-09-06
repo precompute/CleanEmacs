@@ -12,7 +12,7 @@
 
 (setq byte-compile-docstring-max-column 9000)
 
-;; (setq warning-minimum-level :error)
+(setq warning-minimum-level :error) ;; for pesky documentation errors
 
 (set-face-attribute 'default nil :background "#000000" :foreground "#ffffff")
 (set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)

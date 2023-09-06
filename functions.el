@@ -189,6 +189,10 @@ https://emacs.stackexchange.com/questions/74526/programmatically-invoking-insert
     (insert-char charcode)
     (message (concat k1 k2 k3 k4 " => " (char-to-string charcode)))))
 
+(defun char-to-unicode-insert ()
+  (interactive)
+  (insert (format "0x%x" (char-after (point)))))
+
 ;;;; screenshot
 (defun screenshot-png-c ()
   "Save a screenshot of the current frame as an PNG image.
