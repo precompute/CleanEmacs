@@ -3,6 +3,7 @@
 	  text-mode
           dired-mode
           vertico-mode
+          vertico-reverse-mode
           magit-mode
           helpful-mode
           help-mode

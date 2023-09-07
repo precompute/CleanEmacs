@@ -34,5 +34,13 @@
   (global-set-key (kbd "C-SPC") 'completion-at-point)
   ;; (with-eval-after-load 'evil
   ;;   (setq evil-complete-next-func (lambda (_) (completion-at-point))))
+
+  (defun corfu-enable-always-in-minibuffer ()
+    "Enable Corfu in the minibuffer if Vertico/Mct are not active."
+    (unless (bound-and-true-p vertico--input)
+      (setq-local corfu-auto nil)
+      (corfu-mode 1)))
+  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+
   :hook (prog-mode . corfu-mode)
   :hook (corfu-mode . corfu-popupinfo-mode))
