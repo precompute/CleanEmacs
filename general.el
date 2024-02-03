@@ -16,6 +16,8 @@
                                ";; Time: " (current-time-string)))
 (setq coding-system-for-write 'raw-text)
 
+(setq-default indicate-empty-lines t)
+
 (setq frame-title-format "Emacs - %f")
 
 (setq x-stretch-cursor t)
@@ -23,8 +25,9 @@
 (setq indicate-empty-lines nil)
 (setq scroll-margin 10)
 (setq scroll-conservatively 101)
-(setq window-divider-default-right-width 10
-      window-divider-default-bottom-width 0)
+
+(setq process-adaptive-read-buffering nil)
+(setq read-process-output-max (* 4 1024 1024))
 
 (setq history-length 999)
 
@@ -65,10 +68,12 @@
 
 (winner-mode 1)
 (fringe-mode '(7 . 7))
+;; (window-divider-mode 1)
 (savehist-mode 1)
 (save-place-mode 1)
-;; (global-display-line-numbers-mode) ;; Don’t need it.
 
 (setq-default help-at-pt-display-when-idle t
               help-at-pt-timer-delay 0.1)
 (help-at-pt-set-timer) ;; hints in the echo area
+
+(global-hl-line-mode)

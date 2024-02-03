@@ -14,7 +14,8 @@
     (loadfile-c "ui.el")
     (loadfile-c "modeline.el")
     (loadfile-c "modes.el")
-    (loadfile-c "loads.el")))
+    (loadfile-c "loads.el")
+    (loadfile-c ".private/other.el")))
 
 (add-hook 'elpaca-after-init-hook 'after-init-load-file)
 
