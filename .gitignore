@@ -3,3 +3,5 @@
 /tree-sitter/
 /.private/
 /url/
+/multisession/
+/eshell/

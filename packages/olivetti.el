@@ -15,4 +15,7 @@
   (setq-default olivetti-body-width 130
                 olivetti-margin-width 2
                 olivetti-recall-visual-line-mode-entry-state t)
-  (add-hook 'org-mode-hook #'(lambda () (interactive) (setq-local olivetti-body-width 80))))
+  (add-hook 'org-mode-hook #'(lambda () (interactive) (setq-local olivetti-body-width 80)))
+  ;; Remove all olivetti keybinds.  Interferes with org-mode bindings.
+  (assq-delete-all 'olivetti-mode minor-mode-map-alist))
+
