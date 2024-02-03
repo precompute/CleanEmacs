@@ -257,8 +257,7 @@
   :states 'insert
   "C-S-u" 'insert-char-5-discard-end
   "M-o" 'evil-open-below
-  "M-O" 'evil-open-above
-  "C-S-f" 'hippie-completing-read)
+  "M-O" 'evil-open-above)
 
 (general-define-key
  :states 'visual
