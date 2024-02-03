@@ -155,6 +155,10 @@
   "hD" 'toggle-debug-mode
   "hM" 'woman
 
+  "d" '(:ignore t :wk "other")
+  "ds" 'lexic-search-word-at-point
+  "dS" 'lexic-search
+
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
   "qQ" 'clean-exit

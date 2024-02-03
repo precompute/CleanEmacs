@@ -216,3 +216,5 @@
 (elpacaLF "elfeed")
 ;;;;; Org Integration
 (elpacaLF "elfeed-org")
+;;;; lexic (dictionary)
+(elpacaLF "lexic")
