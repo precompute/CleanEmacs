@@ -120,6 +120,8 @@
   "c" '(:ignore t :wk "code diagnostics")
   "cr" 'flymake-show-buffer-diagnostics
   "cR" 'consult-flymake
+  "cC" 'compile
+  "cc" 'recompile
 
   "w" '(:ignore t :wk "window")
   "wm" 'rotate-frame-anticlockwise
@@ -255,7 +257,8 @@
   :states 'insert
   "C-S-u" 'insert-char-5-discard-end
   "M-o" 'evil-open-below
-  "M-O" 'evil-open-above)
+  "M-O" 'evil-open-above
+  "C-S-f" 'hippie-completing-read)
 
 (general-define-key
  :states 'visual

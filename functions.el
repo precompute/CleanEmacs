@@ -86,6 +86,15 @@
         (corfu-mode -1)
         (corfu-mode 1))))
 
+(defun show-current-buffer-path ()
+  (interactive)
+  (message
+   (propertize
+    (concat " " (if buffer-file-name buffer-file-name "nil") " ")
+                       'face '( :inherit '(error bold)
+                                :height 1.5
+                                :box (list :line-width 1)))))
+
 (defun echo-current-buffer-path ()
   (interactive)
   (message (propertize (concat " " (if buffer-file-name buffer-file-name "nil") " ")
@@ -169,7 +178,8 @@ From https://archive.casouri.cc/note/2021/clean-exit/index.html"
       (sqlite3-close dbh))
     (kill-new
      (let* ((vertico-sort-function nil)
-            (rlist (completing-read-multiple " " mylist))
+            ;; (rlist (completing-read-multiple " " mylist))
+            (rlist (completing-read " " mylist)) ;; [23-12-15 00:48:07] Because I like my commas intact
             (rstr ""))
        (while (length> rlist 0)
          (setq rstr (concat rstr (pop rlist) "\n")))
@@ -288,6 +298,11 @@ Needs frame-parameter alpha-background."
   "Open `ter' in the current directory."
   (interactive)
   (shell-command (concat "xfce4-terminal --working-directory=" default-directory)))
+
+(defun vterm-new-instance ()
+  "Open a new instance of vterm in the current window."
+  (interactive)
+  (vterm 't))
 
 ;;;; Window Functions
 ;; It's like golden-ratio but just one function.
@@ -574,13 +589,26 @@ It switches the width before the height."
                   "]")))))]
    [("i" "Increment Day"
      (lambda () (interactive)
-       (let ((newlast (+ 1 (string-to-number
-                            (substring main-log-init-date 6 8)))))
+       (let* ((daycount '((01 . 31) (02 . 29) (03 . 31) (04 . 30)
+                          (05 . 31) (06 . 30) (07 . 31) (08 . 31)
+                          (09 . 30) (10 . 31) (11 . 30) (12 . 31)))
+              (year (string-to-number (substring main-log-init-date 0 2)))
+              (month (string-to-number (substring main-log-init-date 3 5)))
+              (day (string-to-number (substring main-log-init-date 6 8)))
+              (incmonth (if (>= day (cdr (assoc month daycount))) t))
+              (incyear (if (and incmonth (>= month 12)) t))
+              (day (if incmonth 1 (1+ day)))
+              (month (if incmonth (1+ month) month))
+              (year (if incyear (1+ year) year)))
          (setq main-log-init-date
-               (concat (substring main-log-init-date 0 6)
-                       (if (= (length (number-to-string newlast)) 1)
-                           "0")
-                       (number-to-string newlast))))))
+               (format "%02d-%02d-%02d" year month day)))))
+       ;; (let ((newlast (+ 1 (string-to-number
+       ;;                      (substring main-log-init-date 6 8)))))
+       ;;   (setq main-log-init-date
+       ;;         (concat (substring main-log-init-date 0 6)
+       ;;                 (if (= (length (number-to-string newlast)) 1)
+       ;;                     "0")
+       ;;                 (number-to-string newlast))))
     ("I" "Increment Month"
      (lambda () (interactive)
        (let ((newmid (+ 1 (string-to-number
