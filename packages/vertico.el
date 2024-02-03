@@ -1,7 +1,7 @@
 (use-package vertico
-  :elpaca (:host github
-                 :repo "minad/vertico"
-                 :files ("*.el" "extensions/*.el"))
+  :elpaca ( :host github
+            :repo "minad/vertico"
+            :files ("*.el" "extensions/*.el"))
   :bind
   (:map vertico-map
         ("DEL" . vertico-directory-delete-char) ;; delete entire folder names
@@ -20,7 +20,6 @@
   :config
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy) ;; entering ~/ or //
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save) ;; save vertico for reinvocation
-
+  (vertico-reverse-mode)
   :init
-  (vertico-mode)
-  (vertico-reverse-mode))
+  (vertico-mode))

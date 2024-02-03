@@ -18,4 +18,6 @@
                                                :pattern "."
                                                :pad 0.2
                                                :width 0.4
-                                               :blend 0.5)))
+                                               :blend 0.5)
+        indent-bars-treesit-support t
+        indent-bars-no-descend-string t))
