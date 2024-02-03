@@ -187,6 +187,12 @@
 (elpacaLF "eglot-jl")
 ;;;; CSV
 (elpacaLF "csv-mode")
+;;;; Lisp-Flavored Erlang
+(elpacaLF "lfe-mode")
+;;;; Rust
+(elpacaLF "rustic")
+;;;; Haskell
+(elpacaLF "haskell-mode")
 
 
 ;;; Misc

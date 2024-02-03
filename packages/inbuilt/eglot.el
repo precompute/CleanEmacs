@@ -1,5 +1,8 @@
 (use-package eglot
   :elpaca nil
-  :hook ((python-ts-mode . eglot-ensure))
+  :hook ((python-ts-mode
+          js-ts-mode
+          lua-mode) . eglot-ensure)
   :config
-  (add-to-list 'eglot-server-programs '(python-ts-mode . ("pylsp"))))
+  (add-to-list 'eglot-server-programs '(((python-mode python-ts-mode) . ("pylsp"))
+                                        (lua-mode . "lua-language-server"))))

@@ -17,4 +17,6 @@ you want to `nil’ the alist before operation"
 (treesit-verify-and-remap-major-mode t
  '((python python-mode python-ts-mode)
    (json js-json-mode json-ts-mode)
-   (c c-mode c-ts-mode)))
+   (c c-mode c-ts-mode)
+   (rust rust-mode rust-ts-mode)
+   (haskell haskell-mode haskell-ts-mode)))
