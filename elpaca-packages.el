@@ -110,6 +110,10 @@
 (elpacaLF "bicycle") ;; cyclic imenu entries
 ;;; perspective (workspace)
 (elpacaLF "perspective")
+;; ;;;; frame integration
+;; (elpacaLF "nameframe")
+;; (elpacaLF "nameframe-project")
+;; (elpacaLF "nameframe-perspective")
 ;;; diff-hl (git info in fringe)
 (elpacaLF "diff-hl")
 ;;; transpose-frame

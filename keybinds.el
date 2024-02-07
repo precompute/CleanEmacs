@@ -92,7 +92,7 @@
   "TAB a" 'persp-add-buffer
   "TAB A" 'persp-set-buffer
   "TAB b" 'persp-switch-to-buffer
-  "TAB a" 'persp-remove-buffer
+  "TAB x" 'persp-remove-buffer
 
   "RET" 'consult-bookmark
 
