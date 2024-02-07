@@ -14,7 +14,13 @@
   "s-h" 'evil-backward-char
   "s-l" 'evil-forward-char
   "s-j" 'evil-next-line
-  "s-k" 'evil-previous-line)
+  "s-k" 'evil-previous-line
+
+  "<mouse-8>" 'previous-buffer
+  "<mouse-9>" 'next-buffer
+
+  "<header-line> <mouse-2>" 'delete-window
+  "<header-line> <mouse-3>" 'toggle-frame-fullscreen)
 
 ;;;;; Evil-Mode
 ;;;;;; Leader
