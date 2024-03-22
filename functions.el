@@ -284,6 +284,14 @@ Needs frame-parameter alpha-background."
   (dired-jump nil ".git")
   (message "Viewing folder with vc root!"))
 
+;;;; Profiler
+(defun profiler-stop-and-report ()
+  "Stop the profiler with `profiler-stop’ and initiate `profiler-report’."
+  (interactive)
+  (progn
+    (funcall-interactively #'profiler-stop)
+    (funcall-interactively #'profiler-report)))
+
 ;;;; Shell Command Calls
 ;;;;; textmind stats
 (defun textmind-stats-call ()

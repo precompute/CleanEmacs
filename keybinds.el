@@ -160,6 +160,8 @@
   "hm" 'describe-mode
   "hi" 'info
   "hD" 'toggle-debug-mode
+  "hds" 'profiler-start
+  "hdS" 'profiler-stop-and-report
   "hM" 'woman
 
   "d" '(:ignore t :wk "other")

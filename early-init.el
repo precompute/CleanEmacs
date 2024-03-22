@@ -10,14 +10,14 @@
       create-lockfiles nil
       make-backup-files nil)
 
-(setq byte-compile-docstring-max-column 9000)
+(setq byte-compile-docstring-max-column 200)
 
 (setq warning-minimum-level :error) ;; for pesky documentation errors
 
 (set-face-attribute 'default nil :background "#000000" :foreground "#ffffff")
 (set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)
 
-(setq gc-cons-threshold (* 1024 1024 512))
-(add-hook 'focus-out-hook 'garbage-collect)
+;; (setq gc-cons-threshold (* 1024 1024 8))
+;; (add-hook 'after-focus-change-function 'garbage-collect)
 
 (load-file (expand-file-name "early-init-ui.el" user-emacs-directory))
