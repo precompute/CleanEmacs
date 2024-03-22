@@ -48,9 +48,10 @@
 
 (setq confirm-kill-emacs 'y-or-n-p)
 
-(setq blink-cursor-delay 0.2
-      blink-cursor-interval 0.1
-      blink-cursor-blinks 0)
+;; (setq blink-cursor-delay 0.2
+;;       blink-cursor-interval 0.1
+;;       blink-cursor-blinks 0)
+(blink-cursor-mode 0)
 
 (setq disabled-command-function nil)
 
@@ -75,5 +76,3 @@
 (setq-default help-at-pt-display-when-idle t
               help-at-pt-timer-delay 0.1)
 (help-at-pt-set-timer) ;; hints in the echo area
-
-(global-hl-line-mode)

@@ -95,8 +95,8 @@
 (elpacaLF "rainbow-delimiters")
 ;;; Helpful (help buffers)
 (elpacaLF "helpful")
-;;; Ligature
-(elpacaLF "ligature")
+;; ;;; Ligature
+;; (elpacaLF "ligature")
 ;;; Mixed-Pitch
 (elpacaLF "mixed-pitch")
 ;;; Faces for `outline-mode'
