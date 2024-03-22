@@ -84,6 +84,8 @@
 (elpacaLF "undo-fu-session")
 ;;; Olivetti
 (elpacaLF "olivetti")
+;; ;;; Perfect Margin
+;; (elpacaLF "perfect-margin") ;; Better than olivetti!
 ;;; Indent Guides
 ;; (elpacaLF "highlight-indent-guides")
 (load-file (expand-file-name "packages/indent-bars.el" user-emacs-directory))
@@ -124,6 +126,10 @@
 (elpacaLF "whitespace-cleanup-mode")
 ;;; outshine-mode (custom headings in arbitrary code files)
 (elpacaLF "outshine")
+;;; Outline-minor-mode faces
+;; (elpacaLF "outline-minor-faces")
+;; ;;;; Backline
+;; (elpacaLF "backline")
 ;;; PDF Tools
 (elpacaLF "pdf-tools")
 ;;; Alarm Clock
