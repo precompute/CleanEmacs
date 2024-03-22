@@ -204,7 +204,7 @@ Modified from `flymake--mode-line-counter'.
     (defvar headerline--note-face (if noteface noteface "#000000"))
     (defvar headerline--default-face (if defaultfg defaultfg "#000000"))
     (defvar headerline--evil-state-face fl-regexp)
-    (if (and (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
+    (if (and (mlscroll-mode) (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
         (progn
           (setq-default mlscroll-in-color fl-regexp)
           (setq-default mlscroll-out-color defaultbg)
@@ -470,7 +470,7 @@ Specific to the current window's mode line.")
                 ;; " "
                 ;; modeline-evil-state-indicator
                 ;; '(which-function-mode ("" which-func-format "--"))
-                modeline-align-right-c
+                ;; modeline-align-right-c
                 " "
                 modeline-buffer-size-c
                 " "
@@ -478,8 +478,8 @@ Specific to the current window's mode line.")
                 " "
                 modeline-misc-info-c
                 " "
-                modeline-active-indicator-c
-                " "
+                ;; modeline-active-indicator-c
+                ;; " "
                 ))
 
 (setq-default mode-line-format nil)

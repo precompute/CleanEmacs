@@ -29,10 +29,10 @@
 (setq process-adaptive-read-buffering nil)
 (setq read-process-output-max (* 4 1024 1024))
 
-(setq history-length 999)
+(setq history-length 150)
 
-(setq recentf-max-menu-items 999
-      recentf-max-saved-items 999)
+(setq recentf-max-menu-items 150
+      recentf-max-saved-items 150)
 
 (setq load-prefer-newer t)
 

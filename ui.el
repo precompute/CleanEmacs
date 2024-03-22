@@ -38,7 +38,8 @@
  '(org-meta-line ((t (:extend t))))
  '(org-date ((t (:inherit (list bold fixed-pitch)))))
  '(org-special-keyword ((t (:inherit (list bold fixed-pitch)))))
- '(org-ellipsis ((t (:height 1.29 :weight bold)))))
+ '(org-ellipsis ((t (:height 1.29 :weight bold))))
+ '(magit-diff-file-heading-highlight ((t (:height: 1.3)))))
 
 (defun get-face-colors-c (&rest rest)
   (interactive)
@@ -143,7 +144,8 @@
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "NeueJuliaMono" :size 15 :weight 'regular)) ;; reduces X-height somehow
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 12 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Inconsolata" :size 15 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Gohu GohuFont" :size 12 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Cozette" :size 14 :weight 'regular))
@@ -153,8 +155,11 @@
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue LT W1G" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Univers LT Std" :width 'expanded :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
+
+    ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
     (copy-face 'default 'fixed-pitch)))
 (set-fonts-c)
 ;; (set-fontset-font t 'unicode (font-spec :family "Symbola"))
