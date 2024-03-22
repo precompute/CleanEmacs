@@ -1,7 +1,7 @@
 (use-package indent-bars
   :elpaca ( :host github
             :repo "jdtsmith/indent-bars")
-  :hook (prog-mode . indent-bars-mode)
+  ;; :hook (prog-mode . indent-bars-mode)
   :config
   (setq indent-bars-pattern ". "
         indent-bars-width-frac 0.25

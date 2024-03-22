@@ -1,6 +1,11 @@
 (use-package consult
   :custom
-  (consult-ripgrep-args "rg --null --line-buffered --color=never --max-columns=10000 --path-separator /   --smart-case --no-heading --with-filename --line-number")
+  (setq consult-ripgrep-args
+        (string-clean-whitespace
+         (concat
+          (replace-regexp-in-string "--smart-case" ""
+                                    (replace-regexp-in-string "--search-zip" "" consult-ripgrep-args))
+          " --ignore-case")))
   (consult-async-split-style 'semicolon)
   :preface
   (global-set-key [remap bookmark-jump] #'consult-bookmark)

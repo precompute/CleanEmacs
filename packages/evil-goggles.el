@@ -1,6 +1,6 @@
 (use-package evil-goggles
   :config
-  (setq evil-goggles-duration 0.3
+  (setq evil-goggles-duration 0.15
         evil-goggles-pulse t)
   (dolist (c '((eval-region
                 :face evil-goggles-paste-face
