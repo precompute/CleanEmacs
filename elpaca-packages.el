@@ -228,3 +228,7 @@
 (elpacaLF "elfeed-org")
 ;;;; lexic (dictionary)
 (elpacaLF "lexic")
+;;;; scratch-pop
+(elpacaLF "scratch-pop")
+;;;; loccur
+(elpacaLF "loccur")

@@ -236,6 +236,13 @@
  "a N P" 'evil-textobj-forward-until-empty-line
  "a P P" 'evil-textobj-backward-until-empty-line)
 
+;;;;;;; loccur
+(general-define-key
+ :states 'normal
+ "C-s -" 'loccur-no-highlight
+ "C-s C--" 'loccur-isearch
+ "C-s _" 'loccur-current)
+
 ;;;;;;; Misc/Custom
 (general-define-key
   :states 'normal
