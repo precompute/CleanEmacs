@@ -134,6 +134,10 @@
 (setq show-paren-delay 0.2
       show-paren-style 'expression)
 
+;;;; transparency
+(add-hook 'window-setup-hook 'set-transparency-c)
+(add-to-list 'initial-frame-alist (cons 'alpha-background transparency-value-c))
+
 ;;; Fonts
 (defun set-fonts-c (&rest rest)
   "Set fonts for Emacs."

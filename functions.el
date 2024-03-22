@@ -145,6 +145,10 @@
     (goto-char p)
     (call-interactively #'activate-mark)))
 
+(defun load-current-file ()
+  (interactive)
+  (load-file buffer-file-name))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.
@@ -153,7 +157,7 @@ before existing. Replaces ‘save-buffers-kill-terminal’.
 From https://archive.casouri.cc/note/2021/clean-exit/index.html"
   (interactive)
   (if (frame-parameter nil 'client)
-      (server-save-buffers-kill-terminal arg)
+      (server-save-buffers-kill-terminal nil)
     (if-let ((buf-list (seq-filter (lambda (buf)
                                      (and (buffer-modified-p buf)
                                           (buffer-file-name buf)))
@@ -178,12 +182,8 @@ From https://archive.casouri.cc/note/2021/clean-exit/index.html"
       (sqlite3-close dbh))
     (kill-new
      (let* ((vertico-sort-function nil)
-            ;; (rlist (completing-read-multiple " " mylist))
-            (rlist (completing-read " " mylist)) ;; [23-12-15 00:48:07] Because I like my commas intact
-            (rstr ""))
-       (while (length> rlist 0)
-         (setq rstr (concat rstr (pop rlist) "\n")))
-       rstr))))
+            (rlist (completing-read " " mylist))) ;; [23-12-15 00:48:07] Because I like my commas intact
+       rlist))))
 
 ;;;; unicode
 (defun insert-char-5-discard-end ()
@@ -216,19 +216,28 @@ Saves to a temp file and puts the filename in the kill ring."
     (message filename)))
 
 ;;;; transparency
-(defun set-transparency-c (&optional value)
+(defvar transparency-value-c 0.9
+  "Transparency value for `set-transparency-c’.")
+(defun set-transparency-c (&optional value no-set-default only-active-frame)
   "Set the transparency of the selected window.
 Needs frame-parameter alpha-background."
   (interactive)
-  (let ((alpha (frame-parameter nil 'alpha-background))
-        (value (if value value 0.7)))
-    (set-frame-parameter nil 'alpha-background value))
-  ;; (with-selected-frame ;; Quits the frame
-  ;;     (frame-initialize))
-  )
-(defun turn-off-transparency-c ()
+  (let ((val (if value value
+               (if transparency-value-c transparency-value-c
+                 0.7))))
+    (unless no-set-default
+      (progn
+        (let ((x (assoc 'alpha-background default-frame-alist)))
+          (if x (delq x default-frame-alist)))
+        (add-to-list 'default-frame-alist (cons 'alpha-background val))))
+    (if only-active-frame
+        (set-frame-parameter nil 'alpha-background val)
+      (let ((f (frame-list)))
+        (mapc #'(lambda (x) (set-frame-parameter x 'alpha-background val)) f)))))
+
+(defun turn-off-transparency-c (&optional no-set-default only-active-frame)
   (interactive)
-  (set-transparency-c 1.0))
+  (set-transparency-c 1.0 no-set-default only-active-frame))
 
 ;;;; Debug
 (defun toggle-debug-mode ()
@@ -495,6 +504,8 @@ It switches the width before the height."
   :transient-suffix     'transient--do-stay
   :transient-non-suffix 'transient--do-warn
   ["Minor Modes"
+   ;; [("oo" (lambda () (toggle-modes-transient--description 'perfect-margin-mode "Perfect Margin "))
+   ;;   perfect-margin-mode)]
    [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
      olivetti-mode)]
    [("tl" (lambda () (toggle-modes-transient--description 'truncate-lines "Truncate Lines"))
@@ -530,8 +541,16 @@ It switches the width before the height."
     ("$%" "Unhighlight regexp/phrase" unhighlight-regexp :transient nil)]
    [("<f9>" "Save Buffer" save-buffer)
     ("T" "Switch theme" load-theme)]
-   [("tt" "Turn on Transparency" set-transparency-c)
-    ("tT" "Turn off Transparency" turn-off-transparency-c)]]
+   [("tt" "Turn on Transparency" (lambda () (interactive)
+                                   (set-transparency-c nil t)))
+    ("tT" "Turn off Transparency" (lambda () (interactive)
+                                    (turn-off-transparency-c t)))
+    ("t!" (lambda (x) (interactive "sValue? ")
+            (setq transparency-value-c (string-to-number x)))
+     :description (lambda () (interactive)
+                    (concat "Transparency var: "
+                            (propertize (format "%s" transparency-value-c)
+                                        'face 'diary))))]]
   ["Misc"
    ["Corfu"
     ("cc" (lambda () (toggle-modes-transient--description 'corfu-mode "Corfu")) corfu-mode)

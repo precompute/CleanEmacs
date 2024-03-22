@@ -128,6 +128,7 @@
   "cR" 'consult-flymake
   "cC" 'compile
   "cc" 'recompile
+  "cE" 'load-current-file
 
   "w" '(:ignore t :wk "window")
   "wm" 'rotate-frame-anticlockwise
