@@ -203,7 +203,12 @@
 (elpacaLF "rustic")
 ;;;; Haskell
 (elpacaLF "haskell-mode")
-
+;;;; Janet
+(load-file (expand-file-name "packages/janet-ts-mode.el" user-emacs-directory))
+;;;; Clojure
+(elpacaLF "clojure-mode")
+;; (elpacaLF "clojure-ts-mode")
+(elpacaLF "cider")
 
 ;;; Misc
 ;;;; sqlite3
