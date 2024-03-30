@@ -209,6 +209,7 @@
 (elpacaLF "clojure-mode")
 ;; (elpacaLF "clojure-ts-mode")
 (elpacaLF "cider")
+(elpacaLF "flymake-kondor")
 
 ;;; Misc
 ;;;; sqlite3

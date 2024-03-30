@@ -1,2 +1,3 @@
 (use-package highlight-quoted
-  :hook (emacs-lisp-mode . highlight-quoted-mode))
+  :hook ((emacs-lisp-mode
+	  clojure-mode) . highlight-quoted-mode))
