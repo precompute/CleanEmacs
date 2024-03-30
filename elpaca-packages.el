@@ -179,6 +179,8 @@
 (elpacaLF "org-appear")
 
 ;;; Language
+;;;; Prog-mode
+(elpacaLF "prog-mode" t)
 ;;;; Eglot
 (elpacaLF "eglot" t)
 ;;;; Elisp

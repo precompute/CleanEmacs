@@ -1,3 +1,4 @@
 (use-package outline
-  :hook (emacs-lisp-mode . outline-minor-mode)
-  :elpaca nil)
+  :elpaca nil
+  :hook (prog-mode . outline-minor-mode)
+  :preface (setq outline-minor-mode-map nil))
