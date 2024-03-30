@@ -8,7 +8,7 @@
 (setq mouse-yank-at-point t)
 
 (setq ring-bell-function #'ignore)
-(setq visible-bell nil)
+(setq visible-bell t)
 (setq initial-buffer-choice t) ;; start with scratch buffer
 (setq initial-scratch-message (concat
                                ";; Scratch Buffer.\n"
@@ -48,10 +48,10 @@
 
 (setq confirm-kill-emacs 'y-or-n-p)
 
-;; (setq blink-cursor-delay 0.2
-;;       blink-cursor-interval 0.1
-;;       blink-cursor-blinks 0)
-(blink-cursor-mode 0)
+(setq blink-cursor-delay 0.25
+      blink-cursor-interval 0.25
+      blink-cursor-blinks 0)
+(blink-cursor-mode 1)
 
 (setq disabled-command-function nil)
 
@@ -74,5 +74,5 @@
 (save-place-mode 1)
 
 (setq-default help-at-pt-display-when-idle t
-              help-at-pt-timer-delay 0.1)
+              help-at-pt-timer-delay 1)
 (help-at-pt-set-timer) ;; hints in the echo area

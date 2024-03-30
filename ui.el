@@ -39,7 +39,8 @@
  '(org-date ((t (:inherit (list bold fixed-pitch)))))
  '(org-special-keyword ((t (:inherit (list bold fixed-pitch)))))
  '(org-ellipsis ((t (:height 1.29 :weight bold))))
- '(magit-diff-file-heading-highlight ((t (:height: 1.3)))))
+ '(magit-section-heading ((t (:height 1.3))))
+ '(magit-diff-file-heading ((t (:height 1.2)))))
 
 (defun get-face-colors-c (&rest rest)
   (interactive)
@@ -157,6 +158,7 @@
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue LT W1G" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Univers LT Std" :width 'expanded :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Info Text Offc Pro" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
 
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?

@@ -1,5 +1,5 @@
 (use-package dired-sidebar
-  :hook (toggle-truncate-lines)
+  :hook (dired-sidebar . toggle-truncate-lines)
   :commands (dired-sidebar-toggle-sidebar)
   :config
   (setq dired-sidebar-display-alist '((side . left) (slot . 0)))
