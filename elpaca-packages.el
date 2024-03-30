@@ -235,3 +235,7 @@
 (elpacaLF "scratch-pop")
 ;;;; loccur
 (elpacaLF "loccur")
+;; ;;;; Context-based cursor-line flash
+;; (elpacaLF "beacon")
+;;;; tiny (generate ranges)
+(elpacaLF "tiny")
