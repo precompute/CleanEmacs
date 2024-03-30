@@ -200,7 +200,7 @@
 ;;;; Rust
 (elpacaLF "rustic")
 ;;;; Haskell
-(elpacaLF "haskell-mode")
+;; (elpacaLF "haskell-mode")
 ;;;; Janet
 (load-file (expand-file-name "packages/janet-ts-mode.el" user-emacs-directory))
 ;;;; Clojure
