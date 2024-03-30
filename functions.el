@@ -314,7 +314,7 @@ Needs frame-parameter alpha-background."
 (defun open-external-term-here-c ()
   "Open `ter' in the current directory."
   (interactive)
-  (shell-command (concat "xfce4-terminal --working-directory=" default-directory)))
+  (shell-command (concat "xfce4-terminal --working-directory=\"" (file-truename default-directory) "\"")))
 
 (defun vterm-new-instance ()
   "Open a new instance of vterm in the current window."
@@ -548,24 +548,22 @@ It switches the width before the height."
    [("$$" "Highlight regexp" highlight-regexp :transient nil) ;;buffer operations DO NOT WORK
     ("%%" "Highlight phrase" highlight-phrase :transient nil)
     ("$%" "Unhighlight regexp/phrase" unhighlight-regexp :transient nil)]
-   [("<f9>" "Save Buffer" save-buffer)
-    ("T" "Switch theme" load-theme)]
-   [("tt" "Turn on Transparency" (lambda () (interactive)
-                                   (set-transparency-c nil t)))
-    ("tT" "Turn off Transparency" (lambda () (interactive)
-                                    (turn-off-transparency-c t)))
-    ("t!" (lambda (x) (interactive "sValue? ")
-            (setq transparency-value-c (string-to-number x)))
+   [("tt" "Turn on Transparency" (lambda () (interactive) (set-transparency-c nil t t)))
+    ("tT" "Turn off Transparency" (lambda () (interactive) (turn-off-transparency-c nil t)))
+    ("t!" (lambda (x) (interactive "sValue? ") (setq transparency-value-c (string-to-number x)))
      :description (lambda () (interactive)
                     (concat "Transparency var: "
                             (propertize (format "%s" transparency-value-c)
-                                        'face 'diary))))]]
+                                        'face 'diary))))]
+   [("tg" "Turn on Transparency (global)" (lambda () (interactive) (set-transparency-c nil nil nil)))
+    ("tG" "Turn off Transparency (global)" (lambda () (interactive) (turn-off-transparency-c nil nil)))]]
   ["Misc"
    ["Corfu"
     ("cc" (lambda () (toggle-modes-transient--description 'corfu-mode "Corfu")) corfu-mode)
     ("cC" (lambda () (toggle-modes-transient--description 'corfu-auto "Autocomplete")) corfu-toggle-autocomplete)
-    ("co" (lambda () (toggle-modes-transient--description 'corfu-candidate-overlay-mode "Candidate Overlay")) corfu-candidate-overlay-mode)
-    ]]
+    ("co" (lambda () (toggle-modes-transient--description 'corfu-candidate-overlay-mode "Candidate Overlay")) corfu-candidate-overlay-mode)]
+   [("<f9>" "Save Buffer" save-buffer)
+    ("T" "Switch theme" load-theme)]]
   ["+"
    [("+" "New Id" (lambda () (interactive) (find-file "~/46/da/id")) :transient nil)
     ("<return>" "New TimeLog" new-timelog-c :transient nil)]

@@ -20,6 +20,6 @@
   :config
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy) ;; entering ~/ or //
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save) ;; save vertico for reinvocation
-  (vertico-reverse-mode)
+  ;; (vertico-reverse-mode)
   :init
   (vertico-mode))

@@ -200,13 +200,6 @@
   :keymaps 'emacs-lisp-mode-map
   "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
 
-;;;;;;; bicycle-cycle
-(general-define-key
- :states 'normal
- :keymaps 'outline-minor-mode-map
- [tab] 'bicycle-cycle
- [backtab] 'bicycle-cycle-global)
-
 ;;;;;;; misc
 (general-define-key
  :states 'normal
