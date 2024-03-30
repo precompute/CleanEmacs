@@ -1,3 +1,2 @@
 (use-package go-mode
-:elpaca (:depth 1)
-)
+  :elpaca (:depth 1))

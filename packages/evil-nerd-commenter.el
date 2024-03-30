@@ -1,4 +1,5 @@
 (use-package evil-nerd-commenter
+  :after evil
   :commands (evilnc-comment-operator
              evilnc-inner-comment
              evilnc-outer-commenter)

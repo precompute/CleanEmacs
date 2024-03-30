@@ -1,1 +1,3 @@
-(use-package evil-args)
+(use-package evil-args
+  :after evil
+  :elpaca (:depth 1))

@@ -1,4 +1,5 @@
 (use-package evil-snipe
+  :after evil
   :preface
   (setq evil-snipe-use-vim-sneak-bindings t)
   :config

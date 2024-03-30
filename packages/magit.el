@@ -10,5 +10,3 @@
     "Open magit-status in project root."
     (interactive)
     (magit-status (project-root (project-current t)))))
-
-(setq-default left-fringe-width 15)

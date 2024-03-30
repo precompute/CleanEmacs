@@ -1,4 +1,5 @@
 (use-package evil-goggles
+  :after evil
   :config
   (setq evil-goggles-duration 0.15
         evil-goggles-pulse t)

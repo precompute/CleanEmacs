@@ -16,7 +16,7 @@
         evil-vsplit-window-right t)
   (setq evil-symbol-word-search t
         evil-shift-width 2)
-  (setq evil-want-Y-yank-to-eol t ;; Doesn’t work
+  (setq evil-want-Y-yank-to-eol t
         evil-want-C-g-bindings t
         evil-want-C-i-jump t
         evil-respect-visual-line-mode t)
