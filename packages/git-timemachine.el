@@ -5,6 +5,7 @@
     (interactive)
     (if git-timemachine-mode
         (git-timemachine-mode -1)
-     (let ((x olivetti-mode))
-       (git-timemachine-mode)
-       (olivetti-mode)))))
+     ;; (let ((x olivetti-mode))
+     ;;   (git-timemachine-mode)
+     ;;   (olivetti-mode))
+     )))

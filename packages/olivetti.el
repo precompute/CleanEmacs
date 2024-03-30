@@ -17,4 +17,3 @@
   (add-hook 'org-mode-hook #'(lambda () (interactive) (setq-local olivetti-body-width 80)))
   ;; Remove all olivetti keybinds.  Interferes with org-mode bindings.
   (assq-delete-all 'olivetti-mode minor-mode-map-alist))
-

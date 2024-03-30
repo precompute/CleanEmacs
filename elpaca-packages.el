@@ -83,12 +83,12 @@
 ;;;; Undo persistence
 (elpacaLF "undo-fu-session")
 ;;; Olivetti
-(elpacaLF "olivetti")
-;; ;;; Perfect Margin
-;; (elpacaLF "perfect-margin") ;; Better than olivetti!
-;;; Indent Guides
+;; (elpacaLF "olivetti")
+;;; Perfect Margin
+(elpacaLF "perfect-margin") ;; Better than olivetti!
+;; ;;; Indent Guides
 ;; (elpacaLF "highlight-indent-guides")
-(load-file (expand-file-name "packages/indent-bars.el" user-emacs-directory))
+;; (load-file (expand-file-name "packages/indent-bars.el" user-emacs-directory))
 ;;; Which-Key
 (elpacaLF "which-key")
 ;;; Rainbow Delimiters
@@ -124,10 +124,8 @@
 (elpacaLF "rainbow-mode")
 ;;; whitespace-cleanup-mode
 (elpacaLF "whitespace-cleanup-mode")
-;;; outshine-mode (custom headings in arbitrary code files)
-(elpacaLF "outshine")
-;;; Outline-minor-mode faces
-;; (elpacaLF "outline-minor-faces")
+;; ;;; outshine-mode (custom headings in arbitrary code files)
+;; (elpacaLF "outshine")
 ;; ;;;; Backline
 ;; (elpacaLF "backline")
 ;;; PDF Tools

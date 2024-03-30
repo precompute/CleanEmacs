@@ -330,9 +330,9 @@ RATIO is the ratio used, default is 0.618.
 It switches the width before the height."
   (interactive)
   (save-excursion
-    (let* ((postv      (if olivetti-mode
-                           (progn (olivetti-mode -1) t)
-                         nil))
+    (let* (;; (postv      (if olivetti-mode
+           ;;                 (progn (olivetti-mode -1) t)
+           ;;               nil))
            (wwidth     (window-width))
            (wheight    (window-height))
            (fwidth     (frame-width))
@@ -352,7 +352,8 @@ It switches the width before the height."
                 (message "Nothing to resize.")
               (enlarge-window (- fl/fheight wheight)))
           (enlarge-window (- fl/fwidth wwidth) t)))
-      (if postv (olivetti-mode 1)))))
+      ;; (if postv (olivetti-mode 1))
+      )))
 
 (defun split-enlarge-follow-mode-toggle nil
   "Split window, enlarge left and then enable follow-mode."
@@ -512,10 +513,10 @@ It switches the width before the height."
   :transient-suffix     'transient--do-stay
   :transient-non-suffix 'transient--do-warn
   ["Minor Modes"
-   ;; [("oo" (lambda () (toggle-modes-transient--description 'perfect-margin-mode "Perfect Margin "))
-   ;;   perfect-margin-mode)]
-   [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
-     olivetti-mode)]
+   [("oo" (lambda () (toggle-modes-transient--description 'perfect-margin-mode "Perfect Margin "))
+     perfect-margin-mode)]
+    ;; [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
+    ;;   olivetti-mode)]
    [("tl" (lambda () (toggle-modes-transient--description 'truncate-lines "Truncate Lines"))
      toggle-truncate-lines)
     ("v" (lambda () (toggle-modes-transient--description 'visual-line-mode "Visual Lines"))
@@ -523,8 +524,8 @@ It switches the width before the height."
    [("ll" (lambda () (toggle-modes-transient--description 'display-line-numbers "Line Numbers")) display-line-numbers-mode)
     ("lL" (lambda () (toggle-modes-transient--description 'global-display-line-numbers-mode "Global Line Numbers")) global-display-line-numbers-mode)
     ("lg" (lambda () (toggle-modes-transient--description 'diff-hl-mode "Diff Highlight")) diff-hl-mode)]
-   [("i" (lambda () (toggle-modes-transient--description 'indent-bars-mode "Indent Guides")) indent-bars-mode)
-   ;; [("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides")) highlight-indent-guides-mode)
+   [;; ("i" (lambda () (toggle-modes-transient--description 'indent-bars-mode "Indent Guides")) indent-bars-mode)
+    ;; [("i" (lambda () (toggle-modes-transient--description 'highlight-indent-guides-mode "Indent Guides")) highlight-indent-guides-mode)
     ("m" (lambda () (toggle-modes-transient--description 'mixed-pitch--applied-p "Mixed Pitch"))
      mixed-pitch-mode)
     ("L" (lambda () (toggle-modes-transient--description 'hl-line-mode "Highlight Lines"))

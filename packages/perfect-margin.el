@@ -3,15 +3,7 @@
   :hook ((prog-mode
           text-mode
           dired-mode
-          vertico-mode
-          vertico-reverse-mode
-          magit-mode
-          helpful-mode
-          help-mode
-          ibuffer-mode
-          Info-mode
-          woman-mode
-          minibuffer-mode) . perfect-margin-mode)
+          magit-mode) . perfect-margin-mode)
   :config
   (setq-default perfect-margin-lighter nil
                 perfect-margin-visible-width 130)
