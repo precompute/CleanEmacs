@@ -9,7 +9,7 @@
 (defun after-init-load-file ()
   (progn
     (loadfile-c "functions.el")
-    (loadfile-c "keybinds.el")
+    ;; (loadfile-c "keybinds.el")
     ;; (loadfile-c "hooks.el")
     (loadfile-c "ui.el")
     (loadfile-c "modeline.el")

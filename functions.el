@@ -302,13 +302,13 @@ Needs frame-parameter alpha-background."
 (defun open-shell-split-c ()
   "Split window and open shell"
   (interactive)
-  (evil-window-split)
+  (split-window-right)
   (vterm))
 
 (defun open-shell-vsplit-c ()
   "Vsplit window and open shell"
   (interactive)
-  (evil-window-vsplit)
+  (split-window-below)
   (vterm))
 
 (defun open-external-term-here-c ()
@@ -359,8 +359,8 @@ It switches the width before the height."
   "Split window, enlarge left and then enable follow-mode."
   (interactive)
   (progn
-    (call-interactively #'evil-window-vsplit)
-    (call-interactively #'evil-window-left)
+    (call-interactively #'split-window-right)
+    (call-interactively #'other-window)
     (call-interactively #'follow-mode 1)))
 
 ;;;; org-*
@@ -608,7 +608,10 @@ It switches the width before the height."
     ("b" "Insert L1 Above Current"
      (lambda () (interactive)
        (save-excursion
-         (evil-open-above 0)
+         (move-beginning-of-line nil)
+         (newline-and-indent)
+         (forward-line -1)
+         (indent-according-to-mode)
          (insert
           (concat "* ["
                   main-log-init-date
@@ -628,13 +631,13 @@ It switches the width before the height."
               (year (if incyear (1+ year) year)))
          (setq main-log-init-date
                (format "%02d-%02d-%02d" year month day)))))
-       ;; (let ((newlast (+ 1 (string-to-number
-       ;;                      (substring main-log-init-date 6 8)))))
-       ;;   (setq main-log-init-date
-       ;;         (concat (substring main-log-init-date 0 6)
-       ;;                 (if (= (length (number-to-string newlast)) 1)
-       ;;                     "0")
-       ;;                 (number-to-string newlast))))
+    ;; (let ((newlast (+ 1 (string-to-number
+    ;;                      (substring main-log-init-date 6 8)))))
+    ;;   (setq main-log-init-date
+    ;;         (concat (substring main-log-init-date 0 6)
+    ;;                 (if (= (length (number-to-string newlast)) 1)
+    ;;                     "0")
+    ;;                 (number-to-string newlast))))
     ("I" "Increment Month"
      (lambda () (interactive)
        (let ((newmid (+ 1 (string-to-number

@@ -1,6 +1,6 @@
 (use-package dired
   :elpaca nil
-  :hook (dired-mode . evil-mode)
+  ;; :hook (dired-mode . evil-mode)
   :hook (dired-mode . display-line-numbers-mode)
   ;; :hook (dired-mode . diff-hl-dired-mode)
   :custom
