@@ -12,7 +12,7 @@
     (loadfile-c "keybinds.el")
     ;; (loadfile-c "hooks.el")
     (loadfile-c "ui.el")
-    (loadfile-c "modeline.el")
+    (loadfile-c "modeline-simple.el")
     (loadfile-c "modes.el")
     (loadfile-c "loads.el")
     (loadfile-c ".private/other.el")))
