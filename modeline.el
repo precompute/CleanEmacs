@@ -37,51 +37,55 @@ If FACE is nil, set to FALLBACK."
 ;; from Doom-modeline
 (defun modeline-set-selected-window-c (&rest _)
   "Track the active modeline's window in `modeline-active-window'."
-  (let ((win (selected-window)))
-    (unless (minibuffer-window-active-p win)
-      (setq modeline-active-window (frame-selected-window)))))
-(add-hook 'pre-redisplay-functions 'modeline-set-selected-window-c)
+  (while-no-input
+    (let ((win (selected-window)))
+      (unless (minibuffer-window-active-p win)
+        (setq modeline-active-window (frame-selected-window))))))
+(add-to-list 'pre-redisplay-functions 'modeline-set-selected-window-c)
+;; (add-to-list 'window-selection-change-functions 'modeline-set-selected-window-c)
 
 (defvar-local modeline-buffer-id-cache-c nil)
 
 (defun modeline-generate-buffer-id-cache-c ()
-  (when after-init-time
-    (setq modeline-buffer-id-cache-c
-          (if buffer-file-truename
-              (let ((g-root (locate-dominating-file buffer-file-truename ".git")))
-                (if (not g-root)
-                    nil
-                  (let* ((buf (file-truename buffer-file-truename))
-                         (gitroot (file-truename g-root))
-                         (gitroot-nodash (substring gitroot 0 -1))
-                         (gitroot-a (replace-regexp-in-string
-                                     (rx (seq (* anychar) "/"))
-                                     "" gitroot-nodash))
-                         (dirbefore (substring
-                                     gitroot-nodash
-                                     0
-                                     (* -1
-                                        (+ 1
-                                           (length gitroot-a))))))
-                    (cons gitroot-a
-                          (substring buf
-                                     (length gitroot)
-                                     nil)))))
-            (if (eq major-mode 'dired-mode)
-                (cons nil dired-directory)
-              nil)))))
+  (while-no-input
+    (when after-init-time
+      (setq modeline-buffer-id-cache-c
+            (if buffer-file-truename
+                (let ((g-root (locate-dominating-file buffer-file-truename ".git")))
+                  (if (not g-root)
+                      nil
+                    (let* ((buf (file-truename buffer-file-truename))
+                           (gitroot (file-truename g-root))
+                           (gitroot-nodash (substring gitroot 0 -1))
+                           (gitroot-a (replace-regexp-in-string
+                                       "^[z-a]*/" "" gitroot-nodash))
+                           (dirbefore (substring
+                                       gitroot-nodash
+                                       0
+                                       (* -1
+                                          (+ 1
+                                             (length gitroot-a))))))
+                      (cons gitroot-a
+                            (substring buf
+                                       (length gitroot)
+                                       nil)))))
+              (if (eq major-mode 'dired-mode)
+                  (cons nil dired-directory)
+                nil))))))
 (dolist (hook '(change-major-mode-after-body-hook
                 after-save-hook ;; In case the user saves the file to a new location
                 focus-in-hook ;; ...or makes external changes then returns to Emacs
                 projectile-after-switch-project-hook ;; ...or when we change the current project!
                 after-set-visited-file-name-hook ;; ...when the visited file changes (e.g. it's renamed)
                 after-revert-hook)) ;; ...when the underlying file changes
-  (add-hook hook 'modeline-generate-buffer-id-cache-c))
+  (add-hook hook 'modeline-generate-buffer-id-cache-c)
+  ;; (add-hook hook 'modeline-set-selected-window-c)
+  )
 
-(defun colortovar-c (var color)
-  (if color
-      (defvar var color)
-    (defvar var "#000000")))
+;; (defun colortovar-c (var color)
+;;   (if color
+;;       (defvar var color)
+;;     (defvar var "#000000")))
 
 (defun headerline-flymake-count-c (type)
   "Get Error/Warning/Note counts from Flycheck.
@@ -214,8 +218,8 @@ Modified from `flymake--mode-line-counter'.
 (if (fboundp 'set-fonts-c) (add-to-list 'enable-theme-functions 'set-fonts-c))
 
 (defun update-face-remapping-alist (face target)
-  (if (member face face-remapping-alist)
-      (face-remap-reset-base target)
+  (unless (member face face-remapping-alist)
+      ;; (face-remap-reset-base target)
     (push (list target face) face-remapping-alist)))
 
 ;;;; Modeline Constructs
