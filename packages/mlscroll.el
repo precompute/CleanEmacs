@@ -15,4 +15,5 @@
                                (,mouse-wheel-up-event . mlscroll-wheel)
                                (,mouse-wheel-down-event . mlscroll-wheel)))
           help-echo "mouse-1: scroll buffer"
-          mlscroll t)))
+          mlscroll t)
+        mlscroll-width-chars 10))

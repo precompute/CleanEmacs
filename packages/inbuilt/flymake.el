@@ -2,4 +2,6 @@
   :elpaca nil
   :defer t
   :hook (prog-mode . flymake-mode)
-  :custom (flymake-fringe-indicator-position 'right-fringe))
+  :config
+  (setq flymake-fringe-indicator-position 'right-fringe
+        flymake-mode-line-format nil))

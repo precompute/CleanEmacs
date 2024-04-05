@@ -27,6 +27,7 @@
         evil-motion-state-cursor 'hollow
         evil-operator-state-cursor 'hollow
         evil-emacs-state-cursor 'bar)
+  (setq evil-search-module 'evil-search)
   (evil-put-command-property 'evil-yank-line :motion 'evil-end-of-line-or-visual-line) ;; workaround for evil-want-Y-yank-to-eol
 
   (evil-define-text-object evil-textobj-whole-buffer (count &optional _beg _end type)

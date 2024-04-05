@@ -152,6 +152,11 @@
     ;; (set-face-font 'default (font-spec :family "Cozette" :size 14 :weight 'regular))
 
     (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Sabon LT Pro" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Cisalpin LT Std" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Adobe Caslon Pro" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Palatino eText" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica" :size 14))
