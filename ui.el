@@ -39,7 +39,6 @@
  '(org-date ((t (:inherit (list bold fixed-pitch)))))
  '(org-special-keyword ((t (:inherit (list bold fixed-pitch)))))
  '(org-ellipsis ((t (:height 1.29 :weight bold))))
- '(magit-section-heading ((t (:height 1.3))))
  '(magit-diff-file-heading ((t (:height 1.2)))))
 
 (defun get-face-colors-c (&rest rest)

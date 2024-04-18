@@ -1,5 +1,6 @@
 (use-package org
   :elpaca nil
+  :hook (org-mode . visual-line-mode)
   :config
   (setq org-hide-emphasis-markers t
         org-hide-leading-stars t
