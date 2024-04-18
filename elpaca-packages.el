@@ -105,8 +105,8 @@
 (elpacaLF "highlight-numbers")
 ;;; Highlight Quoted
 (elpacaLF "highlight-quoted")
-;; ;;; Highlight Defined
-;; (elpacaLF "highlight-defined") ;; Slows everything down
+;;; Highlight Defined
+(elpacaLF "highlight-defined") ;; Slows everything down
 ;;; imenu
 (elpacaLF "imenu-list")
 (elpacaLF "flimenu") ;; flatten imenu
@@ -245,6 +245,7 @@
 ;;;; tiny (generate ranges)
 (elpacaLF "tiny")
 
-;;; Themes
-(elpacaLF "orangey-bits-theme")
-(elpacaLF "sakura-theme")
+;;; Themes (that I never really use)
+(elpacaLF "orangey-bits-theme") ;; Orange!
+(elpacaLF "sakura-theme") ;; Purple!
+(elpacaLF "ef-themes") ;; Everything else!
