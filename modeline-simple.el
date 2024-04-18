@@ -124,9 +124,15 @@ Modified from `flymake--mode-line-counter'.
 (defface headerline-major-mode-face
   '((t :foreground "#000"))
   "Face for major mode.")
-(defface headerline-buffer-status-face
+(defface headerline-buffer-status-ED-face
   '((t :foreground "#000"))
-  "Face for buffer status.")
+  "Face for buffer status: EDitable.")
+(defface headerline-buffer-status-RO-face
+  '((t :foreground "#000"))
+  "Face for buffer status: Read Only.")
+(defface headerline-buffer-status-NA-face
+  '((t :foreground "#000"))
+  "Face for buffer status: N/A.")
 (defface headerline-match-face
   '((t :foreground "#000"))
   "Face for match numbers.")
@@ -145,6 +151,7 @@ Modified from `flymake--mode-line-counter'.
          (fl-type (get-color-fg 'font-lock-type-face)) ;; brown
          (fl-variable (get-color-fg 'font-lock-punctuation-face)) ;; off-white
          (fl-doc (get-color-fg 'font-lock-doc-face)) ;; red
+         (fl-string (get-color-fg 'font-lock-string-face)) ;; red
          (region (get-color-bg 'region)) ;; brown
          (fl-regexp (get-color-fg 'font-lock-regexp-face 'font-lock-string-face)) ;; dark red
          (errorface (get-color-fg 'error)) ;; red
@@ -155,7 +162,10 @@ Modified from `flymake--mode-line-counter'.
          (defaultfg (get-color-fg 'default)) ;; white
          (defaultbg (get-color-bg 'default)) ;; black
          (height 1.2)
-         (mix1 (mix-colors (if (not (eq 'unspecified fl-variable)) fl-variable fl-type) region 0.6)))
+         (mix1 (mix-colors (if (not (eq 'unspecified fl-variable)) fl-variable
+                             (if (not (eq 'unspecified fl-type))
+                                 fl-type
+                               fl-string)) region 0.6)))
     (set-face-attribute 'headerline-base-face nil
                         :box (list :line-width '(1 . 3) :color region)
                         :height height
@@ -193,8 +203,15 @@ Modified from `flymake--mode-line-counter'.
                         :inherit 'variable-pitch
                         :height 1.2
                         :weight 'bold)
-    (set-face-attribute 'headerline-buffer-status-face nil
-                        :foreground (mix-colors region fl-keyword)
+    (set-face-attribute 'headerline-buffer-status-ED-face nil
+                        :foreground (cl-reduce #'mix-colors (list region fl-keyword fl-constant))
+                        :background (cl-reduce #'mix-colors (list region fl-keyword fl-constant))
+                        :height 1.2)
+    (set-face-attribute 'headerline-buffer-status-RO-face nil
+                        :foreground (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg))
+                        :background (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg))
+                        :height 1.2)
+    (set-face-attribute 'headerline-buffer-status-NA-face nil
                         :height 1.2)
     (set-face-attribute 'headerline-match-face nil
                         :foreground fl-keyword
@@ -230,9 +247,12 @@ Modified from `flymake--mode-line-counter'.
 (defun headerline-buffer-status-c ()
   "Buffer RO/modified/none"
   `(:eval
-    (cond (buffer-read-only (propertize " ✖ " 'face 'headerline-buffer-status-face))
-          ((buffer-modified-p) (propertize " ⬤ " 'face 'headerline-buffer-status-face))
-          (t (propertize "   " 'face 'headerline-buffer-status-face)))))
+    (list
+     " "
+     (cond (buffer-read-only (propertize "  " 'face 'headerline-buffer-status-RO-face))
+          ((buffer-modified-p) (propertize "  " 'face 'headerline-buffer-status-ED-face))
+          (t (propertize "  " 'face 'headerline-buffer-status-NA-face)))
+     " ")))
 
 (defun headerline-buffer-name-c ()
   "Buffer Name and Narrow indicator"
@@ -253,6 +273,7 @@ Modified from `flymake--mode-line-counter'.
                 (list
                  (propertize buffer-file-truename
                              'face 'headerline-buffer-file-name-face))
+
               (list "")))))
 
 (defun headerline-major-mode-c ()
@@ -287,7 +308,7 @@ Modified from `flymake--mode-line-counter'.
                    executing-kbd-macro))
       (if (bound-and-true-p evil-this-macro)
           (propertize (concat " [" (char-to-string evil-this-macro) "] ") 'face 'headerline-macro-face)
-        (propertize "Macro" 'face 'headerline-macro-face)))))
+        (propertize " Macro " 'face 'headerline-macro-face)))))
 
 (defun headerline-anzu-count-c ()
   "Show the match index and total number thereof.
@@ -300,13 +321,13 @@ compatibility with `evil-search'."
        (let ((here anzu--current-position)
              (total anzu--total-matched))
          (cond ((eq anzu--state 'replace-query)
-                (format "%d replace" anzu--cached-count))
+                (format "%d replace " anzu--cached-count))
                ((eq anzu--state 'replace)
-                (format "%d/%d" (1+ here) total))
+                (format "%d/%d " (1+ here) total))
                (anzu--overflow-p
-                (format "%s+" total))
+                (format "%s+ " total))
                (t
-                (format "%s/%d" here total))))
+                (format "%s/%d " here total))))
        'face 'headerline-match-face))))
 
 (defun headerline-flymake-c ()
@@ -376,6 +397,9 @@ Specific to the current window's mode line."
                 text-mode-hook
                 help-mode-hook
                 helpful-mode-hook
+                messages-buffer-mode-hook
+                conf-space-mode-hook
+                doc-view-mode-hook
                 dired-mode-hook))
   (add-hook hook 'headerline-simple-mode)
   (add-hook hook 'mode-line-format-nil))
