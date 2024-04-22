@@ -1,7 +1,9 @@
 ;; init.el -*- lexical-binding: t; -*-
-(defmacro loadfile-c (file)
-  "load file from `user-emacs-directory'"
-  `(load-file (expand-file-name ,file user-emacs-directory)))
+(defun loadfile-c (file)
+  "Load FILE from `user-emacs-directory'."
+  (let ((f (expand-file-name file user-emacs-directory)))
+    (when (file-exists-p f)
+      (load-file f))))
 (loadfile-c "elpaca-init.el")
 (loadfile-c "general.el")
 ;; keybinds.el loaded after General-mode
