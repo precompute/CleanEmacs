@@ -1,6 +1,32 @@
 #+TITLE: CleanEmacs
 
 [[file:.assets/logo.png]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 [23-06-14 21:38:16]
 
@@ -38,19 +64,25 @@ Configured using:
 
 * General Outline
 ** Hierarchy
-- =early-init.el= :: Sets some defaults, calls =early-init-ui.el=
-- =early-init-ui.el= :: Defines some faces for =modeline.el= and disables the menu bar and other stuff.
-- =init.el= :: Only loads files.  Loads =elpaca-init.el= first, and other package-agnostic configuration files are called after.
-- =elpaca-init.el= :: Load elpaca and set some custom vars with cache / user directory locations
-- =general.el= :: Defines emacs-wide user options and enables some global minor-modes.
-- =functions.el= :: Dumping ground for functions and Transients.
-- =keybinds.el= :: Defines keybinds, uses =general-def=.
-- =hooks.el= :: Hooks that are too general to warrant a separate file.
-- =ui.el= :: Sets the theme, fonts and modifies a few faces.
-- =modeline-simple.el= :: Actually a headerline.  A simplified, refactored version of =archive/modeline.el= that doesn’t slow the editor down and only computes changes when it doesn’t affect editing speed (faciliated by ~while-no-input~).  Uses a whitelist of modes, so unsupported modes show the default mode-line.  Uses ~:box~ in ~propertize~ so it might /shift/ your window just a little.  You’ll get used to it.  It also computes colors from the active theme, doesn’t use the default mode-line face provided by a theme.
-- =modes.el= :: For treesit configuration.
-- =loads.el= :: Loads files that aren’t tracked in this project.
-*** Archive
++ =/= ::
+  - =early-init.el= :: Sets some defaults, calls =early-init-ui.el=
+  - =early-init-ui.el= :: Defines some faces for =modeline.el= and disables the menu bar and other stuff.
+  - =init.el= :: Only loads files.  Loads =elpaca-init.el= first, and other package-agnostic configuration files are called after.
+  - =elpaca-init.el= :: Load elpaca and set some custom vars with cache / user directory locations
+  - =general.el= :: Defines emacs-wide user options and enables some global minor-modes.
+  - =functions.el= :: Dumping ground for functions and Transients.
+  - =keybinds.el= :: Defines keybinds, uses =general-def=.
+  - =hooks.el= :: Hooks that are too general to warrant a separate file.
+  - =ui.el= :: Sets the theme, fonts and modifies a few faces.
+  - =modeline-simple.el= :: Actually a headerline.  A simplified, refactored version of =archive/modeline.el= that doesn’t slow the editor down and only computes changes when it doesn’t affect editing speed (faciliated by ~while-no-input~).  Uses a whitelist of modes, so unsupported modes show the default mode-line.  Uses ~:box~ in ~propertize~ so it might /shift/ your window just a little.  You’ll get used to it.  It also computes colors from the active theme, doesn’t use the default mode-line face provided by a theme.
+  - =modes.el= :: For treesit configuration.
+  - =loads.el= :: Loads files that aren’t tracked in this project.
++ =.private= :: Ignored folder for any elisp you’d want to include.
++ =archive= :: For archived files
++ =import=  :: One-off, "foreign" elisp files.
++ =packages= :: Config files for packages, config file for package =abc= is =abc.el=.
++ =packages/inbuilt= :: Config files for inbuilt packages, with =use-package= set to =:elpaca nil=.
+*** Archived
 - =modeline.el= :: Should be named "=headerline.el=".  Defines and =propertize= s functions that show information about the buffer, and =display= s them.  Disables the =mode-line= and instead uses the =header-line=.  Light-weight and inherits colors from the active theme.  Replaced by =modeline-simple.el=.
 
 ** Package Management
@@ -92,10 +124,402 @@ Update [24-04-18 21:21:51] : This project is stable, but if you want to use it, 
 * Screenshots
 With the new modeline:
 [[file:.assets/screenshot5.jpg]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 [[file:.assets/screenshot6.jpg]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 [[file:.assets/screenshot7.jpg]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 ** Old
 [[file:.assets/screenshot1.jpg]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 [[file:.assets/screenshot2.jpg]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 [[file:.assets/screenshot3.jpg]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 [[file:.assets/screenshot4.jpg]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
