@@ -179,6 +179,8 @@
 (elpacaLF "org-super-agenda")
 ;;;; Show Markup when under point
 (elpacaLF "org-appear")
+;;;; Sliced Images
+(elpacaLF "org-sliced-images")
 
 ;;; Language
 ;;;; Prog-mode
