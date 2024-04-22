@@ -1,12 +1,3 @@
-;;; Theme
-(defun set-theme-c ()
-  "Set theme for Emacs."
-  (interactive)
-  (progn
-    (require-theme 'sculpture-themes)
-    (load-theme 'sculpture-themes-dark t)))
-(set-theme-c)
-
 ;;; Custom Faces
 (custom-set-faces
  '(org-level-1 ((t (:extend t :height 1.5))))
@@ -41,20 +32,30 @@
  '(org-ellipsis ((t (:height 1.29 :weight bold))))
  '(magit-diff-file-heading ((t (:height 1.2)))))
 
+;;; Theme
+(defvar current--default-face-foreground)
+(defvar current--builtin-face-foreground)
+(defvar current--keyword-face-foreground)
+(defvar current--constant-face-foreground)
+(defvar current--string-face-foreground)
+(defvar current--default-face-background)
+(defvar current--builtin-face-background)
+(defvar current--keyword-face-background)
+(defvar current--constant-face-background)
+(defvar current--string-face-background)
+
 (defun get-face-colors-c (&rest rest)
   (interactive)
-  (defvar current--default-face-foreground (face-attribute 'default :foreground))
-  (defvar current--builtin-face-foreground (face-attribute 'font-lock-builtin-face :foreground))
-  (defvar current--keyword-face-foreground (face-attribute 'font-lock-keyword-face :foreground))
-  (defvar current--constant-face-foreground (face-attribute 'font-lock-constant-face :foreground))
-  (defvar current--string-face-foreground (face-attribute 'font-lock-string-face :foreground))
-  (defvar current--default-face-background (face-attribute 'default :background))
-  (defvar current--builtin-face-background (face-attribute 'font-lock-builtin-face :background))
-  (defvar current--keyword-face-background (face-attribute 'font-lock-keyword-face :background))
-  (defvar current--constant-face-background (face-attribute 'font-lock-constant-face :background))
-  (defvar current--string-face-background (face-attribute 'font-lock-string-face :background)))
-(get-face-colors-c)
-(add-to-list 'enable-theme-functions 'get-face-colors-c)
+  (setq current--default-face-foreground (face-attribute 'default :foreground))
+  (setq current--builtin-face-foreground (face-attribute 'font-lock-builtin-face :foreground))
+  (setq current--keyword-face-foreground (face-attribute 'font-lock-keyword-face :foreground))
+  (setq current--constant-face-foreground (face-attribute 'font-lock-constant-face :foreground))
+  (setq current--string-face-foreground (face-attribute 'font-lock-string-face :foreground))
+  (setq current--default-face-background (face-attribute 'default :background))
+  (setq current--builtin-face-background (face-attribute 'font-lock-builtin-face :background))
+  (setq current--keyword-face-background (face-attribute 'font-lock-keyword-face :background))
+  (setq current--constant-face-background (face-attribute 'font-lock-constant-face :background))
+  (setq current--string-face-background (face-attribute 'font-lock-string-face :background)))
 
 (defun set-org-mode-faces-c (&rest rest)
   (interactive)
@@ -86,8 +87,24 @@
                           :inherit 'fixed-pitch
                           :box `(:color ,current--default-face-background)
                           :background current--string-face-foreground)))
-(set-org-mode-faces-c)
-(add-to-list 'enable-theme-functions 'set-org-mode-faces-c)
+
+(defun set-eldoc-box-faces-c (&rest rest)
+  (interactive)
+  (when (facep 'eldoc-box-border)
+    (set-face-attribute
+     'eldoc-box-border nil
+     :background (face-attribute 'shadow :foreground))
+    (set-face-attribute
+     'eldoc-box-body nil
+     :background (face-attribute 'region :background))))
+
+(dolist (f '(set-eldoc-box-faces-c
+             set-org-mode-faces-c
+             get-face-colors-c))
+  (add-to-list 'enable-theme-functions f))
+
+;;;; Load Theme
+(load-theme 'sculpture-themes-dark t)
 
 ;;; display-buffer-alist
 (setq window-sides-slots '(1 1 1 1)) ;; LTRB; This is a good enough default.
@@ -125,10 +142,10 @@
          (window-parameters (no-delete-other-windows . t)))))
 
 ;;; Revert on focus-in
-(if (fboundp 'revert-buffer-if-not-modified)
-    (add-function
-     :after after-focus-change-function
-     'revert-buffer-if-not-modified))
+(when (fboundp 'revert-buffer-if-not-modified)
+  (add-function
+   :after after-focus-change-function
+   'revert-buffer-if-not-modified))
 
 ;;; other
 ;;;; show-paren

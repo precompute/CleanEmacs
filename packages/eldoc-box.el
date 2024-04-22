@@ -1,12 +1,6 @@
 (use-package eldoc-box
   :elpaca (:depth 1)
   :hook (prog-mode . eldoc-box-hover-mode)
-  :custom-face
-  ;; (eldoc-box-body
-  ;;  ((t (:inherit variable-pitch))))
-  (eldoc-box-border
-   ;; ((t (:background ,(face-attribute 'font-lock-builtin-face :foreground)))))
-   ((t (:background ,(face-attribute 'shadow :foreground)))))
   :config
   (defun eldoc-box-bottom-left-position-function (width height)
     "Set childframe position to bottom left."
@@ -22,14 +16,11 @@ newlines on top and bottom."
         (goto-char (pos-bol)) (insert "  ") ;; regex wasn’t working.
         (goto-char (pos-eol)) (insert "  ")
         (goto-char (+ 1 (point))))
-      ;; (re-search-forward (rx (or (seq bol)))) (replace-match "AA")
-      ;; (goto-char (point-max))
-      ;; (re-search-backward (rx (seq eol ))) (replace-match "  ")
       (goto-char (point-min)) (re-search-forward (rx (seq bos))) (replace-match "\n")
       (goto-char (point-min)) (re-search-forward (rx (seq eos))) (replace-match "\n \n")))
   (setq eldoc-box-only-multi-line t
         eldoc-box-cleanup-interval 0.1
-        eldoc-box-offset '(10 10 60)
+        eldoc-box-offset '(10 10 20)
         eldoc-box-position-function #'eldoc-box-bottom-left-position-function)
   (remove-hook 'eldoc-box-buffer-hook #'eldoc-box--condense-large-newline-gaps)
   (add-hook 'eldoc-box-buffer-hook #'eldoc-box-add-padding))
