@@ -17,7 +17,4 @@
 (set-face-attribute 'default nil :background "#000000" :foreground "#ffffff")
 (set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)
 
-;; (setq gc-cons-threshold (* 1024 1024 8))
-;; (add-hook 'after-focus-change-function 'garbage-collect)
-
 (load-file (expand-file-name "early-init-ui.el" user-emacs-directory))

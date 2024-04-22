@@ -145,12 +145,12 @@
   (interactive)
   (progn
     ;; (set-face-font 'default (font-spec :family "NeueJuliaMono" :size 15 :weight 'regular)) ;; reduces X-height somehow
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 12 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 15 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Inconsolata" :size 15 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Gohu GohuFont" :size 12 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Cozette" :size 14 :weight 'regular))
 
-    (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 14))
+    (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 17))
     ;; (set-face-font 'variable-pitch (font-spec :family "Sabon LT Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Cisalpin LT Std" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Adobe Caslon Pro" :size 14))

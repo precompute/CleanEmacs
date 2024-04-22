@@ -1,3 +1,1 @@
-(use-package sculpture-themes
-  :config
-  (require-theme 'sculpture-themes))
+(use-package sculpture-themes)
