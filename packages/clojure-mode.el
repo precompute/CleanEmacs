@@ -1,3 +1,2 @@
 (use-package clojure-mode
-:elpaca (:depth 1)
-)
+:elpaca (:depth 1))
