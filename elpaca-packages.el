@@ -214,6 +214,11 @@
 ;; (elpacaLF "clojure-ts-mode")
 (elpacaLF "cider")
 (elpacaLF "flymake-kondor")
+;; ;;;; LLVM
+;; (elpacaLF "llvm-ts-mode")
+;;;; OCaml
+(elpacaLF "tuareg")
+(elpacaLF "merlin")
 
 ;;; Misc
 ;;;; sqlite3
