@@ -83,9 +83,9 @@
 ;;;; Undo persistence
 (elpacaLF "undo-fu-session")
 ;;; Olivetti
-;; (elpacaLF "olivetti")
+(elpacaLF "olivetti")
 ;;; Perfect Margin
-(elpacaLF "perfect-margin") ;; Better than olivetti!
+;; (elpacaLF "perfect-margin") ;; Better than olivetti!
 ;; ;;; Indent Guides
 ;; (elpacaLF "highlight-indent-guides")
 ;; (load-file (expand-file-name "packages/indent-bars.el" user-emacs-directory))

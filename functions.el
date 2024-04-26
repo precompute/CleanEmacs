@@ -513,10 +513,10 @@ It switches the width before the height."
   :transient-suffix     'transient--do-stay
   :transient-non-suffix 'transient--do-warn
   ["Minor Modes"
-   [("oo" (lambda () (toggle-modes-transient--description 'perfect-margin-mode "Perfect Margin "))
-     perfect-margin-mode)]
-    ;; [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
-    ;;   olivetti-mode)]
+   ;; [("oo" (lambda () (toggle-modes-transient--description 'perfect-margin-mode "Perfect Margin "))
+   ;;   perfect-margin-mode)]
+   [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
+     olivetti-mode)]
    [("tl" (lambda () (toggle-modes-transient--description 'truncate-lines "Truncate Lines"))
      toggle-truncate-lines)
     ("v" (lambda () (toggle-modes-transient--description 'visual-line-mode "Visual Lines"))
