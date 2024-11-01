@@ -86,21 +86,20 @@
         (corfu-mode -1)
         (corfu-mode 1))))
 
-(defun show-current-buffer-path ()
-  (interactive)
-  (message
-   (propertize
-    (concat " " (if buffer-file-name buffer-file-name "nil") " ")
-                       'face '( :inherit '(error bold)
-                                :height 1.5
-                                :box (list :line-width 1)))))
-
 (defun echo-current-buffer-path ()
   (interactive)
   (message (propertize (concat " " (if buffer-file-name buffer-file-name "nil") " ")
-                       'face '( :inherit '(font-lock-keyword-face bold)
+                       'face '( :inherit (font-lock-keyword-face bold)
                                 :height 1.5
                                 :box (list :line-width 1)))))
+
+(defun echo-current-time ()
+  "Echo the current time"
+  (interactive)
+  (message (propertize (format-time-string "  %Y-%02m-%02d %02H:%02M:%02S %A Week[%U] Day[%j]  ")
+                       'face '( :inherit (font-lock-keyword-face bold)
+                                :height 1.95
+                                :box (list :line-width 2)))))
 
 (defun dired-jump-other-window ()
   "`dired-jump’ with OTHER-WINDOW as t."
@@ -173,6 +172,8 @@ From https://archive.casouri.cc/note/2021/clean-exit/index.html"
   (interactive)
   (require 'sqlite3)
   (let ((mylist '()))
+    (unless (f-exists-p "/home/sys2/.local/share/zeitgeist/activity.sqlite")
+      (user-error "Zeitgeist database does not exist."))
     (let* ((dbh (sqlite3-open "/home/sys2/.local/share/zeitgeist/activity.sqlite" sqlite-open-readonly))
            (stmt (sqlite3-prepare dbh "select * from text order by id desc limit 1000")))
       (while (= sqlite-row (sqlite3-step stmt))
@@ -596,7 +597,9 @@ It switches the width before the height."
   :transient-non-suffix 'transient--do-warn
   ["Date"
    [("q" (lambda () (interactive)
-           (let ((datevar (read-string "Init Date: ")))
+           (let ((datevar (read-string "Init Date: "
+                                       (when (boundp 'main-log-init-date)
+                                         main-log-init-date))))
              (setq main-log-init-date datevar)))
      :description (lambda () (interactive)
                     (unless (boundp 'main-log-init-date)
@@ -655,15 +658,33 @@ It switches the width before the height."
     ("l" "next level" org-down-element)]
    [("<down>" "Next Match"
      (lambda () (interactive)
-       (word-search-forward main-log-init-date)))
+       (search-forward main-log-init-date)))
     ("<up>" "Prev Match"
      (lambda () (interactive)
-       (word-search-backward main-log-init-date)))]]
+       (search-backward main-log-init-date)))]]
   ["Ops"
    [("o" "cycle local" org-cycle)
     ("O" "cycle global" org-shifttab)]
    [;; ("C" "equalize" org-headings-equalize)
-    ("-" "timelogrefile" org-timelogrefile-c)]])
+    ("-" "timelogrefile" org-timelogrefile-c)
+    ("J05" "timelogrefile next 5" (lambda () (interactive)
+                                   (dotimes (x 5)
+                                     (org-timelogrefile-c)
+                                     (next-line))))
+    ("J15" "timelogrefile next 15" (lambda () (interactive)
+                                     (dotimes (x 15)
+                                       (org-timelogrefile-c)
+                                       (next-line))))
+    ("J25" "timelogrefile next 25" (lambda () (interactive)
+                                     (dotimes (x 25)
+                                       (org-timelogrefile-c)
+                                       (next-line))))
+    ("J50" "timelogrefile next 50" (lambda () (interactive)
+                                     (dotimes (x 50)
+                                       (org-timelogrefile-c)
+                                       (next-line))))
+    ]]
+  )
 
 ;;;; org-agenda
 ;;;;; New timelog file

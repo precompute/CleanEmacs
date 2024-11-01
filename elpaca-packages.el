@@ -208,14 +208,14 @@
 ;;;; Haskell
 ;; (elpacaLF "haskell-mode")
 ;;;; Janet
-(load-file (expand-file-name "packages/janet-ts-mode.el" user-emacs-directory))
+(elpacaC "janet-ts-mode")
 ;;;; Clojure
 (elpacaLF "clojure-mode")
 ;; (elpacaLF "clojure-ts-mode")
 (elpacaLF "cider")
 (elpacaLF "flymake-kondor")
-;; ;;;; LLVM
-;; (elpacaLF "llvm-ts-mode")
+;;;; LLVM
+;; (elpacaLF "llvm-mode" t)
 ;;;; OCaml
 (elpacaLF "tuareg")
 (elpacaLF "merlin")

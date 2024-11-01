@@ -20,3 +20,7 @@ you want to `nil’ the alist before operation"
    (c c-mode c-ts-mode)
    (rust rust-mode rust-ts-mode)
    (haskell haskell-mode haskell-ts-mode)))
+
+;;;; modes
+
+(add-to-list 'auto-mode-alist (cons "\\.pde\\'" 'java-ts-mode))
