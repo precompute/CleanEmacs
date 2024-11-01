@@ -18,6 +18,12 @@
                           path))))
     (load-file path)))
 
+(defmacro elpacaC (package)
+  "Load a custom package."
+  `(load-file (expand-file-name
+               (concat ,package ".el")
+               (concat user-emacs-directory "packages/"))))
+
 ;;; Evil
 (elpacaLF "evil")
 ;;;; number of matches
@@ -53,13 +59,13 @@
 (elpacaLF "general")
 ;;; Completion
 ;;;; Vertico
-(load-file (expand-file-name "packages/vertico.el" user-emacs-directory))
+(elpacaC "vertico")
 ;;;;; Orderless (sorting)
 (elpacaLF "orderless")
 ;;;;; Marginalia (vertico hints)
 (elpacaLF "marginalia")
 ;;;;; Corfu (hints)
-(load-file (expand-file-name "packages/corfu.el" user-emacs-directory))
+(elpacaC "corfu")
 ;;;;;; Candidate overlay
 (elpacaLF "corfu-candidate-overlay")
 ;;;;;; Icons
@@ -88,7 +94,7 @@
 ;; (elpacaLF "perfect-margin") ;; Better than olivetti!
 ;; ;;; Indent Guides
 ;; (elpacaLF "highlight-indent-guides")
-;; (load-file (expand-file-name "packages/indent-bars.el" user-emacs-directory))
+;; (elpacaC "indent-bars")
 ;;; Which-Key
 (elpacaLF "which-key")
 ;;; Rainbow Delimiters
@@ -251,6 +257,8 @@
 ;; (elpacaLF "beacon")
 ;;;; tiny (generate ranges)
 (elpacaLF "tiny")
+;;;; LLM
+(elpacaC "ancilla")
 
 ;;; Themes (that I never really use)
 (elpacaLF "orangey-bits-theme") ;; Orange!
