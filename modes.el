@@ -24,3 +24,6 @@ you want to `nil’ the alist before operation"
 ;;;; modes
 
 (add-to-list 'auto-mode-alist (cons "\\.pde\\'" 'java-ts-mode))
+
+;;;; ffap
+(setq ffap-machine-p-known 'reject)
