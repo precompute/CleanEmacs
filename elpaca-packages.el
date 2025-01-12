@@ -225,6 +225,8 @@
 ;;;; OCaml
 (elpacaLF "tuareg")
 (elpacaLF "merlin")
+;;;; Zig
+(elpacaLF "zig-mode")
 
 ;;; Misc
 ;;;; sqlite3
