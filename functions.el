@@ -217,7 +217,7 @@ Saves to a temp file and puts the filename in the kill ring."
     (message filename)))
 
 ;;;; transparency
-(defvar transparency-value-c 0.9
+(defvar transparency-value-c 0.7
   "Transparency value for `set-transparency-c’.")
 (defun set-transparency-c (&optional value no-set-default only-active-frame)
   "Set the transparency of the selected window.

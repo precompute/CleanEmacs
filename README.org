@@ -36,31 +36,25 @@ I’ve been using Doom Emacs for four years, and I wanted my config to be a ligh
 
 We don’t aim this config to be minimal, but instead to be easy to understand.
 
-- Recommended Emacs Version :: =30.0.50=
+- Recommended Emacs Version :: =31.0.50=
 
-- Current Emacs commit :: =42322257ba9abdb8bcc2aceb34a27f261df070aa=
+- Current Emacs commit :: =4fada67748db787bf3a08ff15f1ab6f7992f9a7e=
 
 - Recommended OS :: I use Debian Stable.  This config /might/ work on MacOS and WSL.  I don’t use either, so no guarantees.
 
-#+BEGIN_QUOTE
-In GNU Emacs 30.0.50 (build 1, x86_64-pc-linux-gnu, GTK+ Version
- 3.24.38, cairo version 1.16.0) of 2024-03-29 built on debhost2
-Repository revision: 42322257ba9abdb8bcc2aceb34a27f261df070aa
-Repository branch: master
-Windowing system distributor 'The X.Org Foundation', version 11.0.12101007
-System Description: Debian GNU/Linux 12 (bookworm)
+Configured with:
 
-Configured using:
- 'configure --with-native-compilation=aot 'CFLAGS=-flto -O3
- -mtune=native -march=native -fomit-frame-pointer' --enable-autodepend
- --enable-link-time-optimization --with-dbus --with-gif --with-gnutls
- --with-gpm=no --with-imagemagick --with-jpeg --with-json
- --with-libotf --with-mailutils --with-modules
- --without-compress-install --without-gconf --without-gsettings
- --without-xaw3d --with-png --with-sound --with-sqlite3 --with-tiff
- --with-toolkit-scroll-bars --with-webp --with-xft --with-xim
- --with-xpm --with-tree-sitter --with-x-toolkit --with-xwidgets'
-#+END_QUOTE
+#+BEGIN_SRC
+configure --with-native-compilation=aot 'CFLAGS=-flto -O3
+-mtune=native -march=native -fomit-frame-pointer' --enable-autodepend
+--enable-link-time-optimization --with-dbus --with-gif --with-gnutls
+--with-gpm=no --with-imagemagick --with-jpeg --with-json
+--with-libotf --with-mailutils --with-modules
+--without-compress-install --without-gconf --without-gsettings
+--without-xaw3d --with-png --with-sound --with-sqlite3 --with-tiff
+--with-toolkit-scroll-bars --with-webp --with-xft --with-xim
+--with-xpm --with-tree-sitter --with-x-toolkit
+#+END_SRC
 
 * General Outline
 ** Hierarchy
@@ -74,7 +68,7 @@ Configured using:
   - =keybinds.el= :: Defines keybinds, uses =general-def=.
   - =hooks.el= :: Hooks that are too general to warrant a separate file.
   - =ui.el= :: Sets the theme, fonts and modifies a few faces.
-  - =modeline-simple.el= :: Actually a headerline.  A simplified, refactored version of =archive/modeline.el= that doesn’t slow the editor down and only computes changes when it doesn’t affect editing speed (faciliated by ~while-no-input~).  Uses a whitelist of modes, so unsupported modes show the default mode-line.  Uses ~:box~ in ~propertize~ so it might /shift/ your window just a little.  You’ll get used to it.  It also computes colors from the active theme, doesn’t use the default mode-line face provided by a theme.
+  - =headerline-simple.el= :: A simplified version of =archive/modeline-simple.el=, which is a  refactored version of =archive/modeline.el= that doesn’t slow the editor down and only computes changes when it doesn’t affect editing speed (faciliated by ~while-no-input~).  Uses a whitelist of modes, so unsupported modes show the default mode-line.  Uses ~:box~ in ~propertize~ so it might /shift/ your window just a little.  You’ll get used to it.  It also computes colors from the active theme, doesn’t use the default mode-line face provided by a theme.
   - =modes.el= :: For treesit configuration.
   - =loads.el= :: Loads files that aren’t tracked in this project.
 + =.private= :: Ignored folder for any elisp you’d want to include.
