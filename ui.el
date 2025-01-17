@@ -185,7 +185,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Palatino eText" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 14))
+    (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 14))
@@ -193,7 +193,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Univers LT Std" :width 'expanded :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Info Text Offc Pro" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
-    (set-face-font 'variable-pitch (font-spec :family "Alegreya Sans" :size 15))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Alegreya Sans" :size 15))
 
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
     (copy-face 'default 'fixed-pitch)))

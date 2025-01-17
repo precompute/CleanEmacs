@@ -1,5 +1,4 @@
 ;;;; Header Line
-;; [25-01-17 21:09:55] Archived!  `mode-line-inactive’ requires significant changes, and will reduce latency!
 ;;;;; functions
 (defun get-color-fg (face &optional fallback)
   "Get the :foreground property of a FACE.
@@ -99,14 +98,6 @@ Modified from `flymake--mode-line-counter'.
   '((t :foreground "#000"
        :background "#000"))
   "Base Face for Headerline")
-(defface headerline-active-indicator-face
-  '((t :foreground "#000"
-       :background "#000"))
-  "Indicator for active window.")
-(defface headerline-inactive-indicator-face
-  '((t :foreground "#000"
-       :background "#000"))
-  "Indicator for inactive window.")
 (defface headerline-file-modified-face
   '((t :foreground "#000"))
   "File Modified Face for Headerline")
@@ -172,16 +163,6 @@ Modified from `flymake--mode-line-counter'.
                         :height height
                         :foreground fl-variable
                         :background region)
-    (set-face-attribute 'headerline-active-indicator-face nil
-                        :box (list :line-width '(5 . 3) :color region)
-                        :height height
-                        :foreground mix1
-                        :background mix1)
-    (set-face-attribute 'headerline-inactive-indicator-face nil
-                        :box (list :line-width '(5 . 3) :color region)
-                        :height height
-                        :foreground region
-                        :background region)
     (set-face-attribute 'headerline-file-modified-face nil
                         :foreground fl-builtin)
     (set-face-attribute 'headerline-file-unmodified-face nil
@@ -225,6 +206,9 @@ Modified from `flymake--mode-line-counter'.
     (set-face-attribute 'headerline-dark-face nil
                         :foreground (mix-colors region fl-constant 0.35)
                         :weight 'bold)
+    (set-face-attribute 'header-line-inactive nil
+                        :background (mix-colors region defaultbg 0.35)
+                        :box (list :line-width '(1 . 3) :color (mix-colors region defaultbg 0.35)))
     (defvar headerline--err-face (if errorface (mix-colors region errorface 0.45) "#000000"))
     (defvar headerline--warn-face (if warnface (mix-colors region warnface 0.45) "#000000"))
     (defvar headerline--note-face (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
@@ -353,39 +337,24 @@ Specific to the current window's mode line."
                  :foreground ,headerline--note-face))))))
 
 ;;;;; Headerline Construction
-(defun make-headerline (left)
-  `(:eval
-    (while-no-input
-      (let* ((active? (headerline-active))
-             (modified? (buffer-modified-p))
-             (indicator (list
-                         (if active?
-                             (propertize "  " 'face 'headerline-active-indicator-face)
-                           (propertize "  " 'face 'headerline-inactive-indicator-face))))
-             (spacer (list " "))
-             (left-list (append indicator ',left)))
-        (mapcar
-         #'format-mode-line
-         left-list)))))
-
-(defun set-headerline (left)
-  (setq-local header-line-format (make-headerline left)))
-
 (defun headerline-simple-mode ()
   (interactive)
-  (funcall 'set-headerline
-           (list
-            (headerline-buffer-status-c)
-            (headerline-major-mode-c) " "
-            (headerline-mlscroll-mode-line-c)
-            (headerline-line-number-c) " "
-            (headerline-remote-c)
-            (headerline-buffer-name-c) " "
-            (headerline-file-size-c) " "
-            (headerline-macro-recording-c)
-            (headerline-anzu-count-c)
-            (headerline-flymake-c)
-            mode-line-misc-info)))
+  (setq-local header-line-format
+              `(:eval
+                (while-no-input
+                  (mapcar #'format-mode-line
+                          (list
+                           (headerline-buffer-status-c)
+                           (headerline-major-mode-c) " "
+                           (headerline-mlscroll-mode-line-c)
+                           (headerline-line-number-c) " "
+                           (headerline-remote-c)
+                           (headerline-buffer-name-c) " "
+                           (headerline-file-size-c) " "
+                           (headerline-macro-recording-c)
+                           (headerline-anzu-count-c)
+                           (headerline-flymake-c)
+                           mode-line-misc-info))))))
 
 (add-hook 'post-command-hook #'headerline-set-active-window)
 
