@@ -148,6 +148,22 @@
   (interactive)
   (load-file buffer-file-name))
 
+(defun scroll-5l-down ()
+  (interactive)
+  (scroll-down 5))
+
+(defun scroll-5l-up ()
+  (interactive)
+  (scroll-up 5))
+
+(defun elisp-show-callable-definition-c ()
+  (interactive)
+  (helpful-callable (helpful--callable-at-point)))
+
+(defun elisp-show-variable-definition-c ()
+  (interactive)
+  (helpful-variable (helpful--variable-at-point)))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.
@@ -366,6 +382,24 @@ It switches the width before the height."
 
 ;;;; org-*
 ;;;;; org-id-*
+(defun org-id-create-insert (&optional kill?)
+  "Create an Org ID and insert it.  KILL? to `kill-new’ instead."
+  (interactive)
+  (let* ((heading (completing-read
+                   "Heading: "
+                   (org-map-entries ;; Also tried org-element-map and others, didn’t work.
+                    (lambda ()
+                      (format "%s %s" (point) (org-get-heading t t t t))))))
+         (sep (string-match " " heading))
+         (p (string-to-number (substring heading 0 sep)))
+         ;; (heading (substring heading (+ 1 sep)))
+         (orgid nil))
+    (save-excursion
+      (save-restriction
+        (goto-char p)
+        (setq orgid (org-id-get (point) t))))
+    (funcall (if kill? #'kill-new #'insert) (format " [[%s]]" orgid))))
+
 ;;org id update recursive function, from discord
 (defun org-id-update-recursively-c ()
   "Get all files in `org-directory' recursively and update org IDs."

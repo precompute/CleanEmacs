@@ -57,6 +57,8 @@
 
 (setq messages-buffer-max-lines 100000)
 
+(setq undo-limit 240000)
+
 (defmacro setcache-c (var file)
   "Macro to set file location to `user-cache-directory'"
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))

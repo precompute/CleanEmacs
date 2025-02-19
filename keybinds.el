@@ -164,6 +164,9 @@
   "hds" 'profiler-start
   "hdS" 'profiler-stop-and-report
   "hM" 'woman
+  "h C-f" 'elisp-show-callable-definition-c
+  "h C-v" 'elisp-show-variable-definition-c
+  ;; `elisp-slime-nav-describe-elisp-thing-at-point` is not adequate
 
   "d" '(:ignore t :wk "other")
   "ds" 'lexic-search-word-at-point
@@ -212,6 +215,16 @@
  :keymaps '(elfeed-show-mode-map
             elfeed-search-mode-map)
  "C-/" 'elfeed-transient-c)
+
+(general-define-key
+ :states 'insert
+ "C-i" 'evil-jump-forward
+ "C-S-i" 'evil-jump-backward)
+
+(general-define-key
+ :states 'motion
+ "C-i" 'evil-jump-forward
+ "C-S-i" 'evil-jump-backward)
 
 ;;;;;;; Evil operators
 (general-define-key
@@ -265,7 +278,10 @@
   "g n" 'narrow-to-page
   "g N" 'widen
 
-  "C-S-t" 'xref-go-forward)
+  "C-S-t" 'xref-go-forward
+
+  "C-d" 'scroll-5l-up
+  "C-S-d" 'scroll-5l-down)
 
 (general-define-key
   :states 'insert
