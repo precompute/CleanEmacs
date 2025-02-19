@@ -187,6 +187,8 @@
 (elpacaLF "org-appear")
 ;;;; Sliced Images
 (elpacaLF "org-sliced-images")
+;;; Hyperbole
+(elpacaLF "hyperbole")
 
 ;;; Language
 ;;;; Prog-mode
@@ -206,7 +208,7 @@
 ;;;;; eglot support
 (elpacaLF "eglot-jl")
 ;;;; CSV
-(elpacaLF "csv-mode")
+;; (elpacaLF "csv-mode")
 ;;;; Lisp-Flavored Erlang
 (elpacaLF "lfe-mode")
 ;;;; Rust
@@ -265,4 +267,5 @@
 ;;; Themes (that I never really use)
 (elpacaLF "orangey-bits-theme") ;; Orange!
 (elpacaLF "sakura-theme") ;; Purple!
+(elpacaLF "sorcery-theme") ;; Inspo!
 (elpacaLF "ef-themes") ;; Everything else!

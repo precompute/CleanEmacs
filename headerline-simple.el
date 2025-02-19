@@ -150,7 +150,7 @@ Modified from `flymake--mode-line-counter'.
          (matchface (get-color-fg 'match)) ;; green
          ;; (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
          (warnface (get-color-fg 'font-lock-type-face)) ;; red-ish
-         (noteface (get-color-bg 'hi-yellow)) ;; yellow
+         (noteface (get-color-bg 'cursor)) ;; yellow
          (defaultfg (get-color-fg 'default)) ;; white
          (defaultbg (get-color-bg 'default)) ;; black
          (height 1.2)
@@ -213,7 +213,7 @@ Modified from `flymake--mode-line-counter'.
     (defvar headerline--warn-face (if warnface (mix-colors region warnface 0.45) "#000000"))
     (defvar headerline--note-face (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
     (defvar headerline--default-face (if defaultfg (mix-colors region defaultfg) "#000000"))
-    (if (and (mlscroll-mode) (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
+    (if (and (fboundp 'mlscroll-mode) (mlscroll-mode) (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
         (progn
           (setq-default mlscroll-in-color (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) fl-keyword)))
           (setq-default mlscroll-out-color defaultbg)
@@ -370,6 +370,8 @@ Specific to the current window's mode line."
                 messages-buffer-mode-hook
                 conf-space-mode-hook
                 doc-view-mode-hook
-                dired-mode-hook))
+                dired-mode-hook
+                debugger-mode
+                messages-buffer-mode))
   (add-hook hook 'headerline-simple-mode)
   (add-hook hook 'mode-line-format-nil))

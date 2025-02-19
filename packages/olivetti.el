@@ -2,7 +2,9 @@
   :hook ((prog-mode
 	  text-mode
           dired-mode
-          magit-mode) . olivetti-mode)
+          magit-mode
+          info-mode
+          helpful-mode) . olivetti-mode)
   :config
   (setq-default olivetti-body-width 130
                 olivetti-margin-width 2)

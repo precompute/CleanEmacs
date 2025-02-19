@@ -113,7 +113,7 @@ In tables, move column to the right."
         (setq beg (min beg (org-table-begin)))
         (setq end (max end (org-table-end))))
       (evil-shift-right beg end count)))
-    (when (and evil-org-retain-visual-state-on-shift (evil-visual-state-p))
+    (when (evil-visual-state-p)
       (evil-normal-state)
       (evil-visual-restore)))
 
