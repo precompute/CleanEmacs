@@ -372,6 +372,7 @@ Specific to the current window's mode line."
                 doc-view-mode-hook
                 dired-mode-hook
                 debugger-mode
-                messages-buffer-mode))
+                messages-buffer-mode
+                magit-status-mode))
   (add-hook hook 'headerline-simple-mode)
   (add-hook hook 'mode-line-format-nil))

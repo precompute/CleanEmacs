@@ -311,6 +311,11 @@
  "<" 'evil-org-<)
 
 (general-define-key
+ :keymaps 'org-mode-map
+ :states 'insert
+ "TAB" 'org-cycle)
+
+(general-define-key
  ;; Modifications and global stuff
  "M-c" 'capitalize-dwim
  "M-u" 'upcase-dwim

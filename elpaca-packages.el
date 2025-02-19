@@ -54,6 +54,8 @@
 ;;;; Sculpture-Themes
 ;; (elpaca (sculpture-themes-local :repo "/home/sys2/temp/git/t-e-r-m/sculpture-themes/"))
 (elpacaLF "sculpture-themes")
+;;;; Hyperstitional-Themes
+(elpacaLF "hyperstitional-themes")
 ;;; Keybinds
 ;;;; General
 (elpacaLF "general")
