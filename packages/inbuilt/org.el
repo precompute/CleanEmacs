@@ -20,6 +20,7 @@
         org-time-stamp-formats org-time-stamp-custom-formats
         org-support-shift-select t
         org-imenu-depth 90
+        org-return-follows-link t
         org-capture-mode-hook nil
         org-cycle-separator-lines 0
         org-enforce-todo-checkbox-dependencies t
