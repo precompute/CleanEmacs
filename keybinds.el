@@ -265,12 +265,13 @@
   "H-s-'" 'delete-other-windows
   "s-[" 'outline-previous-heading
   "s-]" 'outline-next-heading
-  "H-c" 'git-auto-time-commit
-  "H-C" 'git-prompt-commit
-  "H-r" 'refile3-main-transient
   "\\" 'repeat
   "-" 'repeat
   "C-/" 'toggle-modes-transient-c
+
+  "H-h c" 'git-auto-time-commit
+  "H-h C" 'git-prompt-commit
+  "H-h r" 'refile3-main-transient
 
   "<backspace>" 'scroll-up-command
   "S-<backspace>" 'scroll-down-command
@@ -316,7 +317,6 @@
  "TAB" 'org-cycle)
 
 (general-define-key
- ;; Modifications and global stuff
- "M-c" 'capitalize-dwim
- "M-u" 'upcase-dwim
- "H-a" 'org-capture)
+ ;; Org-mode
+ "H-a" 'org-capture
+ "H-q i" 'org-id-create-insert)
