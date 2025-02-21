@@ -371,6 +371,7 @@ Specific to the current window's mode line."
                 conf-space-mode-hook
                 doc-view-mode-hook
                 dired-mode-hook
+                apropos-mode-hook
                 debugger-mode
                 messages-buffer-mode
                 magit-status-mode))

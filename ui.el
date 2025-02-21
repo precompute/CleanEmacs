@@ -172,7 +172,9 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "TX-02" :size 14 :weight 'regular))
+    (set-face-font 'default (font-spec :family "Pragmata Pro" :size 15 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Letter Gothic Mono Pro" :size 16 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Inconsolata" :size 15 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Gohu GohuFont" :size 12 :weight 'regular))
@@ -185,7 +187,8 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Palatino eText" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
-    (set-face-font 'variable-pitch (font-spec :family "Franziska Pro" :size 16))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 19 :width 'condensed :weight 'regular))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Franziska Pro" :size 18))
     ;; (set-face-font 'variable-pitch (font-spec :family "Angie Pro" :size 15 :slant nil))
     ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))

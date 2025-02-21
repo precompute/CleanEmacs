@@ -312,6 +312,12 @@
  "TAB" 'org-cycle)
 
 (general-define-key
- ;; Org-mode
+ :keymaps 'org-mode-map
  "H-a" 'org-capture
- "H-q i" 'org-id-create-insert)
+ "H-q i" 'org-id-create-insert
+ "H-b q" 'org-insert-block-quote-c
+ "H-b s" 'org-insert-block-src-c
+ "H-b Q" 'org-insert-block-quote-meta-c
+ "H-b S" 'org-insert-block-src-meta-c
+ "H-b b" 'org-insert-block-custom-c
+ "H-b B" 'org-insert-block-custom-meta-c)

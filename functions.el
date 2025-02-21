@@ -518,6 +518,68 @@ It switches the width before the height."
     (if (buffer-live-p c-buf)
         (with-current-buffer c-buf
           (locate-dominating-file "." ".git")))))
+
+;;;;; org-insert-block-*
+(defun org-insert-block-c (type &optional metadata?)
+  "Insert block TYPE at point, or enclosing the current region.
+Set METADATA? to t if you need to enter text after #+begin_TYPE."
+  (let ((bounds (if (region-active-p) (region-bounds))))
+    (if bounds
+        (progn
+          (save-excursion
+            (goto-char (cdar bounds))
+            ;; (end-of-line) ;; Region reports one int above end, maybe evil-specific?
+            (insert (format "#+end_%s\n" type))
+            (goto-char (caar bounds))
+            (beginning-of-line)
+            (insert (format "#+begin_%s\n" type)))
+          (if metadata? (goto-char (caar bounds))))
+      (save-excursion
+        (end-of-line)
+        (insert (format "\n#+begin_%s\n#+end_%s" type type))))
+    (if metadata?
+        (progn
+          (unless bounds (next-line))
+          (save-excursion
+            (end-of-line)
+            (insert " "))
+          (if (and (boundp 'evil-mode) evil-mode)
+              (evil-append-line nil)
+            (end-of-line))))))
+
+(defun org-insert-block-quote-c ()
+  "Insert a Quote block at point, or enclosing the current region."
+  (interactive)
+  (org-insert-block-c "quote"))
+
+(defun org-insert-block-src-c ()
+  "Insert a Quote block at point, or enclosing the current region."
+  (interactive)
+  (org-insert-block-c "src"))
+
+(defun org-insert-block-quote-meta-c ()
+  "Insert a Quote block at point, or enclosing the current region.
+Then place point at end of #+begin statement for metadata insertion."
+  (interactive)
+  (org-insert-block-c "quote" t))
+
+(defun org-insert-block-src-meta-c ()
+  "Insert a Quote block at point, or enclosing the current region.
+Then place point at end of #+begin statement for metadata insertion."
+  (interactive)
+  (org-insert-block-c "src" t))
+
+(defun org-insert-block-custom-c (block)
+  "Insert a custom block at point, or enclosing the current region."
+  (interactive "sBlock: ")
+  (org-insert-block-c block t))
+
+(defun org-insert-block-custom-meta-c (block)
+  "Insert a custom block at point, or enclosing the current region.
+Then place point at end of #+begin statement for metadata insertion."
+  (interactive "sBlock: ")
+  (org-insert-block-c block t))
+
 ;;;; transient
 ;;;;; org-agenda transient
 (transient-define-prefix org-agenda-transient ()
