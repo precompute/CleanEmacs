@@ -92,7 +92,7 @@
 (elpacaLF "undo-fu-session")
 ;;; Olivetti
 (elpacaLF "olivetti")
-;;; Perfect Margin
+;; ;;; Perfect Margin
 ;; (elpacaLF "perfect-margin") ;; Better than olivetti!
 ;; ;;; Indent Guides
 ;; (elpacaLF "highlight-indent-guides")
@@ -106,7 +106,7 @@
 ;; ;;; Ligature
 ;; (elpacaLF "ligature")
 ;;; Mixed-Pitch
-(elpacaLF "mixed-pitch")
+(elpacaC "mixed-pitch")
 ;;; Faces for `outline-mode'
 (elpacaLF "outline-minor-faces")
 ;;; Highlight Numbers
