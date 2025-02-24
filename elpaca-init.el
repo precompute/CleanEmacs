@@ -6,6 +6,9 @@
 (setq native-comp-eln-load-path `(,(expand-file-name "eln-cache" user-cache-directory)))
 (defvar user-private-directory (expand-file-name ".private/" user-emacs-directory))
 
+;; Uncomment to use the package commits specified in the lockfile
+;; (setq elpaca-lock-file (expand-file-name "elpaca-lockfile" user-emacs-directory))
+
 (defvar elpaca-directory (expand-file-name "elpaca/" user-cache-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))

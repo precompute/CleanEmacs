@@ -104,6 +104,7 @@ The Headerline is mostly just a propertized default modeline.  It uses =face-rem
 * Making it your own
 
 - Clone to =~/.emacs.d=.  Alternatively, use [[https://github.com/plexus/chemacs2][Chemacs]] to enable multiple configs.
+- [OPTIONAL] Uncomment the *lockfile* section in =elpaca-init.el= for a perfect clone.
 - Modify the active fonts in the function =set-fonts-c= in =ui.el=
 - +Search for =~/= and =sys2= and remove / modify all local filesystem calls.+  Modify =org-id-locations-file= in =packages/inbuilt/org.el=.
 - Seach for =sys2= in the =functions.el= and modify any functions you’d want to use.
@@ -114,6 +115,9 @@ Update [23-09-06 18:07:21] : This project is about ~95% stable.  There are no ov
 
 Update [24-04-18 21:21:51] : This project is stable, but if you want to use it, you’ll have to weed out all the references to my local filesystem.
   
+** Debugging after updates
+If you ever upgrade a package and come across weird errors, delete its folder in the =.cache/build= directory and other relevant =elc= / =eln= files in =.cache= and restart Emacs.
+
 * Screenshots
 With the new headerline:
 [[file:.assets/screenshot5.jpg]]

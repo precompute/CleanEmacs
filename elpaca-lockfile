@@ -1,0 +1,1114 @@
+((autothemer :source #1="elpaca-menu-lock-file" :recipe
+             (:package "autothemer" :fetcher github :repo
+                       "jasonm23/autothemer" :files
+                       (#3="*.el" #4="*.el.in" #5="dir" #6="*.info"
+                           #7="*.texi" #8="*.texinfo" #9="doc/dir"
+                           #10="doc/*.info" #11="doc/*.texi" #12=
+                           "doc/*.texinfo" #13="lisp/*.el" #14=
+                           "docs/dir" #15="docs/*.info" #16=
+                           "docs/*.texi" #17="docs/*.texinfo"
+                           (:exclude #18=".dir-locals.el" #19=
+                                     "test.el" #20="tests.el" #21=
+                                     "*-test.el" #22="*-tests.el" #23=
+                                     "LICENSE" #24="README*" #25=
+                                     "*-pkg.el"))
+                       :source #26="MELPA" :protocol https :inherit t
+                       :depth treeless :ref
+                       "cb4d4b69f8bb1f8158d2311692b7607794b75829"))
+ (rbit :source #1# :recipe
+       (:package #2="rbit" :repo
+                 (#27=
+                  "https://git.savannah.gnu.org/git/emacs/elpa.git"
+                  . #2#)
+                 :branch "externals/rbit" :files
+                 (#29="*" (:exclude #30=".git")) :source #31=
+                 "GNU ELPA" :protocol https :inherit t :depth treeless
+                 :ref "c4730d169d927732952dca9537878530f0bc3a7f"))
+ (reformatter :source #1# :recipe
+              (:package "reformatter" :repo
+                        "purcell/emacs-reformatter" :fetcher github
+                        :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        treeless :ref
+                        "f2cb59466b1c3f85a8c960f7d4b7b7ead015bedc"))
+ (caml :source #1# :recipe
+       (:package "caml" :repo "ocaml/caml-mode" :fetcher github :files
+                 (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13# #14#
+                      #15# #16# #17#
+                      (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                #25#))
+                 :source #26# :protocol https :inherit t :depth
+                 treeless :ref
+                 "47defafa2b08fb680e89bfee9cb9ce82bd9e3bcf"))
+ (parseclj :source #1# :recipe
+           (:package "parseclj" :repo "clojure-emacs/parseclj"
+                     :fetcher github :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth
+                     treeless :ref
+                     "6af22372e0fe14df882dd300b22b12ba2d7e00b0"))
+ (sesman :source #1# :recipe
+         (:package "sesman" :repo "vspinu/sesman" :fetcher github
+                   :files
+                   (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                        #14# #15# #16# #17#
+                        (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                  #25#))
+                   :source #26# :protocol https :inherit t :depth
+                   treeless :ref
+                   "7bca68dbbab0af26a6a23be1ff5fa97f9a18e022"))
+ (queue :source #1# :recipe
+        (:package #28="queue" :repo (#27# . #28#) :branch
+                  "externals/queue" :files (#29# (:exclude #30#))
+                  :source #31# :protocol https :inherit t :depth
+                  treeless :ref
+                  "f986fb68e75bdae951efb9e11a3012ab6bd408ee"))
+ (parseedn :source #1# :recipe
+           (:package "parseedn" :repo "clojure-emacs/parseedn"
+                     :fetcher github :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth
+                     treeless :ref
+                     "3407e4530a367b6c2b857dae261cdbb67a440aaa"))
+ (flycheck :source #1# :recipe
+           (:package "flycheck" :repo "flycheck/flycheck" :fetcher
+                     github :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth
+                     treeless :ref
+                     "87ad201889b2055d0c4b0839d2f8b80eeccae59e"))
+ (xterm-color :source #1# :recipe
+              (:package "xterm-color" :repo "atomontage/xterm-color"
+                        :fetcher github :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        treeless :ref
+                        "2ad407c651e90fff2ea85d17bf074cee2c022912"))
+ (spinner :source #1# :recipe
+          (:package #32="spinner" :repo
+                    ("https://github.com/Malabarba/spinner.el" . #32#)
+                    :files (#29# (:exclude #30#)) :source #31#
+                    :protocol https :inherit t :depth treeless :ref
+                    "d4647ae87fb0cd24bc9081a3d287c860ff061c21"))
+ (rust-mode :source #1# :recipe
+            (:package "rust-mode" :repo "rust-lang/rust-mode" :fetcher
+                      github :files
+                      (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                           #14# #15# #16# #17#
+                           (:exclude #18# #19# #20# #21# #22# #23#
+                                     #24# #25#))
+                      :source #26# :protocol https :inherit t :depth
+                      treeless :ref
+                      "542f1755d8929ca83564322d7030d558f3392fe1"))
+ (ts :source #1# :recipe
+     (:package "ts" :fetcher github :repo "alphapapa/ts.el" :files
+               (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13# #14#
+                    #15# #16# #17#
+                    (:exclude #18# #19# #20# #21# #22# #23# #24# #25#))
+               :source #26# :protocol https :inherit t :depth treeless
+               :ref "552936017cfdec89f7fc20c254ae6b37c3f22c5b"))
+ (ht :source #1# :recipe
+     (:package "ht" :fetcher github :repo "Wilfred/ht.el" :files
+               (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13# #14#
+                    #15# #16# #17#
+                    (:exclude #18# #19# #20# #21# #22# #23# #24# #25#))
+               :source #26# :protocol https :inherit t :depth treeless
+               :ref "1c49aad1c820c86f7ee35bf9fff8429502f60fef"))
+ (dired-subtree :source #1# :recipe
+                (:package "dired-subtree" :fetcher github :repo
+                          "Fuco1/dired-hacks" :files
+                          ("dired-subtree.el") :source #26# :protocol
+                          https :inherit t :depth treeless :ref
+                          "e9e408e8571aee5574ca0a431ef15cac5a3585d4"))
+ (tablist :source #1# :recipe
+          (:package "tablist" :fetcher github :repo
+                    "emacsorphanage/tablist" :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "fcd37147121fabdf003a70279cf86fbe08cfac6f"))
+ (parent-mode :source #1# :recipe
+              (:package "parent-mode" :fetcher github :repo
+                        "Fanael/parent-mode" :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        treeless :ref
+                        "fbd49857ab2e4cd0c5611c0cc83f93711657b298"))
+ (elisp-refs :source #1# :recipe
+             (:package "elisp-refs" :repo "Wilfred/elisp-refs"
+                       :fetcher github :files
+                       (:defaults (:exclude "elisp-refs-bench.el"))
+                       :source #26# :protocol https :inherit t :depth
+                       treeless :ref
+                       "541a064c3ce27867872cf708354a65d83baf2a6d"))
+ (f :source #1# :recipe
+    (:package "f" :fetcher github :repo "rejeep/f.el" :files
+              (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13# #14#
+                   #15# #16# #17#
+                   (:exclude #18# #19# #20# #21# #22# #23# #24# #25#))
+              :source #26# :protocol https :inherit t :depth treeless
+              :ref "931b6d0667fe03e7bf1c6c282d6d8d7006143c52"))
+ (s :source #1# :recipe
+    (:package "s" :fetcher github :repo "magnars/s.el" :files
+              (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13# #14#
+                   #15# #16# #17#
+                   (:exclude #18# #19# #20# #21# #22# #23# #24# #25#))
+              :source #26# :protocol https :inherit t :depth treeless
+              :ref "dda84d38fffdaf0c9b12837b504b402af910d01d"))
+ (with-editor :source #1# :recipe
+              (:package "with-editor" :fetcher github :repo
+                        "magit/with-editor" :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        treeless :ref
+                        "ca902ae02972bdd6919a902be2593d8cb6bd991b"))
+ (dash :source #1# :recipe
+       (:package "dash" :fetcher github :repo "magnars/dash.el" :files
+                 ("dash.el" "dash.texi") :source #26# :protocol https
+                 :inherit t :depth treeless :ref
+                 "1de9dcb83eacfb162b6d9a118a4770b1281bcd84"))
+ (svg-lib :source #1# :recipe
+          (:package #33="svg-lib" :repo
+                    ("https://github.com/rougier/svg-lib" . #33#)
+                    :files (#29# (:exclude #30#)) :source #31#
+                    :protocol https :inherit t :depth treeless :ref
+                    "39621cd178dbf903414156d893c1eefe217b7c29"))
+ (annalist :source #1# :recipe
+           (:package "annalist" :fetcher github :repo
+                     "noctuid/annalist.el" :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth
+                     treeless :ref
+                     "e1ef5dad75fa502d761f70d9ddf1aeb1c423f41d"))
+ (anzu :source #1# :recipe
+       (:package "anzu" :fetcher github :repo "emacsorphanage/anzu"
+                 :files
+                 (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13# #14#
+                      #15# #16# #17#
+                      (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                #25#))
+                 :source #26# :protocol https :inherit t :depth
+                 treeless :ref
+                 "21cb5ab2295614372cb9f1a21429381e49a6255f"))
+ (goto-chg :source #1# :recipe
+           (:package "goto-chg" :repo "emacs-evil/goto-chg" :fetcher
+                     github :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth
+                     treeless :ref
+                     "72f556524b88e9d30dc7fc5b0dc32078c166fda7"))
+ (ef-themes :source #1# :recipe
+            (:package #34="ef-themes" :repo
+                      ("https://github.com/protesilaos/ef-themes"
+                       . #34#)
+                      :files
+                      (#29#
+                       (:exclude #30# "COPYING" "doclicense.texi"
+                                 "contrast-ratios.org"))
+                      :source #31# :protocol https :inherit t :depth 1
+                      :ref "8b18e4cfc9d1c7184931047cadc10720f96a4007"))
+ (sorcery-theme :source #1# :recipe
+                (:package "sorcery-theme" :fetcher github :repo
+                          "mtreca/emacs-theme-sorcery" :files
+                          (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                               #13# #14# #15# #16# #17#
+                               (:exclude #18# #19# #20# #21# #22# #23#
+                                         #24# #25#))
+                          :source #26# :protocol https :inherit t
+                          :depth 1 :ref
+                          "5a1c4445b9e6e09589a299a9962a6973272a0c2f"))
+ (sakura-theme :source #1# :recipe
+               (:package "sakura-theme" :fetcher github :repo
+                         "emacsfodder/emacs-theme-sakura" :files
+                         (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                              #13# #14# #15# #16# #17#
+                              (:exclude #18# #19# #20# #21# #22# #23#
+                                        #24# #25#))
+                         :source #26# :protocol https :inherit t
+                         :depth 1 :ref
+                         "6803175c9cbc0a31763c53bcbefe4b631d534afd"))
+ (orangey-bits-theme :source #1# :recipe
+                     (:package "orangey-bits-theme" :fetcher github
+                               :repo
+                               "emacsfodder/emacs-theme-orangey-bits"
+                               :files
+                               (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                    #12# #13# #14# #15# #16# #17#
+                                    (:exclude #18# #19# #20# #21# #22#
+                                              #23# #24# #25#))
+                               :source #26# :protocol https :inherit t
+                               :depth 1 :ref
+                               "42488307f6082881fae1ff32d459b280e7833aa4"))
+ (ancilla :source #1# :recipe
+          (:source nil :protocol https :inherit t :depth treeless
+                   :host github :repo "shouya/ancilla.el" :files
+                   ("*.el") :package "ancilla" :ref
+                   "72ca3fbef88152f9b4961c4f5d105c17bb5918ce"))
+ (tiny :source #1# :recipe
+       (:package "tiny" :fetcher github :repo "abo-abo/tiny" :files
+                 (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13# #14#
+                      #15# #16# #17#
+                      (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                #25#))
+                 :source #26# :protocol https :inherit t :depth 1 :ref
+                 "c107480fca7e42737c51b2afaa33ac31e92a7290"))
+ (loccur :source #1# :recipe
+         (:package "loccur" :fetcher codeberg :repo "fourier/loccur"
+                   :files
+                   (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                        #14# #15# #16# #17#
+                        (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                  #25#))
+                   :source #26# :protocol https :inherit t :depth 1
+                   :ref "f47c53a24a9d262898517c71284337821dad7ea9"))
+ (scratch-pop :source #1# :recipe
+              (:package "scratch-pop" :fetcher github :repo
+                        "zk-phi/scratch-pop" :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        1 :ref
+                        "cbe842fd78e4b742ece9fc493ebf43e69d872866"))
+ (lexic :source #1# :recipe
+        (:package "lexic" :repo "tecosaur/lexic" :fetcher github
+                  :files
+                  (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                       #14# #15# #16# #17#
+                       (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                 #25#))
+                  :source #26# :protocol https :inherit t :depth 1
+                  :ref "f9b3de4d9c2dd1ce5022383e1a504b87bf7d1b09"))
+ (elfeed-org :source #1# :recipe
+             (:package "elfeed-org" :repo "remyhonig/elfeed-org"
+                       :fetcher github :files
+                       (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                            #13# #14# #15# #16# #17#
+                            (:exclude #18# #19# #20# #21# #22# #23#
+                                      #24# #25#))
+                       :source #26# :protocol https :inherit t :depth
+                       1 :ref
+                       "d62d23e25c5e3be3d70b7fbe1eaeb6e43f93a061"))
+ (elfeed :source #1# :recipe
+         (:package "elfeed" :repo "skeeto/elfeed" :fetcher github
+                   :files (:defaults "README.md") :source #26#
+                   :protocol https :inherit t :depth 1 :ref
+                   "a39fb78e34ee25dc8baea83376f929d7c128344f"))
+ (mlscroll :source #1# :recipe
+           (:package "mlscroll" :repo "jdtsmith/mlscroll" :fetcher
+                     github :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth 1
+                     :ref "f9c18f1ae01d067c83f7c44e77257962345b119b"))
+ (git-timemachine :source #1# :recipe
+                  (:package "git-timemachine" :fetcher codeberg :repo
+                            "pidu/git-timemachine" :files
+                            (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                 #12# #13# #14# #15# #16# #17#
+                                 (:exclude #18# #19# #20# #21# #22#
+                                           #23# #24# #25#))
+                            :source #26# :protocol https :inherit t
+                            :depth 1 :ref
+                            "62ebb0c6588d848b1b7b90bf1a3aa4c04e873822"))
+ (info-colors :source #1# :recipe
+              (:package "info-colors" :fetcher github :repo
+                        "ubolonton/info-colors" :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        1 :ref
+                        "2e237c301ba62f0e0286a27c1abe48c4c8441143"))
+ (vterm :source #1# :recipe
+        (:package "vterm" :fetcher github :repo
+                  "akermu/emacs-libvterm" :files
+                  ("CMakeLists.txt" "elisp.c" "elisp.h"
+                   "emacs-module.h" "etc" "utf8.c" "utf8.h" "vterm.el"
+                   "vterm-module.c" "vterm-module.h")
+                  :source #26# :protocol https :inherit t :depth 1
+                  :ref "056ad74653704bc353d8ec8ab52ac75267b7d373"))
+ (occurx-mode :source #1# :recipe
+              (:package "occurx-mode" :repo "k32/occurx-mode" :fetcher
+                        github :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        1 :ref
+                        "71ecab6b1cdf6159a02cef3dd7d2610c45cbaf02"))
+ (relint :source #1# :recipe
+         (:package #35="relint" :repo
+                   ("https://github.com/mattiase/relint" . #35#)
+                   :files
+                   (#29#
+                    (:exclude #30# "Makefile" ".github" "*-test.el*"
+                              "test"))
+                   :source #31# :protocol https :inherit t :depth 1
+                   :ref "9eda48e439e13479151be4abbf47906326bc732f"))
+ (xr :source #1# :recipe
+     (:package #36="xr" :repo
+               ("https://github.com/mattiase/xr" . #36#) :files
+               (#29# (:exclude #30# "Makefile" ".github" "*-test.el*"))
+               :source #31# :protocol https :inherit t :depth 1 :ref
+               "31cd397f54591e3692bf88d6e1995236928e3561"))
+ (sqlite3 :source #1# :recipe
+          (:package "sqlite3" :fetcher github :repo
+                    "pekingduck/emacs-sqlite3-api" :files
+                    (:defaults "Makefile" "consts.c" "emacs-module.h"
+                               "sqlite3-api.c")
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "a601c9965e4d0178705a64b7d4f88709ca9aea66"))
+ (zig-mode :source #1# :recipe
+           (:package "zig-mode" :repo "ziglang/zig-mode" :fetcher
+                     github :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth 1
+                     :ref "f0b4a487530146f99230f4a5ff67e8d56c8f3f80"))
+ (merlin :source #1# :recipe
+         (:package "merlin" :fetcher github :repo "ocaml/merlin"
+                   :files
+                   ("emacs/*.el"
+                    (:exclude "emacs/merlin-ac.el"
+                              "emacs/merlin-company.el"
+                              "emacs/merlin-iedit.el"))
+                   :source #26# :protocol https :inherit t :depth 1
+                   :ref "86b4b261b950e409791a42815e4ede601c6be92d"))
+ (tuareg :source #1# :recipe
+         (:package "tuareg" :fetcher github :repo "ocaml/tuareg"
+                   :files
+                   (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                        #14# #15# #16# #17#
+                        (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                  #25#))
+                   :source #26# :protocol https :inherit t :depth 1
+                   :ref "1d53723e39f22ab4ab76d31f2b188a2879305092"))
+ (flymake-kondor :source #1# :recipe
+                 (:package "flymake-kondor" :repo
+                           "turbo-cafe/flymake-kondor" :fetcher github
+                           :files
+                           (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                                #13# #14# #15# #16# #17#
+                                (:exclude #18# #19# #20# #21# #22#
+                                          #23# #24# #25#))
+                           :source #26# :protocol https :inherit t
+                           :depth 1 :ref
+                           "784e57f36812a37e323409b90b935ef3c6920a22"))
+ (cider :source #1# :recipe
+        (:package "cider" :fetcher github :repo "clojure-emacs/cider"
+                  :files
+                  ("lisp/*.el" "bin/*.sh" "*.el" "clojure.sh"
+                   "lein.sh" (:exclude ".dir-locals.el"))
+                  :old-names (nrepl) :source #26# :protocol https
+                  :inherit t :depth 1 :ref
+                  "ead9a0d2efe9bd0b251d86a8e982d8b922a94ccc"))
+ (clojure-mode :source #1# :recipe
+               (:package "clojure-mode" :repo
+                         "clojure-emacs/clojure-mode" :fetcher github
+                         :files ("clojure-mode.el") :source #26#
+                         :protocol https :inherit t :depth 1 :ref
+                         "eabe29b076fff19db552d36d4babaa36ecf0b704"))
+ (janet-ts-mode :source #1# :recipe
+                (:source nil :protocol https :inherit t :depth
+                         treeless :host github :repo
+                         "sogaiu/janet-ts-mode" :files
+                         ("*.el" "extensions/*.el") :package
+                         "janet-ts-mode" :ref
+                         "ef68dfda16b44c418532bd51fe9e4247a16b31df"))
+ (rustic :source #1# :recipe
+         (:package "rustic" :repo "emacs-rustic/rustic" :fetcher
+                   github :files
+                   (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                        #14# #15# #16# #17#
+                        (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                  #25#))
+                   :source #26# :protocol https :inherit t :depth 1
+                   :ref "c1e1d5db1c156aaf2b29cc537abd89a07a76f88b"))
+ (lfe-mode :source #1# :recipe
+           (:package "lfe-mode" :fetcher github :repo "rvirding/lfe"
+                     :files
+                     ("emacs/inferior-lfe.el" "emacs/lfe-mode.el"
+                      "emacs/lfe-indent.el")
+                     :source #26# :protocol https :inherit t :depth 1
+                     :ref "2fb4de84f81ac822923ddc60eaccc4a938c9dfdc"))
+ (eglot-jl :source #1# :recipe
+           (:package "eglot-jl" :fetcher github :repo
+                     "non-Jedi/eglot-jl" :files
+                     (:defaults "*.jl" "*.toml") :source #26#
+                     :protocol https :inherit t :depth 1 :ref
+                     "7c968cc61fb64016ebe6dc8ff83fd05923db4374"))
+ (julia-mode :source #1# :recipe
+             (:package "julia-mode" :repo
+                       "JuliaEditorSupport/julia-emacs" :fetcher
+                       github :files
+                       (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                            #13# #14# #15# #16# #17#
+                            (:exclude #18# #19# #20# #21# #22# #23#
+                                      #24# #25#))
+                       :source #26# :protocol https :inherit t :depth
+                       1 :ref
+                       "0f4d74f9049df28e2f522733141bfc5b7a0f69a3"))
+ (go-mode :source #1# :recipe
+          (:package "go-mode" :repo "dominikh/go-mode.el" :fetcher
+                    github :files ("go-mode.el") :source #26#
+                    :protocol https :inherit t :depth 1 :ref
+                    "602d73e22646b1b98b2eb97927fd426c0d1d2f92"))
+ (lua-mode :source #1# :recipe
+           (:package "lua-mode" :repo "immerrr/lua-mode" :fetcher
+                     github :files
+                     (:defaults (:exclude "init-tryout.el")) :source
+                     #26# :protocol https :inherit t :depth 1 :ref
+                     "d074e4134b1beae9ed4c9b512af741ca0d852ba3"))
+ (markdown-mode :source #1# :recipe
+                (:package "markdown-mode" :fetcher github :repo
+                          "jrblevin/markdown-mode" :files
+                          (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                               #13# #14# #15# #16# #17#
+                               (:exclude #18# #19# #20# #21# #22# #23#
+                                         #24# #25#))
+                          :source #26# :protocol https :inherit t
+                          :depth 1 :ref
+                          "7659bc470d096e7a53285fa246cbabcb07d66a33"))
+ (elisp-slime-nav :source #1# :recipe
+                  (:package "elisp-slime-nav" :repo
+                            "purcell/elisp-slime-nav" :fetcher github
+                            :files
+                            (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                 #12# #13# #14# #15# #16# #17#
+                                 (:exclude #18# #19# #20# #21# #22#
+                                           #23# #24# #25#))
+                            :source #26# :protocol https :inherit t
+                            :depth treeless :ref
+                            "0b97339c552cac92788cab7c0724ca7ba160cd0e"))
+ (hyperbole :source #1# :recipe
+            (:package "hyperbole" :url
+                      "https://git.savannah.gnu.org/git/hyperbole.git"
+                      :fetcher git :files
+                      ("*.el" "MANIFEST" "dir" "ChangeLog" "Makefile"
+                       "HY-ABOUT" "HY-ANNOUNCE" "HY-CONCEPTS.kotl"
+                       "HY-NEWS" "HY-WHY.kotl" "INSTALL" "DEMO"
+                       "DEMO-ROLO.otl" "FAST-DEMO" "README.md" "_hypb"
+                       ".hypb" "hyrolo.py" "smart-clib-sym"
+                       "topwin.py" "hyperbole-banner.png"
+                       ("kotl" "kotl/MANIFEST" "kotl/EXAMPLE.kotl"
+                        "kotl/*.el")
+                       ("man" "man/hyperbole.texi" "man/hyperbole.css"
+                        "man/hkey-help.txt" "man/hyperbole.info"
+                        "man/hyperbole.html" "man/hyperbole.pdf")
+                       ("man/im" "man/im/*.png")
+                       ("HY-TALK" "HY-TALK/.hypb" "HY-TALK/HYPB"
+                        "HY-TALK/HY-TALK.org" "HY-TALK/HYPERAMP.org"
+                        "HY-TALK/HYPERORG.org")
+                       ("test" "test/MANIFEST" "test/*tests.el"
+                        "test/hy-test-*.el"))
+                      :source #26# :protocol https :inherit t :depth 1
+                      :ref "e610cf4190bb5cc9bbab75511511fc13dc65ccd5"))
+ (org-sliced-images :source #1# :recipe
+                    (:package "org-sliced-images" :fetcher github
+                              :repo "jcfk/org-sliced-images" :files
+                              (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                   #12# #13# #14# #15# #16# #17#
+                                   (:exclude #18# #19# #20# #21# #22#
+                                             #23# #24# #25#))
+                              :source #26# :protocol https :inherit t
+                              :depth 1 :ref
+                              "b98b88a55eff07e998e7789e0bf7307dd71db050"))
+ (org-appear :source #1# :recipe
+             (:package "org-appear" :fetcher github :repo
+                       "awth13/org-appear" :files
+                       (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                            #13# #14# #15# #16# #17#
+                            (:exclude #18# #19# #20# #21# #22# #23#
+                                      #24# #25#))
+                       :source #26# :protocol https :inherit t :depth
+                       1 :ref
+                       "32ee50f8fdfa449bbc235617549c1bccb503cb09"))
+ (org-super-agenda :source #1# :recipe
+                   (:package "org-super-agenda" :fetcher github :repo
+                             "alphapapa/org-super-agenda" :files
+                             (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                  #12# #13# #14# #15# #16# #17#
+                                  (:exclude #18# #19# #20# #21# #22#
+                                            #23# #24# #25#))
+                             :source #26# :protocol https :inherit t
+                             :depth treeless :ref
+                             "c07e35416ce749b42cbb70ff8d4e814362111bb5"))
+ (org-bullets :source #1# :recipe
+              (:package "org-bullets" :fetcher github :repo
+                        "integral-dw/org-bullets" :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        treeless :ref
+                        "767f55feb58b840a5a04eabfc3fbbf0d257c4792"))
+ (eldoc-box :source #1# :recipe
+            (:package "eldoc-box" :repo "casouri/eldoc-box" :fetcher
+                      github :files
+                      (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                           #14# #15# #16# #17#
+                           (:exclude #18# #19# #20# #21# #22# #23#
+                                     #24# #25#))
+                      :source #26# :protocol https :inherit t :depth 1
+                      :ref "1a2f604ef290bd50f46ad7b324b058c4650d272f"))
+ (dired-collapse :source #1# :recipe
+                 (:package "dired-collapse" :fetcher github :repo
+                           "Fuco1/dired-hacks" :files
+                           ("dired-collapse.el") :source #26#
+                           :protocol https :inherit t :depth 1 :ref
+                           "e9e408e8571aee5574ca0a431ef15cac5a3585d4"))
+ (dired-narrow :source #1# :recipe
+               (:package "dired-narrow" :fetcher github :repo
+                         "Fuco1/dired-hacks" :files
+                         ("dired-narrow.el") :source #26# :protocol
+                         https :inherit t :depth 1 :ref
+                         "e9e408e8571aee5574ca0a431ef15cac5a3585d4"))
+ (dired-hacks-utils :source #1# :recipe
+                    (:package "dired-hacks-utils" :fetcher github
+                              :repo "Fuco1/dired-hacks" :files
+                              ("dired-hacks-utils.el") :source #26#
+                              :protocol https :inherit t :depth 1 :ref
+                              "e9e408e8571aee5574ca0a431ef15cac5a3585d4"))
+ (dired-sidebar :source #1# :recipe
+                (:package "dired-sidebar" :fetcher github :repo
+                          "jojojames/dired-sidebar" :files
+                          (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                               #13# #14# #15# #16# #17#
+                               (:exclude #18# #19# #20# #21# #22# #23#
+                                         #24# #25#))
+                          :source #26# :protocol https :inherit t
+                          :depth treeless :ref
+                          "dd758094849a05c742868e8a9e57f47f7ec4d07a"))
+ (diredfl :source #1# :recipe
+          (:package "diredfl" :fetcher github :repo "purcell/diredfl"
+                    :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "fe72d2e42ee18bf6228bba9d7086de4098f18a70"))
+ (alarm-clock :source #1# :recipe
+              (:package "alarm-clock" :fetcher github :repo
+                        "wlemuel/alarm-clock" :files
+                        (:defaults "*.mp3") :source #26# :protocol
+                        https :inherit t :depth 1 :ref
+                        "f924d0e75eb7ce29055bdc1a1e644bb1dcabda09"))
+ (pdf-tools :source #1# :recipe
+            (:package "pdf-tools" :fetcher github :repo
+                      "vedang/pdf-tools" :files
+                      (:defaults "README" ("build" "Makefile")
+                                 ("build" "server"))
+                      :source #26# :protocol https :inherit t :depth 1
+                      :ref "30b50544e55b8dbf683c2d932d5c33ac73323a16"))
+ (whitespace-cleanup-mode :source #1# :recipe
+                          (:package "whitespace-cleanup-mode" :fetcher
+                                    github :repo
+                                    "purcell/whitespace-cleanup-mode"
+                                    :files
+                                    (#3# #4# #5# #6# #7# #8# #9# #10#
+                                         #11# #12# #13# #14# #15# #16#
+                                         #17#
+                                         (:exclude #18# #19# #20# #21#
+                                                   #22# #23# #24# #25#))
+                                    :source #26# :protocol https
+                                    :inherit t :depth treeless :ref
+                                    "0c9b795d78e2b230c426684af59c71794f2fc8b0"))
+ (rainbow-mode :source #1# :recipe
+               (:package #37="rainbow-mode" :repo (#27# . #37#)
+                         :branch "externals/rainbow-mode" :files
+                         (#29# (:exclude #30#)) :source #31# :protocol
+                         https :inherit t :depth 1 :ref
+                         "f7db3b5919f70420a91eb199f8663468de3033f3"))
+ (transpose-frame :source #1# :recipe
+                  (:package "transpose-frame" :fetcher github :repo
+                            "emacsorphanage/transpose-frame" :files
+                            (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                 #12# #13# #14# #15# #16# #17#
+                                 (:exclude #18# #19# #20# #21# #22#
+                                           #23# #24# #25#))
+                            :source #26# :protocol https :inherit t
+                            :depth treeless :ref
+                            "94c87794d53883a2358d13da264ad8dab9a52daa"))
+ (diff-hl :source #1# :recipe
+          (:package "diff-hl" :fetcher github :repo "dgutov/diff-hl"
+                    :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "65a5de16e21c87b7c12a78a63fc3b57e07c03c86"))
+ (perspective :source #1# :recipe
+              (:package "perspective" :fetcher github :repo
+                        "nex3/perspective-el" :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        treeless :ref
+                        "e32d3ea731f6bc551ce196527b3cb0dc19d71151"))
+ (bicycle :source #1# :recipe
+          (:package "bicycle" :fetcher github :repo "tarsius/bicycle"
+                    :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "04c3e44eb10303b81c47c1d333df1fa23a224963"))
+ (keycast :source #1# :recipe
+          (:package "keycast" :fetcher github :repo "tarsius/keycast"
+                    :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "c44618d2867fc2410e5061fef2a805e974198cf2"))
+ (flimenu :source #1# :recipe
+          (:package "flimenu" :fetcher github :repo
+                    "colonelpanic8/flimenu" :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "4c0ff37cf3bd6c836bd136b5f6c450560a6c92b9"))
+ (imenu-list :source #1# :recipe
+             (:package "imenu-list" :repo "bmag/imenu-list" :fetcher
+                       github :files
+                       (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                            #13# #14# #15# #16# #17#
+                            (:exclude #18# #19# #20# #21# #22# #23#
+                                      #24# #25#))
+                       :source #26# :protocol https :inherit t :depth
+                       treeless :ref
+                       "76f2335ee6f2f066d87fe4e4729219d70c9bc70d"))
+ (highlight-defined :source #1# :recipe
+                    (:package "highlight-defined" :fetcher github
+                              :repo "Fanael/highlight-defined" :files
+                              (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                   #12# #13# #14# #15# #16# #17#
+                                   (:exclude #18# #19# #20# #21# #22#
+                                             #23# #24# #25#))
+                              :source #26# :protocol https :inherit t
+                              :depth 1 :ref
+                              "4420bdda419875dacb065468aafe273b2022580e"))
+ (highlight-quoted :source #1# :recipe
+                   (:package "highlight-quoted" :fetcher github :repo
+                             "Fanael/highlight-quoted" :files
+                             (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                  #12# #13# #14# #15# #16# #17#
+                                  (:exclude #18# #19# #20# #21# #22#
+                                            #23# #24# #25#))
+                             :source #26# :protocol https :inherit t
+                             :depth treeless :ref
+                             "24103478158cd19fbcfb4339a3f1fa1f054f1469"))
+ (highlight-numbers :source #1# :recipe
+                    (:package "highlight-numbers" :fetcher github
+                              :repo "Fanael/highlight-numbers"
+                              :old-names (number-font-lock-mode)
+                              :files
+                              (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                   #12# #13# #14# #15# #16# #17#
+                                   (:exclude #18# #19# #20# #21# #22#
+                                             #23# #24# #25#))
+                              :source #26# :protocol https :inherit t
+                              :depth treeless :ref
+                              "8b4744c7f46c72b1d3d599d4fb75ef8183dee307"))
+ (outline-minor-faces :source #1# :recipe
+                      (:package "outline-minor-faces" :fetcher github
+                                :repo "tarsius/outline-minor-faces"
+                                :files
+                                (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                     #12# #13# #14# #15# #16# #17#
+                                     (:exclude #18# #19# #20# #21#
+                                               #22# #23# #24# #25#))
+                                :source #26# :protocol https :inherit
+                                t :depth treeless :ref
+                                "66199fcbd64181f5d74e44ed03bd7bb4502fa547"))
+ (mixed-pitch :source #1# :recipe
+              (:package "mixed-pitch" :fetcher gitlab :repo
+                        "precompute/mixed-pitch" :files
+                        (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                             #13# #14# #15# #16# #17#
+                             (:exclude #18# #19# #20# #21# #22# #23#
+                                       #24# #25#))
+                        :source #26# :protocol https :inherit t :depth
+                        treeless :host github :ref
+                        "35489e2667705b10d77c054136f7f9e66aa26870"))
+ (helpful :source #1# :recipe
+          (:package "helpful" :repo "Wilfred/helpful" :fetcher github
+                    :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "4ba24cac9fb14d5fdc32582cd947572040e82b2c"))
+ (rainbow-delimiters :source #1# :recipe
+                     (:package "rainbow-delimiters" :fetcher github
+                               :repo "Fanael/rainbow-delimiters"
+                               :files
+                               (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                    #12# #13# #14# #15# #16# #17#
+                                    (:exclude #18# #19# #20# #21# #22#
+                                              #23# #24# #25#))
+                               :source #26# :protocol https :inherit t
+                               :depth treeless :ref
+                               "f40ece58df8b2f0fb6c8576b527755a552a5e763"))
+ (which-key :source #1# :recipe
+            (:package "which-key" :repo "justbur/emacs-which-key"
+                      :fetcher github :files
+                      (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                           #14# #15# #16# #17#
+                           (:exclude #18# #19# #20# #21# #22# #23#
+                                     #24# #25#))
+                      :source #26# :protocol https :inherit t :depth
+                      treeless :ref
+                      "38d4308d1143b61e4004b6e7a940686784e51500"))
+ (olivetti :source #1# :recipe
+           (:package "olivetti" :fetcher github :repo "rnkn/olivetti"
+                     :files
+                     (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                          #14# #15# #16# #17#
+                          (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                    #25#))
+                     :source #26# :protocol https :inherit t :depth
+                     treeless :ref
+                     "845eb7a95a3ca3325f1120c654d761b91683f598"))
+ (undo-fu-session :source #1# :recipe
+                  (:package "undo-fu-session" :fetcher codeberg :repo
+                            "ideasman42/emacs-undo-fu-session" :files
+                            (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                 #12# #13# #14# #15# #16# #17#
+                                 (:exclude #18# #19# #20# #21# #22#
+                                           #23# #24# #25#))
+                            :source #26# :protocol https :inherit t
+                            :depth treeless :ref
+                            "d90d42ddba8fa42ef5dc109196545caeabb42b75"))
+ (vundo :source #1# :recipe
+        (:package #38="vundo" :repo
+                  ("https://github.com/casouri/vundo" . #38#) :files
+                  (#29# (:exclude #30# "test")) :source #31# :protocol
+                  https :inherit t :depth treeless :ref
+                  "288892ee93214ddcaf65fdd9f3134c1bd10100ee"))
+ (magit-section :source #1# :recipe
+                (:package "magit-section" :fetcher github :repo
+                          "magit/magit" :files
+                          ("lisp/magit-section.el"
+                           "docs/magit-section.texi"
+                           "magit-section-pkg.el")
+                          :source #26# :protocol https :inherit t
+                          :depth treeless :ref
+                          "b83417276c494f08feb02939ae05bff23c1e4224"))
+ (magit :source #1# :recipe
+        (:package "magit" :fetcher github :repo "magit/magit" :files
+                  ("lisp/magit*.el" "lisp/git-*.el" "docs/magit.texi"
+                   "docs/AUTHORS.md" "LICENSE" ".dir-locals.el"
+                   (:exclude "lisp/magit-section.el"))
+                  :source #26# :protocol https :inherit t :depth
+                  treeless :ref
+                  "b83417276c494f08feb02939ae05bff23c1e4224"))
+ (consult :source #1# :recipe
+          (:package "consult" :repo "minad/consult" :fetcher github
+                    :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "a055b4cde4d8038c5cd57251e0985835bc17cf16"))
+ (wgrep :source #1# :recipe
+        (:package "wgrep" :fetcher github :repo
+                  "mhayashi1120/Emacs-wgrep" :files ("wgrep.el")
+                  :source #26# :protocol https :inherit t :depth 1
+                  :ref "49f09ab9b706d2312cab1199e1eeb1bcd3f27f6f"))
+ (embark-consult :source #1# :recipe
+                 (:package "embark-consult" :repo "oantolin/embark"
+                           :fetcher github :files
+                           ("embark-consult.el") :source #26#
+                           :protocol https :inherit t :depth 1 :ref
+                           "d2daad08e04090391b3221fa95000492a1f8aabe"))
+ (embark :source #1# :recipe
+         (:package "embark" :repo "oantolin/embark" :fetcher github
+                   :files ("embark.el" "embark-org.el" "embark.texi")
+                   :source #26# :protocol https :inherit t :depth 1
+                   :ref "d2daad08e04090391b3221fa95000492a1f8aabe"))
+ (kind-icon :source #1# :recipe
+            (:package #39="kind-icon" :repo
+                      ("https://github.com/jdtsmith/kind-icon" . #39#)
+                      :files (#29# (:exclude #30#)) :source #31#
+                      :protocol https :inherit t :depth treeless :ref
+                      "b206898fb004bb0f3e0e3bbb9bd630342770db7d"))
+ (corfu-candidate-overlay :source #1# :recipe
+                          (:package "corfu-candidate-overlay" :url
+                                    "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
+                                    :fetcher git :files
+                                    (#3# #4# #5# #6# #7# #8# #9# #10#
+                                         #11# #12# #13# #14# #15# #16#
+                                         #17#
+                                         (:exclude #18# #19# #20# #21#
+                                                   #22# #23# #24# #25#))
+                                    :source #26# :protocol https
+                                    :inherit t :depth 1 :ref
+                                    "f730de2c150720ee70d4d7be4b8bb533c7dfc97e"))
+ (corfu :source #1# :recipe
+        (:package "corfu" :repo "minad/corfu" :files
+                  ("*.el" "extensions/*.el") :fetcher github :source
+                  #26# :protocol https :inherit t :depth treeless
+                  :host github :ref
+                  "9dc2f900ef58fdd75b4804039848da732f56465c"))
+ (marginalia :source #1# :recipe
+             (:package "marginalia" :repo "minad/marginalia" :fetcher
+                       github :files
+                       (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                            #13# #14# #15# #16# #17#
+                            (:exclude #18# #19# #20# #21# #22# #23#
+                                      #24# #25#))
+                       :source #26# :protocol https :inherit t :depth
+                       treeless :ref
+                       "c390456b89ad46bc10c3ef2ee5df59947b72084e"))
+ (orderless :source #1# :recipe
+            (:package "orderless" :repo "oantolin/orderless" :fetcher
+                      github :files
+                      (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                           #14# #15# #16# #17#
+                           (:exclude #18# #19# #20# #21# #22# #23#
+                                     #24# #25#))
+                      :source #26# :protocol https :inherit t :depth
+                      treeless :ref
+                      "411051c3257d60f0492cf88065193bb443b6ca0d"))
+ (vertico :source #1# :recipe
+          (:package "vertico" :repo "minad/vertico" :files
+                    ("*.el" "extensions/*.el") :fetcher github :source
+                    #26# :protocol https :inherit t :depth treeless
+                    :host github :ref
+                    "c033c7149de510b4da9c473b31a6d73619868ce0"))
+ (general :source #1# :recipe
+          (:package "general" :fetcher github :repo
+                    "noctuid/general.el" :files
+                    (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                         #14# #15# #16# #17#
+                         (:exclude #18# #19# #20# #21# #22# #23# #24#
+                                   #25#))
+                    :source #26# :protocol https :inherit t :depth
+                    treeless :ref
+                    "826bf2b97a0fb4a34c5eb96ec2b172d682fd548f"))
+ (hyperstitional-themes :source #1# :recipe
+                        (:package "hyperstitional-themes" :fetcher
+                                  github :repo
+                                  "precompute/hyperstitional-themes"
+                                  :files
+                                  (#3# #4# #5# #6# #7# #8# #9# #10#
+                                       #11# #12# #13# #14# #15# #16#
+                                       #17#
+                                       (:exclude #18# #19# #20# #21#
+                                                 #22# #23# #24# #25#))
+                                  :source #26# :protocol https
+                                  :inherit t :depth 1 :ref
+                                  "8e800f4034c7552f5ccaf85939d125d11883f9c1"))
+ (sculpture-themes :source #1# :recipe
+                   (:package "sculpture-themes" :fetcher github :repo
+                             "precompute/sculpture-themes" :files
+                             (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                  #12# #13# #14# #15# #16# #17#
+                                  (:exclude #18# #19# #20# #21# #22#
+                                            #23# #24# #25#))
+                             :source #26# :protocol https :inherit t
+                             :depth treeless :ref
+                             "723a3b348e9970e3f85910bdf319925c4f241a7d"))
+ (evil-indent-plus :source #1# :recipe
+                   (:package "evil-indent-plus" :fetcher github :repo
+                             "TheBB/evil-indent-plus" :files
+                             (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                  #12# #13# #14# #15# #16# #17#
+                                  (:exclude #18# #19# #20# #21# #22#
+                                            #23# #24# #25#))
+                             :source #26# :protocol https :inherit t
+                             :depth 1 :ref
+                             "f392696e4813f1d3a92c7eeed333248914ba6dae"))
+ (evil-visualstar :source #1# :recipe
+                  (:package "evil-visualstar" :repo
+                            "bling/evil-visualstar" :fetcher github
+                            :files
+                            (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                 #12# #13# #14# #15# #16# #17#
+                                 (:exclude #18# #19# #20# #21# #22#
+                                           #23# #24# #25#))
+                            :source #26# :protocol https :inherit t
+                            :depth treeless :ref
+                            "06c053d8f7381f91c53311b1234872ca96ced752"))
+ (evil-surround :source #1# :recipe
+                (:package "evil-surround" :repo
+                          "emacs-evil/evil-surround" :fetcher github
+                          :old-names (surround) :files
+                          (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                               #13# #14# #15# #16# #17#
+                               (:exclude #18# #19# #20# #21# #22# #23#
+                                         #24# #25#))
+                          :source #26# :protocol https :inherit t
+                          :depth treeless :ref
+                          "da05c60b0621cf33161bb4335153f75ff5c29d91"))
+ (evil-snipe :source #1# :recipe
+             (:package "evil-snipe" :repo "hlissner/evil-snipe"
+                       :fetcher github :files
+                       (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                            #13# #14# #15# #16# #17#
+                            (:exclude #18# #19# #20# #21# #22# #23#
+                                      #24# #25#))
+                       :source #26# :protocol https :inherit t :depth
+                       treeless :ref
+                       "c2108d3932fcd2f75ac3e48250d6badd668f5b4f"))
+ (evil-goggles :source #1# :recipe
+               (:package "evil-goggles" :repo "edkolev/evil-goggles"
+                         :fetcher github :files
+                         (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                              #13# #14# #15# #16# #17#
+                              (:exclude #18# #19# #20# #21# #22# #23#
+                                        #24# #25#))
+                         :source #26# :protocol https :inherit t
+                         :depth treeless :ref
+                         "34ca276a85f615d2b45e714c9f8b5875bcb676f3"))
+ (evil-numbers :source #1# :recipe
+               (:package "evil-numbers" :repo "juliapath/evil-numbers"
+                         :fetcher github :files
+                         (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                              #13# #14# #15# #16# #17#
+                              (:exclude #18# #19# #20# #21# #22# #23#
+                                        #24# #25#))
+                         :source #26# :protocol https :inherit t
+                         :depth treeless :ref
+                         "f4bbb729eebeef26966fae17bd414a7b49f82275"))
+ (evil-nerd-commenter :source #1# :recipe
+                      (:package "evil-nerd-commenter" :fetcher github
+                                :repo
+                                "redguardtoo/evil-nerd-commenter"
+                                :files
+                                (#3# #4# #5# #6# #7# #8# #9# #10# #11#
+                                     #12# #13# #14# #15# #16# #17#
+                                     (:exclude #18# #19# #20# #21#
+                                               #22# #23# #24# #25#))
+                                :source #26# :protocol https :inherit
+                                t :depth treeless :ref
+                                "ae52c5070a48793e2c24474c9c8dbf20175d18a0"))
+ (evil-lion :source #1# :recipe
+            (:package "evil-lion" :fetcher github :repo
+                      "edkolev/evil-lion" :files
+                      (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                           #14# #15# #16# #17#
+                           (:exclude #18# #19# #20# #21# #22# #23#
+                                     #24# #25#))
+                      :source #26# :protocol https :inherit t :depth
+                      treeless :ref
+                      "5a0bca151466960e090d1803c4c5ded88875f90a"))
+ (evil-exchange :source #1# :recipe
+                (:package "evil-exchange" :fetcher github :repo
+                          "Dewdrops/evil-exchange" :files
+                          (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12#
+                               #13# #14# #15# #16# #17#
+                               (:exclude #18# #19# #20# #21# #22# #23#
+                                         #24# #25#))
+                          :source #26# :protocol https :inherit t
+                          :depth treeless :ref
+                          "5f0a2d41434c17c6fb02e4f744043775de1c63a2"))
+ (evil-collection :source #1# :recipe
+                  (:package "evil-collection" :fetcher github :repo
+                            "emacs-evil/evil-collection" :files
+                            (:defaults "modes") :source #26# :protocol
+                            https :inherit t :depth treeless :ref
+                            "58766492f7dc830c010d5a4a095cf23d6eb0aefc"))
+ (evil-args :source #1# :recipe
+            (:package "evil-args" :fetcher github :repo
+                      "wcsmith/evil-args" :files
+                      (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                           #14# #15# #16# #17#
+                           (:exclude #18# #19# #20# #21# #22# #23#
+                                     #24# #25#))
+                      :source #26# :protocol https :inherit t :depth 1
+                      :ref "a8151556f63c9d45d0c44c8a7ef9e5a542f3cdc7"))
+ (evil-anzu :source #1# :recipe
+            (:package "evil-anzu" :fetcher github :repo
+                      "emacsorphanage/evil-anzu" :files
+                      (#3# #4# #5# #6# #7# #8# #9# #10# #11# #12# #13#
+                           #14# #15# #16# #17#
+                           (:exclude #18# #19# #20# #21# #22# #23#
+                                     #24# #25#))
+                      :source #26# :protocol https :inherit t :depth
+                      treeless :ref
+                      "d1e98ee6976437164627542909a25c6946497899"))
+ (evil :source #1# :recipe
+       (:package "evil" :repo "emacs-evil/evil" :fetcher github :files
+                 (:defaults "doc/build/texinfo/evil.texi"
+                            (:exclude "evil-test-helpers.el"))
+                 :source #26# :protocol https :inherit t :depth
+                 treeless :ref
+                 "9adbebddcdd495b53748559fae7750bbcf9eec6b"))
+ (elpaca-use-package :source #1# :recipe
+                     (:package "elpaca-use-package" :wait t :repo
+                               "https://github.com/progfolio/elpaca.git"
+                               :files
+                               ("extensions/elpaca-use-package.el")
+                               :main
+                               "extensions/elpaca-use-package.el"
+                               :build (:not elpaca--compile-info)
+                               :source "Elpaca extensions" :protocol
+                               https :inherit t :depth treeless :ref
+                               "7a68b7dc6b73094e0e3829efd009dbc6bd0fb495"))
+ (elpaca :source
+   #1# :recipe
+   (:source nil :protocol https :inherit t :depth treeless :repo
+            "https://github.com/progfolio/elpaca.git" :ref
+            "7a68b7dc6b73094e0e3829efd009dbc6bd0fb495" :files
+            (:defaults (:exclude "extensions")) :build
+            (:not elpaca--activate-package) :package "elpaca")))

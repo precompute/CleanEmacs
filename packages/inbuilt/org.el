@@ -13,7 +13,7 @@
         org-startup-with-inline-images t
         org-fontify-done-headline t
         org-fontify-todo-headline t
-        org-ellipsis " ＋＋"
+        org-ellipsis " ++"
         org-tsr-regexp-both "[[<]\\([[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\(?: .*?\\)?\\)[]>]\\(--?-?[[<]\\([[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\(?: .*?\\)?\\)[]>]\\)?"
         org-id-locations-file "/home/sys2/46/.orgids"
         org-time-stamp-custom-formats '("<%y-%m-%d %H:%M:%S>" . "<%y-%m-%d %H:%M:%S>")
