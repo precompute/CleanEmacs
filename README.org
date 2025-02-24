@@ -34,7 +34,7 @@ This is my personal Emacs config.  I migrated from [[https://github.com/doomemac
 
 I’ve been using Doom Emacs for four years, and I wanted my config to be a lighter version of the same.  Hence, I’ve tried to stick as close to the keybinds I’m used to.  Other parts of this config also offer Doom-like functionality.
 
-We don’t aim this config to be minimal, but instead to be easy to understand.
+I don’t aim for this config to be minimal, but rather to be easy to understand.
 
 - Recommended Emacs Version :: =31.0.50=
 
@@ -80,7 +80,7 @@ configure --with-native-compilation=aot 'CFLAGS=-flto -O3
 - =modeline.el= :: Should be named "=headerline.el=".  Defines and =propertize= s functions that show information about the buffer, and =display= s them.  Disables the =mode-line= and instead uses the =header-line=.  Light-weight and inherits colors from the active theme.  Replaced by =modeline-simple.el=.
 
 ** Package Management
-We use [[https://github.com/progfolio/elpaca/][Elpaca]] to manage packages.  It’s very easy to set up, and works well with native-compilation.  The user does not need to intervene.
+[[https://github.com/progfolio/elpaca/][Elpaca]] is used to manage packages.  It’s very easy to set up, and works well with native-compilation.  The user does not need to intervene.
 
 Inspired by Doom, this config uses separate module-like configuration files for every package.  This is aided by a small custom function (=elpacaLF=) that creates a config file for a package when it is installed for the first time, and loads the file.  The config is just a =use-package= block with =:elpaca= (if necessary).
 
@@ -91,32 +91,31 @@ If you don’t like the package, you can remove the corresponding =elpacaLF= inv
 All packages will be =:pin= ned shortly, to make this reproducible.
 
 ** Vim Emulation
-We use =evil= for Vim Emulation.  As a Vim refugee, I’ve tried many times to get used to Emacs’ keybinds, but I keep going back to the simplicity of modal editing.
+=evil= is used for Vim Emulation.  As a Vim refugee, I’ve tried many times to get used to Emacs’ keybinds, but I keep going back to the simplicity of modal editing.
 
 *** Keybinds
-We use [[https://github.com/noctuid/general.el][general.el]] for keybinds. 
+[[https://github.com/noctuid/general.el][general.el]] is used for keybinds. 
 
 - Additional modifiers used :: *Hyper*.  Use /xmodmap/ to convert a key to *Hyper*.
 
 ** Headerline
-The Headerline is mostly just a propertized default modeline.  It uses =face-remapping-alist= to change the face for the header-line depending on =(buffer-modified-p)=.  The name of the current buffer is relative to the project root (if found).  We also cache the name of the current buffer (picked up from doom-modeline’s "light" variant).  The active buffer also has two indicators on either extreme end.
+The Headerline is mostly just a propertized default modeline.  It uses =face-remapping-alist= to change the face for =headerline-buffer-status= depending on =(buffer-modified-p)=.  The name of the current buffer is relative to the project root (if found).  The name of the current buffer is cached (borrowed from doom-modeline’s "light" variant).  +The active buffer also has two indicators on either extreme end.+
 
 * Making it your own
 
-As of [23-06-14 22:28:53] , this config is still a work in progress but ~90% to *STABLE* status.  It lacks language-specific configuration and some ease-of-use modifications.  Those will be added in time, but if you’re a former Doom Emacs user, you can use this config as a starting point.
-
-What you need to do:
-
 - Clone to =~/.emacs.d=.  Alternatively, use [[https://github.com/plexus/chemacs2][Chemacs]] to enable multiple configs.
-  
-- Search for =~/= and =sys2= and remove / modify all local filesystem calls.
+- Modify the active fonts in the function =set-fonts-c= in =ui.el=
+- +Search for =~/= and =sys2= and remove / modify all local filesystem calls.+  Modify =org-id-locations-file= in =packages/inbuilt/org.el=.
+- Seach for =sys2= in the =functions.el= and modify any functions you’d want to use.
 
+As of [23-06-14 22:28:53] , this config is still a work in progress but ~90% to *STABLE* status.  It lacks language-specific configuration and some ease-of-use modifications.  Those will be added in time, but if you’re a former Doom Emacs user, you can use this config as a starting point.+
+  
 Update [23-09-06 18:07:21] : This project is about ~95% stable.  There are no overt bugs or surprises, almost everything works well and with speed.  Language support has been added, along with many small improvements.  The emacs version has also been bumped, but no changes have been necessary.
 
 Update [24-04-18 21:21:51] : This project is stable, but if you want to use it, you’ll have to weed out all the references to my local filesystem.
   
 * Screenshots
-With the new modeline:
+With the new headerline:
 [[file:.assets/screenshot5.jpg]]
  
  
