@@ -76,6 +76,7 @@
 ;; (window-divider-mode 1)
 (savehist-mode 1)
 (save-place-mode 1)
+(undelete-frame-mode 1)
 
 (setq-default help-at-pt-display-when-idle t
               help-at-pt-timer-delay 1)

@@ -175,7 +175,8 @@
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
   "qQ" 'clean-exit
-  "qf" 'delete-frame
+  "qf" 'delete-frame-force-c
+  "qF" 'undelete-frame
   "qr" 'restart-emacs)
 
 ;;;;;; Sans leader

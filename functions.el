@@ -338,6 +338,12 @@ Needs frame-parameter alpha-background."
   (interactive)
   (vterm 't))
 
+;;;; Frame Functions
+(defun delete-frame-force-c ()
+  "`delete-frame’ with FORCE set to t."
+  (interactive)
+  (delete-frame nil t))
+
 ;;;; Window Functions
 ;; It's like golden-ratio but just one function.
 ;; width, then height.
