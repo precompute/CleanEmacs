@@ -265,6 +265,8 @@
 (elpacaLF "tiny")
 ;;;; LLM
 (elpacaC "ancilla")
+;;;; Evil-Lispops
+(elpacaLF "evil-lispops")
 
 ;;; Themes (that I never really use)
 (elpacaLF "orangey-bits-theme") ;; Orange!

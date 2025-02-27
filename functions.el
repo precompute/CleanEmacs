@@ -93,6 +93,12 @@
                                 :height 1.5
                                 :box (list :line-width 1)))))
 
+(defun copy-current-buffer-path-c ()
+  (interactive)
+  (let ((n (if buffer-file-name buffer-file-name "nil")))
+    (kill-new n)
+    (message (concat "Copied " (propertize n 'face 'success) " to clipboard."))))
+
 (defun echo-current-time ()
   "Echo the current time"
   (interactive)
