@@ -267,6 +267,8 @@
 (elpacaC "ancilla")
 ;;;; Evil-Lispops
 (elpacaLF "evil-lispops")
+;;;; Breadcrumb
+(elpacaLF "breadcrumb")
 
 ;;; Themes (that I never really use)
 (elpacaLF "orangey-bits-theme") ;; Orange!

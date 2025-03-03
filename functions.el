@@ -840,3 +840,8 @@ Then place point at end of #+begin statement for metadata insertion."
   (find-file (concat "~/46/da/timelog/"
                      (format-time-string "%y%m%d") ".log.org"))
   (org-todo-timestamp-todo-c))
+
+;; TODO
+;; Save all visible windows
+;; Continue a list (numbered / otherwise)
+;; Get fuzzy file list of current non-git-root folder

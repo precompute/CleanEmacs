@@ -316,8 +316,8 @@ compatibility with `evil-search'."
        'face 'headerline-match-face))))
 
 (defun headerline-flymake-c ()
-  "Mode line construct displaying `flymake-mode-line-format'.
-Specific to the current window's mode line."
+  "Construct that displays `flymake-mode-line-format'.
+Specific to the current window."
   `(:eval
     (when (and (bound-and-true-p flymake-mode)
                (flymake-running-backends))
@@ -335,6 +335,16 @@ Specific to the current window's mode line."
         (headerline-flymake-count-c :note)
         'face '( :weight black
                  :foreground ,headerline--note-face))))))
+
+(defun headerline-breadcrumb-c ()
+  "Construct that displays `breadcrumb-imenu-crumbs’.
+Specific to the current window."
+  `(:eval (breadcrumb-imenu-crumbs)))
+
+(defun headerline-right-align-c ()
+  "Wrapper around the builtin function `mode--line-format-right-align’.
+Functionally equivalent to `mode-line-format-right-align’."
+  `(:eval (mode--line-format-right-align)))
 
 ;;;;; Headerline Construction
 (defun headerline-simple-mode ()
@@ -360,8 +370,21 @@ Specific to the current window's mode line."
 
 (headerline-generate-buffer-id-cache-c)
 
-(defun mode-line-format-nil ()
-  (setq mode-line-format nil))
+(defun modeline-simple-mode ()
+  (interactive)
+  (if (and (fboundp 'breadcrumb--header-line)
+           (boundp 'enable-breadcrumb?)
+           (or (buffer-local-value 'enable-breadcrumb? (current-buffer))
+               (eq major-mode 'org-mode)))
+      (setq-local ;; mode-line-right-align-edge 'left-fringe
+                  mode-line-format
+                  `(:eval
+                    (while-no-input
+                      (mapcar #'format-mode-line
+                              (list
+                               ;; (headerline-right-align-c)
+                               (headerline-breadcrumb-c))))))
+    (setq mode-line-format nil)))
 
 (dolist (hook '(prog-mode-hook
                 text-mode-hook
@@ -372,8 +395,8 @@ Specific to the current window's mode line."
                 doc-view-mode-hook
                 dired-mode-hook
                 apropos-mode-hook
-                debugger-mode
-                messages-buffer-mode
-                magit-status-mode))
-  (add-hook hook 'headerline-simple-mode)
-  (add-hook hook 'mode-line-format-nil))
+                debugger-mode-hook
+                messages-buffer-mode-hook
+                magit-status-mode-hook))
+  (add-hook hook 'headerline-simple-mode 100)
+  (add-hook hook 'modeline-simple-mode 100))
