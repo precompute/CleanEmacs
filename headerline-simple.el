@@ -53,28 +53,33 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
   (while-no-input
     (when after-init-time
       (setq headerline-buffer-id-cache-c
-            (if buffer-file-truename
-                (let ((g-root (locate-dominating-file buffer-file-truename ".git")))
-                  (if (not g-root)
-                      nil
-                    (let* ((buf (file-truename buffer-file-truename))
-                           (gitroot (file-truename g-root))
-                           (gitroot-nodash (substring gitroot 0 -1))
-                           (gitroot-a (replace-regexp-in-string
-                                       "^[z-a]*/" "" gitroot-nodash))
-                           (dirbefore (substring
-                                       gitroot-nodash
-                                       0
-                                       (* -1
-                                          (+ 1
-                                             (length gitroot-a))))))
-                      (cons gitroot-a
-                            (substring buf
-                                       (length gitroot)
-                                       nil)))))
-              (if (eq major-mode 'dired-mode)
-                  (cons nil dired-directory)
-                nil))))))
+            (cond
+             (buffer-file-truename
+              (let ((g-root (locate-dominating-file buffer-file-truename ".git")))
+                (if (not g-root)
+                    nil
+                  (let* ((buf (file-truename buffer-file-truename))
+                         (gitroot (file-truename g-root))
+                         (gitroot-nodash (substring gitroot 0 -1))
+                         (gitroot-a (replace-regexp-in-string
+                                     "^[z-a]*/" "" gitroot-nodash))
+                         (dirbefore (substring
+                                     gitroot-nodash
+                                     0
+                                     (* -1
+                                        (+ 1
+                                           (length gitroot-a))))))
+                    (cons gitroot-a
+                          (substring buf
+                                     (length gitroot)
+                                     nil))))))
+             ((eq major-mode 'dired-mode)
+              (cons nil dired-directory))
+             ((eq major-mode 'helpful-mode)
+              (cons (format (if helpful--callable-p "Fn" "Var")
+                            'face 'headerline-narrow-indicator-face)
+                    (format "%s" helpful--sym)))
+             (t nil))))))
 (dolist (hook '(change-major-mode-after-body-hook
                 after-save-hook ;; In case the user saves the file to a new location
                 focus-in-hook ;; ...or makes external changes then returns to Emacs
@@ -242,24 +247,27 @@ Modified from `flymake--mode-line-counter'.
 (defun headerline-buffer-name-c ()
   "Buffer Name and Narrow indicator"
   (mapcar #'concat
-          (if headerline-buffer-id-cache-c
-              (list
-               (propertize (if (buffer-narrowed-p) "Narrow " "")
-                           'face 'headerline-narrow-indicator-face)
-               (propertize (if (car headerline-buffer-id-cache-c)
-                               (car headerline-buffer-id-cache-c)
-                             "")
-                           'face 'headerline-buffer-parent-name-face)
-               (propertize (if (car headerline-buffer-id-cache-c) "/" "")
-                           'face 'headerline-buffer-file-name-face)
-               (propertize (cdr headerline-buffer-id-cache-c)
-                           'face 'headerline-buffer-file-name-face))
-            (if buffer-file-truename
-                (list
-                 (propertize buffer-file-truename
-                             'face 'headerline-buffer-file-name-face))
-
-              (list "")))))
+          (cond
+           (headerline-buffer-id-cache-c
+            (list
+             (propertize (if (buffer-narrowed-p) "Narrow " "")
+                         'face 'headerline-narrow-indicator-face)
+             (propertize (if (car headerline-buffer-id-cache-c)
+                             (car headerline-buffer-id-cache-c)
+                           "")
+                         'face 'headerline-buffer-parent-name-face)
+             (propertize (if (car headerline-buffer-id-cache-c) "/" "")
+                         'face 'headerline-buffer-file-name-face)
+             (propertize (cdr headerline-buffer-id-cache-c)
+                         'face 'headerline-buffer-file-name-face)))
+           (buffer-file-truename
+            (list
+             (propertize buffer-file-truename
+                         'face 'headerline-buffer-file-name-face)))
+           (helpful--sym (cons (format (if helpful--callable-p "Fn" "Var")
+                                       'face 'headerline-narrow-indicator-face)
+                               (format "%s" helpful--sym)))
+           (t (list "")))))
 
 (defun headerline-major-mode-c ()
   "Major mode indicator"

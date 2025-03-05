@@ -77,6 +77,7 @@
   "sm" 'consult-global-mark
   "sd" 'consult-ripgrep-local
   "sp" 'consult-ripgrep
+  "sf" 'consult-fd-local
   "s C-h i" 'consult-info
   "se" '(:ignore t :wk "evil-show")
   "sem" 'evil-show-marks

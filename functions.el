@@ -13,8 +13,12 @@
 ;;;; convenience
 (defun consult-ripgrep-local ()
   (interactive)
-  (let ((consult-project-function nil))
-    (consult-ripgrep)))
+  (consult-ripgrep default-directory))
+
+(defun consult-fd-local ()
+  (interactive)
+  (let ((consult-async-min-input 0))
+    (consult-fd default-directory)))
 
 (defun save-and-kill-buffer ()
   (interactive)
