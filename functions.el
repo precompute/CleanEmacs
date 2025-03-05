@@ -174,6 +174,22 @@
   (interactive)
   (helpful-variable (helpful--variable-at-point)))
 
+(defun continue-structure-c ()
+  "Continue a list / syntactic structure."
+  (interactive)
+  (let ((end (save-excursion (beginning-of-line-text) (point)))
+        (beg (save-excursion (beginning-of-line) (point))))
+    (when (> end beg)
+      (end-of-line)
+      (insert (concat "\n" (buffer-substring beg end))))))
+
+(defun enable-hyper-key-c ()
+  "Call XModMap to enable the HYPER Key."
+  (interactive)
+  (shell-command "setxkbmap ; xmodmap ~/.Xmodmap")
+  (message (concat (propertize "HYPER" 'face 'font-lock-builtin-face)
+                   (propertize " key enabled." 'face 'success))))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.
@@ -844,8 +860,3 @@ Then place point at end of #+begin statement for metadata insertion."
   (find-file (concat "~/46/da/timelog/"
                      (format-time-string "%y%m%d") ".log.org"))
   (org-todo-timestamp-todo-c))
-
-;; TODO
-;; Save all visible windows
-;; Continue a list (numbered / otherwise)
-;; Get fuzzy file list of current non-git-root folder

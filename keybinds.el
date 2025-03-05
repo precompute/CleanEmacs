@@ -274,6 +274,7 @@
   "H-h c" 'git-auto-time-commit
   "H-h C" 'git-prompt-commit
   "H-h r" 'refile3-main-transient
+  "H-h h" 'enable-hyper-key-c
 
   "<backspace>" 'scroll-up-command
   "S-<backspace>" 'scroll-down-command
@@ -301,6 +302,11 @@
  "g N" 'widen
  "u" 'undo-with-prefix
  "C-r" 'undo-redo-with-prefix)
+
+(general-define-key
+ :keymaps 'prog-mode-map
+ :states 'insert
+ "H-<return>" 'continue-structure-c)
 
 (general-define-key
  :keymaps 'org-mode-map
