@@ -1,6 +1,7 @@
 (use-package eglot
   :elpaca nil
   :hook ((python-ts-mode
+          js-mode
           js-ts-mode
           go-ts-mode
           zig-mode

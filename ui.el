@@ -172,7 +172,7 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 12 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "GT Alpina Typewriter" :size 17 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "TX-02" :size 14 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Pragmata Pro" :size 15 :weight 'regular))
@@ -189,7 +189,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
-    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 22 :width 'condensed :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 19 :width 'expanded :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "Franziska Pro" :size 18))
     ;; (set-face-font 'variable-pitch (font-spec :family "Angie Pro" :size 15 :slant nil))
