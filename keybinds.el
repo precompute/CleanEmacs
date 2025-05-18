@@ -71,18 +71,17 @@
   "s-" 'consult-focus-lines
   "ss" 'consult-line
   "sS" 'consult-line-multi
-  "si" 'consult-imenu
-  "sI" 'consult-imenu-multi
-  "s C-i" 'consult-outline
-  "sm" 'consult-global-mark
+  "si" 'consult-outline
+  "sI" 'consult-imenu
+  "s C-i" 'consult-imenu-multi
+  "sm" 'evil-show-marks
+  "sM" 'consult-global-mark
+  "s C-m" 'evil-collection-consult-jump-list
   "sd" 'consult-ripgrep-local
   "sp" 'consult-ripgrep
   "sf" 'consult-fd-local
   "s C-h i" 'consult-info
-  "se" '(:ignore t :wk "evil-show")
-  "sem" 'evil-show-marks
-  "sej" 'evil-collection-consult-jump-list
-  "ser" 'evil-show-registers
+  "sr" 'evil-show-registers
 
   "TAB" '(:ignore t :wk "perspective")
   "TAB TAB" 'persp-switch
@@ -274,7 +273,8 @@
   "H-h c" 'git-auto-time-commit
   "H-h C" 'git-prompt-commit
   "H-h r" 'refile3-main-transient
-  "H-h h" 'enable-hyper-key-c
+
+  "C-S-h h" 'enable-hyper-key-c
 
   "<backspace>" 'scroll-up-command
   "S-<backspace>" 'scroll-down-command
@@ -304,7 +304,7 @@
  "C-r" 'undo-redo-with-prefix)
 
 (general-define-key
- :keymaps 'prog-mode-map
+ :keymaps '(org-mode-map prog-mode-map)
  :states 'insert
  "H-<return>" 'continue-structure-c)
 
@@ -329,3 +329,18 @@
  "H-b S" 'org-insert-block-src-meta-c
  "H-b b" 'org-insert-block-custom-c
  "H-b B" 'org-insert-block-custom-meta-c)
+
+(general-define-key
+ :keymaps 'Info-mode-map
+ "H-j" 'Info-history-back
+ "H-y" 'Info-history-forward
+ "H-S-j" 'Info-history-back-menu
+ "H-S-y" 'Info-history-forward-menu
+ "H-i" 'Info-next
+ "H-m" 'Info-prev
+ "H-e" 'Info-up)
+
+(general-define-key
+ :states 'normal
+ "C-z" 'legit-to-line
+ "C-S-z" 'legit-from-line)

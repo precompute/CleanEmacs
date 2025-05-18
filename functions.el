@@ -187,6 +187,7 @@
   "Call XModMap to enable the HYPER Key."
   (interactive)
   (shell-command "setxkbmap ; xmodmap ~/.Xmodmap")
+  (shell-command "xfconf-query -c keyboards -p /Default/KeyRepeat/Delay -s 90")
   (message (concat (propertize "HYPER" 'face 'font-lock-builtin-face)
                    (propertize " key enabled." 'face 'success))))
 
@@ -585,7 +586,7 @@ Set METADATA? to t if you need to enter text after #+begin_TYPE."
   (org-insert-block-c "quote"))
 
 (defun org-insert-block-src-c ()
-  "Insert a Quote block at point, or enclosing the current region."
+  "Insert a Source block at point, or enclosing the current region."
   (interactive)
   (org-insert-block-c "src"))
 
@@ -596,7 +597,7 @@ Then place point at end of #+begin statement for metadata insertion."
   (org-insert-block-c "quote" t))
 
 (defun org-insert-block-src-meta-c ()
-  "Insert a Quote block at point, or enclosing the current region.
+  "Insert a Source block at point, or enclosing the current region.
 Then place point at end of #+begin statement for metadata insertion."
   (interactive)
   (org-insert-block-c "src" t))

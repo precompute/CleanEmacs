@@ -172,8 +172,8 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    ;; (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
-    (set-face-font 'default (font-spec :family "GT Alpina Typewriter" :size 17 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "GT Alpina Typewriter" :size 17 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "TX-02" :size 14 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Pragmata Pro" :size 15 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Letter Gothic Mono Pro" :size 16 :weight 'regular))
@@ -201,7 +201,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Univers LT Std" :width 'expanded :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Info Text Offc Pro" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Alegreya Sans" :size 15))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Alegreya Sans" :size 18))
 
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
     (copy-face 'default 'fixed-pitch)))

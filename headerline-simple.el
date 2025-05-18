@@ -90,7 +90,7 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
 (defun headerline-flymake-count-c (type)
   "Get Error/Warning/Note counts from Flycheck.
 Modified from `flymake--mode-line-counter'.
-`type' can be `:error', `:warning' or `:note'."
+TYPE can be `:error', `:warning' or `:note'."
   (let ((count 0))
     (dolist (d (flymake-diagnostics))
       (when (= (flymake--severity type)
@@ -399,12 +399,19 @@ Functionally equivalent to `mode-line-format-right-align’."
                 help-mode-hook
                 helpful-mode-hook
                 messages-buffer-mode-hook
+                fundamental-mode-hook
+                conf-mode-hook
                 conf-space-mode-hook
                 doc-view-mode-hook
                 dired-mode-hook
                 apropos-mode-hook
                 debugger-mode-hook
                 messages-buffer-mode-hook
-                magit-status-mode-hook))
+                shortdoc-mode-hook
+                finder-mode-hook
+                magit-status-mode-hook
+                vterm-mode-hook
+                xref--xref-buffer-mode-hook
+                xref--transient-buffer-mode-hook))
   (add-hook hook 'headerline-simple-mode 100)
   (add-hook hook 'modeline-simple-mode 100))

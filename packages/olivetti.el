@@ -3,7 +3,7 @@
 	  text-mode
           dired-mode
           magit-mode
-          info-mode
+          Info-mode
           conf-colon-mode
           helpful-mode) . olivetti-mode)
   :config
