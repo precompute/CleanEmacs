@@ -231,6 +231,8 @@
 (elpacaLF "merlin")
 ;;;; Zig
 (elpacaLF "zig-mode")
+;;;; PHP
+(elpacaLF "php-mode")
 
 ;;; Misc
 ;;;; sqlite3
