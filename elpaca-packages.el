@@ -271,6 +271,10 @@
 (elpacaLF "evil-lispops")
 ;;;; Breadcrumb
 (elpacaLF "breadcrumb")
+;;;; Legit
+(elpacaLF "legit")
+;;;; Scratchiest
+(elpacaLF "scratchiest")
 
 ;;; Themes (that I never really use)
 (elpacaLF "orangey-bits-theme") ;; Orange!

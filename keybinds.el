@@ -115,6 +115,7 @@
   "o RET" 'echo-current-time
   "ot" 'vterm
   "oT" 'project-vterm
+  "os" 'scratchiest
 
   "t" '(:ignore t :wk "toggle")
   "tl" 'display-line-numbers-mode
