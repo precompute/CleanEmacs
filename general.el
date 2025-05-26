@@ -53,11 +53,17 @@
       blink-cursor-blinks 0)
 (blink-cursor-mode 1)
 
+(setq fill-column 97)
+
 (setq disabled-command-function nil)
 
 (setq messages-buffer-max-lines 100000)
 
 (setq undo-limit 240000)
+
+(setq indicate-buffer-boundaries '((top . left) (bottom . left) (up . right) (down . right)))
+
+(minibuffer-depth-indicate-mode t)
 
 (defmacro setcache-c (var file)
   "Macro to set file location to `user-cache-directory'"

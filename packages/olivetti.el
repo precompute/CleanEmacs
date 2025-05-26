@@ -5,7 +5,9 @@
           magit-mode
           Info-mode
           conf-colon-mode
-          helpful-mode) . olivetti-mode)
+          helpful-mode
+          shortdoc-mode
+          lexic-mode) . olivetti-mode)
   :config
   (setq-default olivetti-body-width 130
                 olivetti-margin-width 2)
