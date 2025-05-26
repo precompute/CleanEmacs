@@ -273,6 +273,8 @@
 (elpacaLF "breadcrumb")
 ;;;; Legit
 (elpacaLF "legit")
+;;;; Whack-a-Thing
+(elpacaLF "whack-a-thing")
 ;;;; Scratchiest
 (elpacaLF "scratchiest")
 

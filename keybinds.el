@@ -173,6 +173,12 @@
   "ds" 'lexic-search-word-at-point
   "dS" 'lexic-search
 
+  "m" '(:ignore t :wk "mark")
+  "ml" 'whack-a-thing-whack-line
+  "mL" 'whack-a-thing-quick-whack-line
+  "mw" 'whack-a-thing-whack-word
+  "mW" 'whack-a-thing-transient
+
   "q" '(:ignore t :wk "quit")
   "qq" 'save-buffers-kill-terminal
   "qQ" 'clean-exit
