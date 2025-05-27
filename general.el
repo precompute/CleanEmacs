@@ -77,6 +77,9 @@
 (setcache-c bookmark-default-file  "bookmarks")
 (setcache-c save-place-file        "places")
 
+(setq desktop-dirname user-cache-directory)
+(setq desktop-path (list user-cache-directory))
+
 (winner-mode 1)
 (fringe-mode '(7 . 7))
 ;; (window-divider-mode 1)

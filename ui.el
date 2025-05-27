@@ -189,7 +189,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
-    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 17 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 19 :width 'expanded :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "Franziska Pro" :size 18))
     ;; (set-face-font 'variable-pitch (font-spec :family "Angie Pro" :size 15 :slant nil))

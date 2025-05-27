@@ -274,12 +274,12 @@
 ;;;; Legit
 (elpacaLF "legit")
 ;;;; Whack-a-Thing
-(elpacaLF "whack-a-thing")
+;; (elpacaLF "whack-a-thing")
 ;;;; Scratchiest
 (elpacaLF "scratchiest")
 
 ;;; Themes (that I never really use)
-(elpacaLF "orangey-bits-theme") ;; Orange!
-(elpacaLF "sakura-theme") ;; Purple!
-(elpacaLF "sorcery-theme") ;; Inspo!
-(elpacaLF "ef-themes") ;; Everything else!
+;; (elpacaLF "orangey-bits-theme") ;; Orange!
+;; (elpacaLF "sakura-theme") ;; Purple!
+;; (elpacaLF "sorcery-theme") ;; Inspo!
+;; (elpacaLF "ef-themes") ;; Everything else!

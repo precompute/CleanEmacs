@@ -667,7 +667,10 @@ Then place point at end of #+begin statement for metadata insertion."
    ["Alarm"
     ("-aa" "Set Alarm" alarm-clock-set)
     ("-al" "List Alarms" alarm-clock-list-view)
-    ("-ak" "Kill Alarms" alarm-clock-kill)]]
+    ("-ak" "Kill Alarms" alarm-clock-kill)]
+   ["Desktop"
+    ("-ds" "Save Desktop" desktop-save-in-desktop-dir)
+    ("-dr" "Read Desktop" desktop-read)]]
   ["Other"
    [("B" "Revert Buffer" revert-buffer)
     ("z" "*scratch*" scratch-buffer)

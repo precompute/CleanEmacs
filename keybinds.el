@@ -161,6 +161,7 @@
   "hF" 'describe-face
   "hm" 'describe-mode
   "hi" 'info
+  "hI" 'consult-info
   "hD" 'toggle-debug-mode
   "hds" 'profiler-start
   "hdS" 'profiler-stop-and-report
@@ -345,7 +346,8 @@
  "H-S-y" 'Info-history-forward-menu
  "H-i" 'Info-next
  "H-m" 'Info-prev
- "H-e" 'Info-up)
+ "H-e" 'Info-up
+ "H-s" 'consult-info)
 
 (general-define-key
  :states 'normal
