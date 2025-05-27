@@ -1,3 +1,3 @@
 (use-package orangey-bits-theme
-:elpaca (:depth 1)
+:ensure (:depth 1)
 )

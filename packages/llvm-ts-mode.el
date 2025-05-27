@@ -1,5 +1,5 @@
 (use-package llvm-ts-mode
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   ;; :hook (llvm-ts-mode . turn-off-hideshow)
   :config
   ;; (defun enable-llvm-ts-mode-c ()

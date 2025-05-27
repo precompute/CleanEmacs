@@ -1,3 +1,3 @@
 (use-package loccur
-:elpaca (:depth 1)
+:ensure (:depth 1)
 )

@@ -1,5 +1,5 @@
 (use-package indent-bars
-  :elpaca ( :host github
+  :ensure ( :host github
             :repo "jdtsmith/indent-bars")
   ;; :hook (prog-mode . indent-bars-mode)
   :config

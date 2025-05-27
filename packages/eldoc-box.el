@@ -1,5 +1,5 @@
 (use-package eldoc-box
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :hook (prog-mode . eldoc-box-hover-mode)
   :config
   (defun eldoc-box-bottom-left-position-function (width height)

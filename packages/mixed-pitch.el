@@ -1,5 +1,5 @@
 (use-package mixed-pitch
-  :elpaca ( :host github
+  :ensure ( :host github
             :repo "precompute/mixed-pitch")
   :hook ((org-mode
           info-mode

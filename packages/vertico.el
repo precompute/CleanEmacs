@@ -1,5 +1,5 @@
 (use-package vertico
-  :elpaca ( :host github
+  :ensure ( :host github
             :repo "minad/vertico"
             :files ("*.el" "extensions/*.el"))
   :bind

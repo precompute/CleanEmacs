@@ -1,3 +1,3 @@
 (use-package csv-mode
-:elpaca (:depth 1)
+:ensure (:depth 1)
 )

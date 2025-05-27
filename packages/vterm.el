@@ -1,5 +1,5 @@
 (use-package vterm
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :config
   (defun project-vterm ()
     "Start VTerm in the current project's root directory.

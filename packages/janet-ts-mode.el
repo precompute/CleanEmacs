@@ -1,5 +1,5 @@
 (use-package janet-ts-mode
-  :elpaca ( :host github
+  :ensure ( :host github
             :repo "sogaiu/janet-ts-mode"
             :files ("*.el" "extensions/*.el"))
   :config

@@ -1,5 +1,5 @@
 (use-package dired-hacks-utils
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :config
   (setq dired-subtree-cycle-depth 4
         dired-subtree-line-prefix ">")

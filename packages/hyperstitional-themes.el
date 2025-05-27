@@ -1,3 +1,3 @@
 (use-package hyperstitional-themes
-:elpaca (:depth 1)
+:ensure (:depth 1)
 )

@@ -1,5 +1,5 @@
 (use-package breadcrumb
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :config
   (setq breadcrumb-imenu-max-length 1.0
         breadcrumb-imenu-crumb-separator "::")

@@ -1,3 +1,3 @@
 (use-package embark-consult
-:elpaca (:depth 1)
+:ensure (:depth 1)
 )

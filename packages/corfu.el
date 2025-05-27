@@ -1,5 +1,5 @@
 (use-package corfu
-  :elpaca (:host github
+  :ensure (:host github
                  :repo "minad/corfu"
                  :files ("*.el" "extensions/*.el"))
   :bind

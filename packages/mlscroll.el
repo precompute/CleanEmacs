@@ -1,5 +1,5 @@
 (use-package mlscroll
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :defer t
   :custom
   (mlscroll-right-align nil)

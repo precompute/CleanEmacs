@@ -1,5 +1,5 @@
 (use-package git-timemachine
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :config
   (defun toggle-git-timemachine-c ()
     (interactive)

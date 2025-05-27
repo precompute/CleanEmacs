@@ -1,5 +1,5 @@
 (use-package embark
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :defer t
   :init
   (setq prefix-help-command #'embark-prefix-help-command)

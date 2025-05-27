@@ -1,3 +1,3 @@
 (use-package nameframe-perspective
-:elpaca (:depth 1)
+:ensure (:depth 1)
 )

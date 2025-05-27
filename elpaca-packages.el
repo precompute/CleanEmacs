@@ -12,8 +12,8 @@
           (save-excursion
             (write-region (concat "(use-package "
                                   package
-                                  (if inbuilt? "\n:elpaca nil)"
-                                    "\n:elpaca (:depth 1)\n)"))
+                                  (if inbuilt? "\n:ensure nil)"
+                                    "\n:ensure (:depth 1)\n)"))
                           nil
                           path))))
     (load-file path)))

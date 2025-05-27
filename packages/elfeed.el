@@ -1,5 +1,5 @@
 (use-package elfeed
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :defer t
   :config
   (load-file (expand-file-name "elfeed.el" user-private-directory))

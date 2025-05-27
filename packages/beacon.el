@@ -1,5 +1,5 @@
 (use-package beacon
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :config
   (setq beacon-blink-when-focused t
         beacon-size 10)

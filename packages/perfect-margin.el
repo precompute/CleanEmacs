@@ -1,5 +1,5 @@
 (use-package perfect-margin
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :hook ((prog-mode
           text-mode
           dired-mode

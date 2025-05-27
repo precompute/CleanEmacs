@@ -1,3 +1,3 @@
 (use-package nameframe-project
-:elpaca (:depth 1)
+:ensure (:depth 1)
 )

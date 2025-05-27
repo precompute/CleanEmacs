@@ -1,5 +1,5 @@
 (use-package ancilla
-  :elpaca ( :host github
+  :ensure ( :host github
             :repo "shouya/ancilla.el"
             :files ("*.el"))
   :bind (("H-j" . ancilla-transient-menu)))

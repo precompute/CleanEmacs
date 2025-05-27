@@ -1,4 +1,4 @@
 (use-package julia-mode
-  :elpaca (:depth 1)
+  :ensure (:depth 1)
   :config
   (eglot-jl-init))
