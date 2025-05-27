@@ -1,5 +1,5 @@
 (use-package electric
-  :elpaca nil
+  :ensure nil
   :config
   (setq electric-quote-context-sensitive t
         electric-layout-allow-duplicate-newlines t

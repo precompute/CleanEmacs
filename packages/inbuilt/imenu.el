@@ -1,5 +1,5 @@
 (use-package imenu
-  :elpaca nil
+  :ensure nil
   :preface
   (add-to-list 'imenu-generic-expression
                '("Section" "^[ \t]*;;;*\\**[ \t]+\\([^\n]+\\)" 1))

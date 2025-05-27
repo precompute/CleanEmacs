@@ -1,4 +1,4 @@
 (use-package eldoc
-  :elpaca nil
+  :ensure nil
   :preface
   (setq eldoc-documentation-strategy 'eldoc-documentation-compose))

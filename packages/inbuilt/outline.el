@@ -1,5 +1,5 @@
 (use-package outline
-  :elpaca nil
+  :ensure nil
   :hook ((clojure-mode
           clojure-ts-mode
           emacs-lisp-mode

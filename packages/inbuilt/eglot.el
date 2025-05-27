@@ -1,5 +1,5 @@
 (use-package eglot
-  :elpaca nil
+  :ensure nil
   :hook ((python-ts-mode
           js-mode
           js-ts-mode

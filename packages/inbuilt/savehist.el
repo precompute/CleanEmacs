@@ -1,4 +1,4 @@
 (use-package savehist
-  :elpaca nil
+  :ensure nil
   :init
   (savehist-mode))

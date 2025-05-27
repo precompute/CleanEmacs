@@ -1,5 +1,5 @@
 (use-package org
-  :elpaca nil
+  :ensure nil
   :hook (org-mode . visual-line-mode)
   :config
   (setq org-hide-emphasis-markers t

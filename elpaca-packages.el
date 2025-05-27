@@ -274,7 +274,7 @@
 ;;;; Legit
 (elpacaLF "legit")
 ;;;; Whack-a-Thing
-;; (elpacaLF "whack-a-thing")
+(elpacaLF "whack-a-thing")
 ;;;; Scratchiest
 (elpacaLF "scratchiest")
 

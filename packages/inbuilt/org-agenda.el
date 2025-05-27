@@ -1,5 +1,5 @@
 (use-package org-agenda
-  :elpaca nil
+  :ensure nil
   :defer t
   :bind
   (:map org-agenda-mode-map

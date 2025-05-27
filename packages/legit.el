@@ -1,6 +1,5 @@
-(use-package scratchiest
+(use-package legit
   :ensure ( :depth 1
-            :repo "~/44.2/scratchiest")
+            :repo "~/44.2/legit")
   :config
-  (setq scratchiest-always-inherit-major-mode t
-        scratchiest-message "---SCRATCH---"))
+  (setq legit-layout "arstgmneioqwfpbjluyzxcdvkh"))

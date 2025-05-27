@@ -1,2 +1,2 @@
 (use-package sqlite3
-  :elpaca nil)
+  :ensure nil)

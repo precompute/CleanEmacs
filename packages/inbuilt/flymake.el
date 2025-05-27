@@ -1,5 +1,5 @@
 (use-package flymake
-  :elpaca nil
+  :ensure nil
   :defer t
   :hook (prog-mode . flymake-mode)
   :config

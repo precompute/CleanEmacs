@@ -1,2 +1,2 @@
 (use-package treesit
-  :elpaca nil)
+  :ensure nil)

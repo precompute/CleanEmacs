@@ -1,5 +1,5 @@
 (use-package project
-  :elpaca nil
+  :ensure nil
   :defer t
   :bind
   (:map project-prefix-map

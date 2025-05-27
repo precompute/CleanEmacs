@@ -1,4 +1,4 @@
 (use-package llvm-mode
-  :elpaca nil
+  :ensure nil
   :config
   (add-to-list 'auto-mode-alist '("\\.ll$" . llvm-mode)))

@@ -53,7 +53,7 @@
       blink-cursor-blinks 0)
 (blink-cursor-mode 1)
 
-(setq fill-column 97)
+(setq-default fill-column 97)
 
 (setq disabled-command-function nil)
 
@@ -61,7 +61,7 @@
 
 (setq undo-limit 240000)
 
-(setq indicate-buffer-boundaries '((top . left) (bottom . left) (up . right) (down . right)))
+(setq-default indicate-buffer-boundaries '((top . left) (bottom . left) (up . right) (down . right)))
 
 (minibuffer-depth-indicate-mode t)
 
