@@ -1,2 +1,4 @@
 (use-package transient
-  :ensure nil)
+  :ensure nil
+  :config
+  (setq transient-align-variable-pitch t))

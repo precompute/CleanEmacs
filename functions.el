@@ -646,7 +646,7 @@ Then place point at end of #+begin statement for metadata insertion."
    ;; [("oo" (lambda () (toggle-modes-transient--description 'perfect-margin-mode "Perfect Margin "))
    ;;   perfect-margin-mode)]
    [("oo" (lambda () (toggle-modes-transient--description 'olivetti-mode "Olivetti "))
-     olivetti-mode)]
+     olivetti-mode :if (lambda () (fboundp #'olivetti-mode)))]
    [("tl" (lambda () (toggle-modes-transient--description 'truncate-lines "Truncate Lines"))
      toggle-truncate-lines)
     ("v" (lambda () (toggle-modes-transient--description 'visual-line-mode "Visual Lines"))

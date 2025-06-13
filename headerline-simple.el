@@ -1,24 +1,13 @@
 ;;;; Header Line
 ;;;;; functions
-(defun get-color-fg (face &optional fallback)
-  "Get the :foreground property of a FACE.
+(defun headerline-get-color-prop (prop face &optional fallback)
+  "Get the PROP of a FACE.
 If FACE is nil, set to FALLBACK."
-  (let ((face? (face-attribute face :foreground)))
-    (if (or (eq nil face?) (string-equal "unspecified" face?))
-        (if fallback
-            (face-attribute fallback :foreground)
-          face?)
-      face?)))
-
-(defun get-color-bg (face &optional fallback)
-  "Get the :background property of a FACE.
-If FACE is nil, set to FALLBACK."
-  (let ((face? (face-attribute face :background)))
-    (if (or (eq nil face?) (string-equal "unspecified" face?))
-        (if fallback
-            (face-attribute fallback :background)
-          face?)
-      face?)))
+  ((lambda (z) (if (= 35 (aref z 0)) z (apply #'color-rgb-to-hex (append (color-name-to-rgb z) (list 2)))))
+   (let ((face? (face-attribute face prop)))
+    (if (or (eq nil face?) (eq 'unspecified face?) (string-equal "unspecified" face?))
+        (if fallback (face-attribute fallback prop) "#000000")
+      face?))))
 
 (defun mix-colors (x y &optional ratio)
   "Mix two RGB Colors `X’ and `Y’ (represented as #RRGGBB) together by `RATIO'.
@@ -142,22 +131,22 @@ TYPE can be `:error', `:warning' or `:note'."
 
 (defun set-headerline-faces (&rest rest)
   (interactive)
-  (let* ((fl-keyword (get-color-fg 'font-lock-keyword-face)) ;; green
-         (fl-builtin (get-color-fg 'font-lock-builtin-face)) ;; blue
-         (fl-constant (get-color-fg 'font-lock-constant-face)) ;; yellow
-         (fl-type (get-color-fg 'font-lock-type-face)) ;; brown
-         (fl-variable (get-color-fg 'font-lock-punctuation-face)) ;; off-white
-         (fl-doc (get-color-fg 'font-lock-doc-face)) ;; red
-         (fl-string (get-color-fg 'font-lock-string-face)) ;; red
-         (region (get-color-bg 'region)) ;; brown
-         (fl-regexp (get-color-fg 'font-lock-regexp-face 'font-lock-string-face)) ;; dark red
-         (errorface (get-color-fg 'error)) ;; red
-         (matchface (get-color-fg 'match)) ;; green
-         ;; (warnface (get-color-fg 'font-lock-warning-face)) ;; red-ish
-         (warnface (get-color-fg 'font-lock-type-face)) ;; red-ish
-         (noteface (get-color-bg 'cursor)) ;; yellow
-         (defaultfg (get-color-fg 'default)) ;; white
-         (defaultbg (get-color-bg 'default)) ;; black
+  (let* ((fl-keyword (headerline-get-color-prop :foreground 'font-lock-keyword-face)) ;; green
+         (fl-builtin (headerline-get-color-prop :foreground 'font-lock-builtin-face)) ;; blue
+         (fl-constant (headerline-get-color-prop :foreground 'font-lock-constant-face)) ;; yellow
+         (fl-type (headerline-get-color-prop :foreground 'font-lock-type-face)) ;; brown
+         (fl-variable (headerline-get-color-prop :foreground 'font-lock-punctuation-face)) ;; off-white
+         (fl-doc (headerline-get-color-prop :foreground 'font-lock-doc-face)) ;; red
+         (fl-string (headerline-get-color-prop :foreground 'font-lock-string-face)) ;; red
+         (region (headerline-get-color-prop :background 'region)) ;; brown
+         (fl-regexp (headerline-get-color-prop :foreground 'font-lock-regexp-face 'font-lock-string-face)) ;; dark red
+         (errorface (headerline-get-color-prop :foreground 'error)) ;; red
+         (matchface (headerline-get-color-prop :foreground 'match)) ;; green
+         ;; (warnface (headerline-get-color-prop :foreground 'font-lock-warning-face)) ;; red-ish
+         (warnface (headerline-get-color-prop :foreground 'font-lock-type-face)) ;; red-ish
+         (noteface (headerline-get-color-prop :background 'cursor)) ;; yellow
+         (defaultfg (headerline-get-color-prop :foreground 'default)) ;; white
+         (defaultbg (headerline-get-color-prop :background 'default)) ;; black
          (height 1.2)
          (mix1 (mix-colors (if (not (eq 'unspecified fl-variable)) fl-variable
                              (if (not (eq 'unspecified fl-type))
@@ -214,6 +203,8 @@ TYPE can be `:error', `:warning' or `:note'."
     (set-face-attribute 'header-line-inactive nil
                         :background (mix-colors region defaultbg 0.35)
                         :box (list :line-width '(1 . 3) :color (mix-colors region defaultbg 0.35)))
+    (set-face-attribute 'mode-line nil :background defaultbg :box nil)
+    (set-face-attribute 'mode-line-inactive nil :background defaultbg :box nil)
     (defvar headerline--err-face (if errorface (mix-colors region errorface 0.45) "#000000"))
     (defvar headerline--warn-face (if warnface (mix-colors region warnface 0.45) "#000000"))
     (defvar headerline--note-face (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
@@ -255,19 +246,29 @@ TYPE can be `:error', `:warning' or `:note'."
              (propertize (if (car headerline-buffer-id-cache-c)
                              (car headerline-buffer-id-cache-c)
                            "")
-                         'face 'headerline-buffer-parent-name-face)
+                         'face 'headerline-buffer-parent-name-face
+                         'help-echo #'headerline-help-echo-c)
              (propertize (if (car headerline-buffer-id-cache-c) "/" "")
-                         'face 'headerline-buffer-file-name-face)
+                         'face 'headerline-buffer-file-name-face
+                         'help-echo #'headerline-help-echo-c)
              (propertize (cdr headerline-buffer-id-cache-c)
-                         'face 'headerline-buffer-file-name-face)))
+                         'face 'headerline-buffer-file-name-face
+                         'help-echo #'headerline-help-echo-c)))
            (buffer-file-truename
             (list
              (propertize buffer-file-truename
-                         'face 'headerline-buffer-file-name-face)))
+                         'face 'headerline-buffer-file-name-face
+                         'help-echo #'headerline-help-echo-c)))
            (helpful--sym (cons (format (if helpful--callable-p "Fn" "Var")
                                        'face 'headerline-narrow-indicator-face)
                                (format "%s" helpful--sym)))
            (t (list "")))))
+
+(defun headerline-help-echo-c (window object pos)
+  "Help Echo string for the buffer-name component of WINDOW.
+OBJECT and POS are ignored."
+  (with-selected-window window
+    (format "%s" (or (car headerline-buffer-id-cache-c) buffer-file-truename helpful--sym))))
 
 (defun headerline-major-mode-c ()
   "Major mode indicator"

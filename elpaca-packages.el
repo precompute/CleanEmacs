@@ -90,8 +90,8 @@
 (elpacaLF "vundo")
 ;;;; Undo persistence
 (elpacaLF "undo-fu-session")
-;;; Olivetti
-(elpacaLF "olivetti")
+;; ;;; Olivetti
+;; (elpacaLF "olivetti") ;; Slows everything down!
 ;; ;;; Perfect Margin
 ;; (elpacaLF "perfect-margin") ;; Better than olivetti!
 ;; ;;; Indent Guides
@@ -142,9 +142,6 @@
 (elpacaLF "pdf-tools")
 ;;; Alarm Clock
 (elpacaLF "alarm-clock")
-
-
-
 ;;; Dired
 (elpacaLF "dired" t)
 ;;;; Dired Faces (font lock)
@@ -191,7 +188,6 @@
 (elpacaLF "org-sliced-images")
 ;;; Hyperbole
 (elpacaLF "hyperbole")
-
 ;;; Language
 ;;;; Prog-mode
 (elpacaLF "prog-mode" t)

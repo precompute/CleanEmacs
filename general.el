@@ -80,6 +80,8 @@
 (setq desktop-dirname user-cache-directory)
 (setq desktop-path (list user-cache-directory))
 
+(setq-default display-fill-column-indicator-character 124)
+
 (winner-mode 1)
 (fringe-mode '(7 . 7))
 ;; (window-divider-mode 1)
