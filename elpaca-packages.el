@@ -186,8 +186,8 @@
 (elpacaLF "org-appear")
 ;;;; Sliced Images
 (elpacaLF "org-sliced-images")
-;;; Hyperbole
-(elpacaLF "hyperbole")
+;; ;;; Hyperbole
+;; (elpacaLF "hyperbole")
 ;;; Language
 ;;;; Prog-mode
 (elpacaLF "prog-mode" t)
@@ -273,6 +273,8 @@
 (elpacaLF "whack-a-thing")
 ;;;; Scratchiest
 (elpacaLF "scratchiest")
+;; ;;;; Squish-Content
+;; (elpacaLF "squish-content")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!
