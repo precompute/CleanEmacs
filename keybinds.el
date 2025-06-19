@@ -1,26 +1,26 @@
 ;;;; General
 ;;;;; Global nice-to-haves
 (general-define-key
-  [f5] 'delete-window
-  [s-f5] 'delete-other-windows
-  [f6] 'timestamp
-  [s-f6] 'timestamp-no-time
-  [f9] 'save-buffer
-  [f10] 'save-and-delete-window
-  [f12] 'save-and-kill-buffer
+ [f5] 'delete-window
+ [s-f5] 'delete-other-windows
+ [f6] 'timestamp
+ [s-f6] 'timestamp-no-time
+ [f9] 'save-buffer
+ [f10] 'save-and-delete-window
+ [f12] 'save-and-kill-buffer
 
-  "C-f" 'hippie-expand
+ "C-f" 'hippie-expand
 
-  "s-h" 'evil-backward-char
-  "s-l" 'evil-forward-char
-  "s-j" 'evil-next-line
-  "s-k" 'evil-previous-line
+ "s-h" 'evil-backward-char
+ "s-l" 'evil-forward-char
+ "s-j" 'evil-next-line
+ "s-k" 'evil-previous-line
 
-  "<mouse-8>" 'previous-buffer
-  "<mouse-9>" 'next-buffer
+ "<mouse-8>" 'previous-buffer
+ "<mouse-9>" 'next-buffer
 
-  "<header-line> <mouse-2>" 'delete-window
-  "<header-line> <mouse-3>" 'toggle-frame-fullscreen)
+ "<header-line> <mouse-2>" 'delete-window
+ "<header-line> <mouse-3>" 'toggle-frame-fullscreen)
 
 ;;;;; Evil-Mode
 ;;;;;; Leader
@@ -55,7 +55,7 @@
   "gp" 'consult-git-grep
   "g+" 'evil-numbers/inc-at-pt
   "g-" 'evil-numbers/dec-at-pt
-  "gt" 'toggle-git-timemachine-c
+  "gt" 'git-timemachine
 
   "b" '(:ignore t :wk "buffer")
   "br" 'revert-buffer
@@ -107,6 +107,9 @@
   "oO" 'dired-jump-other-window
   ;; "od" 'dired-jump
   "of" 'make-frame
+  "oF" 'tear-off-window
+  "ow" 'split-root-window-below
+  "oW" 'split-root-window-right
   "oi" 'imenu-list-smart-toggle
   "op" 'dired-sidebar-toggle-sidebar
   "o'" 'vertico-repeat
@@ -190,28 +193,28 @@
 ;;;;;; Sans leader
 ;;;;;;; Buffer
 (general-define-key
-  :states 'normal
-  "z" '(:ignore t :wk "end")
-  "zp" 'delete-window
-  "zs" 'save-buffer
-  "zx" 'kill-current-buffer
-  "zX" 'kill-current-buffer-and-window-c
-  "zZ" 'bury-buffer)
+ :states 'normal
+ "z" '(:ignore t :wk "end")
+ "zp" 'delete-window
+ "zs" 'save-buffer
+ "zx" 'kill-current-buffer
+ "zX" 'kill-current-buffer-and-window-c
+ "zZ" 'bury-buffer)
 
 ;;;;;;; Undo / Redo
 (general-define-key
-  :states 'normal
-  "C-w" '(:ignore t)
-  "C-w C-u" 'winner-undo
-  "C-w u" 'winner-undo
-  "C-w C-r" 'winner-redo
-  "C-w r" 'winner-redo)
+ :states 'normal
+ "C-w" '(:ignore t)
+ "C-w C-u" 'winner-undo
+ "C-w u" 'winner-undo
+ "C-w C-r" 'winner-redo
+ "C-w r" 'winner-redo)
 
 ;;;;;;; Nav/other
 (general-define-key
-  :states 'normal
-  :keymaps 'emacs-lisp-mode-map
-  "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
+ :states 'normal
+ :keymaps 'emacs-lisp-mode-map
+ "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
 
 ;;;;;;; misc
 (general-define-key
@@ -237,12 +240,12 @@
 
 ;;;;;;; Evil operators
 (general-define-key
-  :states 'normal
-  "g" '(:ignore t)
-  "g c" 'evilnc-comment-operator
-  "g g" 'evil-goto-first-line
-  "g e" 'evil-operator-eval-region
-  "g p" 'evil-reselect-paste)
+ :states 'normal
+ "g" '(:ignore t)
+ "g c" 'evilnc-comment-operator
+ "g g" 'evil-goto-first-line
+ "g e" 'evil-operator-eval-region
+ "g p" 'evil-reselect-paste)
 
 (general-define-key
  :states 'motion
@@ -261,45 +264,45 @@
 
 ;;;;;;; Misc/Custom
 (general-define-key
-  :states 'normal
-  "C-H-s--" 'flip-frame
-  "C-H-s-\\" 'flop-frame
-  "C-H-s-/" 'transpose-frame
-  "C-H-s-." 'rotate-frame-clockwise
-  "C-H-s-," 'rotate-frame-anticlockwise
-  "C-s-h" 'evil-window-decrease-width
-  "C-s-j" 'evil-window-decrease-height
-  "C-s-k" 'evil-window-increase-height
-  "C-s-l" 'evil-window-increase-width
-  "H-s-'" 'delete-other-windows
-  "s-[" 'outline-previous-heading
-  "s-]" 'outline-next-heading
-  "\\" 'repeat
-  "-" 'repeat
-  "C-/" 'toggle-modes-transient-c
+ :states 'normal
+ "C-H-s--" 'flip-frame
+ "C-H-s-\\" 'flop-frame
+ "C-H-s-/" 'transpose-frame
+ "C-H-s-." 'rotate-frame-clockwise
+ "C-H-s-," 'rotate-frame-anticlockwise
+ "C-s-h" 'evil-window-decrease-width
+ "C-s-j" 'evil-window-decrease-height
+ "C-s-k" 'evil-window-increase-height
+ "C-s-l" 'evil-window-increase-width
+ "H-s-'" 'delete-other-windows
+ "s-[" 'outline-previous-heading
+ "s-]" 'outline-next-heading
+ "\\" 'repeat
+ "-" 'repeat
+ "C-/" 'toggle-modes-transient-c
 
-  "H-h c" 'git-auto-time-commit
-  "H-h C" 'git-prompt-commit
-  "H-h r" 'refile3-main-transient
+ "H-h c" 'git-auto-time-commit
+ "H-h C" 'git-prompt-commit
+ "H-h r" 'refile3-main-transient
 
-  "C-S-h h" 'enable-hyper-key-c
+ "C-S-h h" 'enable-hyper-key-c
 
-  "<backspace>" 'scroll-up-command
-  "S-<backspace>" 'scroll-down-command
+ "<backspace>" 'scroll-up-command
+ "S-<backspace>" 'scroll-down-command
 
-  "g n" 'narrow-to-page
-  "g N" 'widen
+ "g n" 'narrow-to-page
+ "g N" 'widen
 
-  "C-S-t" 'xref-go-forward
+ "C-S-t" 'xref-go-forward
 
-  "C-d" 'scroll-5l-up
-  "C-S-d" 'scroll-5l-down)
+ "C-d" 'scroll-5l-up
+ "C-S-d" 'scroll-5l-down)
 
 (general-define-key
-  :states 'insert
-  "C-S-u" 'insert-char-5-discard-end
-  "M-o" 'evil-open-below
-  "M-O" 'evil-open-above)
+ :states 'insert
+ "C-S-u" 'insert-char-5-discard-end
+ "M-o" 'evil-open-below
+ "M-O" 'evil-open-above)
 
 (general-define-key
  :states 'visual

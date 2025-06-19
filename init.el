@@ -8,6 +8,14 @@
 (loadfile-c "general.el")
 ;; keybinds.el loaded after General-mode
 
+(defun native-compile-user-programs ()
+  "Native Compile selected user programs."
+  (interactive)
+  (dolist (z (list "headerline-simple.el" "functions.el" "ui.el"))
+    (native-compile (expand-file-name z user-emacs-directory)))
+  (native-compile-directory (expand-file-name "packages/" user-emacs-directory)))
+(native-compile-user-programs)
+
 (defun after-init-load-file ()
   (progn
     (loadfile-c "functions.el")
