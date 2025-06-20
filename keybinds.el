@@ -108,8 +108,6 @@
   ;; "od" 'dired-jump
   "of" 'make-frame
   "oF" 'tear-off-window
-  "ow" 'split-root-window-below
-  "oW" 'split-root-window-right
   "oi" 'imenu-list-smart-toggle
   "op" 'dired-sidebar-toggle-sidebar
   "o'" 'vertico-repeat
@@ -146,6 +144,8 @@
   "wj" 'windmove-swap-states-left
   "wl" 'windmove-swap-states-down
   "wu" 'windmove-swap-states-up
+  "ww" 'split-root-window-below
+  "wW" 'split-root-window-right
   "wy" 'windmove-swap-states-right
 
   "!" '(:ignore t :wk "exclaim")

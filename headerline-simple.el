@@ -150,6 +150,7 @@ TYPE can be `:error', `:warning' or `:note'."
          (hyperstition? (memq theme '(hyperstitional-themes-rebug-flipped hyperstitional-themes-rebug)))
          (fl-variable (if hyperstition? (headerline-get-color-prop :foreground 'error) fl-variable))
          (fl-string (if hyperstition? (headerline-get-color-prop :foreground 'font-lock-builtin-face) fl-string))
+         (region (if hyperstition? (headerline-get-color-prop :foreground 'menu) region))
          (height 1.3)
          (height2 0.8)
          (mix1 (mix-colors (if (not (eq 'unspecified fl-variable)) fl-variable
@@ -157,9 +158,10 @@ TYPE can be `:error', `:warning' or `:note'."
                                  fl-type
                                fl-string)) region 0.6)))
     (set-face-attribute 'headerline-base-face nil
-                        ;; :box (list :line-width '(1 . 3) :color region)
                         :inherit 'variable-pitch
                         :height height
+                        :overline fl-variable
+                        :underline `(:color ,fl-variable :position 0)
                         :foreground fl-variable
                         :background region)
     (set-face-attribute 'headerline-file-modified-face nil
@@ -203,8 +205,7 @@ TYPE can be `:error', `:warning' or `:note'."
                         :inherit 'variable-pitch
                         :foreground (mix-colors fl-variable defaultbg 0.2)
                         :background (mix-colors region defaultbg 0.5)
-                        ;; :box (list :line-width '(1 . 3) :color (mix-colors region defaultbg 0.35))
-                        )
+                        :overline (mix-colors region defaultbg 0.5))
     (set-face-attribute 'mode-line nil :background defaultbg :box nil)
     (set-face-attribute 'mode-line-inactive nil :background defaultbg :box nil)
     (defvar headerline--err-face (if errorface (mix-colors region errorface 0.45) "#000000"))
