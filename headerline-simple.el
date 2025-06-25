@@ -126,6 +126,9 @@ TYPE can be `:error', `:warning' or `:note'."
 (defface headerline-dark-face-2
   '((t :foreground "#000"))
   "Dark face 2.")
+(defface headerline-dark-face-2
+  '((t :foreground "#000"))
+  "Dark face 2.")
 
 (defun set-headerline-faces (&rest rest)
   "Set headerline faces."
@@ -206,8 +209,14 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground (mix-colors fl-variable defaultbg 0.2)
                         :background (mix-colors region defaultbg 0.5)
                         :overline (mix-colors region defaultbg 0.5))
-    (set-face-attribute 'mode-line nil :background defaultbg :box nil)
-    (set-face-attribute 'mode-line-inactive nil :background defaultbg :box nil)
+    (set-face-attribute 'mode-line nil
+                        :background defaultbg
+                        :box nil
+                        :overline fl-variable)
+    (set-face-attribute 'mode-line-inactive nil
+                        :background defaultbg
+                        :box nil
+                        :overline nil)
     (defvar headerline--err-face (if errorface (mix-colors region errorface 0.45) "#000000"))
     (defvar headerline--warn-face (if warnface (mix-colors region warnface 0.45) "#000000"))
     (defvar headerline--note-face (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
@@ -238,6 +247,22 @@ TYPE can be `:error', `:warning' or `:note'."
            ((buffer-modified-p) (propertize "    " 'face 'headerline-buffer-status-ED-face))
            (t (propertize "    " 'face 'headerline-buffer-status-NA-face)))
      " ")))
+
+(defun headerline-buffer-status-with-evil-c ()
+  "Buffer RO/modified/none & evil state."
+  `(:eval
+    (let ((z (if evil-local-mode
+                 (cadr (assoc evil-state (list (list 'normal "N")
+                                               (list 'insert "I")
+                                               (list 'visual "V")
+                                               (list 'replace "R"))))
+               "  ")))
+      (list
+       " "
+       (cond (buffer-read-only (propertize z 'face 'headerline-buffer-status-RO-face))
+             ((buffer-modified-p) (propertize z 'face 'headerline-buffer-status-ED-face))
+             (t (propertize z 'face 'headerline-buffer-status-NA-face)))
+       " "))))
 
 (defun headerline-buffer-name-c ()
   "Buffer Name and Narrow indicator"
@@ -360,6 +385,18 @@ Specific to the current window."
   "Construct that displays `breadcrumb-imenu-crumbs’.
 Specific to the current window."
   `(:eval (breadcrumb-imenu-crumbs)))
+
+(defun headerline-evil-state-c ()
+  "Display the current evil state if evil-mode is active locally."
+  `(:eval
+    (if evil-local-mode
+        (propertize
+         (cadr (assoc evil-state (list (list 'normal " N ")
+                                       (list 'insert " I ")
+                                       (list 'visual " V ")
+                                       (list 'replace " R "))))
+         'face '(:inherit fixed-pitch :height 0.8))
+      "")))
 
 (defun headerline-right-align-c ()
   "Wrapper around the builtin function `mode--line-format-right-align’.

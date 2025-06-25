@@ -9,7 +9,9 @@
  [f10] 'save-and-delete-window
  [f12] 'save-and-kill-buffer
 
- "C-f" 'hippie-expand
+ "C-<tab>" 'hippie-expand-small
+ "C-<iso-lefttab>" 'hippie-unexpand
+ "C-f" 'hippie-expand-all
 
  "s-h" 'evil-backward-char
  "s-l" 'evil-forward-char

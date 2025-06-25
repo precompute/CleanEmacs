@@ -245,8 +245,8 @@
 (elpacaLF "info-colors")
 ;;;; Browse older revisions of a file in a git repo
 (elpacaLF "git-timemachine")
-;;;; Scroll bar for mode/headerline
-(elpacaLF "mlscroll")
+;; ;;;; Scroll bar for mode/headerline
+;; (elpacaLF "mlscroll")
 ;;;; RSS Reader
 (elpacaLF "elfeed")
 ;;;;; Org Integration
