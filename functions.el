@@ -339,27 +339,58 @@ Needs frame-parameter alpha-background."
             (propertize (format "%s" debug-on-error)
                         'face (if debug-on-error 'success 'error)))))
 
-;;;; Center window content
-(defvar center-window-content-width 125)
-(defvar-local center-window-content-enabled nil)
-(defun center-window-content ()
-  "Center/Uncenter the contents of the current window.
-Like Olivetti but without the invasive hooks."
-  (interactive)
-  (let* ((w (selected-window))
-         (tw (with-selected-window w (window-total-width)))
-         (bw (with-selected-window w (window-body-width)))
-         (uw center-window-content-width)
-         (err 2)
-         (margin (/ (abs (- tw uw)) 2)))
-    (if (not center-window-content-enabled)
-        (when (< err (abs (- tw uw)))
-          (setq center-window-content-enabled t)
-          (set-window-margins w margin margin))
-      (if (< err (abs (- bw uw)))
-          (set-window-margins w margin margin)
-        (setq center-window-content-enabled nil)
-        (set-window-margins w 0 0)))))
+;; [25-06-26 23:26:50]  Moved to temper-width (previously squish-content)
+;; ;;;; Center window content
+;; (defvar center-window-content-width 125)
+;; (defvar-local center-window-content-enabled nil)
+;; (defvar center-window-content-allowed-modes
+;;   '(text-mode dired-mode magit-mode Info-mode helpful-mode shortdoc-mode org-mode))
+;; (defvar center-window-content-allow-prog-mode t)
+;; (defun center-window-content (&optional w)
+;;   "Center/Uncenter the contents of the window W or the current window.
+;; Like Olivetti but without the invasive hooks."
+;;   (interactive)
+;;   (when (or (memq major-mode center-window-content-allowed-modes)
+;;             (when center-window-content-allow-prog-mode (derived-mode-p 'prog-mode)))
+;;     (let* ((win (or w (selected-window)))
+;;            (tw (with-selected-window win (window-total-width)))
+;;            ;; (bw (with-selected-window win (window-body-width)))
+;;            (uw center-window-content-width)
+;;            (err 2)
+;;            (margin (/ (abs (- tw uw)) 2)))
+;;       ;; (message "win:%s tw:%s uw:%s margin:%s" win tw uw margin)
+;;       (when (> (abs (- tw uw)) err)
+;;         (if (> tw uw)
+;;             (progn (setq center-window-content-enabled t)
+;;                    (set-window-margins win margin margin))
+;;           (setq center-window-content-enabled nil)
+;;           (set-window-margins win 0 0))))
+;;     ;; (when center-window-content-enabled
+;;     ;;   (setq center-window-content-enabled nil)
+;;     ;;   (set-window-margins win 0 0))
+;;     ))
+
+;; ;; (when (> (abs (- tw uw)) err)
+;; ;;       (if (> tw uw)
+;; ;;           (if center-window-content-enabled
+;; ;;               (when (> (abs (- bw uw)) err)
+;; ;;                 (if (> bw uw)
+;; ;;                     (set-window-margins win margin margin)
+;; ;;                   (set-window-margins win 0 0)))
+;; ;;             (setq center-window-content-enabled t)
+;; ;;             (set-window-margins win margin margin))
+;; ;;         (setq center-window-content-enabled nil)
+;; ;;         (set-window-margins win 0 0)))
+
+;; (defun center-window-content-frame (&optional frame)
+;;   "Invoke `center-window-content’ on all windows in the current frame or FRAME."
+;;   (interactive)
+;;   ;; (message "------")
+;;   (with-selected-frame (or frame (selected-frame))
+;;     (walk-windows #'center-window-content)))
+
+;; (remove-hook 'window-size-change-functions #'center-window-content-frame)
+;; (remove-hook 'change-major-mode-hook #'center-window-content-frame)
 
 ;;;; git
 ;;;;; auto-commit

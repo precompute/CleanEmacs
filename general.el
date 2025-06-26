@@ -57,6 +57,9 @@
 
 (setq disabled-command-function nil)
 
+(setq lazy-highlight-cleanup nil
+      lazy-highlight-initial-delay 0.1)
+
 (setq messages-buffer-max-lines 100000)
 
 (setq undo-limit 240000)

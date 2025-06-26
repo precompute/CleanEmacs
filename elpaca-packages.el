@@ -277,6 +277,8 @@
 ;; (elpacaLF "squish-content")
 ;;;; Difflayer
 (elpacaLF "difflayer")
+;;;; Temper  Width
+(elpacaLF "temper-width")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!

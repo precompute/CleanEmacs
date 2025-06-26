@@ -127,7 +127,6 @@
   "tc" 'corfu-mode
   "tC" 'corfu-toggle-autocomplete
   "teb" 'toggle-eldoc-box
-  "to" 'center-window-content
 
   "c" '(:ignore t :wk "code diagnostics")
   "cr" 'flymake-show-buffer-diagnostics
