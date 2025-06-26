@@ -339,6 +339,28 @@ Needs frame-parameter alpha-background."
             (propertize (format "%s" debug-on-error)
                         'face (if debug-on-error 'success 'error)))))
 
+;;;; Center window content
+(defvar center-window-content-width 125)
+(defvar-local center-window-content-enabled nil)
+(defun center-window-content ()
+  "Center/Uncenter the contents of the current window.
+Like Olivetti but without the invasive hooks."
+  (interactive)
+  (let* ((w (selected-window))
+         (tw (with-selected-window w (window-total-width)))
+         (bw (with-selected-window w (window-body-width)))
+         (uw center-window-content-width)
+         (err 2)
+         (margin (/ (abs (- tw uw)) 2)))
+    (if (not center-window-content-enabled)
+        (when (< err (abs (- tw uw)))
+          (setq center-window-content-enabled t)
+          (set-window-margins w margin margin))
+      (if (< err (abs (- bw uw)))
+          (set-window-margins w margin margin)
+        (setq center-window-content-enabled nil)
+        (set-window-margins w 0 0)))))
+
 ;;;; git
 ;;;;; auto-commit
 (defun git-auto-time-commit ()

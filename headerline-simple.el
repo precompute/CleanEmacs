@@ -207,8 +207,8 @@ TYPE can be `:error', `:warning' or `:note'."
                         :height height
                         :inherit 'variable-pitch
                         :foreground (mix-colors fl-variable defaultbg 0.2)
-                        :background (mix-colors region defaultbg 0.5)
-                        :overline (mix-colors region defaultbg 0.5))
+                        :background (mix-colors region defaultbg 0.45)
+                        :overline (mix-colors region defaultbg 0.45))
     (set-face-attribute 'mode-line nil
                         :background defaultbg
                         :box nil

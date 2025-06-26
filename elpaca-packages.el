@@ -275,6 +275,8 @@
 (elpacaLF "scratchiest")
 ;; ;;;; Squish-Content
 ;; (elpacaLF "squish-content")
+;;;; Difflayer
+(elpacaLF "difflayer")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!

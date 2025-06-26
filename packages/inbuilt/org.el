@@ -224,7 +224,9 @@
     (set-face-attribute 'org-indent nil :foreground (face-attribute 'default :background))
     (unless (memq 'set-custom-org-mode-faces enable-theme-functions)
       (add-to-list 'enable-theme-functions 'set-custom-org-mode-faces)))
-  (set-custom-org-mode-faces)
+
+  (with-eval-after-load 'org
+      (set-custom-org-mode-faces))
 
 ;;;;; org capture
   (defvar 46-da-org-dir-path-c "/home/sys2/46/da/da.org")
