@@ -210,53 +210,6 @@ From https://archive.casouri.cc/note/2021/clean-exit/index.html"
       (save-buffers-kill-terminal))))
 
 ;;;; completion
-;;;;; Hippie-Expand
-;;;;;; Hippie-Expand all
-(defun hippie-expand-all (arg)
-  "Hippie-Expand with all try-functions.
-ARG passed to `hippie-expand’."
-  (interactive "P")
-  (let ((hippie-expand-try-functions-list '( try-complete-file-name
-                                             try-complete-file-name-partially
-                                             try-complete-lisp-symbol
-                                             try-complete-lisp-symbol-partially
-                                             try-expand-all-abbrevs
-                                             try-expand-all-abbrevs
-                                             try-expand-dabbrev
-                                             try-expand-dabbrev-all-buffers
-                                             try-expand-dabbrev-from-kill
-                                             try-expand-dabbrev-visible
-                                             try-expand-line
-                                             try-expand-line-all-buffers
-                                             try-expand-list
-                                             try-expand-list-all-buffers
-                                             try-expand-whole-kill)))
-    (hippie-expand arg)))
-
-;;;;;; Hippie-Expand backwards
-(defun hippie-unexpand ()
-  "Hippie-Expand with negative arg."
-  (interactive)
-  (hippie-expand -1))
-
-;;;;;; Hippie-Expand small
-(defun hippie-expand-small (arg)
-  "Hippie-Expand with a selected repertoire of try-functions.
-ARG passed to `hippie-expand’."
-  (interactive "P")
-  (let* ((hippie-expand-try-functions-list '(try-expand-dabbrev
-                                             try-expand-dabbrev-visible
-                                             try-expand-dabbrev-all-buffers))
-         (hippie-expand-try-functions-list (when (memq major-mode '(emacs-lisp-mode lisp-interaction-mode))
-                                             (append hippie-expand-try-functions-list
-                                                     '(try-complete-lisp-symbol-partially
-                                                       try-complete-lisp-symbol))))
-         (hippie-expand-try-functions-list (when (memq major-mode '(prog-mode markdown-mode org-mode))
-                                             (append hippie-expand-try-functions-list
-                                                     '(try-complete-file-name-partially
-                                                       try-complete-file-name)))))
-    (hippie-expand arg)))
-
 ;;;;; kill-new from global paste
 (defun kill-new-from-global-paste-c ()
   (interactive)

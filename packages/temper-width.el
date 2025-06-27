@@ -8,4 +8,5 @@
                                       magit-mode Info-mode
                                       conf-colon-mode helpful-mode
                                       shortdoc-mode org-mode
-                                      lexic-mode)))
+                                      woman-mode lexic-mode))
+  (temper-width-global-mode))

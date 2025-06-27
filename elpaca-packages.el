@@ -188,6 +188,10 @@
 (elpacaLF "org-sliced-images")
 ;; ;;; Hyperbole
 ;; (elpacaLF "hyperbole")
+;;; Hippie-Expand
+(elpacaLF "hippie-exp" t)
+;;; Ispell
+(elpacaLF "ispell" t)
 ;;; Language
 ;;;; Prog-mode
 (elpacaLF "prog-mode" t)
