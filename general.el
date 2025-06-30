@@ -16,14 +16,13 @@
                                ";; Time: " (current-time-string)))
 (setq coding-system-for-write 'raw-text)
 
-(setq-default indicate-empty-lines t)
-
 (setq frame-title-format "Emacs - %f")
 
 (setq x-stretch-cursor t)
-(setq indicate-buffer-boundaries nil)
-(setq indicate-empty-lines nil)
-(setq scroll-margin 10)
+(setq-default indicate-buffer-boundaries
+              '((top . left) (bottom . left) (up . right) (down . right)))
+(setq-default indicate-empty-lines t)
+(setq scroll-margin 11)
 (setq scroll-conservatively 101)
 
 (setq process-adaptive-read-buffering nil)
@@ -63,8 +62,6 @@
 (setq messages-buffer-max-lines 100000)
 
 (setq undo-limit 240000)
-
-(setq-default indicate-buffer-boundaries '((top . left) (bottom . left) (up . right) (down . right)))
 
 (minibuffer-depth-indicate-mode t)
 

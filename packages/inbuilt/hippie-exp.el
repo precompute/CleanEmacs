@@ -1,5 +1,6 @@
 (use-package hippie-exp
   :ensure nil
+  :config
   ;; Variable for buffers that require a certain completion function.
   (defvar-local hippie-expand-literature-buffer nil)
 

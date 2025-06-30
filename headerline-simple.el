@@ -305,7 +305,7 @@ OBJECT and POS are ignored."
           (list (propertize "%[" 'face 'error)
                 (propertize (format-mode-line mode-name)
                             'face 'headerline-major-mode-face)
-                mode-line-process
+                (format-mode-line mode-line-process)
                 (propertize "%]" 'face 'error))))
 
 (defun headerline-line-number-c ()

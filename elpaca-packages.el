@@ -277,12 +277,12 @@
 (elpacaLF "whack-a-thing")
 ;;;; Scratchiest
 (elpacaLF "scratchiest")
-;; ;;;; Squish-Content
-;; (elpacaLF "squish-content")
 ;;;; Difflayer
 (elpacaLF "difflayer")
 ;;;; Temper  Width
 (elpacaLF "temper-width")
+;;;; MuCoCo
+(elpacaLF "mucoco")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!

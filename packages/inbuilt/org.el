@@ -218,15 +218,6 @@
                             ("^\\(.*\\)\\(\\[\\)\\([0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\)\\(]\\).*"
                              (2 '(face nil display " "))
                              (4 '(face nil display " ")))))
-;;;;; Faces
-  (defun set-custom-org-mode-faces (&rest rest)
-    "Set custom org-mode faces for the current theme."
-    (set-face-attribute 'org-indent nil :foreground (face-attribute 'default :background))
-    (unless (memq 'set-custom-org-mode-faces enable-theme-functions)
-      (add-to-list 'enable-theme-functions 'set-custom-org-mode-faces)))
-
-  (with-eval-after-load 'org
-      (set-custom-org-mode-faces))
 
 ;;;;; org capture
   (defvar 46-da-org-dir-path-c "/home/sys2/46/da/da.org")
@@ -340,6 +331,9 @@
 (defface custom--org-todo-project
   '((t (:inherit (bold font-lock-doc-face org-todo fixed-pitch))))
   "Custom org-mode todo-project face.")
+
+(with-eval-after-load 'org-indent
+  (set-face-attribute 'org-indent nil :foreground (face-attribute 'default :background)))
 
 ;;;;; Functions
 ;;;;;; agenda
