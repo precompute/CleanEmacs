@@ -192,6 +192,8 @@
 (elpacaLF "hippie-exp" t)
 ;;; Ispell
 (elpacaLF "ispell" t)
+;;; Email
+(elpacaLF "notmuch")
 ;;; Language
 ;;;; Prog-mode
 (elpacaLF "prog-mode" t)
@@ -233,6 +235,9 @@
 (elpacaLF "zig-mode")
 ;;;; PHP
 (elpacaLF "php-mode")
+;;;; Elixir
+;;;;; REPL
+(elpacaLF "inf-elixir")
 
 ;;; Misc
 ;;;; sqlite3
@@ -280,7 +285,7 @@
 ;;;; Difflayer
 (elpacaLF "difflayer")
 ;;;; Temper  Width
-(elpacaLF "temper-width")
+;; (elpacaLF "temper-width")
 ;;;; MuCoCo
 (elpacaLF "mucoco")
 

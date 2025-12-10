@@ -332,8 +332,11 @@
   '((t (:inherit (bold font-lock-doc-face org-todo fixed-pitch))))
   "Custom org-mode todo-project face.")
 
-(with-eval-after-load 'org-indent
-  (set-face-attribute 'org-indent nil :foreground (face-attribute 'default :background)))
+(defun set-custom-org-faces-c (&optional theme)
+  "Set custom org faces for THEME."
+  (with-eval-after-load 'org-indent
+    (set-face-attribute 'org-indent nil :foreground (face-attribute 'default :background))))
+(add-to-list 'enable-theme-functions 'set-custom-org-faces-c)
 
 ;;;;; Functions
 ;;;;;; agenda

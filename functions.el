@@ -62,25 +62,9 @@
 
 (defun toggle-eldoc-box ()
   (interactive)
-  (if (boundp 'toggle-eldoc-box--history)
-      (progn
-        (if (eq 1 (car toggle-eldoc-box--history))
-            (funcall-interactively #'eldoc-box-hover-mode)
-          (if (eq 1 (cdr toggle-eldoc-box--history))
-              (funcall-interactively #'eldoc-box-hover-at-point-mode))))
-    (defvar-local toggle-eldoc-box--history '(0 0))
-    (let ((msg ""))
-      (if eldoc-box-hover-mode
-          (progn
-            (setq-local toggle-eldoc-box--history
-                        (list 1 (cdr toggle-eldoc-box--history)))
-            (concat msg " `eldoc-box-hover-mode' disabled.")))
-      (if eldoc-box-hover-at-point-mode
-          (progn
-            (setq-local toggle-eldoc-box--history
-                        (list (car toggle-eldoc-box--history) 1))
-            (concat msg " `eldoc-box-hover-at-point-mode' disabled.")))
-      (message msg))))
+  (if eldoc-box-hover-mode
+      (eldoc-box-hover-mode -1)
+    (eldoc-box-hover-mode t)))
 
 (defun corfu-toggle-autocomplete ()
   (interactive)

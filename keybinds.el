@@ -230,16 +230,6 @@
             elfeed-search-mode-map)
  "C-/" 'elfeed-transient-c)
 
-(general-define-key
- :states 'insert
- "C-i" 'evil-jump-forward
- "C-S-i" 'evil-jump-backward)
-
-(general-define-key
- :states 'motion
- "C-i" 'evil-jump-forward
- "C-S-i" 'evil-jump-backward)
-
 ;;;;;;; Evil operators
 (general-define-key
  :states 'normal

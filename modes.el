@@ -22,8 +22,12 @@ you want to `nil’ the alist before operation"
    (haskell haskell-mode haskell-ts-mode)))
 
 ;;;; modes
-(add-to-list 'auto-mode-alist (cons "\\.pde\\'" 'java-ts-mode))
-(add-to-list 'auto-mode-alist (cons "\\.jsx\\'" 'js-jsx-mode))
+(dolist (z (list (cons "\\.pde\\'" 'java-ts-mode)
+                 (cons "\\.jsx\\'" 'js-jsx-mode)
+                 (cons "\\.ex\\'" 'elixir-ts-mode)
+                 (cons "\\.exs\\'" 'elixir-ts-mode)
+                 (cons "\\.elixir\\'" 'elixir-ts-mode)))
+  (add-to-list 'auto-mode-alist z))
 
 ;;;; ffap
 (setq ffap-machine-p-known 'reject)

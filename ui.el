@@ -172,11 +172,12 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 13 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "GT Alpina Typewriter" :size 14 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))
     ;; (set-face-font 'default (font-spec :family "GT America Mono LCG" :size 14))
     ;; (set-face-font 'default (font-spec :family "TX-02" :size 12 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "Iosevka" :size 14))
     ;; (set-face-font 'default (font-spec :family "Pragmata Pro" :size 15 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Letter Gothic Mono Pro" :size 16 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "Inconsolata" :size 15 :weight 'regular))
