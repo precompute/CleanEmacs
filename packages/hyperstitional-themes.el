@@ -1,4 +1,3 @@
 (use-package hyperstitional-themes
   :ensure ( :depth 1
-            :repo "~/44.2/hyperstitional-themes/"
-            :branch "rebug"))
+            :repo "~/44.2/hyperstitional-themes/"))
