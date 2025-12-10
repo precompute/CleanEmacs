@@ -38,22 +38,20 @@ I don’t aim for this config to be minimal, but rather to be easy to understand
 
 - Recommended Emacs Version :: =31.0.50=
 
-- Current Emacs commit :: =4fada67748db787bf3a08ff15f1ab6f7992f9a7e=
+- Current Emacs commit :: =d8870cc1022cecba1bdbb3531659e9253c20c479=
 
 - Recommended OS :: I use Debian Stable.  This config /might/ work on MacOS and WSL.  I don’t use either, so no guarantees.
 
-Configured with:
+Configured with (=C-h v= ~system-configuration-options~):
 
 #+BEGIN_SRC
-configure --with-native-compilation=aot 'CFLAGS=-flto -O3
--mtune=native -march=native -fomit-frame-pointer' --enable-autodepend
---enable-link-time-optimization --with-dbus --with-gif --with-gnutls
---with-gpm=no --with-imagemagick --with-jpeg --with-json
---with-libotf --with-mailutils --with-modules
---without-compress-install --without-gconf --without-gsettings
---without-xaw3d --with-png --with-sound --with-sqlite3 --with-tiff
---with-toolkit-scroll-bars --with-webp --with-xft --with-xim
---with-xpm --with-tree-sitter --with-x-toolkit
+--with-native-compilation=aot --prefix=/opt/emacs/ 'CFLAGS=-flto -O3 -mtune=native -march=native
+-fomit-frame-pointer' --enable-autodepend --enable-link-time-optimization --with-dbus
+--with-gif --with-gnutls --with-gpm=no --with-imagemagick --with-jpeg --with-json --with-libotf
+--with-mailutils --with-modules --without-compress-install --without-gconf --without-gsettings
+--without-xaw3d --with-png --with-sound --with-sqlite3 --with-tiff --with-toolkit-scroll-bars
+--with-webp --with-xft --with-xim --with-xpm --with-tree-sitter --with-x-toolkit --with-pop
+--with-imagemagick --with-mailutils
 #+END_SRC
 
 * General Outline

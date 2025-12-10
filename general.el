@@ -76,6 +76,7 @@
 (setcache-c transient-values-file  "transient/values")
 (setcache-c bookmark-default-file  "bookmarks")
 (setcache-c save-place-file        "places")
+(setcache-c auto-save-list-file-prefix ".saves-")
 
 (setq desktop-dirname user-cache-directory)
 (setq desktop-path (list user-cache-directory))
