@@ -589,6 +589,22 @@ It switches the width before the height."
         (with-current-buffer c-buf
           (locate-dominating-file "." ".git")))))
 
+(defun org-capture-notmuch-c (valtype &optional org-prop)
+  "Get value VALTYPE from the current notmuch-show buffer.
+When ORG-PROP is t, add appropriate property drawer prefixes."
+  (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
+         (c-buf (get-buffer c-buf-name))
+         (valtype (substring (symbol-name valtype) 1)))
+    (when (buffer-live-p c-buf)
+      (with-current-buffer c-buf
+        (let ((r (if (string-equal "to" valtype)
+                     (notmuch-show-get-header :Delivered-To)
+                   (funcall (intern (concat "notmuch-show-get-" valtype))))))
+          (when r
+            (if org-prop
+                (format "\n:MAIL-%s: %s" (upcase valtype) r)
+              (format "%s" r))))))))
+
 ;;;;; org-insert-block-*
 (defun org-insert-block-c (type &optional metadata?)
   "Insert block TYPE at point, or enclosing the current region.

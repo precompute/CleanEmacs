@@ -279,8 +279,27 @@
 #+begin_src %(org-capture-get-major-mode-c)
 %i
 #+end_src" :empty-lines 1 :immediate-finish t)
-          ("e" "epub" plain (file 46-da-org-dir-path-c)
-           "** %(org-capture-epub-c 1)
+          ("m" "mail" plain (file 46-da-org-dir-path-c)
+           "** MAIL from \"%(org-capture-notmuch-c :from)\" [%(org-capture-notmuch-c :timestamp)] : %(org-capture-notmuch-c :subject)
+:PROPERTIES:%(org-capture-notmuch-c :from t)%(org-capture-notmuch-c :to t)%(org-capture-notmuch-c :cc t)%(org-capture-notmuch-c :filename t)%(org-capture-notmuch-c :date t)
+:END:
+[[%(org-capture-notmuch-c :filename)]]
+%U
+#+begin_quote
+%i
+#+end_quote
+%?" :empty-lines 1)
+          ("M" "mail without comments" plain (file 46-da-org-dir-path-c)
+           "** MAIL from \"%(org-capture-notmuch-c :from)\" [%(org-capture-notmuch-c :timestamp)] : %(org-capture-notmuch-c :subject)
+:PROPERTIES:%(org-capture-notmuch-c :from t)%(org-capture-notmuch-c :to t)%(org-capture-notmuch-c :cc t)%(org-capture-notmuch-c :filename t)%(org-capture-notmuch-c :date t)
+:END:
+[[%(org-capture-notmuch-c :filename)]]
+%U
+#+begin_quote
+%i
+#+end_quote" :empty-lines 1 :immediate-finish t)
+          ( "e" "epub" plain (file 46-da-org-dir-path-c)
+            "** %(org-capture-epub-c 1)
 :PROPERTIES:
 :CHAPTER: %(org-capture-epub-c 4)
 :CHAPTER_PROGRESS: %(org-capture-epub-c 5)

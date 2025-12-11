@@ -273,6 +273,8 @@
  "-" 'repeat
  "C-/" 'toggle-modes-transient-c
 
+ "H-a" 'org-capture
+
  "H-h c" 'git-auto-time-commit
  "H-h C" 'git-prompt-commit
  "H-h r" 'refile3-main-transient
@@ -324,7 +326,6 @@
 
 (general-define-key
  :keymaps 'org-mode-map
- "H-a" 'org-capture
  "H-q i" 'org-id-create-insert
  "H-b q" 'org-insert-block-quote-c
  "H-b s" 'org-insert-block-src-c
