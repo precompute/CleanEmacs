@@ -9,4 +9,5 @@
                                       conf-colon-mode helpful-mode
                                       shortdoc-mode org-mode
                                       woman-mode lexic-mode))
-  (temper-width-global-mode))
+  ;; (temper-width-global-mode)
+  )

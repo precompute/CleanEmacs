@@ -285,7 +285,7 @@
 ;;;; Difflayer
 (elpacaLF "difflayer")
 ;;;; Temper  Width
-;; (elpacaLF "temper-width")
+(elpacaLF "temper-width")
 ;;;; MuCoCo
 (elpacaLF "mucoco")
 
