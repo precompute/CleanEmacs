@@ -172,7 +172,7 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 13 :weight 'regular))
+    (set-face-font 'default (font-spec :family "JuliaMono" :size 14 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "GT Alpina Typewriter" :size 14 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))
     ;; (set-face-font 'default (font-spec :family "GT America Mono LCG" :size 14))
@@ -188,7 +188,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Sabon LT Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Cisalpin LT Std" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Adobe Caslon Pro" :size 14))
-    (set-face-font 'variable-pitch (font-spec :family "Palatino eText" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Palatino eText" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Frutiger Serif LT Pro" :size 14 :width 'condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "Myriad Pro" :size 15 :width 'semi-condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "SuisseIntl" :size 15 :width 'condensed))
@@ -199,9 +199,9 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'condensed :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT America LCG" :size 16 :width 'expanded :weight 'regular))
-    ;; (set-face-font 'variable-pitch (font-spec :family "GT Super Text" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT Super Text" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Sectra" :size 16))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Franziska Pro" :size 18))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Franziska Pro" :size 13))
     ;; (set-face-font 'variable-pitch (font-spec :family "Angie Pro" :size 15 :slant nil))
     ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))
@@ -209,10 +209,10 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue LT W1G" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Univers LT Std" :width 'expanded :size 14))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Info Text Offc Pro" :size 14))
-    ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 17))
+    (set-face-font 'variable-pitch (font-spec :family "Info Text Offc Pro" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Alegreya Sans" :size 18))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia eText" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia eText" :size 12))
 
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
     (copy-face 'default 'fixed-pitch)))
