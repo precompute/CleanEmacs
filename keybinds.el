@@ -38,7 +38,8 @@
   "S-SPC" 'project-switch-project
   "f"  '(:ignore t :wk "file")
   "ff" 'find-file
-  "fr" 'recentf-open
+  "fr" 'consult-recent-file
+  "fR" 'recentf-open-files
   "fD" 'make-directory
 
   "g" '(:ignore t :wk "Version Control")
