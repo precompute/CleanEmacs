@@ -597,9 +597,10 @@ When ORG-PROP is t, add appropriate property drawer prefixes."
          (valtype (substring (symbol-name valtype) 1)))
     (when (buffer-live-p c-buf)
       (with-current-buffer c-buf
-        (let ((r (if (string-equal "to" valtype)
-                     (notmuch-show-get-header :Delivered-To)
-                   (funcall (intern (concat "notmuch-show-get-" valtype))))))
+        (let* ((r (funcall (intern (concat "notmuch-show-get-" valtype))))
+               (r (if (string-equal "to" valtype)
+                      (if r r (notmuch-show-get-header :Delivered-To))
+                    r)))
           (when r
             (if org-prop
                 (format "\n:MAIL-%s: %s" (upcase valtype) r)
