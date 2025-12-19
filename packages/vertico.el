@@ -8,7 +8,8 @@
         ("C-SPC" . vertico-quick-insert)
         ("C-q" . vertico-quick-exit))
   :custom
-  (vertico-count 20)
+  (vertico-count 25)
+  (vertico-scroll-margin 5)
   (vertico-cycle t)
   ;; (vertico-count-format ;; slows things down
   ;;  (cons (propertize "%-10s" 'face 'font-lock-keyword-face)

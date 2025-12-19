@@ -356,3 +356,10 @@
  :states 'normal
  "C-z" 'legit-to-line
  "C-S-z" 'legit-from-line)
+
+(general-define-key
+ :keymaps 'vertico-map
+ "<next>" 'vertico-scroll-up
+ "<prior>" 'vertico-scroll-down
+ "C-<next>" 'next-history-element
+ "C-<prior>" 'previous-history-element)

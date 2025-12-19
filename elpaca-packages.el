@@ -80,6 +80,8 @@
 (elpacaLF "wgrep")
 ;;;;; Consult (incremental functions)
 (elpacaLF "consult")
+;;;;; Vertico-Posframe (center child frame)
+(elpacaLF "vertico-posframe")
 ;;; Magit
 (elpacaLF "magit")
 ;;;; Magit Section
