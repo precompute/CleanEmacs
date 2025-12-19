@@ -1,16 +1,17 @@
 (use-package eglot
   :ensure nil
-  :hook ((python-ts-mode
+  :hook ((python-mode
+          python-ts-mode
           js-mode
           js-ts-mode
+          go-mode
           go-ts-mode
           elixir-ts-mode
           zig-mode
           lua-mode) . eglot-ensure)
   :config
-  (add-to-list 'eglot-server-programs '(zig-mode "zls"))
-  (add-to-list 'eglot-server-programs '(elixir-ts-mode "elixir-ls"))
-  ;; (add-to-list 'eglot-server-programs '(((python-mode python-ts-mode) . ("pylsp"))
-  ;;                                       (lua-mode . "lua-language-server")
-  ;;                                       ((go-mode go-ts-mode) . ("gopls"))))
-  )
+  (dolist (mode-server '((zig-mode . ("zls"))
+                         (elixir-ts-mode . ("elixir-ls"))
+                         ((go-mode go-ts-mode) . ("gopls"))
+                         ((python-mode python-ts-mode) . ("ty" "server"))))
+    (add-to-list 'eglot-server-programs mode-server)))

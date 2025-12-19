@@ -7,6 +7,11 @@
     (pcase-let ((`(,offset-l ,offset-r ,offset-t) eldoc-box-offset))
       (cons offset-l
             (- (frame-outer-height (selected-frame)) height offset-t))))
+  (defun eldoc-box-bottom-right-position-function (width height)
+    "Set childframe position to bottom right."
+    (pcase-let ((`(,offset-l ,offset-r ,offset-t) eldoc-box-offset))
+      (cons (- (frame-outer-width (selected-frame)) width offset-r)
+            (- (frame-outer-height (selected-frame)) height offset-t))))
   (defun eldoc-box-add-padding ()
     "Add padding to the box by adding spaces before every line and
 newlines on top and bottom."
@@ -20,7 +25,9 @@ newlines on top and bottom."
       (goto-char (point-min)) (re-search-forward (rx (seq eos))) (replace-match "\n \n")))
   (setq eldoc-box-only-multi-line t
         eldoc-box-cleanup-interval 0.1
-        eldoc-box-offset '(10 10 20)
-        eldoc-box-position-function #'eldoc-box-bottom-left-position-function)
+        eldoc-box-offset '(15 15 40)
+        eldoc-box-position-function #'eldoc-box-bottom-right-position-function
+        eldoc-box-max-pixel-width 400
+        eldoc-box-max-pixel-height 400)
   (remove-hook 'eldoc-box-buffer-hook #'eldoc-box--condense-large-newline-gaps)
   (add-hook 'eldoc-box-buffer-hook #'eldoc-box-add-padding))

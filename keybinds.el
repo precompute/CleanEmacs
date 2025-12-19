@@ -347,6 +347,12 @@
  "H-s" 'consult-info)
 
 (general-define-key
+ :states '(normal insert visual)
+ "H-c" 'clipboard-kill-ring-save
+ "H-x" 'clipboard-kill-region
+ "H-p" 'clipboard-yank)
+
+(general-define-key
  :states 'normal
  "C-z" 'legit-to-line
  "C-S-z" 'legit-from-line)

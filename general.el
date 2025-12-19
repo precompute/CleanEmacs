@@ -39,6 +39,12 @@
 
 (setq vc-follow-symlinks t) ;; no prompting for changing VC'd files
 
+(setq-default select-active-regions nil
+              select-enable-clipboard nil
+              x-select-enable-clipboard-manager nil)
+
+(setq kill-ring-max 1024)
+
 (setq-default indent-tabs-mode nil)
 
 (setq display-line-numbers-width 5)
@@ -92,5 +98,5 @@
 (undelete-frame-mode 1)
 
 (setq-default help-at-pt-display-when-idle t
-              help-at-pt-timer-delay 1)
+              help-at-pt-timer-delay 0.5)
 (help-at-pt-set-timer) ;; hints in the echo area
