@@ -63,8 +63,11 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
               (cons (format (if helpful--callable-p "Fn" "Var")
                             'face 'headerline-narrow-indicator-face)
                     (format "%s" helpful--sym)))
-             ((eq major-mode 'Man-mode)
+             ((or (eq major-mode 'woman-mode)
+                  (eq major-mode 'Man-mode))
               (cons nil Man-page-mode-string))
+             ;; ((eq major-mode 'notmuch-search-mode)
+             ;;  (cons nil notmuch-search-query-string))
              (t nil))))))
 (dolist (hook '(change-major-mode-after-body-hook
                 after-save-hook ;; In case the user saves the file to a new location
@@ -462,9 +465,11 @@ Functionally equivalent to `mode-line-format-right-align’."
                 shortdoc-mode-hook
                 finder-mode-hook
                 magit-status-mode-hook
-                Man-mode
+                man-common-hook
                 vterm-mode-hook
                 xref--xref-buffer-mode-hook
-                xref--transient-buffer-mode-hook))
+                xref--transient-buffer-mode-hook
+                notmuch-hello-mode-hook
+                notmuch-search-mode-hook))
   (add-hook hook 'headerline-simple-mode 100)
   (add-hook hook 'modeline-simple-mode 100))

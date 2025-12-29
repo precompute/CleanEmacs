@@ -62,6 +62,8 @@
 
 (setq disabled-command-function nil)
 
+(mouse-avoidance-mode 'exile)
+
 (setq lazy-highlight-cleanup nil
       lazy-highlight-initial-delay 0.1)
 

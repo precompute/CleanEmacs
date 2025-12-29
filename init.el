@@ -1,5 +1,6 @@
 ;; init.el -*- lexical-binding: t; -*-
-(setq gc-cons-threshold (* 4 1024 1024))
+(setq gc-cons-threshold (* 8 1024 1024))
+(setq inhibit-compacting-font-caches t)
 
 (defun loadfile-c (file)
   "Load FILE from `user-emacs-directory'."
