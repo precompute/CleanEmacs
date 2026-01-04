@@ -73,6 +73,8 @@
 
 (minibuffer-depth-indicate-mode t)
 
+(setq minibuffer-follows-selected-frame nil)
+
 (defmacro setcache-c (var file)
   "Macro to set file location to `user-cache-directory'"
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))

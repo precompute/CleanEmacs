@@ -7,3 +7,5 @@
 /eshell/
 tramp
 /.cacheold/
+/eln-cache/
+/ielm-history.eld
