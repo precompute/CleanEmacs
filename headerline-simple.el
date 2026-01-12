@@ -168,7 +168,7 @@ TYPE can be `:error', `:warning' or `:note'."
     (set-face-attribute 'headerline-base-face nil
                         :inherit 'variable-pitch
                         :height height
-                        :overline fl-variable
+                        :overline region
                         :underline `(:color ,fl-variable :position 0)
                         :foreground fl-variable
                         :background region)

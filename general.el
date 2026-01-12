@@ -75,6 +75,8 @@
 
 (setq minibuffer-follows-selected-frame nil)
 
+(setq password-cache-expiry nil)
+
 (defmacro setcache-c (var file)
   "Macro to set file location to `user-cache-directory'"
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))
@@ -97,7 +99,10 @@
 
 (winner-mode 1)
 (fringe-mode '(7 . 7))
-;; (window-divider-mode 1)
+(window-divider-mode 1)
+(setq window-divider-default-places t
+      window-divider-default-right-width 1
+      window-divider-default-bottom-width 1)
 (savehist-mode 1)
 (save-place-mode 1)
 (recentf-mode 1)
