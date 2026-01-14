@@ -98,7 +98,13 @@
      'eldoc-box-body nil
      :background (face-attribute 'region :background))))
 
-(dolist (f '(set-eldoc-box-faces-c
+(defun set-pulsar-face-c (&rest _args)
+  (interactive)
+  (when (featurep 'pulsar)
+    (set-face-attribute 'pulsar-generic nil :background current--builtin-face-foreground :inherit nil)))
+
+(dolist (f '(set-pulsar-face-c
+             set-eldoc-box-faces-c
              set-org-mode-faces-c
              get-face-colors-c))
   (add-to-list 'enable-theme-functions f))
@@ -197,6 +203,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))
@@ -210,7 +217,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Source Sans 3" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "Source Serif 4" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "Angie Pro" :size 15 :slant nil))
-    (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 15))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 14))

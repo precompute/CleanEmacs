@@ -1,5 +1,8 @@
 ;;;; General
 ;;;;; Global nice-to-haves
+;; (global-set-key (kbd "C-i") nil)
+;; (define-key evil-normal-state-map (kbd "C-i") nil)
+;; (define-key evil-normal-state-map (kbd "<tab>") nil)
 (general-define-key
  [f5] 'delete-window
  [s-f5] 'delete-other-windows
@@ -36,6 +39,7 @@
 (evil-keymaps-c
   "SPC" 'project-find-file
   "S-SPC" 'project-switch-project
+  "C-SPC" 'consult-fd-local
   "f"  '(:ignore t :wk "file")
   "ff" 'find-file
   "fr" 'consult-recent-file
@@ -80,9 +84,8 @@
   "sm" 'evil-show-marks
   "sM" 'consult-global-mark
   "s C-m" 'evil-collection-consult-jump-list
-  "sd" 'consult-ripgrep-local
+  "sP" 'consult-ripgrep-local
   "sp" 'consult-ripgrep
-  "sf" 'consult-fd-local
   "s C-h i" 'consult-info
   "sr" 'evil-show-registers
 
@@ -243,6 +246,7 @@
 (general-define-key
  :states 'motion
  "a g" 'evil-textobj-whole-buffer
+ "a h" 'evil-textobj-visible-lines
  "a f" 'evil-textobj-get-func
  "a l" 'evil-textobj-entire-line
  "a N P" 'evil-textobj-forward-until-empty-line
@@ -346,11 +350,17 @@
  "H-e" 'Info-up
  "H-s" 'consult-info)
 
+;; c x p a q b z h
 (general-define-key
  :states '(normal insert visual)
  "H-c" 'clipboard-kill-ring-save
  "H-x" 'clipboard-kill-region
  "H-p" 'clipboard-yank)
+
+(general-define-key
+ :states '(normal insert visual)
+ "C-i" 'evil-jump-backward
+ "C-o" 'evil-jump-forward)
 
 (general-define-key
  :states 'normal

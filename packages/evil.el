@@ -35,6 +35,12 @@
     "Text object to select the whole buffer."
     (evil-range (point-min) (point-max) type))
 
+  (evil-define-text-object evil-textobj-visible-lines (count &optional _beg _end type)
+    "Text object to select all visible lines in current window."
+    (let ((start (save-excursion (goto-char (window-start)) (pos-bol)))
+          (end (save-excursion (goto-char (window-end)) (pos-bol))))
+      (evil-range start end type)))
+
   (evil-define-text-object evil-textobj-get-func (count &optional _beg _end type)
     "Text object to select the top-level Lisp form or function definition at
 point."
@@ -157,6 +163,12 @@ If ARG < 0, move column END to BEG"
            (move-left-p (< arg 0)))
       (goto-char (if move-left-p end beg))
       (dotimes (_ n-columns-to-move) (org-table-move-column move-left-p))))
+
+  (defun evil--advice-restore-point (f &rest args)
+    "Restore point after operation."
+    (let ((p (point))) (apply f args) (goto-char p)))
+
+  (advice-add 'evil-yank :around #'evil--advice-restore-point)
 
   :init
   (setq evil-want-keybinding nil)

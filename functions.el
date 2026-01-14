@@ -12,12 +12,17 @@
 
 ;;;; convenience
 (defun consult-ripgrep-local ()
+  "Run ripgrep on the current directory, nothing ignored."
   (interactive)
-  (consult-ripgrep default-directory))
+  (let ((consult-async-min-input 1)
+        (consult-ripgrep-args (concat consult-ripgrep-args " -uu")))
+    (consult-ripgrep default-directory)))
 
 (defun consult-fd-local ()
+  "Run fdfind in the current directory, nothing ignored."
   (interactive)
-  (let ((consult-async-min-input 0))
+  (let ((consult-async-min-input 1)
+        (consult-fd-args '((if (executable-find "fdfind" 'remote) "fdfind" "fd") "--full-path --color=never -u")))
     (consult-fd default-directory)))
 
 (defun save-and-kill-buffer ()

@@ -99,7 +99,7 @@
 
 (winner-mode 1)
 (fringe-mode '(7 . 7))
-(window-divider-mode 1)
+(window-divider-mode)
 (setq window-divider-default-places t
       window-divider-default-right-width 1
       window-divider-default-bottom-width 1)
