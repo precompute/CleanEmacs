@@ -99,10 +99,6 @@
 
 (winner-mode 1)
 (fringe-mode '(7 . 7))
-(window-divider-mode)
-(setq window-divider-default-places t
-      window-divider-default-right-width 1
-      window-divider-default-bottom-width 1)
 (savehist-mode 1)
 (save-place-mode 1)
 (recentf-mode 1)

@@ -382,6 +382,34 @@ Needs frame-parameter alpha-background."
   (when-let* ((z (get-thing-at-point-or-region-c 'symbol)))
     (consult-fd-local default-directory z)))
 
+;;;;; highlight
+(defvar highlight-at-point-faces-c '( hi-yellow hi-blue hi-pink hi-green hi-salmon hi-aquamarine
+                                      highlight lazy-highlight))
+(defvar-local highlight-at-point-used-faces-c 0)
+(defun highlight-at-point-c ()
+  "Run `highlight-phrase’ with the symbol at point, or the active region, in the current buffer."
+  (interactive)
+  (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
+              (z (regexp-quote z))
+              (f (nth highlight-at-point-used-faces-c highlight-at-point-faces-c)))
+    (when f (cl-incf highlight-at-point-used-faces-c))
+    (highlight-phrase z f)))
+
+(defun unhighlight-at-point-c (arg)
+  "Run `hi-lock-unface-buffer’ with the symbol at point, or the active region, in the current buffer.
+When ARG is non-nil, remove all highlights in current buffer."
+  (interactive "P")
+  (if arg (hi-lock-unface-buffer t)
+    (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
+                (z (regexp-quote z)))
+      (when (> highlight-at-point-used-faces-c 0) (cl-decf highlight-at-point-used-faces-c))
+      (hi-lock-unface-buffer z))))
+
+(defun unhighlight-all-c ()
+  "Run `unhighlight-at-point-c’ with arg as t."
+  (interactive)
+  (unhighlight-at-point-c t))
+
 ;;;; git
 ;;;;; auto-commit
 (defun git-auto-time-commit ()

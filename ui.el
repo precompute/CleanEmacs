@@ -173,6 +173,11 @@ Ignore REST."
 (add-hook 'window-setup-hook 'set-transparency-c)
 (add-to-list 'initial-frame-alist (cons 'alpha-background transparency-value-c))
 
+;;;; window-divider
+(setq window-divider-default-places t
+      window-divider-default-right-width 1
+      window-divider-default-bottom-width 1)
+(window-divider-mode)
 ;;; Fonts
 (defun set-fonts-c (&rest rest)
   "Set fonts for Emacs."
@@ -203,7 +208,8 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
-    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'regular))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))

@@ -96,6 +96,9 @@
   "Ss" 'consult-line-at-point-c
   "S SPC" 'consult-fd-local-global-at-point-c
   "S C-SPC" 'consult-fd-local-at-point-c
+  "Sh" 'highlight-at-point-c
+  "SH" 'unhighlight-at-point-c
+  "S C-h" 'unhighlight-all-c
 
   "TAB" '(:ignore t :wk "perspective")
   "TAB TAB" 'persp-switch
@@ -381,3 +384,10 @@
  "<prior>" 'vertico-scroll-down
  "C-<next>" 'next-history-element
  "C-<prior>" 'previous-history-element)
+
+;; SPC-M-SPC to select a file from all files
+;; visual select all visible lines
+;; highlight all matching under point
+;; search with under point
+;; evil jump
+;; Bicycle: restore point after
