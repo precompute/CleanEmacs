@@ -89,6 +89,14 @@
   "s C-h i" 'consult-info
   "sr" 'evil-show-registers
 
+  "s" '(:ignore t :wk "show-at-point")
+  "Sf" 'find-file-at-point
+  "Sp" 'consult-ripgrep-at-point-c
+  "SP" 'consult-ripgrep-local-at-point-c
+  "Ss" 'consult-line-at-point-c
+  "S SPC" 'consult-fd-local-global-at-point-c
+  "S C-SPC" 'consult-fd-local-at-point-c
+
   "TAB" '(:ignore t :wk "perspective")
   "TAB TAB" 'persp-switch
   "TAB d" 'persp-kill

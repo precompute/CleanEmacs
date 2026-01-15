@@ -11,19 +11,20 @@
   (insert (format-time-string "[%02y-%02m-%02d]")))
 
 ;;;; convenience
-(defun consult-ripgrep-local ()
+(defun consult-ripgrep-local (&optional dir initial)
   "Run ripgrep on the current directory, nothing ignored."
   (interactive)
   (let ((consult-async-min-input 1)
         (consult-ripgrep-args (concat consult-ripgrep-args " -uu")))
-    (consult-ripgrep default-directory)))
+    (consult-ripgrep (or dir default-directory) initial)))
 
-(defun consult-fd-local ()
-  "Run fdfind in the current directory, nothing ignored."
+(defun consult-fd-local (&optional dir initial)
+  "Run fdfind in the current directory, nothing ignored.
+DIR is the directory, INITIAL is the string."
   (interactive)
   (let ((consult-async-min-input 1)
         (consult-fd-args '((if (executable-find "fdfind" 'remote) "fdfind" "fd") "--full-path --color=never -u")))
-    (consult-fd default-directory)))
+    (consult-fd (or dir default-directory) initial)))
 
 (defun save-and-kill-buffer ()
   (interactive)
@@ -333,6 +334,53 @@ Needs frame-parameter alpha-background."
 
 ;; (remove-hook 'window-size-change-functions #'center-window-content-frame)
 ;; (remove-hook 'change-major-mode-hook #'center-window-content-frame)
+
+;;;; with-at-point
+(defun get-thing-at-point-or-region-c (thing)
+  "Get THING with `thing-at-point’ or get the active region, and return it."
+  (interactive)
+  (let ((s (if (region-active-p)
+               (buffer-substring-no-properties (region-beginning) (region-end))
+             (thing-at-point thing t))))
+    (if (and s (not (string-empty-p s))) s nil)))
+
+(defun consult-ripgrep-at-point-c ()
+  "Run `consult-ripgrep’ with the symbol at point, or the active region."
+  (interactive)
+  (when-let* ((z (get-thing-at-point-or-region-c 'symbol)))
+    (consult-ripgrep nil z)))
+
+(defun consult-ripgrep-local-at-point-c ()
+  "Run `consult-ripgrep-local’ with the symbol at point, or the active region."
+  (interactive)
+  (when-let* ((z (get-thing-at-point-or-region-c 'symbol)))
+    (consult-ripgrep-local default-directory z)))
+
+(defun consult-line-at-point-c ()
+  "Run `consult-line’ with the symbol at point, or the active region."
+  (interactive)
+  (when-let* ((z (get-thing-at-point-or-region-c 'symbol)))
+    (consult-line z)))
+
+;; (defun project-find-file-at-point-c ()
+;;   "Run `project-find-file’ with the symbol at point, or the active region."
+;;   (interactive)
+;;   (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
+;;               (pr (project-current t))
+;;               (root (project-root pr)))
+;;     (project-find-file-in z (list root) pr t)))
+
+(defun consult-fd-local-global-at-point-c ()
+  "Run `consult-fd-local’ with the symbol at point, or the active region, in the current project."
+  (interactive)
+  (when-let* ((z (get-thing-at-point-or-region-c 'symbol)))
+    (consult-fd-local (project-root (project-current t)) z)))
+
+(defun consult-fd-local-at-point-c ()
+  "Run `consult-fd-local’ with the symbol at point, or the active region, in `default-directory’."
+  (interactive)
+  (when-let* ((z (get-thing-at-point-or-region-c 'symbol)))
+    (consult-fd-local default-directory z)))
 
 ;;;; git
 ;;;;; auto-commit
