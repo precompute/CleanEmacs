@@ -150,8 +150,10 @@
 (elpacaLF "diredfl")
 ;;;; Dired Sidebar
 (elpacaLF "dired-sidebar")
-;;;;; Dired Subtree
-(elpacaLF "dired-hacks-utils")
+;;;; Dired Subtree
+(elpacaLF "dired-subtree")
+;;;; Dired Posframe
+(elpacaLF "dired-posframe")
 ;;;; Dired Narrow
 (elpacaLF "dired-narrow")
 ;;;; Dired Collapse (skip empty directories)

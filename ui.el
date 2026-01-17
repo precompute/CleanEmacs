@@ -103,7 +103,13 @@
   (when (featurep 'pulsar)
     (set-face-attribute 'pulsar-generic nil :background current--builtin-face-foreground :inherit nil)))
 
+(defun set-dired-posframe-face-c (&rest _args)
+  (interactive)
+  (when (featurep 'dired-posframe)
+    (set-face-attribute 'dired-posframe-border nil :background current--builtin-face-foreground :inherit nil)))
+
 (dolist (f '(set-pulsar-face-c
+             set-dired-posframe-face-c
              set-eldoc-box-faces-c
              set-org-mode-faces-c
              get-face-colors-c))

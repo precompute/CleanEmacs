@@ -1,5 +1,6 @@
-(use-package dired-hacks-utils
+(use-package dired-subtree
   :ensure (:depth 1)
+  :after dired
   :config
   (setq dired-subtree-cycle-depth 4
         dired-subtree-line-prefix ">")
