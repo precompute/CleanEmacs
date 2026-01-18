@@ -96,8 +96,8 @@
 ;; (elpacaLF "olivetti") ;; Slows everything down!
 ;; ;;; Perfect Margin
 ;; (elpacaLF "perfect-margin") ;; Better than olivetti!
-;; ;;; Indent Guides
-;; (elpacaLF "highlight-indent-guides")
+;;; Indent Guides
+(elpacaLF "highlight-indent-guides")
 ;; (elpacaC "indent-bars")
 ;;; Which-Key
 (elpacaLF "which-key")
@@ -154,6 +154,8 @@
 (elpacaLF "dired-subtree")
 ;;;; Dired Posframe
 (elpacaLF "dired-posframe")
+;; ;;;; Dired Hist
+;; (elpacaLF "dired-hist")
 ;;;; Dired Narrow
 (elpacaLF "dired-narrow")
 ;;;; Dired Collapse (skip empty directories)

@@ -6,4 +6,5 @@
   (setq highlight-indent-guides-character ?\∣) ;; :
   (setq highlight-indent-guides-auto-enabled nil)
   (setq highlight-indent-guides-delay 0.25)
-  :hook (prog-mode . highlight-indent-guides-mode))
+  ;; :hook (prog-mode . highlight-indent-guides-mode)
+  )
