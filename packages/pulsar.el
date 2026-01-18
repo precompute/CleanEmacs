@@ -7,7 +7,7 @@
   :custom
   (pulsar-face 'pulsar-generic)
   (pulsar-iterations 1)
-  (pulsar-delay 0.1)
+  (pulsar-delay 0)
   :config
   (defun pulsar-pulse-line--window-selection-c (_)
     "Wrapper around `pulsar-pulse-line’ to make it work with `window-selection-change-functions’."

@@ -49,22 +49,21 @@ DIR is the directory, INITIAL is the string."
   (interactive)
   (let ((changed? (not (verify-visited-file-modtime))))
     (if (buffer-modified-p)
-        (if changed?
-            (message
-             (concat
-              (propertize "Buffer " 'face 'variable-pitch)
-              (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
-              (propertize " changed on disk.  " 'face 'variable-pitch)
-              (propertize "You have unsaved changes." 'face '(variable-pitch success)))))
-      (if changed?
-          (progn
-            (message
-             (concat
-              (propertize "Buffer " 'face 'variable-pitch)
-              (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
-              (propertize " changed on disk.  " 'face 'variable-pitch)
-              (propertize "REVERTING." 'face '(variable-pitch success))))
-            (revert-buffer t t))))))
+        (when changed?
+          (message
+           (concat
+            (propertize "Buffer " 'face 'variable-pitch)
+            (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
+            (propertize " changed on disk.  " 'face 'variable-pitch)
+            (propertize "You have unsaved changes." 'face '(variable-pitch success)))))
+      (when changed?
+        (message
+         (concat
+          (propertize "Buffer " 'face 'variable-pitch)
+          (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
+          (propertize " changed on disk.  " 'face 'variable-pitch)
+          (propertize "REVERTING." 'face '(variable-pitch success))))
+        (revert-buffer t t)))))
 
 (defun toggle-eldoc-box ()
   (interactive)
