@@ -219,18 +219,12 @@ From https://archive.casouri.cc/note/2021/clean-exit/index.html"
        rlist))))
 
 ;;;; unicode
-(defun insert-char-5-discard-end ()
-  "Read 5 keyboard inputs, interpret first four as a hexadecimal number, discard the fifth and insert the remaining as a character.
-https://emacs.stackexchange.com/questions/74526/programmatically-invoking-insert-char-for-compatibility-with-unicode-insertion-i/74527#74527"
+(defun insert-base16-char-c ()
+  "Insert a base16 char.  SPC terminates input."
   (interactive)
-  (let* ((k1 (read-key-sequence "_____"))
-         (k2 (read-key-sequence (concat k1 "____")))
-         (k3 (read-key-sequence (concat k1 k2 "___")))
-         (k4 (read-key-sequence (concat k1 k2 k3 "__")))
-         (k5 (read-key (concat k1 k2 k3 k4 "_")))
-         (charcode (cl-parse-integer (concat k1 k2 k3 k4) :radix 16)))
-    (insert-char charcode)
-    (message (concat k1 k2 k3 k4 " => " (char-to-string charcode)))))
+  (cl-loop for k = (read-key) until (eq k ? )
+           concat (char-to-string k) into s
+           finally (unless (string-empty-p s) (insert-char (string-to-number s 16)))))
 
 (defun char-to-unicode-insert ()
   (interactive)

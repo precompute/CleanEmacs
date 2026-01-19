@@ -190,6 +190,7 @@ Ignore REST."
   (interactive)
   (progn
     (set-face-font 'default (font-spec :family "JuliaMono" :size 13 :weight 'regular))
+    ;; (set-face-font 'default (font-spec :family "Luculent" :size 12))
     ;; (set-face-font 'default (font-spec :family "GT Standard Mono" :size 13 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "GT Alpina Typewriter" :size 14 :weight 'regular))
     ;; (set-face-font 'default (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))

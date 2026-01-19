@@ -310,7 +310,7 @@
 
 (general-define-key
  :states 'insert
- "C-S-u" 'insert-char-5-discard-end
+ "C-S-u" 'insert-base16-char-c
  "M-o" 'evil-open-below
  "M-O" 'evil-open-above)
 
