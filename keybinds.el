@@ -1,13 +1,11 @@
 ;;;; General
 ;;;;; Global nice-to-haves
-;; (global-set-key (kbd "C-i") nil)
-;; (define-key evil-normal-state-map (kbd "C-i") nil)
-;; (define-key evil-normal-state-map (kbd "<tab>") nil)
 (general-define-key
  [f5] 'delete-window
  [s-f5] 'delete-other-windows
  [f6] 'timestamp
  [s-f6] 'timestamp-no-time
+ [f7] 'execute-extended-command
  [f9] 'save-buffer
  [f10] 'save-and-delete-window
  [f12] 'save-and-kill-buffer
@@ -42,9 +40,12 @@
   "C-SPC" 'consult-fd-local
   "f"  '(:ignore t :wk "file")
   "ff" 'find-file
+  "fF" 'find-file-other-window
+  "f C-f" 'find-file-other-frame
   "fr" 'consult-recent-file
   "fR" 'recentf-open-files
-  "fD" 'make-directory
+  "fd" 'make-directory
+  "fe" 'rename-visited-file
 
   "g" '(:ignore t :wk "Version Control")
   "gg" 'magit-status
@@ -124,7 +125,8 @@
   "oO" 'dired-jump-other-window
   ;; "od" 'dired-jump
   "of" 'make-frame
-  "oF" 'tear-off-window
+  "oF" 'legit-to-frame
+  "o C-f" 'tear-off-window
   "oi" 'imenu-list-smart-toggle
   "op" 'dired-sidebar-toggle-sidebar
   "o'" 'vertico-repeat
@@ -384,10 +386,3 @@
  "<prior>" 'vertico-scroll-down
  "C-<next>" 'next-history-element
  "C-<prior>" 'previous-history-element)
-
-;; SPC-M-SPC to select a file from all files
-;; visual select all visible lines
-;; highlight all matching under point
-;; search with under point
-;; evil jump
-;; Bicycle: restore point after

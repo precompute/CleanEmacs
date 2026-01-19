@@ -464,6 +464,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                 messages-buffer-mode-hook
                 shortdoc-mode-hook
                 finder-mode-hook
+                image-mode-hook
                 magit-status-mode-hook
                 man-common-hook
                 vterm-mode-hook
