@@ -47,13 +47,14 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
                          (gitroot-nodash (substring gitroot 0 -1))
                          (gitroot-a (replace-regexp-in-string
                                      "^[z-a]*/" "" gitroot-nodash))
-                         (dirbefore (substring
-                                     gitroot-nodash
-                                     0
-                                     (* -1
-                                        (+ 1
-                                           (length gitroot-a))))))
-                    (cons gitroot-a
+                         ;; (dirbefore (substring
+                         ;;             gitroot-nodash
+                         ;;             0
+                         ;;             (* -1
+                         ;;                (+ 1
+                         ;;                   (length gitroot-a)))))
+                         )
+                    (cons (abbreviate-file-name gitroot-a)
                           (substring buf
                                      (length gitroot)
                                      nil))))))
@@ -201,11 +202,11 @@ TYPE can be `:error', `:warning' or `:note'."
     (set-face-attribute 'headerline-macro-face nil
                         :foreground fl-constant)
     (set-face-attribute 'headerline-dark-face nil
-                        :height height2
+                        :inherit 'fixed-pitch-numbers
                         :foreground (mix-colors region fl-constant 0.6)
                         :weight 'bold)
     (set-face-attribute 'headerline-dark-face-2 nil
-                        :height height2
+                        :inherit 'fixed-pitch-numbers
                         :foreground (mix-colors region fl-string 0.9)
                         :weight 'bold)
     (set-face-attribute 'header-line-inactive nil
@@ -373,16 +374,19 @@ Specific to the current window."
        (propertize
         (headerline-flymake-count-c :error)
         'face '( :weight black
+                 :inherit fixed-pitch-numbers
                  :height ,headerline-secondary-height
                  :foreground ,headerline--err-face))
        (propertize
         (headerline-flymake-count-c :warning)
         'face '( :weight black
+                 :inherit fixed-pitch-numbers
                  :height ,headerline-secondary-height
                  :foreground ,headerline--warn-face))
        (propertize
         (headerline-flymake-count-c :note)
         'face '( :weight black
+                 :inherit fixed-pitch-numbers
                  :height ,headerline-secondary-height
                  :foreground ,headerline--note-face))))))
 

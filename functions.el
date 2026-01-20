@@ -180,6 +180,14 @@ DIR is the directory, INITIAL is the string."
   (message (concat (propertize "HYPER" 'face 'font-lock-builtin-face)
                    (propertize " key enabled." 'face 'success))))
 
+(defun clipboard-kill-ring-save-c ()
+  "Run `clipboard-kill-ring-save’ if a region is active.
+If region is inactive, then copy from kill-ring to clipboard."
+  (interactive)
+  (if (use-region-p) ;; not `region-active-p’
+      (clipboard-kill-ring-save (region-beginning) (region-end))
+    (when kill-ring (gui-set-selection 'CLIPBOARD (current-kill 0 t)))))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.

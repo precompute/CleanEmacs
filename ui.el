@@ -90,7 +90,7 @@
 
 (defun set-eldoc-box-faces-c (&rest rest)
   (interactive)
-  (when (facep 'eldoc-box-border)
+  (when (and (featurep 'eldoc-box) (facep 'eldoc-box-border))
     (set-face-attribute
      'eldoc-box-border nil
      :background (face-attribute 'shadow :foreground))
@@ -184,25 +184,34 @@ Ignore REST."
       window-divider-default-right-width 1
       window-divider-default-bottom-width 1)
 (window-divider-mode)
+
 ;;; Fonts
+(defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
+
+(defun set-face-font-c (spec)
+  "Set SPEC to faces `default’ and `fixed-pitch’.
+`copy-face’ brings over the background setting, and more."
+  (set-face-font 'default spec)
+  (set-face-font 'fixed-pitch spec))
+
 (defun set-fonts-c (&rest rest)
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font 'default (font-spec :family "JuliaMono" :size 13 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "Luculent" :size 12))
-    ;; (set-face-font 'default (font-spec :family "GT Standard Mono" :size 13 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "GT Alpina Typewriter" :size 14 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))
-    ;; (set-face-font 'default (font-spec :family "GT America Mono LCG" :size 14))
-    ;; (set-face-font 'default (font-spec :family "TX-02" :size 12 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "Iosevka" :size 14))
-    ;; (set-face-font 'default (font-spec :family "Pragmata Pro" :size 15 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "Letter Gothic Mono Pro" :size 16 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "Inconsolata" :size 15 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "Inconsolata" :size 15 :weight 'regular :width 'condensed))
-    ;; (set-face-font 'default (font-spec :family "Gohu GohuFont" :size 12 :weight 'regular))
-    ;; (set-face-font 'default (font-spec :family "Cozette" :size 14 :weight 'regular))
+    (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "Luculent" :size 12))
+    ;; (set-face-font-c (font-spec :family "GT Standard Mono" :size 13 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 14 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))
+    ;; (set-face-font-c (font-spec :family "GT America Mono LCG" :size 14))
+    ;; (set-face-font-c (font-spec :family "TX-02" :size 12 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "Iosevka" :size 14))
+    ;; (set-face-font-c (font-spec :family "Pragmata Pro" :size 15 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "Letter Gothic Mono Pro" :size 16 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "Inconsolata" :size 15 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "Inconsolata" :size 15 :weight 'regular :width 'condensed))
+    ;; (set-face-font-c (font-spec :family "Gohu GohuFont" :size 12 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "Cozette" :size 14 :weight 'regular))
 
     ;; (set-face-font 'variable-pitch (font-spec :family "Meta Corr Pro" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "Sabon LT Pro" :size 14))
@@ -244,7 +253,8 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Alegreya Sans" :size 18))
     ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia eText" :size 12))
 
+    (set-face-font 'fixed-pitch-numbers (font-spec :family "Info Text Offc Pro" :size 16))
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
-    (copy-face 'default 'fixed-pitch)))
+    ;; (copy-face 'default 'fixed-pitch)
+    (set-fontset-font t 'symbol (font-spec :family "Symbola"))))
 (set-fonts-c)
-;; (set-fontset-font t 'unicode (font-spec :family "Symbola"))
