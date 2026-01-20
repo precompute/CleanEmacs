@@ -47,7 +47,7 @@
   "fd" 'make-directory
   "fe" 'rename-visited-file
 
-  "g" '(:ignore t :wk "Version Control")
+  "g" '(:ignore t :wk "vc")
   "gg" 'magit-status
   "gG" 'magit-dispatch
   "gF" 'magit-file-dispatch
@@ -132,10 +132,13 @@
   "o'" 'vertico-repeat
   "o\"" 'vertico-repeat-select
   "o-" 'echo-current-buffer-path
+  "o_" 'kill-current-buffer-path
   "o RET" 'echo-current-time
   "ot" 'vterm
   "oT" 'project-vterm
   "os" 'scratchiest
+  "oc" 'quick-calc
+  "oC" 'calc
 
   "t" '(:ignore t :wk "toggle")
   "tl" 'display-line-numbers-mode
@@ -388,3 +391,12 @@
  "<prior>" 'vertico-scroll-down
  "C-<next>" 'next-history-element
  "C-<prior>" 'previous-history-element)
+
+(general-define-key
+ :states 'normal
+ :keymaps '(notmuch-hello-mode-map
+            notmuch-search-mode-map
+            notmuch-message-mode-map)
+ :prefix "SPC"
+ "p" '(:ignore t :wk "poll")
+ "pp" 'notmuch-async-poll-all)

@@ -1,3 +1,4 @@
+(setq gc-cons-threshold (* 8 gc-cons-threshold))
 (setq package-enable-at-startup nil)
 
 (setq native-comp-always-compile t
@@ -18,3 +19,9 @@
 (set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)
 
 (load-file (expand-file-name "early-init-ui.el" user-emacs-directory))
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:

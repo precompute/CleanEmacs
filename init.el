@@ -1,6 +1,4 @@
 ;; init.el -*- lexical-binding: t; -*-
-(setq gc-cons-threshold (* 16 1024 1024)
-      gc-cons-percentage 0.5)
 (setq inhibit-compacting-font-caches t)
 
 (defun loadfile-c (file)
@@ -36,6 +34,10 @@
 (if (not (file-exists-p "/run/user/1000/emacs/server"))
     (server-start)
   (message "Emacs Server already running, run (server-start) after setting `server-name’ otherwise."))
+
+(setq gc-cons-threshold (truncate (* (/ (+ 5 gcs-done) 5.0)
+                                     (car (get 'gc-cons-threshold 'standard-value)))))
+;; adjust by GC invocations during startup
 
 ;; Local Variables:
 ;; no-byte-compile: t

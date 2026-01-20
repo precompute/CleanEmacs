@@ -127,7 +127,16 @@ Ignore REST."
     (disable-theme theme)
     (enable-theme theme))
   (set-fonts-c))
-(add-to-list 'after-make-frame-functions 'reload-theme-c)
+
+;; [26-01-20 20:16:46] Not required
+;; (add-to-list 'after-make-frame-functions 'reload-theme-c)
+;; (defun reload-theme-once (frame)
+;;   "Reload theme once, then remove self from hook."
+;;   (with-selected-frame frame
+;;     (reload-theme-c))
+;;   (remove-hook 'after-make-frame-functions 'reload-theme-once))
+
+;; (add-hook 'after-make-frame-functions 'reload-theme-once)
 
 ;;; display-buffer-alist
 (setq window-sides-slots '(1 1 1 1)) ;; LTRB; This is a good enough default.

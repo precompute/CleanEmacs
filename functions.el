@@ -79,18 +79,22 @@ DIR is the directory, INITIAL is the string."
         (corfu-mode -1)
         (corfu-mode 1))))
 
-(defun echo-current-buffer-path ()
+(defun echo-current-buffer-path (&optional kill)
+  "Echo current buffer path.
+If KILL is non-nil, kill path."
   (interactive)
-  (message (propertize (concat " " (if buffer-file-name buffer-file-name "nil") " ")
-                       'face '( :inherit (font-lock-keyword-face bold)
-                                :height 1.5
-                                :box (list :line-width 1)))))
+  (if buffer-file-name
+      (progn
+        (when kill (kill-new buffer-file-name))
+        (message buffer-file-name))
+    (message "`buffer-file-name’ is nil.")))
 
-(defun copy-current-buffer-path-c ()
+(defun kill-current-buffer-path ()
+  "Call `echo-current-buffer-path’ with KILL set to t."
   (interactive)
-  (let ((n (if buffer-file-name buffer-file-name "nil")))
-    (kill-new n)
-    (message (concat "Copied " (propertize n 'face 'success) " to clipboard."))))
+  (echo-current-buffer-path t))
+
+(defalias 'copy-current-buffer-path #'kill-current-buffer-path)
 
 (defun echo-current-time ()
   "Echo the current time"
