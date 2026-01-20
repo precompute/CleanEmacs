@@ -22,7 +22,9 @@ you want to `nil’ the alist before operation"
    (haskell haskell-mode haskell-ts-mode)))
 
 ;;;; modes
-(dolist (z (list (cons "\\.pde\\'" 'java-ts-mode)
+(dolist (z (list (cons "\\.service\\'" 'conf-mode) ;; systemd
+                 (cons "\\.timer\\'" 'conf-mode)
+                 (cons "\\.pde\\'" 'java-ts-mode)
                  (cons "\\.jsx\\'" 'js-jsx-mode)
                  (cons "\\.ex\\'" 'elixir-ts-mode)
                  (cons "\\.exs\\'" 'elixir-ts-mode)

@@ -166,6 +166,8 @@
   "ww" 'split-root-window-below
   "wW" 'split-root-window-right
   "wy" 'windmove-swap-states-right
+  "wb" 'balance-windows-area
+  "wB" 'balance-windows
 
   "!" '(:ignore t :wk "exclaim")
   "!R" 'make-window-larger-c

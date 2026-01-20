@@ -1,5 +1,6 @@
 ;; init.el -*- lexical-binding: t; -*-
-(setq gc-cons-threshold (* 4 1024 1024))
+(setq gc-cons-threshold (* 16 1024 1024)
+      gc-cons-percentage 0.5)
 (setq inhibit-compacting-font-caches t)
 
 (defun loadfile-c (file)
