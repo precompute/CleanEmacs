@@ -38,7 +38,7 @@ I don’t aim for this config to be minimal, but rather to be easy to understand
 
 - Recommended Emacs Version :: =31.0.50=
 
-- Current Emacs commit :: =d8870cc1022cecba1bdbb3531659e9253c20c479=
+- Commit :: =d8870cc1022cecba1bdbb3531659e9253c20c479=
 
 - Recommended OS :: I use Debian Stable.  This config /might/ work on MacOS and WSL.  I don’t use either, so no guarantees.
 
@@ -86,7 +86,7 @@ Internal packages can also be configured.  They use =:elpaca nil= .
 
 If you don’t like the package, you can remove the corresponding =elpacaLF= invocation and the package will be completely ignored on the next startup / eval.  Packages can also be installed by =eval= ing a new =elpacaLF= invocation.
 
-All packages will be =:pin= ned shortly, to make this reproducible.
++All packages will be =:pin= ned shortly, to make this reproducible+.  Use the lockfile.
 
 ** Vim Emulation
 =evil= is used for Vim Emulation.  As a Vim refugee, I’ve tried many times to get used to Emacs’ keybinds, but I keep going back to the simplicity of modal editing.
@@ -105,13 +105,15 @@ The Headerline is mostly just a propertized default modeline.  It uses =face-rem
 - [OPTIONAL] Uncomment the *lockfile* section in =elpaca-init.el= for a perfect clone.
 - Modify the active fonts in the function =set-fonts-c= in =ui.el=
 - +Search for =~/= and =sys2= and remove / modify all local filesystem calls.+  Modify =org-id-locations-file= in =packages/inbuilt/org.el=.
-- Seach for =sys2= in the =functions.el= and modify any functions you’d want to use.
+- +Search for =sys2= in the =functions.el= and modify any functions you’d want to use.+
 
 As of [23-06-14 22:28:53] , this config is still a work in progress but ~90% to *STABLE* status.  It lacks language-specific configuration and some ease-of-use modifications.  Those will be added in time, but if you’re a former Doom Emacs user, you can use this config as a starting point.+
   
 Update [23-09-06 18:07:21] : This project is about ~95% stable.  There are no overt bugs or surprises, almost everything works well and with speed.  Language support has been added, along with many small improvements.  The emacs version has also been bumped, but no changes have been necessary.
 
 Update [24-04-18 21:21:51] : This project is stable, but if you want to use it, you’ll have to weed out all the references to my local filesystem.
+
+Update [26-01-21 19:54:24] : Porting this config to your system is mostly painless.  Turn on debug mode and it’ll weed out most offenders.
   
 ** Debugging after updates
 If you ever upgrade a package and come across weird errors, delete its folder in the =.cache/build= directory and other relevant =elc= / =eln= files in =.cache= and restart Emacs.
