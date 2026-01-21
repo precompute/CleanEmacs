@@ -83,11 +83,9 @@ DIR is the directory, INITIAL is the string."
   "Echo current buffer path.
 If KILL is non-nil, kill path."
   (interactive)
-  (if buffer-file-name
-      (progn
-        (when kill (kill-new buffer-file-name))
-        (message buffer-file-name))
-    (message "`buffer-file-name’ is nil.")))
+  (let ((p (or buffer-file-name default-directory)))
+    (if p (progn (when kill (kill-new p)) (message p))
+      (message "`buffer-file-name’ and `default-directory’ is nil."))))
 
 (defun kill-current-buffer-path ()
   "Call `echo-current-buffer-path’ with KILL set to t."
@@ -213,12 +211,14 @@ From https://archive.casouri.cc/note/2021/clean-exit/index.html"
 ;;;; completion
 ;;;;; kill-new from global paste
 (defun kill-new-from-global-paste-c ()
+  "Select and kill a new entry from the clipboard, which is managed by zeitgeist."
   (interactive)
   (require 'sqlite3)
-  (let ((mylist '()))
-    (unless (f-exists-p "/home/sys2/.local/share/zeitgeist/activity.sqlite")
+  (let ((mylist '())
+        (db (expand-file-name "~/.local/share/zeitgeist/activity.sqlite")))
+    (unless (f-exists-p db)
       (user-error "Zeitgeist database does not exist."))
-    (let* ((dbh (sqlite3-open "/home/sys2/.local/share/zeitgeist/activity.sqlite" sqlite-open-readonly))
+    (let* ((dbh (sqlite3-open db sqlite-open-readonly))
            (stmt (sqlite3-prepare dbh "select * from text order by id desc limit 1000")))
       (while (= sqlite-row (sqlite3-step stmt))
         (cl-destructuring-bind (id text) (sqlite3-fetch stmt)
@@ -391,29 +391,29 @@ Needs frame-parameter alpha-background."
 (defvar highlight-at-point-faces-c '( hi-yellow hi-blue hi-pink hi-green hi-salmon hi-aquamarine
                                       highlight lazy-highlight))
 (defvar-local highlight-at-point-used-faces-c 0)
-(defun highlight-at-point-c ()
-  "Run `highlight-phrase’ with the symbol at point, or the active region, in the current buffer."
-  (interactive)
-  (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
-              (z (regexp-quote z))
-              (f (nth highlight-at-point-used-faces-c highlight-at-point-faces-c)))
-    (when f (cl-incf highlight-at-point-used-faces-c))
-    (highlight-phrase z f)))
-
-(defun unhighlight-at-point-c (arg)
-  "Run `hi-lock-unface-buffer’ with the symbol at point, or the active region, in the current buffer.
-When ARG is non-nil, remove all highlights in current buffer."
+(defun highlight-at-point-c (arg)
+  "Run `highlight-phrase’ with the symbol at point, or the active region, in the current buffer.
+\\[universal-argument]: unhighlight at point
+\\[universal-argument] \\[universal-argument]: unhighlight all in buffer."
   (interactive "P")
-  (if arg (hi-lock-unface-buffer t)
+  (cond
+   ((null arg)
     (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
-                (z (regexp-quote z)))
-      (when (> highlight-at-point-used-faces-c 0) (cl-decf highlight-at-point-used-faces-c))
-      (hi-lock-unface-buffer z))))
+                (z (concat "\\<" (regexp-quote z) "\\>"))
+                (f (nth highlight-at-point-used-faces-c highlight-at-point-faces-c)))
+      (when f (cl-incf highlight-at-point-used-faces-c))
+      (highlight-phrase z f)))
+   ((equal arg '(4))
+    (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
+                (z (concat "\\<" (regexp-quote z) "\\>")))
+      (when (> highlight-at-point-used-faces-c 0) (decf highlight-at-point-used-faces-c))
+      (hi-lock-unface-buffer z)))
+   (t (unhighlight-all-in-buffer-c))))
 
-(defun unhighlight-all-c ()
-  "Run `unhighlight-at-point-c’ with arg as t."
-  (interactive)
-  (unhighlight-at-point-c t))
+(defun unhighlight-all-in-buffer-c ()
+  "Run `hi-lock-unface-buffer’ and zero `highlight-at-point-used-faces-c’."
+  (setq highlight-at-point-used-faces-c 0)
+  (hi-lock-unface-buffer t))
 
 ;;;; git
 ;;;;; auto-commit
@@ -460,11 +460,6 @@ When ARG is non-nil, remove all highlights in current buffer."
     (funcall-interactively #'profiler-report)))
 
 ;;;; Shell Command Calls
-;;;;; textmind stats
-(defun textmind-stats-call ()
-  (interactive)
-  (async-shell-command "/home/sys2/44.1/python/textmindstats/textmindstats"))
-
 ;;;;; shell
 (defun open-shell-split-c ()
   "Split window and open shell"
@@ -555,52 +550,6 @@ It switches the width before the height."
         (goto-char p)
         (setq orgid (org-id-get (point) t))))
     (funcall (if kill? #'kill-new #'insert) (format " [[%s]]" orgid))))
-
-;;org id update recursive function, from discord
-(defun org-id-update-recursively-c ()
-  "Get all files in `org-directory' recursively and update org IDs."
-  (interactive)
-  (org-id-update-id-locations
-   (append
-    (directory-files-recursively org-directory (rx ".org" eos))
-    (directory-files-recursively "~/46/da/timelog" (rx ".org" eos))
-    (directory-files-recursively "~/46/da/read" (rx ".org" eos))
-    (directory-files-recursively "~/46/textmind" (rx ".org" eos)))))
-
-(defun org-id-update-46ca-recursively-c ()
-  "Get all files in 46/ca recursively and update org IDs."
-  (interactive)
-  (let ((org-id-locations-file "/home/sys1/46/ca/.orgids")
-        (recentf-used-hooks nil))
-    (org-id-update-id-locations
-     (directory-files-recursively "/home/sys1/46/ca";; (file-name-directory buffer-file-name)
-                                  ".org"))))
-
-;;;;; org-timelogrefile-*
-(defun org-timelogrefile-base-c (givendate)
-  (save-restriction
-    (org-narrow-to-subtree)
-    (write-region
-     (concat "#+TITLE: " givendate "\n\n")
-     nil (concat "/home/sys2/46/da/time/" givendate ".org"))
-    (write-region
-     (point-min) (point-max)
-     (concat "/home/sys2/46/da/time/" givendate ".org") t)))
-
-(defun org-timelogrefile-interactive-c (givendate)
-  (interactive "sDate:")
-  (org-timelogrefile-base-c givendate)
-  )
-
-(defun org-timelogrefile-c ()
-  (interactive)
-  (back-to-indentation)
-  (let ((givendate (concat
-                    (buffer-substring-no-properties (+ (point) 3) (+ (point) 5))
-                    (buffer-substring-no-properties (+ (point) 6) (+ (point) 8))
-                    (buffer-substring-no-properties (+ (point) 9) (+ (point) 11))
-                    )))
-    (org-timelogrefile-base-c givendate)))
 
 ;;;;; org-capture-*
 (defun org-capture-pdf-c (action)
@@ -957,50 +906,3 @@ Then place point at end of #+begin statement for metadata insertion."
                                        (next-line))))
     ]]
   )
-
-;;;; org-agenda
-;;;;; New timelog file
-(defun new-timelog-c ()
-  "Make/Open today's timelog file"
-  (interactive)
-  (let* ((givendate (format-time-string "%y-%m-%d"))
-         (filedate (format-time-string "%y%m%d"))
-         (basefile (concat "~/46/da/timelog/" filedate ".log.org")))
-    (if (file-directory-p basefile)
-        (progn
-          (find-file basefile)
-          (write-region (concat "#+TITLE: [" givendate "]\n\n")
-                        nil basefile t)
-          (end-of-buffer))
-      (progn
-        (find-file basefile)
-        (end-of-buffer)))))
-
-;;;;; todo timestamp
-(defun org-todo-timestamp-c (&optional todo)
-  "Insert new heading with timestamp and open line below."
-  (interactive)
-  (progn
-    (goto-char (point-max))
-    (if todo (insert "\n* TODO [#B]\nOPENED: ") (insert "\n* "))
-    (timestamp)
-    (newline)))
-
-(defun org-todo-timestamp-todo-c ()
-  "Insert new TODO heading with timestamp and open line below."
-  (interactive)
-  (org-todo-timestamp-c t))
-
-(defun org-todo-today-timestamp-c ()
-  "Open today's file and execute `org-todo-timestamp-c'"
-  (interactive)
-  (find-file (concat "~/46/da/timelog/"
-                     (format-time-string "%y%m%d") ".log.org"))
-  (org-todo-timestamp-c))
-
-(defun org-todo-today-timestamp-todo-c ()
-  "Open today's file and execute `org-todo-timestamp-todo-c'"
-  (interactive)
-  (find-file (concat "~/46/da/timelog/"
-                     (format-time-string "%y%m%d") ".log.org"))
-  (org-todo-timestamp-todo-c))

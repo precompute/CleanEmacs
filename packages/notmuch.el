@@ -5,6 +5,7 @@
     "Call notmuch poll via `async-shell-command’.
 The poll function that ships with the notmuch package blocks emacs."
     (interactive)
+    (message "Running \"notmuch new\".")
     (let ((display-buffer-alist (cons (list (regexp-quote shell-command-buffer-name-async)
                                             #'display-buffer-no-window)
                                       display-buffer-alist)))

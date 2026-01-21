@@ -98,8 +98,6 @@
   "S SPC" 'consult-fd-local-global-at-point-c
   "S C-SPC" 'consult-fd-local-at-point-c
   "Sh" 'highlight-at-point-c
-  "SH" 'unhighlight-at-point-c
-  "S C-h" 'unhighlight-all-c
 
   "TAB" '(:ignore t :wk "perspective")
   "TAB TAB" 'persp-switch

@@ -15,7 +15,7 @@
         org-fontify-todo-headline t
         org-ellipsis nil
         org-tsr-regexp-both "[[<]\\([[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\(?: .*?\\)?\\)[]>]\\(--?-?[[<]\\([[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\(?: .*?\\)?\\)[]>]\\)?"
-        org-id-locations-file "/home/sys2/46/.orgids"
+        org-id-locations-file (expand-file-name "~/46/.orgids")
         org-time-stamp-custom-formats '("<%y-%m-%d %H:%M:%S>" . "<%y-%m-%d %H:%M:%S>")
         org-time-stamp-formats org-time-stamp-custom-formats
         org-support-shift-select t
@@ -220,9 +220,9 @@
                              (4 '(face nil display " ")))))
 
 ;;;;; org capture
-  (defvar 46-da-org-dir-path-c "/home/sys2/46/da/da.org")
+  (defvar org-dir-path-c (expand-file-name "~/46/da/da.org"))
   (setq org-capture-templates
-        '(("p" "PDF" plain (file 46-da-org-dir-path-c)
+        '(("p" "PDF" plain (file org-dir-path-c)
            "** %(org-capture-pdf-c 1)
 :PROPERTIES:
 :PAGE: %(org-capture-pdf-c 4)
@@ -233,7 +233,7 @@
 %(org-capture-pdf-c 3)
 #+end_quote
 %?" :empty-lines 1)
-          ("P" "PDF without comment" plain (file 46-da-org-dir-path-c)
+          ("P" "PDF without comment" plain (file org-dir-path-c)
            "** %(org-capture-pdf-c 1)
 :PROPERTIES:
 :PAGE: %(org-capture-pdf-c 4)
@@ -243,7 +243,7 @@
 #+begin_quote
 %(org-capture-pdf-c 3)
 #+end_quote" :empty-lines 1 :immediate-finish t)
-          ("f" "file" plain (file 46-da-org-dir-path-c)
+          ("f" "file" plain (file org-dir-path-c)
            "** %f
 [[%F]]
 %U
@@ -251,14 +251,14 @@
 %i
 #+end_quote
 %?" :empty-lines 1)
-          ("F" "file without comment" plain (file 46-da-org-dir-path-c)
+          ("F" "file without comment" plain (file org-dir-path-c)
            "** %f
 [[%F]]
 %U
 #+begin_quote
 %i
 #+end_quote" :empty-lines 1 :immediate-finish t)
-          ("c" "code" plain (file 46-da-org-dir-path-c)
+          ("c" "code" plain (file org-dir-path-c)
            "** %f
 :PROPERTIES:
 :REPO_ROOT: %(org-capture-get-repository-root-c)
@@ -269,7 +269,7 @@
 %i
 #+end_src
 %?" :empty-lines 1)
-          ("C" "code without comments" plain (file 46-da-org-dir-path-c)
+          ("C" "code without comments" plain (file org-dir-path-c)
            "** %f
 :PROPERTIES:
 :REPO_ROOT: %(org-capture-get-repository-root-c)
@@ -279,7 +279,7 @@
 #+begin_src %(org-capture-get-major-mode-c)
 %i
 #+end_src" :empty-lines 1 :immediate-finish t)
-          ("m" "mail" plain (file 46-da-org-dir-path-c)
+          ("m" "mail" plain (file org-dir-path-c)
            "** MAIL from \"%(org-capture-notmuch-c :from)\" [%(org-capture-notmuch-c :timestamp)] : %(org-capture-notmuch-c :subject)
 :PROPERTIES:%(org-capture-notmuch-c :from t)%(org-capture-notmuch-c :to t)%(org-capture-notmuch-c :cc t)%(org-capture-notmuch-c :filename t)%(org-capture-notmuch-c :date t)
 :END:
@@ -289,7 +289,7 @@
 %i
 #+end_quote
 %?" :empty-lines 1)
-          ("M" "mail without comments" plain (file 46-da-org-dir-path-c)
+          ("M" "mail without comments" plain (file org-dir-path-c)
            "** MAIL from \"%(org-capture-notmuch-c :from)\" [%(org-capture-notmuch-c :timestamp)] : %(org-capture-notmuch-c :subject)
 :PROPERTIES:%(org-capture-notmuch-c :from t)%(org-capture-notmuch-c :to t)%(org-capture-notmuch-c :cc t)%(org-capture-notmuch-c :filename t)%(org-capture-notmuch-c :date t)
 :END:
@@ -298,7 +298,7 @@
 #+begin_quote
 %i
 #+end_quote" :empty-lines 1 :immediate-finish t)
-          ( "e" "epub" plain (file 46-da-org-dir-path-c)
+          ( "e" "epub" plain (file org-dir-path-c)
             "** %(org-capture-epub-c 1)
 :PROPERTIES:
 :CHAPTER: %(org-capture-epub-c 4)
@@ -310,7 +310,7 @@
 %(org-capture-epub-c 3)
 #+end_quote
 %?" :empty-lines 1)
-          ("E" "epub without comments" plain (file 46-da-org-dir-path-c)
+          ("E" "epub without comments" plain (file org-dir-path-c)
            "** %(org-capture-epub-c 1)
 :PROPERTIES:
 :CHAPTER: %(org-capture-epub-c 4)
