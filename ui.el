@@ -251,6 +251,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Angie Pro" :size 15 :slant nil))
     ;; (set-face-font 'variable-pitch (font-spec :family "Dagny Offc Pro" :size 15))
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Larsseit" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue LT W1G" :size 14))

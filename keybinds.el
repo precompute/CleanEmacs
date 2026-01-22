@@ -228,15 +228,19 @@
  :states 'normal
  "C-w" '(:ignore t)
  "C-w C-u" 'winner-undo
- "C-w u" 'winner-undo
- "C-w C-r" 'winner-redo
- "C-w r" 'winner-redo)
+ "C-w C-r" 'winner-redo)
 
 ;;;;;;; Nav/other
 (general-define-key
  :states 'normal
  :keymaps 'emacs-lisp-mode-map
  "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
+
+(general-define-key
+ "s-C-w s-C-h" 'windmove-left
+ "s-C-w s-C-j" 'windmove-down
+ "s-C-w s-C-k" 'windmove-up
+ "s-C-w s-C-l" 'windmove-right)
 
 ;;;;;;; misc
 (general-define-key
@@ -314,6 +318,22 @@
  "C-S-d" 'scroll-5l-down)
 
 (general-define-key
+ :keymaps '(org-mode-map prog-mode-map)
+ :states 'insert
+ "H-<return>" 'continue-structure-c)
+
+;;;;;;; Evil
+(general-define-key
+ :states '(normal insert visual)
+ "C-i" 'evil-jump-backward
+ "C-o" 'evil-jump-forward)
+
+(general-define-key
+ :states 'normal
+ "C-z" 'legit-to-line
+ "C-S-z" 'legit-from-line)
+
+(general-define-key
  :states 'insert
  "C-S-u" 'insert-base16-char-c
  "M-o" 'evil-open-below
@@ -329,11 +349,7 @@
  "u" 'undo-with-prefix
  "C-r" 'undo-redo-with-prefix)
 
-(general-define-key
- :keymaps '(org-mode-map prog-mode-map)
- :states 'insert
- "H-<return>" 'continue-structure-c)
-
+;;;;;;; Org
 (general-define-key
  :keymaps 'org-mode-map
  :states '(visual normal)
@@ -355,6 +371,7 @@
  "H-b b" 'org-insert-block-custom-c
  "H-b B" 'org-insert-block-custom-meta-c)
 
+;;;;;;; Info
 (general-define-key
  :keymaps 'Info-mode-map
  "H-j" 'Info-history-back
@@ -366,6 +383,7 @@
  "H-e" 'Info-up
  "H-s" 'consult-info)
 
+;;;;;;; Clipboard
 ;; c x p a q b z h
 (general-define-key
  :states '(normal insert visual)
@@ -373,16 +391,7 @@
  "H-x" 'clipboard-kill-region
  "H-p" 'clipboard-yank)
 
-(general-define-key
- :states '(normal insert visual)
- "C-i" 'evil-jump-backward
- "C-o" 'evil-jump-forward)
-
-(general-define-key
- :states 'normal
- "C-z" 'legit-to-line
- "C-S-z" 'legit-from-line)
-
+;;;;;;; Completion
 (general-define-key
  :keymaps 'vertico-map
  "<next>" 'vertico-scroll-up
@@ -390,6 +399,7 @@
  "C-<next>" 'next-history-element
  "C-<prior>" 'previous-history-element)
 
+;;;;;;; Notmuch
 (general-define-key
  :states 'normal
  :keymaps '(notmuch-hello-mode-map

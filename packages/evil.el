@@ -167,7 +167,6 @@ If ARG < 0, move column END to BEG"
   (defun evil--advice-restore-point (f &rest args)
     "Restore point after operation."
     (let ((p (point))) (apply f args) (goto-char p)))
-
   (advice-add 'evil-yank :around #'evil--advice-restore-point)
 
   :init
