@@ -62,7 +62,7 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
              (cons nil Man-page-mode-string))
             ((eq major-mode 'notmuch-search-mode)
              (cons nil notmuch-search-query-string))
-            (t nil))))
+            (t (cons nil (buffer-name))))))
       (setq headerline-buffer-id-cache-c
             (list
              ;; (if (buffer-narrowed-p) headerline-buffer-name-c-narrow-string "")
