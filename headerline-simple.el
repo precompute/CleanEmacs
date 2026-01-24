@@ -33,6 +33,8 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
 
 (defvar-local headerline-buffer-id-cache-c nil)
 
+(defvar-local headerline-buffer-name-c-parent-name-string nil)
+(defvar-local headerline-buffer-name-c-file-name-string nil)
 (defun headerline-generate-buffer-id-cache-c ()
   (while-no-input
     (when after-init-time
@@ -53,7 +55,18 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
               (cons nil Man-page-mode-string))
              ;; ((eq major-mode 'notmuch-search-mode)
              ;;  (cons nil notmuch-search-query-string))
-             (t nil))))))
+             (t nil)))
+      (setq headerline-buffer-name-c-parent-name-string
+            (if (car headerline-buffer-id-cache-c)
+                (propertize (car headerline-buffer-id-cache-c)
+                            'face 'headerline-buffer-parent-name-face
+                            'help-echo #'headerline-help-echo-c)
+              ""))
+      (setq headerline-buffer-name-c-file-name-string
+            (if (car headerline-buffer-id-cache-c)
+                (propertize (cdr headerline-buffer-id-cache-c)
+                 'face 'headerline-buffer-file-name-face
+                 'help-echo #'headerline-help-echo-c))))))
 (dolist (hook '(change-major-mode-after-body-hook
                 after-save-hook ;; In case the user saves the file to a new location
                 focus-in-hook ;; ...or makes external changes then returns to Emacs
@@ -91,7 +104,7 @@ TYPE can be `:error', `:warning' or `:note'."
                    'face 'headerline-flymake-note-face)))
     (setq headerline--flymake-cache-c nil)))
 (advice-add 'flymake--handle-report :after #'headerline-flymake-cache-c)
-(remove-hook 'flymake-mode-hook #'headerline-flymake-cache-c)
+(add-hook 'flymake-mode-hook #'headerline-flymake-cache-c)
 
 ;;;;; Faces
 (defface headerline-base-face
@@ -201,6 +214,7 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground mix1
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-file-name-face nil
+                        :weight 'normal
                         :foreground mix1)
     (set-face-attribute 'headerline-major-mode-face nil
                         :foreground mix1
@@ -269,15 +283,19 @@ TYPE can be `:error', `:warning' or `:note'."
 (if (fboundp 'set-fonts-c) (add-to-list 'enable-theme-functions 'set-fonts-c))
 
 ;;;;; Headerline Constructs
+(defconst headerline-buffer-status-c--read-only-string
+  (propertize "    " 'face 'headerline-buffer-status-RO-face))
+(defconst headerline-buffer-status-c--modified-p-string
+  (propertize "    " 'face 'headerline-buffer-status-ED-face))
+(defconst headerline-buffer-status-c--default-string
+  (propertize "    " 'face 'headerline-buffer-status-NA-face))
 (defun headerline-buffer-status-c ()
   "Buffer RO/modified/none"
-  `(:eval
-    (list
-     " "
-     (cond (buffer-read-only (propertize "    " 'face 'headerline-buffer-status-RO-face))
-           ((buffer-modified-p) (propertize "    " 'face 'headerline-buffer-status-ED-face))
-           (t (propertize "    " 'face 'headerline-buffer-status-NA-face)))
-     " ")))
+  `(:eval (list " "
+                (cond (buffer-read-only headerline-buffer-status-c--read-only-string)
+                      ((buffer-modified-p) headerline-buffer-status-c--modified-p-string)
+                      (t headerline-buffer-status-c--default-string))
+                " ")))
 
 (defun headerline-buffer-status-with-evil-c ()
   "Buffer RO/modified/none & evil state."
@@ -295,31 +313,25 @@ TYPE can be `:error', `:warning' or `:note'."
              (t (propertize z 'face 'headerline-buffer-status-NA-face)))
        " "))))
 
+(defconst headerline-buffer-name-c-narrow-string
+  (propertize "Narrow " 'face 'headerline-narrow-indicator-face))
 (defun headerline-buffer-name-c ()
   "Buffer Name and Narrow indicator"
-  (mapcar #'concat
-          (cond
-           (headerline-buffer-id-cache-c
-            (list
-             (propertize (if (buffer-narrowed-p) "Narrow " "")
-                         'face 'headerline-narrow-indicator-face)
-             (propertize (if (car headerline-buffer-id-cache-c)
-                             (car headerline-buffer-id-cache-c)
-                           "")
-                         'face 'headerline-buffer-parent-name-face
-                         'help-echo #'headerline-help-echo-c)
-             (propertize (cdr headerline-buffer-id-cache-c)
-                         'face 'headerline-buffer-file-name-face
-                         'help-echo #'headerline-help-echo-c)))
-           (buffer-file-truename
-            (list
-             (propertize buffer-file-truename
-                         'face 'headerline-buffer-file-name-face
-                         'help-echo #'headerline-help-echo-c)))
-           (helpful--sym (cons (format (if helpful--callable-p "Fn " "Var ")
-                                       'face 'headerline-narrow-indicator-face)
-                               (format "%s" helpful--sym)))
-           (t (list "")))))
+  (cond
+   (headerline-buffer-id-cache-c
+    (list
+     (if (buffer-narrowed-p) headerline-buffer-name-c-narrow-string "") ;; empty string is necessary
+     headerline-buffer-name-c-parent-name-string
+     headerline-buffer-name-c-file-name-string))
+   (buffer-file-truename
+    (list
+     (propertize buffer-file-truename
+                 'face 'headerline-buffer-file-name-face
+                 'help-echo #'headerline-help-echo-c)))
+   (helpful--sym (cons (format (if helpful--callable-p "Fn " "Var ")
+                               'face 'headerline-narrow-indicator-face)
+                       (format "%s" helpful--sym)))
+   (t (list ""))))
 
 (defun headerline-help-echo-c (window object pos)
   "Help Echo string for the buffer-name component of WINDOW.
@@ -327,20 +339,19 @@ OBJECT and POS are ignored."
   (with-selected-window window
     (format "%s" (or (car headerline-buffer-id-cache-c) buffer-file-truename helpful--sym))))
 
+(defconst headerline-major-mode-c-rec-edit-start-string (propertize "%[" 'face 'error))
+(defconst headerline-major-mode-c-rec-edit-end-string (propertize "%]" 'face 'error))
 (defun headerline-major-mode-c ()
   "Major mode indicator"
-  (mapcar #'concat
-          (list (propertize "%[" 'face 'error)
-                (propertize (format-mode-line mode-name)
-                            'face 'headerline-major-mode-face)
-                (format-mode-line mode-line-process)
-                (propertize "%]" 'face 'error))))
+  (list headerline-major-mode-c-rec-edit-start-string
+        (propertize (format-mode-line mode-name)
+                    'face 'headerline-major-mode-face)
+        (format-mode-line mode-line-process)
+        headerline-major-mode-c-rec-edit-end-string))
 
-(defun headerline-line-number-c ()
-  (propertize "%5l" 'face 'headerline-dark-face))
+(defconst headerline-line-number-c (propertize "%5l" 'face 'headerline-dark-face))
 
-(defun headerline-file-size-c ()
-  (propertize "%I" 'face 'headerline-dark-face))
+(defconst headerline-file-size-c (propertize "%I" 'face 'headerline-dark-face))
 
 (defun headerline-remote-c ()
   `(:eval
@@ -351,9 +362,9 @@ OBJECT and POS are ignored."
   "For mlscroll."
   `(:eval (mlscroll-mode-line)))
 
-(defun headerline-buffer-percent-c ()
-  "Buffer percent / Bot / Top / All."
-  (propertize "%P" 'face 'headerline-dark-face-2))
+(defconst headerline-buffer-percent-c
+  (propertize "%P" 'face 'headerline-dark-face-2)
+  "Buffer percent / Bot / Top / All.")
 
 (defun headerline-macro-recording-c ()
   "Display current Emacs or evil macro being recorded."
@@ -416,12 +427,12 @@ Functionally equivalent to `mode-line-format-right-align’."
   (interactive)
   (setq-local header-line-format `(:eval (list (headerline-buffer-status-c)
                                                (headerline-major-mode-c) " "
-                                               (headerline-line-number-c) " "
+                                               headerline-line-number-c " "
                                                ;; (headerline-mlscroll-mode-line-c)
-                                               (headerline-buffer-percent-c) " "
+                                               headerline-buffer-percent-c " "
                                                (headerline-remote-c)
                                                (headerline-buffer-name-c) " "
-                                               ;; (headerline-file-size-c) " "
+                                               headerline-file-size-c " "
                                                (headerline-macro-recording-c)
                                                (headerline-anzu-count-c)
                                                (headerline-flymake-c)
@@ -439,12 +450,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                (eq major-mode 'org-mode)))
       (setq-local ;; mode-line-right-align-edge 'left-fringe
        mode-line-format
-       `(:eval
-         (while-no-input
-           (mapcar #'format-mode-line
-                   (list
-                    ;; (headerline-right-align-c)
-                    (headerline-breadcrumb-c))))))
+       `(:eval (list (headerline-breadcrumb-c))))
     (setq mode-line-format nil)))
 
 (dolist (hook '(prog-mode-hook
