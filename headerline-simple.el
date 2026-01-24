@@ -6,9 +6,9 @@
 If FACE is nil, set to FALLBACK."
   ((lambda (z) (if (= 35 (aref z 0)) z (apply #'color-rgb-to-hex (append (color-name-to-rgb z) (list 2)))))
    (let ((face? (face-attribute face prop)))
-    (if (or (eq nil face?) (eq 'unspecified face?) (string-equal "unspecified" face?))
-        (if fallback (face-attribute fallback prop) "#000000")
-      face?))))
+     (if (or (eq nil face?) (eq 'unspecified face?) (string-equal "unspecified" face?))
+         (if fallback (face-attribute fallback prop) "#000000")
+       face?))))
 
 (defun mix-colors (x y &optional ratio)
   "Mix two RGB Colors `X’ and `Y’ (represented as #RRGGBB) together by `RATIO'.
@@ -39,25 +39,9 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
       (setq headerline-buffer-id-cache-c
             (cond
              (buffer-file-truename
-              (let ((g-root (locate-dominating-file buffer-file-truename ".git")))
-                (if (not g-root)
-                    nil
-                  (let* ((buf (file-truename buffer-file-truename))
-                         (gitroot (file-truename g-root))
-                         (gitroot-nodash (substring gitroot 0 -1))
-                         (gitroot-a (replace-regexp-in-string
-                                     "^[z-a]*/" "" gitroot-nodash))
-                         ;; (dirbefore (substring
-                         ;;             gitroot-nodash
-                         ;;             0
-                         ;;             (* -1
-                         ;;                (+ 1
-                         ;;                   (length gitroot-a)))))
-                         )
-                    (cons (abbreviate-file-name gitroot-a)
-                          (substring buf
-                                     (length gitroot)
-                                     nil))))))
+              (when-let* ((project (project-current))
+                          (root (project-root project)))
+                (cons root (substring buffer-file-truename (length root) nil))))
              ((eq major-mode 'dired-mode)
               (cons nil dired-directory))
              ((eq major-mode 'helpful-mode)
@@ -283,9 +267,6 @@ TYPE can be `:error', `:warning' or `:note'."
                            "")
                          'face 'headerline-buffer-parent-name-face
                          'help-echo #'headerline-help-echo-c)
-             (propertize (if (car headerline-buffer-id-cache-c) "/" "")
-                         'face 'headerline-buffer-file-name-face
-                         'help-echo #'headerline-help-echo-c)
              (propertize (cdr headerline-buffer-id-cache-c)
                          'face 'headerline-buffer-file-name-face
                          'help-echo #'headerline-help-echo-c)))
@@ -444,13 +425,13 @@ Functionally equivalent to `mode-line-format-right-align’."
            (or (buffer-local-value 'enable-breadcrumb? (current-buffer))
                (eq major-mode 'org-mode)))
       (setq-local ;; mode-line-right-align-edge 'left-fringe
-                  mode-line-format
-                  `(:eval
-                    (while-no-input
-                      (mapcar #'format-mode-line
-                              (list
-                               ;; (headerline-right-align-c)
-                               (headerline-breadcrumb-c))))))
+       mode-line-format
+       `(:eval
+         (while-no-input
+           (mapcar #'format-mode-line
+                   (list
+                    ;; (headerline-right-align-c)
+                    (headerline-breadcrumb-c))))))
     (setq mode-line-format nil)))
 
 (dolist (hook '(prog-mode-hook

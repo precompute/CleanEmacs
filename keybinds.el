@@ -125,6 +125,7 @@
   "of" 'make-frame
   "oF" 'legit-to-frame
   "o C-f" 'tear-off-window
+  "o C-c" 'clone-frame
   "oi" 'imenu-list-smart-toggle
   "op" 'dired-sidebar-toggle-sidebar
   "o'" 'vertico-repeat
