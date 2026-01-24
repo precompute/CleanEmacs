@@ -210,19 +210,20 @@ From https://archive.casouri.cc/note/2021/clean-exit/index.html"
 
 ;;;; completion
 ;;;;; kill-new from global paste
-(defun kill-new-from-global-paste-c ()
-  "Select and kill a new entry from the clipboard, which is managed by zeitgeist."
-  (interactive)
+(defun kill-new-from-global-paste-c (arg)
+  "Select and kill a new entry from the clipboard, which is managed by zeitgeist.
+Set limit ARG."
+  (interactive "P")
   (require 'sqlite3)
   (let ((mylist '())
-        (db (expand-file-name "~/.local/share/zeitgeist/activity.sqlite")))
+        (db (expand-file-name "~/.local/share/zeitgeist/activity.sqlite"))
+        (limit (if arg (prefix-numeric-value arg) 1000)))
     (unless (f-exists-p db)
       (user-error "Zeitgeist database does not exist."))
     (let* ((dbh (sqlite3-open db sqlite-open-readonly))
-           (stmt (sqlite3-prepare dbh "select * from text order by id desc limit 1000")))
+           (stmt (sqlite3-prepare dbh (format "select value from text order by id desc limit %s" limit))))
       (while (= sqlite-row (sqlite3-step stmt))
-        (cl-destructuring-bind (id text) (sqlite3-fetch stmt)
-          (setq mylist (nconc mylist (list text)))))
+        (setq mylist (nconc mylist (list (sqlite3-fetch stmt)))))
       (sqlite3-finalize stmt)
       (sqlite3-close dbh))
     (kill-new
@@ -344,7 +345,7 @@ Needs frame-parameter alpha-background."
 (defun get-thing-at-point-or-region-c (thing)
   "Get THING with `thing-at-point’ or get the active region, and return it."
   (interactive)
-  (let ((s (if (region-active-p)
+  (let ((s (if (use-region-p)
                (buffer-substring-no-properties (region-beginning) (region-end))
              (thing-at-point thing t))))
     (if (and s (not (string-empty-p s))) s nil)))
@@ -399,16 +400,19 @@ Needs frame-parameter alpha-background."
   (cond
    ((null arg)
     (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
-                (z (concat "\\<" (regexp-quote z) "\\>"))
                 (f (nth highlight-at-point-used-faces-c highlight-at-point-faces-c)))
       (when f (cl-incf highlight-at-point-used-faces-c))
-      (highlight-phrase z f)))
+      (highlight-phrase (if (use-region-p) z (concat "\\<" (regexp-quote z) "\\>")) f)
+      (message (format "Highlighting %s" (if (use-region-p) "region" (propertize z 'face f))))))
    ((equal arg '(4))
     (when-let* ((z (get-thing-at-point-or-region-c 'symbol))
                 (z (concat "\\<" (regexp-quote z) "\\>")))
       (when (> highlight-at-point-used-faces-c 0) (decf highlight-at-point-used-faces-c))
       (hi-lock-unface-buffer z)))
-   (t (unhighlight-all-in-buffer-c))))
+   (t (progn
+        (let ((z highlight-at-point-used-faces-c))
+         (unhighlight-all-in-buffer-c)
+         (message (format "%s highlights removed." z)))))))
 
 (defun unhighlight-all-in-buffer-c ()
   "Run `hi-lock-unface-buffer’ and zero `highlight-at-point-used-faces-c’."
