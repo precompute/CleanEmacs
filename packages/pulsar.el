@@ -7,11 +7,12 @@
   :custom
   (pulsar-face 'pulsar-generic)
   (pulsar-iterations 1)
-  (pulsar-delay 0)
+  (pulsar-delay 0.15)
   :config
-  (defun pulsar-pulse-line--window-selection-c (_)
-    "Wrapper around `pulsar-pulse-line’ to make it work with `window-selection-change-functions’."
+  (defun pulsar-pulse-line--wrapper-c (_)
+    "Wrapper around `pulsar-pulse-line’ for hooks."
     (pulsar-pulse-line))
-  (add-hook 'window-selection-change-functions 'pulsar-pulse-line--window-selection-c)
+  (dolist (f '(window-selection-change-functions))
+    (add-hook f 'pulsar-pulse-line--wrapper-c))
   :init
   (pulsar-global-mode))

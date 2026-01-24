@@ -10,6 +10,8 @@
  [f10] 'save-and-delete-window
  [f12] 'save-and-kill-buffer
 
+ "C-x C-c" nil
+
  "C-<tab>" 'hippie-expand-small
  "C-<iso-lefttab>" 'hippie-unexpand
  "C-f" 'hippie-expand-all

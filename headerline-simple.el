@@ -72,6 +72,27 @@ TYPE can be `:error', `:warning' or `:note'."
         (cl-incf count)))
     (number-to-string count)))
 
+(defvar-local headerline--flymake-cache-c nil)
+(defun headerline-flymake-cache-c (&rest _)
+  "Cache propertized Error/Warning/Note counts from Flycheck to `headerline--flymake-cache-c’."
+  (if (and (bound-and-true-p flymake-mode)
+           (fboundp 'flymake-running-backends)
+           (flymake-running-backends))
+      (setq headerline--flymake-cache-c
+            (list flymake-mode-line-exception
+                  (propertize
+                   (headerline-flymake-count-c :error)
+                   'face 'headerline-flymake-err-face)
+                  (propertize
+                   (headerline-flymake-count-c :warning)
+                   'face 'headerline-flymake-warn-face)
+                  (propertize
+                   (headerline-flymake-count-c :note)
+                   'face 'headerline-flymake-note-face)))
+    (setq headerline--flymake-cache-c nil)))
+(advice-add 'flymake--handle-report :after #'headerline-flymake-cache-c)
+(remove-hook 'flymake-mode-hook #'headerline-flymake-cache-c)
+
 ;;;;; Faces
 (defface headerline-base-face
   '((t :foreground "#000"
@@ -119,6 +140,15 @@ TYPE can be `:error', `:warning' or `:note'."
 (defface headerline-dark-face-2
   '((t :foreground "#000"))
   "Dark face 2.")
+(defface headerline-flymake-err-face
+  '((t :foreground "#000"))
+  "Face for Flymake Err-Diagnostics.")
+(defface headerline-flymake-warn-face
+  '((t :foreground "#000"))
+  "Face for Flymake Warn-Diagnostics.")
+(defface headerline-flymake-note-face
+  '((t :foreground "#000"))
+  "Face for Flymake Note-Diagnostics.")
 
 (defun set-headerline-faces (&rest rest)
   "Set headerline faces."
@@ -139,6 +169,9 @@ TYPE can be `:error', `:warning' or `:note'."
          (noteface (headerline-get-color-prop :background 'cursor)) ;; yellow
          (defaultfg (headerline-get-color-prop :foreground 'default)) ;; white
          (defaultbg (headerline-get-color-prop :background 'default)) ;; black
+         (flymake-err-color (if errorface (mix-colors region errorface 0.45) "#000000"))
+         (flymake-warn-color (if warnface (mix-colors region warnface 0.45) "#000000"))
+         (flymake-note-color (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
          (theme (car custom-enabled-themes))
          (hyperstition? (memq theme '(hyperstitional-themes-rebug-flipped hyperstitional-themes-rebug)))
          (fl-variable (if hyperstition? (headerline-get-color-prop :foreground 'error) fl-variable))
@@ -207,11 +240,19 @@ TYPE can be `:error', `:warning' or `:note'."
                         :background defaultbg
                         :box nil
                         :overline nil)
-    (defvar headerline--err-face (if errorface (mix-colors region errorface 0.45) "#000000"))
-    (defvar headerline--warn-face (if warnface (mix-colors region warnface 0.45) "#000000"))
-    (defvar headerline--note-face (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
-    (defvar headerline--default-face (if defaultfg (mix-colors region defaultfg) "#000000"))
-    (defvar headerline-secondary-height height2)
+    (set-face-attribute 'headerline-flymake-err-face nil
+                        :weight 'black
+                        :inherit 'fixed-pitch-numbers
+                        :foreground flymake-err-color)
+    (set-face-attribute 'headerline-flymake-warn-face nil
+                        :weight 'black
+                        :inherit 'fixed-pitch-numbers
+                        :foreground flymake-warn-color)
+    (set-face-attribute 'headerline-flymake-note-face nil
+                        :weight 'black
+                        :inherit 'fixed-pitch-numbers
+                        :foreground flymake-note-color)
+    ;; (defvar headerline--default-face (if defaultfg (mix-colors region defaultfg) "#000000"))
     (if (and (fboundp 'mlscroll-mode) (mlscroll-mode) (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
         (progn
           (setq-default mlscroll-in-color (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) fl-keyword)))
@@ -275,7 +316,7 @@ TYPE can be `:error', `:warning' or `:note'."
              (propertize buffer-file-truename
                          'face 'headerline-buffer-file-name-face
                          'help-echo #'headerline-help-echo-c)))
-           (helpful--sym (cons (format (if helpful--callable-p "Fn" "Var")
+           (helpful--sym (cons (format (if helpful--callable-p "Fn " "Var ")
                                        'face 'headerline-narrow-indicator-face)
                                (format "%s" helpful--sym)))
            (t (list "")))))
@@ -345,31 +386,8 @@ compatibility with `evil-search'."
        'face 'headerline-match-face))))
 
 (defun headerline-flymake-c ()
-  "Construct that displays `flymake-mode-line-format'.
-Specific to the current window."
-  `(:eval
-    (when (and (bound-and-true-p flymake-mode)
-               (flymake-running-backends))
-      (list
-       flymake-mode-line-exception
-       (propertize
-        (headerline-flymake-count-c :error)
-        'face '( :weight black
-                 :inherit fixed-pitch-numbers
-                 :height ,headerline-secondary-height
-                 :foreground ,headerline--err-face))
-       (propertize
-        (headerline-flymake-count-c :warning)
-        'face '( :weight black
-                 :inherit fixed-pitch-numbers
-                 :height ,headerline-secondary-height
-                 :foreground ,headerline--warn-face))
-       (propertize
-        (headerline-flymake-count-c :note)
-        'face '( :weight black
-                 :inherit fixed-pitch-numbers
-                 :height ,headerline-secondary-height
-                 :foreground ,headerline--note-face))))))
+  "Return `headerline--flymake-cache-c’."
+  headerline--flymake-cache-c)
 
 (defun headerline-breadcrumb-c ()
   "Construct that displays `breadcrumb-imenu-crumbs’.
@@ -396,23 +414,18 @@ Functionally equivalent to `mode-line-format-right-align’."
 ;;;;; Headerline Construction
 (defun headerline-simple-mode ()
   (interactive)
-  (setq-local header-line-format
-              `(:eval
-                (while-no-input
-                  (mapcar #'format-mode-line
-                          (list
-                           (headerline-buffer-status-c)
-                           (headerline-major-mode-c) " "
-                           (headerline-line-number-c) " "
-                           ;; (headerline-mlscroll-mode-line-c)
-                           (headerline-buffer-percent-c) " "
-                           (headerline-remote-c)
-                           (headerline-buffer-name-c) " "
-                           ;; (headerline-file-size-c) " "
-                           (headerline-macro-recording-c)
-                           (headerline-anzu-count-c)
-                           (headerline-flymake-c)
-                           mode-line-misc-info))))))
+  (setq-local header-line-format `(:eval (list (headerline-buffer-status-c)
+                                               (headerline-major-mode-c) " "
+                                               (headerline-line-number-c) " "
+                                               ;; (headerline-mlscroll-mode-line-c)
+                                               (headerline-buffer-percent-c) " "
+                                               (headerline-remote-c)
+                                               (headerline-buffer-name-c) " "
+                                               ;; (headerline-file-size-c) " "
+                                               (headerline-macro-recording-c)
+                                               (headerline-anzu-count-c)
+                                               (headerline-flymake-c)
+                                               mode-line-misc-info))))
 
 (add-hook 'post-command-hook #'headerline-set-active-window)
 
