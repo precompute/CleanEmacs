@@ -133,7 +133,6 @@
   "o'" 'vertico-repeat
   "o\"" 'vertico-repeat-select
   "o-" 'echo-current-buffer-path
-  "o_" 'kill-current-buffer-path
   "o RET" 'echo-current-time
   "ot" 'vterm
   "oT" 'project-vterm

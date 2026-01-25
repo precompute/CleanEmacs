@@ -7,7 +7,7 @@
   :custom
   (pulsar-face 'pulsar-generic)
   (pulsar-iterations 1)
-  (pulsar-delay 0.15)
+  (pulsar-delay 0.1)
   :config
   (defun pulsar-pulse-line--wrapper-c (_)
     "Wrapper around `pulsar-pulse-line’ for hooks."

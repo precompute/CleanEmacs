@@ -79,20 +79,13 @@ DIR is the directory, INITIAL is the string."
         (corfu-mode -1)
         (corfu-mode 1))))
 
-(defun echo-current-buffer-path (&optional kill)
+(defun echo-current-buffer-path (arg)
   "Echo current buffer path.
-If KILL is non-nil, kill path."
-  (interactive)
+If ARG is non-nil, kill path."
+  (interactive "P")
   (let ((p (or buffer-file-name default-directory)))
-    (if p (progn (when kill (kill-new p)) (message p))
+    (if p (progn (when arg (kill-new p)) (message p))
       (message "`buffer-file-name’ and `default-directory’ is nil."))))
-
-(defun kill-current-buffer-path ()
-  "Call `echo-current-buffer-path’ with KILL set to t."
-  (interactive)
-  (echo-current-buffer-path t))
-
-(defalias 'copy-current-buffer-path #'kill-current-buffer-path)
 
 (defun echo-current-time ()
   "Echo the current time"

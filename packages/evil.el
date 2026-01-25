@@ -28,6 +28,7 @@
         evil-operator-state-cursor 'hollow
         evil-emacs-state-cursor 'bar)
   (setq evil-search-module 'evil-search)
+  (setq evil-want-fine-undo t)
   (setq-default evil-mode-line-format nil)
   (evil-put-command-property 'evil-yank-line :motion 'evil-end-of-line-or-visual-line) ;; workaround for evil-want-Y-yank-to-eol
 

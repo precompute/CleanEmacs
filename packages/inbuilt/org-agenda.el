@@ -27,11 +27,12 @@
   (org-agenda-use-time-grid nil)
   (org-agenda-time-grid '((weekly today require-timed) nil "" ""))
   :config
-  (org-agenda-refresh-c)
-  (dolist (hook '(org-agenda-refresh-c
-                  (lambda () (setq org-agenda-ss-seq 0))
-                  (lambda () (setq org-agenda-ss-seq-2 0))
-                  (lambda () (setq org-agenda-ss-seq-3 0))
-                  org-super-agenda-mode
-                  outline-minor-mode))
-    (add-hook 'org-agenda-mode-hook hook)))
+  ;; (org-agenda-refresh-c)
+  ;; (dolist (hook '(org-agenda-refresh-c
+  ;;                 (lambda () (setq org-agenda-ss-seq 0))
+  ;;                 (lambda () (setq org-agenda-ss-seq-2 0))
+  ;;                 (lambda () (setq org-agenda-ss-seq-3 0))
+  ;;                 org-super-agenda-mode
+  ;;                 outline-minor-mode))
+  ;;   (add-hook 'org-agenda-mode-hook hook))
+  )

@@ -292,8 +292,8 @@
 (elpacaLF "difflayer")
 ;;;; Temper  Width
 (elpacaLF "temper-width")
-;;;; MuCoCo
-(elpacaLF "mucoco")
+;; ;;;; MuCoCo
+;; (elpacaLF "mucoco")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!
