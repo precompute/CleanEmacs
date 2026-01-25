@@ -425,7 +425,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                                                (headerline-remote-c)
                                                (headerline-narrow-c) " "
                                                (headerline-buffer-name-c) " "
-                                               headerline-file-size-c " "
+                                               ;; headerline-file-size-c " "
                                                (headerline-macro-recording-c)
                                                (headerline-anzu-count-c)
                                                (headerline-flymake-c)

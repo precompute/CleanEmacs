@@ -249,28 +249,23 @@ Saves to a temp file and puts the filename in the kill ring."
     (message filename)))
 
 ;;;; transparency
-(defvar transparency-value-c 0.7
+(defvar transparency-value-c 97
   "Transparency value for `set-transparency-c’.")
-(defun set-transparency-c (&optional value no-set-default only-active-frame)
-  "Set the transparency of the selected window.
-Needs frame-parameter alpha-background."
-  (interactive)
-  (let ((val (if value value
-               (if transparency-value-c transparency-value-c
-                 0.7))))
-    (unless no-set-default
-      (progn
-        (let ((x (assoc 'alpha-background default-frame-alist)))
-          (if x (delq x default-frame-alist)))
-        (add-to-list 'default-frame-alist (cons 'alpha-background val))))
-    (if only-active-frame
-        (set-frame-parameter nil 'alpha-background val)
-      (let ((f (frame-list)))
-        (mapc #'(lambda (x) (set-frame-parameter x 'alpha-background val)) f)))))
 
-(defun turn-off-transparency-c (&optional no-set-default only-active-frame)
-  (interactive)
-  (set-transparency-c 1.0 no-set-default only-active-frame))
+(defun set-transparency-c (arg &optional all-frames?)
+  "Set the transparency of the current, or all, frames.
+If ARG is provided, set (min 100 ARG) as the transparency value.
+When ALL-FRAMES? is non-nil, change for all frames."
+  (interactive "P")
+  (let ((tval (if arg (min 100 (abs (prefix-numeric-value arg))) transparency-value-c)))
+    (if all-frames?
+        (modify-all-frames-parameters `((alpha-background . ,tval)))
+      (modify-frame-parameters nil `((alpha-background . ,tval))))))
+
+(defun set-transparency-watch-function-c (_ newval operation _)
+  (when (eq operation 'set) (set-transparency-c newval t)))
+
+(add-variable-watcher 'transparency-value-c #'set-transparency-watch-function-c)
 
 ;;;; Debug
 (defun toggle-debug-mode ()
@@ -767,15 +762,15 @@ Then place point at end of #+begin statement for metadata insertion."
    [("$$" "Highlight regexp" highlight-regexp :transient nil) ;;buffer operations DO NOT WORK
     ("%%" "Highlight phrase" highlight-phrase :transient nil)
     ("$%" "Unhighlight regexp/phrase" unhighlight-regexp :transient nil)]
-   [("tt" "Turn on Transparency" (lambda () (interactive) (set-transparency-c nil t t)))
-    ("tT" "Turn off Transparency" (lambda () (interactive) (turn-off-transparency-c nil t)))
+   [("tt" "Turn on Transparency" (lambda () (interactive) (set-transparency-c nil)))
+    ("tT" "Turn off Transparency" (lambda () (interactive) (set-transparency-c 100)))
     ("t!" (lambda (x) (interactive "sValue? ") (setq transparency-value-c (string-to-number x)))
      :description (lambda () (interactive)
                     (concat "Transparency var: "
                             (propertize (format "%s" transparency-value-c)
                                         'face 'diary))))]
-   [("tg" "Turn on Transparency (global)" (lambda () (interactive) (set-transparency-c nil nil nil)))
-    ("tG" "Turn off Transparency (global)" (lambda () (interactive) (turn-off-transparency-c nil nil)))]]
+   [("tg" "Turn on Transparency (global)" (lambda () (interactive) (set-transparency-c nil t)))
+    ("tG" "Turn off Transparency (global)" (lambda () (interactive) (set-transparency-c 100 t)))]]
   ["Misc"
    ["Corfu"
     ("cc" (lambda () (toggle-modes-transient--description 'corfu-mode "Corfu")) corfu-mode)
