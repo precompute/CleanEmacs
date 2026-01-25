@@ -1,17 +1,15 @@
 ;;; Custom Faces
-(cl-loop for level in (number-sequence 1 8)
-         for size in '(1.5 1.3 1.25 1.15 1.1 1.08 1.05 1.05)
-         do (custom-set-faces
-             `(,(intern (format "org-level-%s" level)) ((t :extend t :height ,size)))
-             `(,(intern (format "outline-%s" level)) ((t :extend t :height ,size)))
-             `(,(intern (format "outline-minor-%s" level)) ((t :extend t :height ,size)))))
-'(helpful-heading ((t (:extend t :height 1.25 :inherit variable-pitch))))
-'(transient-heading ((t (:height 1.25 :inherit variable-pitch))))
-'(org-meta-line ((t (:extend t))))
-'(org-date ((t (:inherit (list bold fixed-pitch)))))
-'(org-special-keyword ((t (:inherit (list bold fixed-pitch)))))
-'(org-ellipsis ((t (:height 1.3 :weight bold))))
-'(magit-diff-file-heading ((t (:height 1.3))))
+(cl-loop for level from 1 to 8 for size in '(1.5 1.3 1.25 1.15 1.1 1.08 1.05 1.05)
+         do (dolist (z '("org-level-%s" "outline-%s" "outline-minor-%s"))
+              (custom-set-faces `(,(intern (format z level)) ((t :extend t :height ,size))))))
+(custom-set-faces
+ '(helpful-heading ((t :extend t :height 1.25 :inherit variable-pitch)))
+ '(transient-heading ((t :height 1.25 :inherit variable-pitch)))
+ '(org-meta-line ((t :extend t)))
+ '(org-date ((t :inherit (bold fixed-pitch))))
+ '(org-special-keyword ((t :inherit (bold fixed-pitch))))
+ '(org-ellipsis ((t :height 1.3 :weight bold)))
+ '(magit-diff-file-heading ((t :height 1.3))))
 
 ;;; Theme
 (defun get-face-colors-c (&rest rest)
@@ -166,6 +164,7 @@ Ignore REST."
 
 ;;; Fonts
 (defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
+(set-face-attribute 'bold nil :weight 'extra-bold)
 
 (defun set-face-font-c (spec)
   "Set SPEC to faces `default’ and `fixed-pitch’.
@@ -177,10 +176,10 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'regular))
     ;; (set-face-font-c (font-spec :family "Luculent" :size 12))
     ;; (set-face-font-c (font-spec :family "GT Standard Mono" :size 13 :weight 'regular))
-    ;; (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 14 :weight 'regular))
+    (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 16 :weight 'regular))
     ;; (set-face-font-c (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))
     ;; (set-face-font-c (font-spec :family "GT America Mono LCG" :size 14))
     ;; (set-face-font-c (font-spec :family "TX-02" :size 12 :weight 'regular))
@@ -204,8 +203,8 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'regular))
-    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'light))
-    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'light))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))
