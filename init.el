@@ -1,5 +1,5 @@
 ;; init.el -*- lexical-binding: t; -*-
-(setq inhibit-compacting-font-caches t)
+;; (setq inhibit-compacting-font-caches t)
 
 (defun loadfile-c (file)
   "Load FILE from `user-emacs-directory'."
@@ -7,8 +7,6 @@
     (when (file-exists-p f)
       (load-file f))))
 (loadfile-c "elpaca-init.el")
-(loadfile-c "general.el")
-;; keybinds.el loaded after General-mode
 
 (defun native-compile-user-programs ()
   "Native Compile selected user programs."
@@ -20,6 +18,7 @@
 
 (defun after-init-load-file ()
   (progn
+    (loadfile-c "general.el")
     (loadfile-c "functions.el")
     (loadfile-c "keybinds.el")
     ;; (loadfile-c "hooks.el")
