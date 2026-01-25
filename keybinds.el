@@ -188,6 +188,7 @@
   "hF" 'describe-face
   "hm" 'describe-mode
   "hi" 'info
+  "hs" 'shortdoc
   "hI" 'consult-info
   "hD" 'toggle-debug-mode
   "hds" 'profiler-start

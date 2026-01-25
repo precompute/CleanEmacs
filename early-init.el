@@ -15,8 +15,11 @@
 
 (setq warning-minimum-level :error) ;; for pesky documentation errors
 
-(set-face-attribute 'default nil :background "#000000" :foreground "#ffffff")
-(set-face-attribute 'mode-line nil :background "#000000" :foreground "#ffffff" :box 'unspecified)
+;; Prevent white flash.  Use `default-frame-alist’ not `set-face-attribute’, so that these
+;; properties can be removed from `default-frame-alist’ in init.el.
+;; Using `set-face-attribute’ messes up face loading in new frames and pollutes the default setup.
+(add-to-list 'default-frame-alist '(background-color . "#000000"))
+(add-to-list 'default-frame-alist '(foreground-color . "#ffffff"))
 
 (load-file (expand-file-name "early-init-ui.el" user-emacs-directory))
 
