@@ -143,8 +143,7 @@ Ignore REST."
       show-paren-style 'expression)
 
 ;;;; transparency
-(add-hook 'window-setup-hook 'set-transparency-c)
-(add-to-list 'initial-frame-alist (cons 'alpha-background transparency-value-c))
+(setq transparency-value-c 97)
 
 ;;;; window-divider
 (setq window-divider-default-places t

@@ -35,8 +35,6 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
 
 (defvar-local headerline-buffer-name-c-parent-name-string nil)
 (defvar-local headerline-buffer-name-c-file-name-string nil)
-;; (defconst headerline-buffer-name-c-narrow-string
-;;   (propertize "Narrow " 'face 'headerline-narrow-indicator-face))
 (defconst headerline-buffer-name-c-helpful-fn-string
   (propertize "Fn " 'face 'headerline-narrow-indicator-face))
 (defconst headerline-buffer-name-c-helpful-var-string
@@ -65,7 +63,6 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
             (t (cons nil (buffer-name))))))
       (setq headerline-buffer-id-cache-c
             (list
-             ;; (if (buffer-narrowed-p) headerline-buffer-name-c-narrow-string "")
              (if (car z) (propertize (car z) 'face 'headerline-buffer-parent-name-face) "")
              (if (cdr z) (propertize (cdr z) 'face 'headerline-buffer-file-name-face) ""))))))
 (dolist (hook '(change-major-mode-after-body-hook
@@ -74,8 +71,6 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
                 after-set-visited-file-name-hook ;; ...when the visited file changes (e.g. it's renamed)
                 after-revert-hook)) ;; ...when the underlying file changes
   (add-hook hook 'headerline-generate-buffer-id-cache-c))
-;; (dolist (z '(narrow-to-region narrow-to-page narrow-to-defun widen))
-;;   (advice-add z :after (lambda (&rest _) (headerline-generate-buffer-id-cache-c))))
 
 (defun headerline-flymake-count-c (type)
   "Get Error/Warning/Note counts from Flycheck.
