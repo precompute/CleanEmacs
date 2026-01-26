@@ -220,6 +220,8 @@
 ;; (elpacaLF "csv-mode")
 ;;;; Lisp-Flavored Erlang
 (elpacaLF "lfe-mode")
+;;;; Javascript
+(elpacaLF "js" t)
 ;;;; Rust
 (elpacaLF "rustic")
 ;;;; Haskell

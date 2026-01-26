@@ -218,13 +218,15 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground mix1
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-status-ED-face nil
+                        :inherit 'fixed-pitch
                         :foreground (cl-reduce #'mix-colors (list region fl-keyword fl-constant))
                         :background (cl-reduce #'mix-colors (list region fl-keyword fl-constant)))
     (set-face-attribute 'headerline-buffer-status-RO-face nil
+                        :inherit 'fixed-pitch
                         :foreground (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg))
                         :background (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg)))
-    ;; (set-face-attribute 'headerline-buffer-status-NA-face nil
-    ;;                     )
+    (set-face-attribute 'headerline-buffer-status-NA-face nil
+                        :inherit 'fixed-pitch)
     (set-face-attribute 'headerline-match-face nil
                         :foreground fl-keyword
                         :weight 'bold)
@@ -282,11 +284,11 @@ TYPE can be `:error', `:warning' or `:note'."
 
 ;;;;; Headerline Constructs
 (defconst headerline-buffer-status-c--read-only-string
-  (propertize "    " 'face 'headerline-buffer-status-RO-face))
+  (propertize "  " 'face 'headerline-buffer-status-RO-face))
 (defconst headerline-buffer-status-c--modified-p-string
-  (propertize "    " 'face 'headerline-buffer-status-ED-face))
+  (propertize "  " 'face 'headerline-buffer-status-ED-face))
 (defconst headerline-buffer-status-c--default-string
-  (propertize "    " 'face 'headerline-buffer-status-NA-face))
+  (propertize "  " 'face 'headerline-buffer-status-NA-face))
 (defun headerline-buffer-status-c ()
   "Buffer RO/modified/none"
   `(:eval (list " "
