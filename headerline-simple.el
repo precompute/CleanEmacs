@@ -45,7 +45,10 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
            (cond
             (buffer-file-truename
              (if-let* ((project (project-current))
-                       (root (project-root project)))
+                       (root (thread-last project
+                                          project-root
+                                          file-truename
+                                          abbreviate-file-name)))
                  (cons root (substring buffer-file-truename (length root)))
                (cons nil buffer-file-truename)))
             ((eq major-mode 'dired-mode)

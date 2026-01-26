@@ -1,17 +1,18 @@
 ;; packages/evil.el -*- lexical-binding: t; -*-
 (use-package evil
   :config
-  (if (boundp 'undo-tree-mode)
-      (setq evil-undo-system 'undo-tree
-            evil-undo-function #'undo-tree-undo
-            evil-redo-function #'undo-tree-redo)
-    (if (boundp 'undo-fu-mode)
-        (setq evil-undo-system 'undo-fu
-              evil-undo-function #'undo-fu-only-undo
-              evil-redo-function #'undo-fu-only-redo)
-      (setq evil-undo-system 'undo-redo ;; 'undo-fu
-            evil-undo-function #'undo
-            evil-redo-function #'undo-redo)))
+  (cond
+   ((boundp 'undo-tree-mode)
+    (setq evil-undo-system 'undo-tree
+          evil-undo-function #'undo-tree-undo
+          evil-redo-function #'undo-tree-redo))
+   ((boundp 'undo-fu-mode)
+    (setq evil-undo-system 'undo-fu
+          evil-undo-function #'undo-fu-only-undo
+          evil-redo-function #'undo-fu-only-redo))
+   ((setq evil-undo-system 'undo-redo ;; 'undo-fu
+          evil-undo-function #'undo
+          evil-redo-function #'undo-redo)))
   (setq evil-split-window-below t
         evil-vsplit-window-right t)
   (setq evil-symbol-word-search t
