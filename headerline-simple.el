@@ -176,6 +176,7 @@ TYPE can be `:error', `:warning' or `:note'."
          (fl-string (headerline-get-color-prop :foreground 'font-lock-string-face)) ;; red
          (region (headerline-get-color-prop :background 'region)) ;; brown
          (fl-regexp (headerline-get-color-prop :foreground 'font-lock-regexp-face 'font-lock-string-face)) ;; dark red
+         (successface (headerline-get-color-prop :foreground 'success))
          (errorface (headerline-get-color-prop :foreground 'error)) ;; red
          (matchface (headerline-get-color-prop :foreground 'match)) ;; green
          ;; (warnface (headerline-get-color-prop :foreground 'font-lock-warning-face)) ;; red-ish
@@ -218,7 +219,7 @@ TYPE can be `:error', `:warning' or `:note'."
                         :weight 'normal
                         :foreground mix1)
     (set-face-attribute 'headerline-major-mode-face nil
-                        :foreground mix1
+                        :foreground (mix-colors fl-keyword defaultbg 0.8)
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-status-ED-face nil
                         :inherit 'fixed-pitch
@@ -237,16 +238,13 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground fl-constant)
     (set-face-attribute 'headerline-dark-face nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-string 0.9)
-                        :weight 'bold)
+                        :foreground (mix-colors region fl-string 0.9))
     (set-face-attribute 'headerline-dark-face-2 nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-builtin 0.9)
-                        :weight 'bold)
+                        :foreground (mix-colors region fl-builtin 0.9))
     (set-face-attribute 'headerline-dark-face-3 nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-keyword 0.6)
-                        :weight 'bold)
+                        :foreground (mix-colors region fl-keyword 0.6))
     (set-face-attribute 'header-line-inactive nil
                         :height height
                         :inherit 'variable-pitch
@@ -262,15 +260,12 @@ TYPE can be `:error', `:warning' or `:note'."
                         :box nil
                         :overline nil)
     (set-face-attribute 'headerline-flymake-err-face nil
-                        :weight 'black
                         :inherit 'fixed-pitch-numbers
                         :foreground flymake-err-color)
     (set-face-attribute 'headerline-flymake-warn-face nil
-                        :weight 'black
                         :inherit 'fixed-pitch-numbers
                         :foreground flymake-warn-color)
     (set-face-attribute 'headerline-flymake-note-face nil
-                        :weight 'black
                         :inherit 'fixed-pitch-numbers
                         :foreground flymake-note-color)
     ;; (defvar headerline--default-face (if defaultfg (mix-colors region defaultfg) "#000000"))
@@ -339,7 +334,7 @@ OBJECT and POS are ignored."
         mode-line-process
         headerline-major-mode-c-rec-edit-end-string))
 
-(defconst headerline-line-number-c (propertize "%5l" 'face 'headerline-dark-face))
+(defconst headerline-line-number-c (propertize "%4l" 'face 'headerline-dark-face))
 
 (defconst headerline-file-size-c (propertize "%I" 'face 'headerline-dark-face))
 
@@ -352,8 +347,9 @@ OBJECT and POS are ignored."
   "For mlscroll."
   `(:eval (mlscroll-mode-line)))
 
+(setq mode-line-percent-position '(-3 "%o"))
 (defconst headerline-buffer-percent-c
-  (propertize "%P" 'face 'headerline-dark-face-2)
+  (propertize "%o" 'face 'headerline-dark-face-2)
   "Buffer percent / Bot / Top / All.")
 
 (defconst headerline-buffer-name-c-narrow-string
@@ -421,9 +417,7 @@ Functionally equivalent to `mode-line-format-right-align’."
   (interactive)
   (setq-local header-line-format `(:eval (list (headerline-buffer-status-c)
                                                (headerline-major-mode-c) " "
-                                               headerline-line-number-c " "
                                                ;; (headerline-mlscroll-mode-line-c)
-                                               headerline-buffer-percent-c " "
                                                (headerline-remote-c)
                                                (headerline-narrow-c) " "
                                                (headerline-buffer-name-c) " "
@@ -431,6 +425,8 @@ Functionally equivalent to `mode-line-format-right-align’."
                                                (headerline-macro-recording-c)
                                                (headerline-anzu-count-c)
                                                (headerline-flymake-c)
+                                               headerline-line-number-c " "
+                                               headerline-buffer-percent-c " "
                                                mode-line-misc-info))))
 
 (add-hook 'post-command-hook #'headerline-set-active-window)
