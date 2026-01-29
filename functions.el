@@ -183,6 +183,19 @@ If region is inactive, then copy from kill-ring to clipboard."
       (clipboard-kill-ring-save (region-beginning) (region-end))
     (when kill-ring (gui-set-selection 'CLIPBOARD (current-kill 0 t)))))
 
+(defun fill-region-custom-width-c (arg)
+  "Run `fill-region’ with a custom `fill-column’ value (from ARG or otherwise)."
+  (interactive "P")
+  (if (use-region-p)
+      (let ((fill-column (if arg (prefix-numeric-value arg)
+                           (read-number "Fill Column Width:" 75)))
+            (justify (read-number "Justify [0]none [1]Full [2]Left [3]Right [4]Center: " 0)))
+        (fill-region (region-beginning) (region-end)
+                     (pcase justify (0 nil) (1 'full) (2 'left) (3 'right) (4 'center))))
+    (if (derived-mode-p 'prog-mode)
+        (funcall-interactively #'prog-fill-reindent-defun)
+      (fill-paragraph))))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.

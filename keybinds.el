@@ -326,6 +326,10 @@
  :states 'insert
  "H-<return>" 'continue-structure-c)
 
+(general-define-key
+ :states '(normal visual)
+ "M-s-q" 'fill-region-custom-width-c)
+
 ;;;;;;; Evil
 (general-define-key
  :states '(normal insert visual)

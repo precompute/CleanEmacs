@@ -1,1 +1,2 @@
-(use-package sculpture-themes)
+(use-package sculpture-themes
+  :ensure (:depth 1))
