@@ -9,7 +9,7 @@ The poll function that ships with the notmuch package blocks emacs."
     (let ((display-buffer-alist (cons (list (regexp-quote shell-command-buffer-name-async)
                                             #'display-buffer-no-window)
                                       display-buffer-alist)))
-      (async-shell-command "notmuch new")))
+      (async-shell-command notmuch-new-command-c)))
 
   (defun notmuch-delete-window-c ()
     "Advice that deletes active window after `notmuch-bury-or-kill-this-buffer’."

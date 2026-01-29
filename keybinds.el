@@ -71,8 +71,8 @@
   "br" 'revert-buffer
   "bb" 'switch-to-buffer
   "bB" 'switch-to-buffer-other-window
-  "bp" 'previous-buffer
-  "bn" 'next-buffer
+  "bn" 'previous-buffer
+  "bp" 'next-buffer
   "bi" 'ibuffer-other-window
   "bc" 'clone-indirect-buffer-other-window
 
@@ -149,7 +149,7 @@
   "teb" 'toggle-eldoc-box
 
   "c" '(:ignore t :wk "code diagnostics")
-  "cr" 'flymake-show-buffer-diagnostics
+  "cd" 'flymake-show-buffer-diagnostics
   "cR" 'consult-flymake
   "cC" 'compile
   "cc" 'recompile
@@ -306,6 +306,7 @@
  "H-h c" 'git-auto-time-commit
  "H-h C" 'git-prompt-commit
  "H-h r" 'refile3-main-transient
+ "H-h m" 'notmuch
 
  "C-S-h h" 'enable-hyper-key-c
 
@@ -411,3 +412,10 @@
  :prefix "SPC"
  "p" '(:ignore t :wk "poll")
  "pp" 'notmuch-async-poll-all)
+
+;;;;;;; Eglot
+(general-define-key
+ :states 'normal
+ :keymaps 'eglot-mode-map
+ :prefix "SPC"
+ "cr" 'eglot-rename)

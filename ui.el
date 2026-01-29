@@ -1,5 +1,5 @@
 ;;; Custom Faces
-(cl-loop for level from 1 to 8 for size in '(1.5 1.3 1.25 1.15 1.1 1.08 1.05 1.05)
+(cl-loop for level from 1 to 8 for size in '(1.6 1.525 1.45 1.375 1.3 1.225 1.15 1.075)
          do (dolist (z '("org-level-%s" "outline-%s" "outline-minor-%s"))
               (custom-set-faces `(,(intern (format z level)) ((t :extend t :height ,size))))))
 (custom-set-faces
@@ -153,7 +153,6 @@ Ignore REST."
 
 ;;; Fonts
 (defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
-(set-face-attribute 'bold nil :weight 'extra-bold)
 
 (defun set-face-font-c (spec)
   "Set SPEC to faces `default’ and `fixed-pitch’.
@@ -165,10 +164,11 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    ;; (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'regular))
+    ;; (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'medium))
     ;; (set-face-font-c (font-spec :family "Luculent" :size 12))
-    ;; (set-face-font-c (font-spec :family "GT Standard Mono" :size 13 :weight 'regular))
-    (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 16 :weight 'regular))
+    (set-face-font-c (font-spec :family "GT Standard Mono" :size 15 :weight 'medium :width 'condensed))
+    ;; (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 16 :weight 'light))
+    ;; (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 16 :weight 'regular))
     ;; (set-face-font-c (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))
     ;; (set-face-font-c (font-spec :family "GT America Mono LCG" :size 14))
     ;; (set-face-font-c (font-spec :family "TX-02" :size 12 :weight 'regular))
@@ -192,16 +192,17 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'regular))
-    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'light))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'light))
-    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'condensed :weight 'light))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT America LCG" :size 14 :width 'narrow :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT America LCG" :size 16 :width 'expanded :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Super Text" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Sectra" :size 16))
-    ;; (set-face-font 'variable-pitch (font-spec :family "GT Standard S" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT Standard" :size 16 :weight 'normal :width 'condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Maru" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Franziska Pro" :size 13))
     ;; (set-face-font 'variable-pitch (font-spec :family "Source Sans 3" :size 15))
@@ -222,7 +223,10 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia eText" :size 12))
 
     (set-face-font 'fixed-pitch-numbers (font-spec :family "Info Text Offc Pro" :size 16))
+    ;; (set-face-font 'fixed-pitch-numbers (font-spec :family "Meta Serif SC Offc Pro" :size 17 :weight 'bold))
+
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
     ;; (copy-face 'default 'fixed-pitch)
-    (set-fontset-font t 'symbol (font-spec :family "Symbola"))))
+    (set-fontset-font t 'symbol (font-spec :family "Symbola"))
+    (set-face-attribute 'bold nil :weight 'extra-bold)))
 (set-fonts-c)

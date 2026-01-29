@@ -7,6 +7,15 @@
           lua-ts-mode
           ;; python-mode
           ;; python-ts-mode
+          js-mode
+          js-base-mode
           rust-mode
           rust-ts-mode) . outline-minor-mode)
-  :preface (setq outline-minor-mode-map nil))
+  ((js-mode js-base-mode) . (lambda () (setq-local outline-regexp js-mode-outline-regexp-c
+                                                   outline-level #'outline-level-group-1-c)))
+  :preface (setq outline-minor-mode-map nil)
+  :config
+  (setq js-mode-outline-regexp-c (rx (* (or space blank)) (= 2 ?/) (or space blank) (group (+ "*"))))
+  (defun outline-level-group-1-c ()
+    "Calculate the characters in the first group of the match."
+    (- (match-end 1) (match-beginning 1))))
