@@ -473,3 +473,15 @@ Functionally equivalent to `mode-line-format-right-align’."
                 notmuch-search-mode-hook))
   (add-hook hook 'headerline-simple-mode 100)
   (add-hook hook 'modeline-simple-mode 100))
+
+;; [26-01-30 02:49:38] I’ve put in too much time trying to make the
+;; headerline and modeline right-aligned.  The fault seems to lie with
+;; variable-pitch faces; first from sculpture-theme and second from
+;; headerline-simple.el.  However, it could be because I cache variables;
+;; or maybe because I do `setq-local’ via a hook instead of `setq-default’
+;; for mode-line-format and header-line-format.
+;; I tried setting mode-line-right-align-edge to all three values and
+;; tested every possible combination twice.  The following works perfectly,
+;; occasionally even with variable-pitch faces:
+;; (setq-default mode-line-format `("%f %l %o" mode-line-format-right-align "aaa %+ %q z"))
+;; (setq-default header-line-format `("%f %l %o" mode-line-format-right-align "aaa %+ %q z"))
