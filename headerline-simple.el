@@ -151,9 +151,9 @@ TYPE can be `:error', `:warning' or `:note'."
 (defface headerline-dark-face-2
   '((t :foreground "#000"))
   "Dark face 2.")
-(defface headerline-dark-face-2
+(defface headerline-dark-face-3
   '((t :foreground "#000"))
-  "Dark face 2.")
+  "Dark face 3.")
 (defface headerline-flymake-err-face
   '((t :foreground "#000"))
   "Face for Flymake Err-Diagnostics.")
@@ -237,11 +237,15 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground fl-constant)
     (set-face-attribute 'headerline-dark-face nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-constant 0.6)
+                        :foreground (mix-colors region fl-string 0.9)
                         :weight 'bold)
     (set-face-attribute 'headerline-dark-face-2 nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-string 0.9)
+                        :foreground (mix-colors region fl-builtin 0.9)
+                        :weight 'bold)
+    (set-face-attribute 'headerline-dark-face-3 nil
+                        :inherit 'fixed-pitch-numbers
+                        :foreground (mix-colors region fl-keyword 0.6)
                         :weight 'bold)
     (set-face-attribute 'header-line-inactive nil
                         :height height
@@ -294,11 +298,11 @@ TYPE can be `:error', `:warning' or `:note'."
   (propertize "  " 'face 'headerline-buffer-status-NA-face))
 (defun headerline-buffer-status-c ()
   "Buffer RO/modified/none"
-  `(:eval (list " "
-                (cond (buffer-read-only headerline-buffer-status-c--read-only-string)
-                      ((buffer-modified-p) headerline-buffer-status-c--modified-p-string)
-                      (t headerline-buffer-status-c--default-string))
-                " ")))
+  (list " "
+        (cond (buffer-read-only headerline-buffer-status-c--read-only-string)
+              ((buffer-modified-p) headerline-buffer-status-c--modified-p-string)
+              (t headerline-buffer-status-c--default-string))
+        " "))
 
 (defun headerline-buffer-status-with-evil-c ()
   "Buffer RO/modified/none & evil state."
@@ -360,33 +364,31 @@ OBJECT and POS are ignored."
 
 (defun headerline-macro-recording-c ()
   "Display current Emacs or evil macro being recorded."
-  `(:eval
-    (when (and (headerline-active)
-               (or defining-kbd-macro
-                   executing-kbd-macro))
-      (if (bound-and-true-p evil-this-macro)
-          (propertize (concat " [" (char-to-string evil-this-macro) "] ") 'face 'headerline-macro-face)
-        (propertize " Macro " 'face 'headerline-macro-face)))))
+  (when (and (headerline-active)
+             (or defining-kbd-macro
+                 executing-kbd-macro))
+    (if (bound-and-true-p evil-this-macro)
+        (propertize (concat " [" (char-to-string evil-this-macro) "] ") 'face 'headerline-macro-face)
+      (propertize " Macro " 'face 'headerline-macro-face))))
 
 (defun headerline-anzu-count-c ()
   "Show the match index and total number thereof.
 Requires `anzu', also `evil-anzu' if using `evil-mode' for
 compatibility with `evil-search'."
-  `(:eval
-    (when (and (bound-and-true-p anzu--state)
-               (not (bound-and-true-p iedit-mode)))
-      (propertize
-       (let ((here anzu--current-position)
-             (total anzu--total-matched))
-         (cond ((eq anzu--state 'replace-query)
-                (format "%d replace " anzu--cached-count))
-               ((eq anzu--state 'replace)
-                (format "%d/%d " (1+ here) total))
-               (anzu--overflow-p
-                (format "%s+ " total))
-               (t
-                (format "%s/%d " here total))))
-       'face 'headerline-match-face))))
+  (when (and (bound-and-true-p anzu--state)
+             (not (bound-and-true-p iedit-mode)))
+    (propertize
+     (let ((here anzu--current-position)
+           (total anzu--total-matched))
+       (cond ((eq anzu--state 'replace-query)
+              (format "%d replace " anzu--cached-count))
+             ((eq anzu--state 'replace)
+              (format "%d/%d " (1+ here) total))
+             (anzu--overflow-p
+              (format "%s+ " total))
+             (t
+              (format "%s/%d " here total))))
+     'face 'headerline-dark-face-3)))
 
 (defun headerline-flymake-c ()
   "Return `headerline--flymake-cache-c’."
