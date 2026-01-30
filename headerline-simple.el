@@ -164,6 +164,8 @@ TYPE can be `:error', `:warning' or `:note'."
   '((t :foreground "#000"))
   "Face for Flymake Note-Diagnostics.")
 
+(unless (facep 'fixed-pitch-numbers) (copy-face 'fixed-pitch 'fixed-pitch-numbers))
+
 (defun set-headerline-faces (&rest rest)
   "Set headerline faces."
   (interactive)
@@ -219,7 +221,7 @@ TYPE can be `:error', `:warning' or `:note'."
                         :weight 'normal
                         :foreground mix1)
     (set-face-attribute 'headerline-major-mode-face nil
-                        :foreground (mix-colors fl-keyword defaultbg 0.8)
+                        :foreground mix1
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-status-ED-face nil
                         :inherit 'fixed-pitch

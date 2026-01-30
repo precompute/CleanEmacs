@@ -47,23 +47,25 @@ DIR is the directory, INITIAL is the string."
 (defun revert-buffer-if-not-modified ()
   "Revert the buffer if it isn’t modified."
   (interactive)
-  (let ((changed? (not (verify-visited-file-modtime))))
-    (if (buffer-modified-p)
+  (let* ((b (window-buffer (selected-window)))
+         (changed? (not (verify-visited-file-modtime b))))
+    (with-current-buffer b
+      (if (buffer-modified-p)
+          (when changed?
+            (message
+             (concat
+              (propertize "Buffer " 'face 'variable-pitch)
+              (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
+              (propertize " changed on disk.  " 'face 'variable-pitch)
+              (propertize "You have unsaved changes." 'face '(variable-pitch success)))))
         (when changed?
           (message
            (concat
             (propertize "Buffer " 'face 'variable-pitch)
             (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
             (propertize " changed on disk.  " 'face 'variable-pitch)
-            (propertize "You have unsaved changes." 'face '(variable-pitch success)))))
-      (when changed?
-        (message
-         (concat
-          (propertize "Buffer " 'face 'variable-pitch)
-          (propertize (buffer-name) 'face '(variable-pitch bold font-lock-builtin-face))
-          (propertize " changed on disk.  " 'face 'variable-pitch)
-          (propertize "REVERTING." 'face '(variable-pitch success))))
-        (revert-buffer t t)))))
+            (propertize "REVERTING." 'face '(variable-pitch success))))
+          (revert-buffer t t))))))
 
 (defun toggle-eldoc-box ()
   (interactive)
