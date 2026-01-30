@@ -198,6 +198,37 @@ If region is inactive, then copy from kill-ring to clipboard."
         (funcall-interactively #'prog-fill-reindent-defun)
       (fill-paragraph))))
 
+(defun export-current-buffer-as-text (&optional buf)
+  "Export current buffer as text for ingestion in other programs.
+Copies to system clipboard.
+When BUF is a buffer, return contents of buffer."
+  (interactive)
+  (let* ((b? (when buf (bufferp buf)))
+         (s-buf (if b? buf (current-buffer)))
+         (text (with-current-buffer s-buf
+                 (buffer-substring-no-properties (point-min) (point-max))))
+         (name (or (buffer-file-name s-buf) (buffer-name s-buf) "Unknown"))
+         (bufsizekb (/ (buffer-size s-buf) 125.0))
+         (outstring (format "--- SIZE: %.1fkb FILE: %s ---\n```\n%s\n```" bufsizekb name text)))
+    (if text (if b? (format "%s\n" outstring)
+               (with-temp-buffer
+                 (insert outstring)
+                 (clipboard-kill-ring-save (point-min) (point-max)))
+               (message (format "Saved file %s to Clipboard." name)))
+      (unless b? (message (format "Could not extract text from Buffer %s." s-buf))))))
+
+(defun export-selected-buffers-as-text ()
+  "Export all buffers selected by user as text for ingestion in other programs.
+Copies to system clipboard."
+  (interactive)
+  (let ((buflist (completing-read-multiple
+                  "Buffers:" (mapcar #'buffer-name (buffer-list)) nil t)))
+    (cl-loop for b in buflist
+             concat (export-current-buffer-as-text (get-buffer b)) into text
+             finally (with-temp-buffer
+                       (insert text)
+                       (clipboard-kill-ring-save (point-min) (point-max))))))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.
