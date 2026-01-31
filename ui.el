@@ -13,10 +13,13 @@
 
 ;;; Theme
 (defun get-face-colors-c (&rest rest)
+  "Generate custom face color variables from the active theme’s colors.  Ignore REST."
   (interactive)
-  (dolist (z (cl-loop for z in '(default builtin keyword constant string regexp type doc)
+  (dolist (z (cl-loop for z in '( default region error success
+                                  builtin keyword constant string regexp type doc)
                       append (cl-loop for y in '(background foreground)
-                                      collect (list (if (eq z 'default) z (intern (format "font-lock-%s-face" z)))
+                                      collect (list (if (memq z '(default region error success)) z
+                                                      (intern (format "font-lock-%s-face" z)))
                                                     (intern (format "current--%s-face-%s" z y))
                                                     (intern (format ":%s" y))))))
     (let* ((face (car z))
@@ -69,7 +72,15 @@
 (defun set-pulsar-face-c (&rest _args)
   (interactive)
   (when (featurep 'pulsar)
-    (set-face-attribute 'pulsar-generic nil :background current--builtin-face-foreground :inherit nil)))
+    (set-face-attribute 'pulsar-generic nil
+                        :background (apply #'color-rgb-to-hex
+                                           (color-blend
+                                            (color-blend (color-name-to-rgb current--region-face-background)
+                                                         (color-name-to-rgb current--default-face-foreground)
+                                                         0.85)
+                                            (color-name-to-rgb current--success-face-foreground)
+                                            0.85))
+                        :inherit nil)))
 
 (defun set-dired-posframe-face-c (&rest _args)
   (interactive)

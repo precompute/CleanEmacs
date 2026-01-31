@@ -176,7 +176,7 @@ TYPE can be `:error', `:warning' or `:note'."
          (fl-variable (headerline-get-color-prop :foreground 'font-lock-punctuation-face)) ;; off-white
          (fl-doc (headerline-get-color-prop :foreground 'font-lock-doc-face)) ;; red
          (fl-string (headerline-get-color-prop :foreground 'font-lock-string-face)) ;; red
-         (region (headerline-get-color-prop :background 'region)) ;; brown
+         (regionface (headerline-get-color-prop :background 'region)) ;; brown
          (fl-regexp (headerline-get-color-prop :foreground 'font-lock-regexp-face 'font-lock-string-face)) ;; dark red
          (successface (headerline-get-color-prop :foreground 'success))
          (errorface (headerline-get-color-prop :foreground 'error)) ;; red
@@ -186,27 +186,27 @@ TYPE can be `:error', `:warning' or `:note'."
          (noteface (headerline-get-color-prop :background 'cursor)) ;; yellow
          (defaultfg (headerline-get-color-prop :foreground 'default)) ;; white
          (defaultbg (headerline-get-color-prop :background 'default)) ;; black
-         (flymake-err-color (if errorface (mix-colors region errorface 0.45) "#000000"))
-         (flymake-warn-color (if warnface (mix-colors region warnface 0.45) "#000000"))
+         (flymake-err-color (if errorface (mix-colors regionface errorface 0.45) "#000000"))
+         (flymake-warn-color (if warnface (mix-colors regionface warnface 0.45) "#000000"))
          (flymake-note-color (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
          (theme (car custom-enabled-themes))
          (hyperstition? (memq theme '(hyperstitional-themes-rebug-flipped hyperstitional-themes-rebug)))
          (fl-variable (if hyperstition? (headerline-get-color-prop :foreground 'error) fl-variable))
          (fl-string (if hyperstition? (headerline-get-color-prop :foreground 'font-lock-builtin-face) fl-string))
-         (region (if hyperstition? (headerline-get-color-prop :foreground 'menu) region))
+         (regionface (if hyperstition? (headerline-get-color-prop :foreground 'menu) regionface))
          (height 1.3)
          (height2 0.8)
          (mix1 (mix-colors (if (not (eq 'unspecified fl-variable)) fl-variable
                              (if (not (eq 'unspecified fl-type))
                                  fl-type
-                               fl-string)) region 0.6)))
+                               fl-string)) regionface 0.6)))
     (set-face-attribute 'headerline-base-face nil
                         :inherit 'variable-pitch
                         :height height
-                        :overline region
+                        :overline regionface
                         :underline `(:color ,fl-variable :position 0)
                         :foreground fl-variable
-                        :background region)
+                        :background regionface)
     (set-face-attribute 'headerline-file-modified-face nil
                         :foreground fl-builtin)
     (set-face-attribute 'headerline-file-unmodified-face nil
@@ -225,12 +225,12 @@ TYPE can be `:error', `:warning' or `:note'."
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-status-ED-face nil
                         :inherit 'fixed-pitch
-                        :foreground (cl-reduce #'mix-colors (list region fl-keyword fl-constant))
-                        :background (cl-reduce #'mix-colors (list region fl-keyword fl-constant)))
+                        :foreground (cl-reduce #'mix-colors (list regionface fl-keyword fl-constant))
+                        :background (cl-reduce #'mix-colors (list regionface fl-keyword fl-constant)))
     (set-face-attribute 'headerline-buffer-status-RO-face nil
                         :inherit 'fixed-pitch
-                        :foreground (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg))
-                        :background (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg)))
+                        :foreground (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg))
+                        :background (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg)))
     (set-face-attribute 'headerline-buffer-status-NA-face nil
                         :inherit 'fixed-pitch)
     (set-face-attribute 'headerline-match-face nil
@@ -240,19 +240,20 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground fl-constant)
     (set-face-attribute 'headerline-dark-face nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-string 0.9))
+                        :foreground (mix-colors regionface fl-string 0.9))
     (set-face-attribute 'headerline-dark-face-2 nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-builtin 0.9))
+                        :foreground (mix-colors regionface fl-builtin 0.9))
     (set-face-attribute 'headerline-dark-face-3 nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors region fl-keyword 0.6))
+                        :foreground (mix-colors regionface fl-keyword 0.6))
     (set-face-attribute 'header-line-inactive nil
                         :height height
                         :inherit 'variable-pitch
                         :foreground (mix-colors fl-variable defaultbg 0.2)
-                        :background (mix-colors region defaultbg 0.45)
-                        :overline (mix-colors region defaultbg 0.45))
+                        :background (mix-colors regionface defaultbg 0.45)
+                        :underline `(:color ,(mix-colors regionface defaultbg 0.45) :position 0)
+                        :overline (mix-colors regionface defaultbg 0.45))
     (set-face-attribute 'mode-line nil
                         :background defaultbg
                         :box nil
@@ -270,10 +271,10 @@ TYPE can be `:error', `:warning' or `:note'."
     (set-face-attribute 'headerline-flymake-note-face nil
                         :inherit 'fixed-pitch-numbers
                         :foreground flymake-note-color)
-    ;; (defvar headerline--default-face (if defaultfg (mix-colors region defaultfg) "#000000"))
+    ;; (defvar headerline--default-face (if defaultfg (mix-colors regionface defaultfg) "#000000"))
     (if (and (fboundp 'mlscroll-mode) (mlscroll-mode) (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
         (progn
-          (setq-default mlscroll-in-color (cl-reduce #'mix-colors (list region (if (not (eq 'unspecified fl-doc)) fl-doc errorface) fl-keyword)))
+          (setq-default mlscroll-in-color (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) fl-keyword)))
           (setq-default mlscroll-out-color defaultbg)
           (mlscroll-mode -1) (mlscroll-mode 1)))
     (update-face-remapping-alist 'headerline-base-face 'header-line)))

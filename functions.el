@@ -456,8 +456,8 @@ When ALL-FRAMES? is non-nil, change for all frames."
 
 ;;;;; Color
 (defun convert-color-string-at-point-to-rgb (arg)
-  "Get the color string at point and convert it to RGB.
-When ARG is non-nil, replace the string with the RGB color.
+  "Get the color string (symbol) at point and convert it to RGB (0-255).
+When ARG is non-nil, replace the symbol at point with the new string.
 Otherwise, kill it."
   (interactive "P")
   (when-let* ((sym (thing-at-point 'symbol t))
