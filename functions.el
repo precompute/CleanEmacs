@@ -209,7 +209,8 @@ When BUF is a buffer, return contents of buffer."
                  (buffer-substring-no-properties (point-min) (point-max))))
          (name (or (buffer-file-name s-buf) (buffer-name s-buf) "Unknown"))
          (bufsizekb (/ (buffer-size s-buf) 125.0))
-         (outstring (format "--- SIZE: %.1fkb FILE: %s ---\n```\n%s\n```" bufsizekb name text)))
+         (proglang (substring (format "%s" major-mode) 0 -5))
+         (outstring (format "--- SIZE: %.1fkb FILE: %s ---\n```%s\n%s\n```" bufsizekb name proglang text)))
     (if text (if b? (format "%s\n" outstring)
                (with-temp-buffer
                  (insert outstring)
@@ -445,13 +446,35 @@ When ALL-FRAMES? is non-nil, change for all frames."
       (hi-lock-unface-buffer z)))
    (t (progn
         (let ((z highlight-at-point-used-faces-c))
-         (unhighlight-all-in-buffer-c)
-         (message (format "%s highlights removed." z)))))))
+          (unhighlight-all-in-buffer-c)
+          (message (format "%s highlights removed." z)))))))
 
 (defun unhighlight-all-in-buffer-c ()
   "Run `hi-lock-unface-buffer’ and zero `highlight-at-point-used-faces-c’."
   (setq highlight-at-point-used-faces-c 0)
   (hi-lock-unface-buffer t))
+
+;;;;; Color
+(defun convert-color-string-at-point-to-rgb (arg)
+  "Get the color string at point and convert it to RGB.
+When ARG is non-nil, replace the string with the RGB color.
+Otherwise, kill it."
+  (interactive "P")
+  (when-let* ((sym (thing-at-point 'symbol t))
+              (s (if (s-suffix? "\"" sym) (substring s 0 -1) sym)) ;; not strictly necessary
+              (s (if (s-prefix? "\"" s) (substring s 1 0) s))
+              (s (if (s-prefix? "#" s) (substring s 1 0) s))
+              (r (substring s 0 2))
+              (g (substring s 2 4))
+              (b (substring s 4 6)))
+    ((lambda (z) (if arg (let ((b (bounds-of-thing-at-point 'symbol)))
+                           (save-excursion (goto-char (car b))
+                                           (delete-region (car b) (cdr b))
+                                           (insert z)))
+                   (message z)))
+     (thread-last (list r g b)
+                  (mapcar (lambda (y) (string-to-number y 16)))
+                  (format "%s")))))
 
 ;;;; git
 ;;;;; auto-commit
@@ -640,9 +663,9 @@ It switches the width before the height."
             (save-excursion
               (let ((twords (count-words (point-min) (point-max)))
                     (cpwords (count-words (point-min) (region-end))))
-               (format "(%s/%s) %s%%"
-                       nov-documents-index (length nov-documents)
-                       (/ (* 100 cpwords) twords))))))))))
+                (format "(%s/%s) %s%%"
+                        nov-documents-index (length nov-documents)
+                        (/ (* 100 cpwords) twords))))))))))
 
 (defun org-capture-get-major-mode-c ()
   "Get the major-mode of the buffer Capture was called from."
@@ -890,13 +913,13 @@ Then place point at end of #+begin statement for metadata insertion."
               (year (if incyear (1+ year) year)))
          (setq main-log-init-date
                (format "%02d-%02d-%02d" year month day)))))
-       ;; (let ((newlast (+ 1 (string-to-number
-       ;;                      (substring main-log-init-date 6 8)))))
-       ;;   (setq main-log-init-date
-       ;;         (concat (substring main-log-init-date 0 6)
-       ;;                 (if (= (length (number-to-string newlast)) 1)
-       ;;                     "0")
-       ;;                 (number-to-string newlast))))
+    ;; (let ((newlast (+ 1 (string-to-number
+    ;;                      (substring main-log-init-date 6 8)))))
+    ;;   (setq main-log-init-date
+    ;;         (concat (substring main-log-init-date 0 6)
+    ;;                 (if (= (length (number-to-string newlast)) 1)
+    ;;                     "0")
+    ;;                 (number-to-string newlast))))
     ("I" "Increment Month"
      (lambda () (interactive)
        (let ((newmid (+ 1 (string-to-number
@@ -927,9 +950,9 @@ Then place point at end of #+begin statement for metadata insertion."
    [;; ("C" "equalize" org-headings-equalize)
     ("-" "timelogrefile" org-timelogrefile-c)
     ("J05" "timelogrefile next 5" (lambda () (interactive)
-                                   (dotimes (x 5)
-                                     (org-timelogrefile-c)
-                                     (next-line))))
+                                    (dotimes (x 5)
+                                      (org-timelogrefile-c)
+                                      (next-line))))
     ("J15" "timelogrefile next 15" (lambda () (interactive)
                                      (dotimes (x 15)
                                        (org-timelogrefile-c)
