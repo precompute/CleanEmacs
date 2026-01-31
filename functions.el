@@ -458,7 +458,7 @@ When ALL-FRAMES? is non-nil, change for all frames."
 (defun convert-color-string-at-point-to-rgb (arg)
   "Get the color string (symbol) at point and convert it to RGB (0-255).
 When ARG is non-nil, replace the symbol at point with the new string.
-Otherwise, kill it."
+Otherwise, kill it." ;; Can use `color-values’ instead.
   (interactive "P")
   (when-let* ((sym (thing-at-point 'symbol t))
               (s (if (s-suffix? "\"" sym) (substring s 0 -1) sym)) ;; not strictly necessary
@@ -611,96 +611,6 @@ It switches the width before the height."
         (goto-char p)
         (setq orgid (org-id-get (point) t))))
     (funcall (if kill? #'kill-new #'insert) (format " [[%s]]" orgid))))
-
-;;;;; org-capture-*
-(defun org-capture-pdf-c (action)
-  "Capture the active region of the pdf-view buffer."
-  (let* ((pdf-buf-name (plist-get org-capture-plist :original-buffer))
-         (pdf-buf (get-buffer pdf-buf-name)))
-    (if (buffer-live-p pdf-buf)
-        (cond
-         ((= action 1)
-          (with-current-buffer pdf-buf
-            (buffer-name)))
-         ((= action 2)
-          (with-current-buffer pdf-buf
-            (buffer-file-name)))
-         ((= action 3)
-          (with-current-buffer pdf-buf
-            (if (pdf-view-active-region-p)
-                (car (pdf-view-active-region-text))
-              (ignore-errors
-                (buffer-substring-no-properties (region-beginning) (region-end))))))
-         ((= action 4)
-          (with-current-buffer pdf-buf
-            (number-to-string (pdf-view-current-page)))))
-      (user-error "Buffer %S not alive." pdf-buf-name))))
-
-(defun org-capture-epub-c (action)
-  "Capture the active region of the nov (epub) buffer."
-  (let* ((pdf-buf-name (plist-get org-capture-plist :original-buffer))
-         (pdf-buf (get-buffer pdf-buf-name)))
-    (if (buffer-live-p pdf-buf)
-        (cond
-         ((= action 1)
-          (with-current-buffer pdf-buf
-            (buffer-name)))
-         ((= action 2)
-          (with-current-buffer pdf-buf
-            nov-file-name))
-         ((= action 3)
-          (with-current-buffer pdf-buf
-            (ignore-errors
-              (buffer-substring-no-properties (region-beginning) (region-end)))))
-         ((= action 4)
-          (with-current-buffer pdf-buf
-            (save-excursion
-              (goto-char (point-min))
-              (buffer-substring-no-properties
-               (point-min) (point-at-eol)))))
-         ((= action 5)
-          (with-current-buffer pdf-buf
-            (save-excursion
-              (let ((twords (count-words (point-min) (point-max)))
-                    (cpwords (count-words (point-min) (region-end))))
-                (format "(%s/%s) %s%%"
-                        nov-documents-index (length nov-documents)
-                        (/ (* 100 cpwords) twords))))))))))
-
-(defun org-capture-get-major-mode-c ()
-  "Get the major-mode of the buffer Capture was called from."
-  (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
-         (c-buf (get-buffer c-buf-name)))
-    (if (buffer-live-p c-buf)
-        (with-current-buffer c-buf
-          (substring
-           (symbol-name major-mode)
-           0 -5)))))
-
-(defun org-capture-get-repository-root-c ()
-  "Get the root of the repository Capture was called from."
-  (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
-         (c-buf (get-buffer c-buf-name)))
-    (if (buffer-live-p c-buf)
-        (with-current-buffer c-buf
-          (locate-dominating-file "." ".git")))))
-
-(defun org-capture-notmuch-c (valtype &optional org-prop)
-  "Get value VALTYPE from the current notmuch-show buffer.
-When ORG-PROP is t, add appropriate property drawer prefixes."
-  (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
-         (c-buf (get-buffer c-buf-name))
-         (valtype (substring (symbol-name valtype) 1)))
-    (when (buffer-live-p c-buf)
-      (with-current-buffer c-buf
-        (let* ((r (funcall (intern (concat "notmuch-show-get-" valtype))))
-               (r (if (string-equal "to" valtype)
-                      (if r r (notmuch-show-get-header :Delivered-To))
-                    r)))
-          (when r
-            (if org-prop
-                (format "\n:MAIL-%s: %s" (upcase valtype) r)
-              (format "%s" r))))))))
 
 ;;;;; org-insert-block-*
 (defun org-insert-block-c (type &optional metadata?)

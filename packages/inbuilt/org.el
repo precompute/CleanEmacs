@@ -67,9 +67,122 @@
                             ))
 
 ;;;;; org capture
+;;;;;; org-capture-* functions
+  (defun org-capture-pdf-c (action)
+    "Capture the active region of the pdf-view buffer."
+    (let* ((pdf-buf-name (plist-get org-capture-plist :original-buffer))
+           (pdf-buf (get-buffer pdf-buf-name)))
+      (if (buffer-live-p pdf-buf)
+          (cond
+           ((= action 1)
+            (with-current-buffer pdf-buf
+              (buffer-name)))
+           ((= action 2)
+            (with-current-buffer pdf-buf
+              (buffer-file-name)))
+           ((= action 3)
+            (with-current-buffer pdf-buf
+              (if (pdf-view-active-region-p)
+                  (car (pdf-view-active-region-text))
+                (ignore-errors
+                  (buffer-substring-no-properties (region-beginning) (region-end))))))
+           ((= action 4)
+            (with-current-buffer pdf-buf
+              (number-to-string (pdf-view-current-page)))))
+        (user-error "Buffer %S not alive." pdf-buf-name))))
+
+  (defun org-capture-epub-c (action)
+    "Capture the active region of the nov (epub) buffer."
+    (let* ((pdf-buf-name (plist-get org-capture-plist :original-buffer))
+           (pdf-buf (get-buffer pdf-buf-name)))
+      (if (buffer-live-p pdf-buf)
+          (cond
+           ((= action 1)
+            (with-current-buffer pdf-buf
+              (buffer-name)))
+           ((= action 2)
+            (with-current-buffer pdf-buf
+              nov-file-name))
+           ((= action 3)
+            (with-current-buffer pdf-buf
+              (ignore-errors
+                (buffer-substring-no-properties (region-beginning) (region-end)))))
+           ((= action 4)
+            (with-current-buffer pdf-buf
+              (save-excursion
+                (goto-char (point-min))
+                (buffer-substring-no-properties
+                 (point-min) (point-at-eol)))))
+           ((= action 5)
+            (with-current-buffer pdf-buf
+              (save-excursion
+                (let ((twords (count-words (point-min) (point-max)))
+                      (cpwords (count-words (point-min) (region-end))))
+                  (format "(%s/%s) %s%%"
+                          nov-documents-index (length nov-documents)
+                          (/ (* 100 cpwords) twords))))))))))
+
+  (defun org-capture-get-major-mode-c ()
+    "Get the major-mode of the buffer Capture was called from."
+    (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
+           (c-buf (get-buffer c-buf-name)))
+      (if (buffer-live-p c-buf)
+          (with-current-buffer c-buf
+            (substring
+             (symbol-name major-mode)
+             0 -5)))))
+
+  (defun org-capture-get-repository-root-c ()
+    "Get the root of the repository Capture was called from."
+    (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
+           (c-buf (get-buffer c-buf-name)))
+      (if (buffer-live-p c-buf)
+          (with-current-buffer c-buf
+            (locate-dominating-file "." ".git")))))
+
+  (defun org-capture-notmuch-c (valtype &optional org-prop)
+    "Get value VALTYPE from the current notmuch-show buffer.
+When ORG-PROP is t, add appropriate property drawer prefixes."
+    (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
+           (c-buf (get-buffer c-buf-name))
+           (valtype (substring (symbol-name valtype) 1)))
+      (when (buffer-live-p c-buf)
+        (with-current-buffer c-buf
+          (let* ((r (funcall (intern (concat "notmuch-show-get-" valtype))))
+                 (r (if (string-equal "to" valtype)
+                        (if r r (notmuch-show-get-header :Delivered-To))
+                      r)))
+            (when r
+              (if org-prop
+                  (format "\n:MAIL-%s: %s" (upcase valtype) r)
+                (format "%s" r))))))))
+
+  (defun org-capture-generic-c ()
+    "Return the heading for a generic capture."
+    (let* ((c-buf-name (plist-get org-capture-plist :original-buffer))
+           (c-buf (get-buffer c-buf-name))
+           (m-mode (with-current-buffer c-buf (symbol-name major-mode))))
+      (format "(%s) - %s" m-mode c-buf)))
+
   (defvar org-dir-path-c (expand-file-name "~/46/da/da.org"))
   (setq org-capture-templates
-        '(("p" "PDF" plain (file org-dir-path-c)
+        '(("g" "Generic" plain (file org-dir-path-c)
+           "** %(org-capture-generic-c)
+[[%F]]
+%U
+#+begin_quote
+%i
+#+end_quote
+%?" :empty-lines 1)
+          ("G" "Generic without comment" plain (file org-dir-path-c)
+           "** %(org-capture-generic-c)
+[[%F]]
+%U
+#+begin_quote
+%i
+#+end_quote
+%?" :empty-lines 1 :immediate-finish t)
+          ("p" "PDF" plain (file org-dir-path-c)
            "** %(org-capture-pdf-c 1)
 :PROPERTIES:
 :PAGE: %(org-capture-pdf-c 4)
