@@ -1,8 +1,6 @@
 ;; general.el -*- lexical-binding: t; -*-
 
 (setq use-short-answers t) ;; yes or no -> y or n 
-(setq auto-save-default nil)
-(setq make-backup-files nil)
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq uniquify-buffer-name-style 'forward)
 (setq mouse-yank-at-point t)
@@ -90,7 +88,6 @@
 (setcache-c transient-values-file "transient/values")
 (setcache-c bookmark-default-file "bookmarks")
 (setcache-c save-place-file "places")
-(setcache-c auto-save-list-file-prefix ".saves-")
 
 (setq-default custom-file (expand-file-name "custom" user-private-directory))
 
@@ -109,3 +106,17 @@
 (setq-default help-at-pt-display-when-idle t
               help-at-pt-timer-delay 0.5)
 (help-at-pt-set-timer) ;; hints in the echo area
+
+(auto-save-mode 1)
+(setcache-c auto-save-list-file-prefix ".saves-")
+(setq auto-save-no-message t
+      delete-auto-save-files nil
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "auto-saves/" user-cache-directory) 'sha512)))
+
+(setq make-backup-files t
+      version-control t
+      backup-by-copying t
+      delete-old-versions 'other
+      kept-old-versions 30
+      kept-new-versions 30
+      backup-directory-alist `(("." . ,(expand-file-name "backup/" user-cache-directory))))

@@ -263,10 +263,10 @@
 (elpacaLF "git-timemachine")
 ;; ;;;; Scroll bar for mode/headerline
 ;; (elpacaLF "mlscroll")
-;;;; RSS Reader
-(elpacaLF "elfeed")
-;;;;; Org Integration
-(elpacaLF "elfeed-org")
+;; ;;;; RSS Reader
+;; (elpacaLF "elfeed")
+;; ;;;;; Org Integration
+;; (elpacaLF "elfeed-org")
 ;;;; lexic (dictionary)
 (elpacaLF "lexic")
 ;;;; scratch-pop
