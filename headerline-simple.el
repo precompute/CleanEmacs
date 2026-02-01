@@ -84,7 +84,7 @@ TYPE can be `:error', `:warning' or `:note'."
       (when (= (flymake--severity type)
                (flymake--severity (flymake-diagnostic-type d)))
         (cl-incf count)))
-    (number-to-string count)))
+    (format " %s " count)))
 
 (defvar-local headerline--flymake-cache-c nil)
 (defun headerline-flymake-cache-c (&rest _)
@@ -163,11 +163,14 @@ TYPE can be `:error', `:warning' or `:note'."
 (defface headerline-flymake-note-face
   '((t :foreground "#000"))
   "Face for Flymake Note-Diagnostics.")
+(defface headerline-custom-space-face
+  '((t))
+  "Face for spaces.")
 
 (unless (facep 'fixed-pitch-numbers) (copy-face 'fixed-pitch 'fixed-pitch-numbers))
 
-(defun set-headerline-faces (&rest rest)
-  "Set headerline faces."
+(defun set-headerline-faces (&optional theme)
+  "Set headerline faces for THEME."
   (interactive)
   (let* ((fl-keyword (headerline-get-color-prop :foreground 'font-lock-keyword-face)) ;; green
          (fl-builtin (headerline-get-color-prop :foreground 'font-lock-builtin-face)) ;; blue
@@ -190,23 +193,34 @@ TYPE can be `:error', `:warning' or `:note'."
          (flymake-warn-color (if warnface (mix-colors regionface warnface 0.45) "#000000"))
          (flymake-note-color (if noteface (mix-colors fl-variable noteface 0.3) "#000000"))
          (theme (car custom-enabled-themes))
+         (light-theme? (let ((z (or theme (car custom-enabled-themes))))
+                         (eq 'light (plist-get (get z 'theme-properties) :background-mode))))
          (hyperstition? (memq theme '(hyperstitional-themes-rebug-flipped hyperstitional-themes-rebug)))
          (fl-variable (if hyperstition? (headerline-get-color-prop :foreground 'error) fl-variable))
          (fl-string (if hyperstition? (headerline-get-color-prop :foreground 'font-lock-builtin-face) fl-string))
          (regionface (if hyperstition? (headerline-get-color-prop :foreground 'menu) regionface))
          (height 1.3)
-         (height2 0.8)
+         (height2 1.0)
          (mix1 (mix-colors (if (not (eq 'unspecified fl-variable)) fl-variable
                              (if (not (eq 'unspecified fl-type))
                                  fl-type
                                fl-string)) regionface 0.6)))
-    (set-face-attribute 'headerline-base-face nil
+    (let ((c (mix-colors regionface (if light-theme? defaultfg fl-doc) (if light-theme? 0.75 0.25))))
+      (set-face-attribute 'headerline-base-face nil
+                          :inherit 'variable-pitch
+                          :height height
+                          :foreground fl-variable
+                          :background c
+                          :box `(:color ,c :line-width (-1 . 4))))
+    (set-face-attribute 'header-line-inactive nil
                         :inherit 'variable-pitch
                         :height height
-                        :overline regionface
-                        :underline `(:color ,fl-variable :position 0)
-                        :foreground fl-variable
-                        :background regionface)
+                        :foreground (mix-colors defaultbg defaultfg 0.2)
+                        :background defaultbg
+                        :box `(:color ,defaultbg :line-width (-1 . 4)))
+    (set-face-attribute 'headerline-custom-space-face nil
+                        :inherit 'variable-pitch
+                        :weight 'normal)
     (set-face-attribute 'headerline-file-modified-face nil
                         :foreground fl-builtin)
     (set-face-attribute 'headerline-file-unmodified-face nil
@@ -215,24 +229,24 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground fl-regexp
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-parent-name-face nil
-                        :foreground mix1
+                        :foreground fl-builtin
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-file-name-face nil
-                        :weight 'normal
-                        :foreground mix1)
+                        :foreground fl-keyword
+                        :weight 'normal)
     (set-face-attribute 'headerline-major-mode-face nil
-                        :foreground mix1
+                        :foreground (mix-colors mix1 fl-constant 0.75)
                         :weight 'bold)
     (set-face-attribute 'headerline-buffer-status-ED-face nil
-                        :inherit 'fixed-pitch
-                        :foreground (cl-reduce #'mix-colors (list regionface fl-keyword fl-constant))
-                        :background (cl-reduce #'mix-colors (list regionface fl-keyword fl-constant)))
+                        ;; :foreground (cl-reduce #'mix-colors (list regionface fl-keyword fl-constant)))
+                        :foreground successface)
     (set-face-attribute 'headerline-buffer-status-RO-face nil
-                        :inherit 'fixed-pitch
-                        :foreground (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg))
-                        :background (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg)))
+                        ;; :foreground (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) defaultbg))
+                        :foreground errorface)
     (set-face-attribute 'headerline-buffer-status-NA-face nil
-                        :inherit 'fixed-pitch)
+                        :foreground (mix-colors mix1 fl-constant 0.75)
+                        :background nil
+                        :inherit nil)
     (set-face-attribute 'headerline-match-face nil
                         :foreground fl-keyword
                         :weight 'bold)
@@ -240,37 +254,54 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground fl-constant)
     (set-face-attribute 'headerline-dark-face nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors regionface fl-string 0.9))
+                        :inverse-video nil
+                        :weight 'bold
+                        :height 1.25
+                        :foreground (cl-reduce #'mix-colors (list regionface fl-string defaultfg)))
     (set-face-attribute 'headerline-dark-face-2 nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors regionface fl-builtin 0.9))
+                        :inverse-video nil
+                        :weight 'bold
+                        :height 1.25
+                        :foreground (cl-reduce #'mix-colors (list regionface fl-builtin defaultfg)))
     (set-face-attribute 'headerline-dark-face-3 nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground (mix-colors regionface fl-keyword 0.6))
-    (set-face-attribute 'header-line-inactive nil
-                        :height height
-                        :inherit 'variable-pitch
-                        :foreground (mix-colors fl-variable defaultbg 0.2)
-                        :background (mix-colors regionface defaultbg 0.45)
-                        :underline `(:color ,(mix-colors regionface defaultbg 0.45) :position 0)
-                        :overline (mix-colors regionface defaultbg 0.45))
+                        :inverse-video nil
+                        :weight 'bold
+                        :height 1.25
+                        :foreground (cl-reduce #'mix-colors (list regionface fl-keyword defaultfg)))
     (set-face-attribute 'mode-line nil
-                        :background defaultbg
+                        :inherit 'fixed-pitch-numbers
+                        :stipple nil
+                        :background nil
                         :box nil
-                        :overline fl-variable)
+                        :overline nil)
     (set-face-attribute 'mode-line-inactive nil
-                        :background defaultbg
+                        :background nil
+                        :inherit 'fixed-pitch-numbers
                         :box nil
                         :overline nil)
     (set-face-attribute 'headerline-flymake-err-face nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground flymake-err-color)
+                        :inverse-video t
+                        :weight 'bold
+                        :height 1.25
+                        :foreground flymake-err-color
+                        :box `(:color ,flymake-err-color :line-width (1 . -1))) ;; box fills the entire height automatically
     (set-face-attribute 'headerline-flymake-warn-face nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground flymake-warn-color)
+                        :inverse-video t
+                        :weight 'bold
+                        :height 1.25
+                        :foreground flymake-warn-color
+                        :box `(:color ,flymake-warn-color :line-width (1 . -1)))
     (set-face-attribute 'headerline-flymake-note-face nil
                         :inherit 'fixed-pitch-numbers
-                        :foreground flymake-note-color)
+                        :inverse-video t
+                        :weight 'bold
+                        :height 1.25
+                        :foreground flymake-note-color
+                        :box `(:color ,flymake-note-color :line-width (1 . -1)))
     ;; (defvar headerline--default-face (if defaultfg (mix-colors regionface defaultfg) "#000000"))
     (if (and (fboundp 'mlscroll-mode) (mlscroll-mode) (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
         (progn
@@ -288,18 +319,47 @@ TYPE can be `:error', `:warning' or `:note'."
 (if (fboundp 'set-fonts-c) (add-to-list 'enable-theme-functions 'set-fonts-c))
 
 ;;;;; Headerline Constructs
+(defconst headerline-custom-space
+  (propertize " " 'face 'headerline-custom-space-face)) ;;haha
+(defconst headerline-custom-space-2
+  (propertize "  " 'face 'headerline-custom-space-face))
+
 (defconst headerline-buffer-status-c--read-only-string
-  (propertize "  " 'face 'headerline-buffer-status-RO-face))
+  (propertize " " 'display (create-image
+                            (expand-file-name ".images/modeline/juliamonocomma.svg" user-emacs-directory)
+                            'svg nil :ascent 'center :width 15)
+              'face 'headerline-buffer-status-RO-face))
 (defconst headerline-buffer-status-c--modified-p-string
-  (propertize "  " 'face 'headerline-buffer-status-ED-face))
+  (propertize " " 'display (create-image
+                            (expand-file-name ".images/modeline/juliamonoplusrot1.svg" user-emacs-directory)
+                            'svg nil :ascent 'center :width 15)
+              'face 'headerline-buffer-status-ED-face))
+(defconst headerline-buffer-status-c--modified-p-string-2
+  (propertize " " 'display (create-image
+                            (expand-file-name ".images/modeline/juliamonoplusrot2.svg" user-emacs-directory)
+                            'svg nil :ascent 'center :width 15)
+              'face 'headerline-buffer-status-ED-face))
 (defconst headerline-buffer-status-c--default-string
-  (propertize "  " 'face 'headerline-buffer-status-NA-face))
+  (propertize " " 'display (create-image
+                            (expand-file-name ".images/modeline/juliamonoasterisk.svg" user-emacs-directory)
+                            'svg nil :ascent 'center :width 15)
+              'face 'headerline-buffer-status-NA-face))
+(defconst headerline-buffer-status-c--default-string-2
+  (propertize " " 'display (create-image
+                            (expand-file-name ".images/modeline/juliamonoasterisk.svg" user-emacs-directory)
+                            'svg nil :ascent 'center :width 15 :rotation 90)
+              'face 'headerline-buffer-status-NA-face))
 (defun headerline-buffer-status-c ()
   "Buffer RO/modified/none"
   (list " "
         (cond (buffer-read-only headerline-buffer-status-c--read-only-string)
-              ((buffer-modified-p) headerline-buffer-status-c--modified-p-string)
-              (t headerline-buffer-status-c--default-string))
+              ((buffer-modified-p)
+               (if (evenp (point))
+                   headerline-buffer-status-c--modified-p-string
+                   headerline-buffer-status-c--modified-p-string-2))
+              (t (if (evenp (line-number-at-pos (point)))
+                     headerline-buffer-status-c--default-string
+                   headerline-buffer-status-c--default-string-2)))
         " "))
 
 (defun headerline-buffer-status-with-evil-c ()
@@ -418,18 +478,25 @@ Functionally equivalent to `mode-line-format-right-align’."
 ;;;;; Headerline Construction
 (defun headerline-simple-mode ()
   (interactive)
-  (setq-local header-line-format `(:eval (list (headerline-buffer-status-c)
-                                               (headerline-major-mode-c) " "
+  (setq-local header-line-format `(:eval (list headerline-custom-space-2
+                                               (headerline-buffer-status-c)
+                                               headerline-custom-space
+                                               (headerline-major-mode-c)
+                                               headerline-custom-space-2
                                                ;; (headerline-mlscroll-mode-line-c)
                                                (headerline-remote-c)
-                                               (headerline-narrow-c) " "
-                                               (headerline-buffer-name-c) " "
-                                               ;; headerline-file-size-c " "
+                                               (headerline-narrow-c)
+                                               headerline-custom-space
+                                               (headerline-buffer-name-c)
+                                               headerline-custom-space-2
                                                (headerline-macro-recording-c)
                                                (headerline-anzu-count-c)
                                                (headerline-flymake-c)
-                                               headerline-line-number-c " "
-                                               headerline-buffer-percent-c " "
+                                               headerline-custom-space
+                                               headerline-line-number-c
+                                               headerline-custom-space
+                                               headerline-buffer-percent-c
+                                               headerline-custom-space
                                                mode-line-misc-info))))
 
 (add-hook 'post-command-hook #'headerline-set-active-window)
@@ -444,7 +511,8 @@ Functionally equivalent to `mode-line-format-right-align’."
                (eq major-mode 'org-mode)))
       (setq-local ;; mode-line-right-align-edge 'left-fringe
        mode-line-format
-       `(:eval (list (headerline-breadcrumb-c))))
+       `(:eval (list headerline-custom-space-2
+                     (headerline-breadcrumb-c))))
     (setq mode-line-format nil)))
 
 (dolist (hook '(prog-mode-hook

@@ -69,7 +69,7 @@
      'eldoc-box-body nil
      :background (face-attribute 'region :background))))
 
-(defun set-pulsar-face-c (&rest _args)
+(defun set-pulsar-face-c (&rest rest)
   (interactive)
   (when (featurep 'pulsar)
     (set-face-attribute 'pulsar-generic nil
@@ -82,12 +82,21 @@
                                             0.85))
                         :inherit nil)))
 
-(defun set-dired-posframe-face-c (&rest _args)
+(defun set-dired-posframe-face-c (&rest rest)
   (interactive)
   (when (featurep 'dired-posframe)
     (set-face-attribute 'dired-posframe-border nil :background current--builtin-face-foreground :inherit nil)))
 
-(dolist (f '(set-pulsar-face-c
+(defun set-breadcrumb-face-c (&rest rest)
+  (interactive)
+  (when (featurep 'breadcrumb)
+    (dolist (z '( breadcrumb-imenu-leaf-face breadcrumb-imenu-crumbs-face
+                  breadcrumb-project-base-face breadcrumb-project-leaf-face
+                  breadcrumb-project-crumbs-face))
+      (set-face-attribute z nil :background nil :inherit nil))))
+
+(dolist (f '(set-breadcrumb-face-c
+             set-pulsar-face-c
              set-dired-posframe-face-c
              set-eldoc-box-faces-c
              set-org-mode-faces-c
