@@ -40,6 +40,7 @@ Very naive mixer.  Moves towards white for ratio>=0.5 ."
 (defconst headerline-buffer-name-c-helpful-var-string
   (propertize "Var " 'face 'headerline-narrow-indicator-face))
 (defun headerline-generate-buffer-id-cache-c ()
+  "Generate the Buffer ID (base dir / filename) cache."
   (when after-init-time
     (let ((z
            (cond
@@ -111,13 +112,13 @@ TYPE can be `:error', `:warning' or `:note'."
 (defface headerline-base-face
   '((t :foreground "#000"
        :background "#000"))
-  "Base Face for Headerline")
+  "Base Face for Headerline.")
 (defface headerline-file-modified-face
   '((t :foreground "#000"))
-  "File Modified Face for Headerline")
+  "File Modified Face for Headerline.")
 (defface headerline-file-unmodified-face
   '((t :foreground "#000"))
-  "File Unmodified Face for Headerline")
+  "File Unmodified Face for Headerline.")
 (defface headerline-narrow-indicator-face
   '((t :foreground "#000"))
   "Face for narrowing.")
@@ -209,12 +210,14 @@ TYPE can be `:error', `:warning' or `:note'."
       (set-face-attribute 'headerline-base-face nil
                           :inherit 'variable-pitch
                           :height height
+                          :weight 'normal
                           :foreground fl-variable
                           :background c
                           :box `(:color ,c :line-width (-1 . 4))))
     (set-face-attribute 'header-line-inactive nil
                         :inherit 'variable-pitch
                         :height height
+                        :weight 'normal
                         :foreground (mix-colors defaultbg defaultfg 0.2)
                         :background defaultbg
                         :box `(:color ,defaultbg :line-width (-1 . 4)))
@@ -311,6 +314,7 @@ TYPE can be `:error', `:warning' or `:note'."
     (update-face-remapping-alist 'headerline-base-face 'header-line)))
 
 (defun update-face-remapping-alist (face target)
+  "Update `face-remapping-alist’ for FACE in TARGET."
   (unless (member face face-remapping-alist)
     (push (list target face) face-remapping-alist)))
 
@@ -350,17 +354,19 @@ TYPE can be `:error', `:warning' or `:note'."
                             'svg nil :ascent 'center :width 15 :rotation 90)
               'face 'headerline-buffer-status-NA-face))
 (defun headerline-buffer-status-c ()
-  "Buffer RO/modified/none"
-  (list " "
-        (cond (buffer-read-only headerline-buffer-status-c--read-only-string)
-              ((buffer-modified-p)
-               (if (evenp (point))
-                   headerline-buffer-status-c--modified-p-string
-                   headerline-buffer-status-c--modified-p-string-2))
-              (t (if (evenp (line-number-at-pos (point)))
-                     headerline-buffer-status-c--default-string
-                   headerline-buffer-status-c--default-string-2)))
-        " "))
+  "Buffer RO/modified/none."
+  (cond (buffer-read-only headerline-buffer-status-c--read-only-string)
+        ((buffer-modified-p)
+         (if (evenp (point))
+             headerline-buffer-status-c--modified-p-string
+           headerline-buffer-status-c--modified-p-string-2))
+        (t (if (evenp (line-number-at-pos))
+               headerline-buffer-status-c--default-string
+             headerline-buffer-status-c--default-string-2))))
+;; We use `line-number-at-pos’ and not `point’ because in normal-mode the
+;; modeline seemingly only updates when the line number changes.  Maybe
+;; this is an optimization in Emacs.  Should I add an invisible
+;; point-construct to the modeline to force another optimization?
 
 (defun headerline-buffer-status-with-evil-c ()
   "Buffer RO/modified/none & evil state."
@@ -379,7 +385,7 @@ TYPE can be `:error', `:warning' or `:note'."
        " "))))
 
 (defun headerline-buffer-name-c ()
-  "Buffer Name and Narrow indicator"
+  "Buffer Name and Narrow indicator."
   headerline-buffer-id-cache-c)
 
 (defun headerline-help-echo-c (window object pos)
@@ -391,7 +397,7 @@ OBJECT and POS are ignored."
 (defconst headerline-major-mode-c-rec-edit-start-string (propertize "%[" 'face 'error))
 (defconst headerline-major-mode-c-rec-edit-end-string (propertize "%]" 'face 'error))
 (defun headerline-major-mode-c ()
-  "Major mode indicator"
+  "Major mode indicator."
   (list headerline-major-mode-c-rec-edit-start-string
         '(:propertize mode-name face headerline-major-mode-face)
         mode-line-process
@@ -459,7 +465,7 @@ Specific to the current window."
   `(:eval (breadcrumb-imenu-crumbs)))
 
 (defun headerline-evil-state-c ()
-  "Display the current evil state if evil-mode is active locally."
+  "Display the current evil state if `evil-mode’ is active locally."
   `(:eval
     (if evil-local-mode
         (propertize
@@ -477,10 +483,11 @@ Functionally equivalent to `mode-line-format-right-align’."
 
 ;;;;; Headerline Construction
 (defun headerline-simple-mode ()
+  "Custom Header-Line mode.  Changes `header-line-format’ for the current buffer (with `setq-local’)."
   (interactive)
   (setq-local header-line-format `(:eval (list headerline-custom-space-2
                                                (headerline-buffer-status-c)
-                                               headerline-custom-space
+                                               headerline-custom-space-2
                                                (headerline-major-mode-c)
                                                headerline-custom-space-2
                                                ;; (headerline-mlscroll-mode-line-c)
@@ -504,6 +511,7 @@ Functionally equivalent to `mode-line-format-right-align’."
 (headerline-generate-buffer-id-cache-c)
 
 (defun modeline-simple-mode ()
+  "Custom Mode-Line mode.  Changes `mode-line-format’ for the current buffer (with `setq-local’)."
   (interactive)
   (if (and (fboundp 'breadcrumb--header-line)
            (boundp 'enable-breadcrumb?)
