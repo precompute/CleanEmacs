@@ -78,7 +78,7 @@
 (setq compilation-scroll-output t)
 
 (defmacro setcache-c (var file)
-  "Macro to set file location to `user-cache-directory'"
+  "Macro to set file location for VAR to `user-cache-directory'/FILE."
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))
 (setcache-c recentf-save-file "recentf")
 (setcache-c project-list-file "projects")
@@ -120,3 +120,8 @@
       kept-old-versions 30
       kept-new-versions 30
       backup-directory-alist `(("." . ,(expand-file-name "backup/" user-cache-directory))))
+
+(dolist (z (delete (expand-file-name "elpaca" user-cache-directory)
+            (directory-files user-cache-directory t "^[^.].*")))
+  (add-to-list 'recentf-exclude (expand-file-name z user-cache-directory)))
+

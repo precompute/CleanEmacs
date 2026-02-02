@@ -109,64 +109,26 @@ TYPE can be `:error', `:warning' or `:note'."
 (add-hook 'flymake-mode-hook #'headerline-flymake-cache-c)
 
 ;;;;; Faces
-(defface headerline-base-face
-  '((t :foreground "#000"
-       :background "#000"))
-  "Base Face for Headerline.")
-(defface headerline-file-modified-face
-  '((t :foreground "#000"))
-  "File Modified Face for Headerline.")
-(defface headerline-file-unmodified-face
-  '((t :foreground "#000"))
-  "File Unmodified Face for Headerline.")
-(defface headerline-narrow-indicator-face
-  '((t :foreground "#000"))
-  "Face for narrowing.")
-(defface headerline-buffer-parent-name-face
-  '((t :foreground "#000"))
-  "Face for parent in buffer name.")
-(defface headerline-buffer-file-name-face
-  '((t :foreground "#000"))
-  "Face for file in buffer name.")
-(defface headerline-major-mode-face
-  '((t :foreground "#000"))
-  "Face for major mode.")
-(defface headerline-buffer-status-ED-face
-  '((t :foreground "#000"))
-  "Face for buffer status: EDitable.")
-(defface headerline-buffer-status-RO-face
-  '((t :foreground "#000"))
-  "Face for buffer status: Read Only.")
-(defface headerline-buffer-status-NA-face
-  '((t :foreground "#000"))
-  "Face for buffer status: N/A.")
-(defface headerline-match-face
-  '((t :foreground "#000"))
-  "Face for match numbers.")
-(defface headerline-macro-face
-  '((t :foreground "#000"))
-  "Face for indicating macros.")
-(defface headerline-dark-face
-  '((t :foreground "#000"))
-  "Dark face.")
-(defface headerline-dark-face-2
-  '((t :foreground "#000"))
-  "Dark face 2.")
-(defface headerline-dark-face-3
-  '((t :foreground "#000"))
-  "Dark face 3.")
-(defface headerline-flymake-err-face
-  '((t :foreground "#000"))
-  "Face for Flymake Err-Diagnostics.")
-(defface headerline-flymake-warn-face
-  '((t :foreground "#000"))
-  "Face for Flymake Warn-Diagnostics.")
-(defface headerline-flymake-note-face
-  '((t :foreground "#000"))
-  "Face for Flymake Note-Diagnostics.")
-(defface headerline-custom-space-face
-  '((t))
-  "Face for spaces.")
+(defface headerline-base-face '((t)) "Base Face for Headerline.")
+(defface headerline-file-modified-face '((t)) "File Modified Face for Headerline.")
+(defface headerline-file-unmodified-face '((t)) "File Unmodified Face for Headerline.")
+(defface headerline-narrow-indicator-face '((t)) "Face for narrowing.")
+(defface headerline-buffer-parent-name-face '((t)) "Face for parent in buffer name.")
+(defface headerline-buffer-file-name-face '((t)) "Face for file in buffer name.")
+(defface headerline-major-mode-face '((t)) "Face for major mode.")
+(defface headerline-buffer-status-ED-face '((t)) "Face for buffer status: EDitable.")
+(defface headerline-buffer-status-RO-face '((t)) "Face for buffer status: Read Only.")
+(defface headerline-buffer-status-NA-face '((t)) "Face for buffer status: N/A.")
+(defface headerline-match-face '((t)) "Face for match numbers.")
+(defface headerline-macro-face '((t)) "Face for indicating macros.")
+(defface headerline-dark-face '((t)) "Dark face.")
+(defface headerline-dark-face-2 '((t)) "Dark face 2.")
+(defface headerline-dark-face-3 '((t)) "Dark face 3.")
+(defface headerline-flymake-err-face '((t)) "Face for Flymake Err-Diagnostics.")
+(defface headerline-flymake-warn-face '((t)) "Face for Flymake Warn-Diagnostics.")
+(defface headerline-flymake-note-face '((t)) "Face for Flymake Note-Diagnostics.")
+(defface headerline-custom-space-face '((t)) "Face for spaces.")
+(defface headerline-evil-insert-active-face '((t)) "Face for when evil insert is active.")
 
 (unless (facep 'fixed-pitch-numbers) (copy-face 'fixed-pitch 'fixed-pitch-numbers))
 
@@ -304,12 +266,15 @@ TYPE can be `:error', `:warning' or `:note'."
                         :height 1.25
                         :foreground flymake-note-color
                         :box `(:color ,flymake-note-color :line-width (1 . -1)))
+    (set-face-attribute 'headerline-evil-insert-active-face nil
+                        :foreground (mix-colors fl-keyword fl-builtin)
+                        :background 'unspecified)
     ;; (defvar headerline--default-face (if defaultfg (mix-colors regionface defaultfg) "#000000"))
     (if (and (fboundp 'mlscroll-mode) (mlscroll-mode) (boundp 'mlscroll-in-color) (boundp 'mlscroll-out-color))
-        (progn
-          (setq-default mlscroll-in-color (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) fl-keyword)))
-          (setq-default mlscroll-out-color defaultbg)
-          (mlscroll-mode -1) (mlscroll-mode 1)))
+        (progn (setq-default mlscroll-in-color
+                             (cl-reduce #'mix-colors (list regionface (if (not (eq 'unspecified fl-doc)) fl-doc errorface) fl-keyword)))
+               (setq-default mlscroll-out-color defaultbg)
+               (mlscroll-mode -1) (mlscroll-mode 1)))
     (update-face-remapping-alist 'headerline-base-face 'header-line)))
 
 (defun update-face-remapping-alist (face target)
@@ -322,10 +287,9 @@ TYPE can be `:error', `:warning' or `:note'."
 (if (fboundp 'set-fonts-c) (add-to-list 'enable-theme-functions 'set-fonts-c))
 
 ;;;;; Headerline Constructs
-(defconst headerline-custom-space
-  (propertize " " 'face 'headerline-custom-space-face)) ;;haha
-(defconst headerline-custom-space-2
-  (propertize "  " 'face 'headerline-custom-space-face))
+(defconst headerline-custom-space (propertize " " 'face 'headerline-custom-space-face)) ;;haha
+(defconst headerline-custom-space-2 (propertize "  " 'face 'headerline-custom-space-face))
+(defconst headerline-custom-space-3 (propertize "   " 'face 'headerline-custom-space-face))
 
 (defconst headerline-buffer-status-c--read-only-string
   (propertize " " 'display (create-image
@@ -366,6 +330,31 @@ TYPE can be `:error', `:warning' or `:note'."
 ;; modeline seemingly only updates when the line number changes.  Maybe
 ;; this is an optimization in Emacs.  Should I add an invisible
 ;; point-construct to the modeline to force another optimization?
+
+(defconst headerline-evil-insert-state-indicator-c--inactive-string
+  (propertize " " 'display (create-image
+                            (expand-file-name ".images/modeline/blanksquare.svg" user-emacs-directory)
+                            'svg nil :ascent 'center :width 5)))
+(defconst headerline-evil-insert-state-indicator-c--active-string
+  (propertize " " 'display (create-image
+                            (expand-file-name ".images/modeline/juliamonoperiod.svg" user-emacs-directory)
+                            'svg nil :ascent 'center :width 5)
+              'face 'headerline-evil-insert-active-face))
+(defvar-local headerline-evil-insert-state-indicator-var-c
+  headerline-evil-insert-state-indicator-c--inactive-string)
+(defun headerline-evil-insert-state-indicator-c--enable ()
+  "Set the insert state variable to the active-string."
+  (setq-local headerline-evil-insert-state-indicator-var-c
+              headerline-evil-insert-state-indicator-c--active-string))
+(defun headerline-evil-insert-state-indicator-c--disable ()
+  "Set the insert state variable to the inactive-string."
+  (setq-local headerline-evil-insert-state-indicator-var-c
+              headerline-evil-insert-state-indicator-c--inactive-string))
+(add-hook 'evil-insert-state-exit-hook #'headerline-evil-insert-state-indicator-c--disable)
+(add-hook 'evil-insert-state-entry-hook #'headerline-evil-insert-state-indicator-c--enable)
+(defun headerline-evil-insert-state-indicator-c ()
+  "Display evil-mode’s insert state."
+  headerline-evil-insert-state-indicator-var-c)
 
 (defun headerline-buffer-status-with-evil-c ()
   "Buffer RO/modified/none & evil state."
@@ -484,9 +473,10 @@ Functionally equivalent to `mode-line-format-right-align’."
 (defun headerline-simple-mode ()
   "Custom Header-Line mode.  Changes `header-line-format’ for the current buffer (with `setq-local’)."
   (interactive)
-  (setq-local header-line-format `(:eval (list headerline-custom-space-2
+  (setq-local header-line-format `(:eval (list headerline-custom-space-3
                                                (headerline-buffer-status-c)
-                                               headerline-custom-space-2
+                                               (headerline-evil-insert-state-indicator-c)
+                                               headerline-custom-space
                                                (headerline-major-mode-c)
                                                headerline-custom-space-2
                                                ;; (headerline-mlscroll-mode-line-c)
