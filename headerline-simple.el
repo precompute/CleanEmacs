@@ -248,7 +248,7 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground errorface)
     (set-face-attribute 'headerline-buffer-status-NA-face nil
                         :foreground (mix-colors mix1 fl-constant 0.75)
-                        :background nil
+                        :background 'unspecified
                         :inherit nil)
     (set-face-attribute 'headerline-match-face nil
                         :foreground fl-keyword
@@ -275,13 +275,12 @@ TYPE can be `:error', `:warning' or `:note'."
                         :foreground (cl-reduce #'mix-colors (list regionface fl-keyword defaultfg)))
     (set-face-attribute 'mode-line nil
                         :inherit 'fixed-pitch-numbers
-                        :stipple nil
-                        :background nil
+                        :background 'unspecified
                         :box nil
                         :overline nil)
     (set-face-attribute 'mode-line-inactive nil
-                        :background nil
                         :inherit 'fixed-pitch-numbers
+                        :background 'unspecified
                         :box nil
                         :overline nil)
     (set-face-attribute 'headerline-flymake-err-face nil

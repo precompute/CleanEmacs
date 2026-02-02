@@ -28,7 +28,8 @@
            (val (when (facep face) (face-attribute face type))))
       (if (eq val 'unspecified) (set var nil) (set var val)))))
 
-(defun set-org-mode-faces-c (&rest rest)
+(defun set-org-mode-faces-c (&optional theme)
+  "Set faces for `org-mode’.  Optional THEME for `enable-theme-functions’."
   (interactive)
   ;; (set-face-attribute 'org-todo nil
   ;;                     :underline nil
@@ -59,7 +60,8 @@
                           :box `(:color ,current--default-face-background)
                           :background current--string-face-foreground)))
 
-(defun set-eldoc-box-faces-c (&rest rest)
+(defun set-eldoc-box-faces-c (&optional theme)
+  "Set faces for eldoc-box.  Optional THEME for `enable-theme-functions’."
   (interactive)
   (when (and (featurep 'eldoc-box) (facep 'eldoc-box-border))
     (set-face-attribute
@@ -69,7 +71,8 @@
      'eldoc-box-body nil
      :background (face-attribute 'region :background))))
 
-(defun set-pulsar-face-c (&rest rest)
+(defun set-pulsar-face-c (&optional theme)
+  "Set faces for pulsar.  Optional THEME for `enable-theme-functions’."
   (interactive)
   (when (featurep 'pulsar)
     (set-face-attribute 'pulsar-generic nil
@@ -82,18 +85,20 @@
                                             0.85))
                         :inherit nil)))
 
-(defun set-dired-posframe-face-c (&rest rest)
+(defun set-dired-posframe-face-c (&optional theme)
+  "Set faces for dired-posframe.  Optional THEME for `enable-theme-functions’."
   (interactive)
   (when (featurep 'dired-posframe)
     (set-face-attribute 'dired-posframe-border nil :background current--builtin-face-foreground :inherit nil)))
 
-(defun set-breadcrumb-face-c (&rest rest)
+(defun set-breadcrumb-face-c (&optional theme)
+  "Set faces for `breadcrumb-mode’.  Optional THEME for `enable-theme-functions’."
   (interactive)
   (when (featurep 'breadcrumb)
     (dolist (z '( breadcrumb-imenu-leaf-face breadcrumb-imenu-crumbs-face
                   breadcrumb-project-base-face breadcrumb-project-leaf-face
                   breadcrumb-project-crumbs-face))
-      (set-face-attribute z nil :background nil :inherit nil))))
+      (set-face-attribute z nil :background 'unspecified :inherit nil))))
 
 (dolist (f '(set-breadcrumb-face-c
              set-pulsar-face-c
