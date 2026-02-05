@@ -127,6 +127,7 @@ Ignore REST."
                        display-buffer-in-direction)
          (direction . bottom)
          (window-height . 0.3)
+         (inhibit-switch-frame . t)
          (body-function . select-window)
          (window-parameters (no-delete-other-windows . t)))))
 

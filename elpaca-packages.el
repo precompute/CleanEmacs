@@ -217,7 +217,7 @@
 ;;;;; eglot support
 (elpacaLF "eglot-jl")
 ;;;; CSV
-;; (elpacaLF "csv-mode")
+(elpacaLF "csv-mode")
 ;;;; Lisp-Flavored Erlang
 (elpacaLF "lfe-mode")
 ;;;; Javascript
@@ -245,6 +245,8 @@
 ;;;; Elixir
 ;;;;; REPL
 (elpacaLF "inf-elixir")
+;;;; CSV
+(elpacaLF "csv-mode")
 
 ;;; Misc
 ;;;; sqlite3

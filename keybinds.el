@@ -48,6 +48,8 @@
   "fR" 'recentf-open-files
   "fd" 'make-directory
   "fe" 'rename-visited-file
+  "f C-n" 'np-file-next-file
+  "f C-p" 'np-file-previous-file
 
   "g" '(:ignore t :wk "vc")
   "gg" 'magit-status

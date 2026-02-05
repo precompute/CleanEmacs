@@ -11,6 +11,7 @@
   (insert (format-time-string "[%02y-%02m-%02d]")))
 
 ;;;; convenience
+;;;;; consult
 (defun consult-ripgrep-local (&optional dir initial)
   "Run ripgrep on the current directory, nothing ignored."
   (interactive)
@@ -26,6 +27,7 @@ DIR is the directory, INITIAL is the string."
         (consult-fd-args '((if (executable-find "fdfind" 'remote) "fdfind" "fd") "--full-path --color=never -u")))
     (consult-fd (or dir default-directory) initial)))
 
+;;;;; misc
 (defun save-and-kill-buffer ()
   (interactive)
   (progn
@@ -43,6 +45,18 @@ DIR is the directory, INITIAL is the string."
   (progn
     (kill-current-buffer)
     (delete-window)))
+
+(defun load-current-file ()
+  (interactive)
+  (load-file buffer-file-name))
+
+(defun scroll-5l-down ()
+  (interactive)
+  (scroll-down 5))
+
+(defun scroll-5l-up ()
+  (interactive)
+  (scroll-up 5))
 
 (defun revert-buffer-if-not-modified ()
   "Revert the buffer if it isn’t modified."
@@ -67,11 +81,21 @@ DIR is the directory, INITIAL is the string."
             (propertize "REVERTING." 'face '(variable-pitch success))))
           (revert-buffer t t))))))
 
+;;;;; Eldoc-box
 (defun toggle-eldoc-box ()
   (interactive)
   (if eldoc-box-hover-mode
       (eldoc-box-hover-mode -1)
     (eldoc-box-hover-mode t)))
+
+;;;;; Elisp definition
+(defun elisp-show-callable-definition-c ()
+  (interactive)
+  (helpful-callable (helpful--callable-at-point)))
+
+(defun elisp-show-variable-definition-c ()
+  (interactive)
+  (helpful-variable (helpful--variable-at-point)))
 
 (defun corfu-toggle-autocomplete ()
   (interactive)
@@ -81,6 +105,7 @@ DIR is the directory, INITIAL is the string."
         (corfu-mode -1)
         (corfu-mode 1))))
 
+;;;;; Echo buffer path
 (defun echo-current-buffer-path (arg)
   "Echo current buffer path.
 If ARG is non-nil, kill path."
@@ -89,6 +114,7 @@ If ARG is non-nil, kill path."
     (if p (progn (when arg (kill-new p)) (message p))
       (message "`buffer-file-name’ and `default-directory’ is nil."))))
 
+;;;;; Time
 (defun echo-current-time ()
   "Echo the current time"
   (interactive)
@@ -97,11 +123,13 @@ If ARG is non-nil, kill path."
                                 :height 1.95
                                 :box (list :line-width 2)))))
 
+;;;;; Dired jump other window
 (defun dired-jump-other-window ()
   "`dired-jump’ with OTHER-WINDOW as t."
   (interactive)
   (dired-jump t))
 
+;; ;;;;; Clone indirect buffer
 ;; (defun clone-indirect-buffer-with-action (&optional action)
 ;;   (interactive)
 ;;   (let* ((newname  (buffer-name))
@@ -120,6 +148,7 @@ If ARG is non-nil, kill path."
 ;;   (interactive)
 ;;   (clone-indirect-buffer-with-action 'display-buffer-below-selected))
 
+;;;;; Undo
 (defun undo-with-prefix ()
   (interactive)
   (let ((current-prefix-arg '(4))
@@ -140,26 +169,7 @@ If ARG is non-nil, kill path."
     (goto-char p)
     (call-interactively #'activate-mark)))
 
-(defun load-current-file ()
-  (interactive)
-  (load-file buffer-file-name))
-
-(defun scroll-5l-down ()
-  (interactive)
-  (scroll-down 5))
-
-(defun scroll-5l-up ()
-  (interactive)
-  (scroll-up 5))
-
-(defun elisp-show-callable-definition-c ()
-  (interactive)
-  (helpful-callable (helpful--callable-at-point)))
-
-(defun elisp-show-variable-definition-c ()
-  (interactive)
-  (helpful-variable (helpful--variable-at-point)))
-
+;;;;; Continue Structure
 (defun continue-structure-c ()
   "Continue a list / syntactic structure."
   (interactive)
@@ -169,6 +179,7 @@ If ARG is non-nil, kill path."
       (end-of-line)
       (insert (concat "\n" (buffer-substring beg end))))))
 
+;;;;; Enable Hyper
 (defun enable-hyper-key-c ()
   "Call XModMap to enable the HYPER Key."
   (interactive)
@@ -177,6 +188,7 @@ If ARG is non-nil, kill path."
   (message (concat (propertize "HYPER" 'face 'font-lock-builtin-face)
                    (propertize " key enabled." 'face 'success))))
 
+;;;;; Save to kill ring
 (defun clipboard-kill-ring-save-c ()
   "Run `clipboard-kill-ring-save’ if a region is active.
 If region is inactive, then copy from kill-ring to clipboard."
@@ -185,6 +197,7 @@ If region is inactive, then copy from kill-ring to clipboard."
       (clipboard-kill-ring-save (region-beginning) (region-end))
     (when kill-ring (gui-set-selection 'CLIPBOARD (current-kill 0 t)))))
 
+;;;;; Fill Region
 (defun fill-region-custom-width-c (arg)
   "Run `fill-region’ with a custom `fill-column’ value (from ARG or otherwise)."
   (interactive "P")
@@ -198,6 +211,7 @@ If region is inactive, then copy from kill-ring to clipboard."
         (funcall-interactively #'prog-fill-reindent-defun)
       (fill-paragraph))))
 
+;;;;; Export as Text
 (defun export-current-buffer-as-text (&optional buf)
   "Export current buffer as text for ingestion in other programs.
 Copies to system clipboard.
@@ -229,6 +243,40 @@ Copies to system clipboard."
              finally (with-temp-buffer
                        (insert text)
                        (clipboard-kill-ring-save (point-min) (point-max))))))
+
+;;;;; Next / Previous File
+(defun np-file--generate-file-list-c ()
+  "Generate a list of files in the current directory, with the file in the current buffer as the pivot."
+  (when-let* ((path (buffer-file-name))
+              (dir (file-name-directory path))
+              (file (file-name-nondirectory path)))
+    (let* ((filelist (seq-filter (lambda (z) (not (f-dir? z)))
+                                 (directory-files dir nil directory-files-no-dot-files-regexp)))
+           (pos (seq-position filelist file)))
+      (when pos
+        (cons
+         (expand-file-name (nth (if (= pos 0) pos (1- pos)) filelist) dir)
+         (expand-file-name (nth (if (= pos (1- (length filelist))) (1- (length filelist)) (1+ pos))
+                                filelist)
+                           dir))))))
+
+(defun np-file-next-file ()
+  "Visit the next file in the current directory."
+  (interactive)
+  (let ((f (cdr (np-file--generate-file-list-c))))
+    (if (string-equal f (buffer-file-name))
+        (message (format "No more files after the current file." f))
+      (message (format "Opening next file: %s" f))
+      (find-file f))))
+
+(defun np-file-previous-file ()
+  "Visit the next file in the current directory."
+  (interactive)
+  (let ((f (car (np-file--generate-file-list-c))))
+    (if (string-equal f (buffer-file-name))
+        (message (format "No more files before the current file." f))
+      (message (format "Opening previous file: %s" f))
+      (find-file f))))
 
 ;;;; Exit Emacs
 (defun clean-exit ()

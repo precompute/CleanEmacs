@@ -1,3 +1,2 @@
 (use-package csv-mode
-:ensure (:depth 1)
-)
+  :ensure (:depth 1))
