@@ -287,20 +287,9 @@
 ;;;;;;; Misc/Custom
 (general-define-key
  :states 'normal
- "C-H-s--" 'flip-frame
- "C-H-s-\\" 'flop-frame
- "C-H-s-/" 'transpose-frame
- "C-H-s-." 'rotate-frame-clockwise
- "C-H-s-," 'rotate-frame-anticlockwise
- "C-s-h" 'evil-window-decrease-width
- "C-s-j" 'evil-window-decrease-height
- "C-s-k" 'evil-window-increase-height
- "C-s-l" 'evil-window-increase-width
- "H-s-'" 'delete-other-windows
  "s-[" 'outline-previous-heading
  "s-]" 'outline-next-heading
  "\\" 'repeat
- "-" 'repeat
  "C-/" 'toggle-modes-transient-c
 
  "H-a" 'org-capture
@@ -331,6 +320,19 @@
 (general-define-key
  :states '(normal visual)
  "M-s-q" 'fill-region-custom-width-c)
+
+(general-define-key
+ :states 'normal
+ "H-w f" 'flip-frame
+ "H-w F" 'flop-frame
+ "H-w t" 'transpose-frame
+ "H-w r" 'rotate-frame-clockwise
+ "H-w R" 'rotate-frame-anticlockwise
+ "H-w w" 'evil-window-decrease-width
+ "H-w h" 'evil-window-decrease-height
+ "H-w H" 'evil-window-increase-height
+ "H-w W" 'evil-window-increase-width
+ "H-w d" 'delete-other-windows)
 
 ;;;;;;; Evil
 (general-define-key
@@ -418,6 +420,10 @@
  :prefix "SPC"
  "p" '(:ignore t :wk "poll")
  "pp" 'notmuch-async-poll-all)
+
+(general-define-key
+ :states 'normal
+ "C-x m" 'notmuch-mua-new-mail)
 
 ;;;;;;; Eglot
 (general-define-key
