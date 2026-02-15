@@ -128,7 +128,7 @@ Ignore REST."
          (direction . bottom)
          (window-height . 0.3)
          (inhibit-switch-frame . t)
-         (body-function . select-window)
+         ;; (body-function . select-window) ;; messes with transient
          (window-parameters (no-delete-other-windows . t)))))
 
 ;;; Revert on focus-in
@@ -164,9 +164,9 @@ Ignore REST."
   "Set fonts for Emacs."
   (interactive)
   (progn
-    ;; (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'medium))
+    (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'medium))
     ;; (set-face-font-c (font-spec :family "Luculent" :size 12))
-    (set-face-font-c (font-spec :family "GT Standard Mono" :size 15 :weight 'medium :width 'condensed))
+    ;; (set-face-font-c (font-spec :family "GT Standard Mono" :size 15 :weight 'medium :width 'condensed))
     ;; (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 16 :weight 'light))
     ;; (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 16 :weight 'regular))
     ;; (set-face-font-c (font-spec :family "GT Flexa Mono" :size 14 :weight 'light))
@@ -176,7 +176,7 @@ Ignore REST."
     ;; (set-face-font-c (font-spec :family "Pragmata Pro" :size 15 :weight 'regular))
     ;; (set-face-font-c (font-spec :family "Letter Gothic Mono Pro" :size 16 :weight 'regular))
     ;; (set-face-font-c (font-spec :family "Inconsolata" :size 15 :weight 'regular))
-    ;; (set-face-font-c (font-spec :family "Inconsolata" :size 15 :weight 'regular :width 'condensed))
+    ;; (set-face-font-c (font-spec :family "Inconsolata" :size 18 :weight 'regular :width 'condensed))
     ;; (set-face-font-c (font-spec :family "Gohu GohuFont" :size 12 :weight 'regular))
     ;; (set-face-font-c (font-spec :family "Cozette" :size 14 :weight 'regular))
 

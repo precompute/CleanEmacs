@@ -534,6 +534,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                 xref--xref-buffer-mode-hook
                 xref--transient-buffer-mode-hook
                 notmuch-hello-mode-hook
+                sparro-append-chat-mode-hook
                 notmuch-search-mode-hook))
   (add-hook hook 'headerline-simple-mode 100)
   (add-hook hook 'modeline-simple-mode 100))
