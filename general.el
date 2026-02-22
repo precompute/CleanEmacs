@@ -51,8 +51,8 @@
 
 (setq confirm-kill-emacs 'y-or-n-p)
 
-(setq blink-cursor-delay 0.25
-      blink-cursor-interval 0.25
+(setq blink-cursor-delay 0.16
+      blink-cursor-interval 0.16
       blink-cursor-blinks 0)
 (blink-cursor-mode 1)
 

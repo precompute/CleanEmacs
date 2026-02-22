@@ -598,6 +598,20 @@ Otherwise, kill it." ;; Can use `color-values’ instead.
   (interactive)
   (delete-frame nil t))
 
+(defun jump-to-previous-frame-c ()
+  "Jump to the previous frame, change workspace."
+  (interactive)
+  (let* ((f (previous-frame))
+         (id (frame-parameter f 'outer-window-id)))
+    (call-process "wmctrl" nil nil nil "-i" "-a" id)))
+
+(defun jump-to-next-frame-c ()
+  "Jump to the next frame, change workspace."
+  (interactive)
+  (let* ((f (next-frame))
+         (id (frame-parameter f 'outer-window-id)))
+    (call-process "wmctrl" nil nil nil "-i" "-a" id)))
+
 ;;;; Window Functions
 ;; It's like golden-ratio but just one function.
 ;; width, then height.

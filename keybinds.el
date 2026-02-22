@@ -332,7 +332,9 @@
  "H-w h" 'evil-window-decrease-height
  "H-w H" 'evil-window-increase-height
  "H-w W" 'evil-window-increase-width
- "H-w d" 'delete-other-windows)
+ "H-w d" 'delete-other-windows
+ "H-w <" 'jump-to-previous-frame-c
+ "H-w >" 'jump-to-next-frame-c)
 
 ;;;;;;; Evil
 (general-define-key
