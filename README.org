@@ -38,20 +38,51 @@ I don’t aim for this config to be minimal, but rather to be easy to understand
 
 - Recommended Emacs Version :: =31.0.50=
 
-- Commit :: =d8870cc1022cecba1bdbb3531659e9253c20c479=
+- Commit :: =91c9e9883488d715a30877dfd7641ef4b3c62658=
+
+- Branch :: =feature/igc=
 
 - Recommended OS :: I use Debian Stable.  This config /might/ work on MacOS and WSL.  I don’t use either, so no guarantees.
 
 Configured with (=C-h v= ~system-configuration-options~):
 
 #+BEGIN_SRC
---with-native-compilation=aot --prefix=/opt/emacs/ 'CFLAGS=-flto -O3 -mtune=native -march=native
--fomit-frame-pointer' --enable-autodepend --enable-link-time-optimization --with-dbus
---with-gif --with-gnutls --with-gpm=no --with-imagemagick --with-jpeg --with-json --with-libotf
---with-mailutils --with-modules --without-compress-install --without-gconf --without-gsettings
---without-xaw3d --with-png --with-sound --with-sqlite3 --with-tiff --with-toolkit-scroll-bars
---with-webp --with-xft --with-xim --with-xpm --with-tree-sitter --with-x-toolkit --with-pop
---with-imagemagick --with-mailutils
+'CPPFLAGS=-I/opt/customlibs/mps_artifacts -I/opt/customlibs/tree-sitter/include'
+'LDFLAGS=-L/opt/customlibs/mps_artifacts -L/opt/customlibs/tree-sitter/lib -Wl,-rpath,/opt/customlibs/tree-sitter/lib'
+'CFLAGS=-O4 -flto -fuse-linker-plugin -march=native -mtune=native -fomit-frame-pointer'
+'CXXFLAGS=-O4 -flto -fuse-linker-plugin -march=native -mtune=native -fomit-frame-pointer'
+--with-native-compilation=aot
+--prefix=/opt/emacs/
+--with-mps=yes
+--enable-autodepend
+--enable-link-time-optimization
+--with-dbus
+--with-gif
+--with-gnutls
+--with-gpm=no
+--with-imagemagick
+--with-jpeg
+--with-json
+--with-libotf
+--with-mailutils
+--with-modules
+--without-compress-install
+--without-gconf
+--without-gsettings
+--without-xaw3d
+--with-png
+--with-sound
+--with-sqlite3
+--with-tiff
+--with-toolkit-scroll-bars
+--with-webp
+--with-xft
+--with-xim
+--with-xpm
+--with-tree-sitter
+--with-x-toolkit
+--with-pop
+--with-mailutils
 #+END_SRC
 
 * General Outline

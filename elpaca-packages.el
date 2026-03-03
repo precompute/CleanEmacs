@@ -271,6 +271,8 @@
 ;; (elpacaLF "elfeed-org")
 ;;;; lexic (dictionary)
 (elpacaLF "lexic")
+;;;; Caddyfile
+(elpacaLF "caddyfile-mode")
 ;;;; scratch-pop
 (elpacaLF "scratch-pop")
 ;;;; loccur
@@ -298,6 +300,8 @@
 (elpacaLF "temper-width")
 ;; ;;;; MuCoCo
 ;; (elpacaLF "mucoco")
+;;;; Cheese Capture
+(elpacaLF "cheese-capture")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!

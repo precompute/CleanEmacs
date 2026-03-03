@@ -37,8 +37,9 @@
 (assq-delete-all 'foreground-color default-frame-alist)
 (assq-delete-all 'background-color default-frame-alist)
 
-(setq gc-cons-threshold (truncate (* (/ (+ 5 gcs-done) 5.0)
-                                     (car (get 'gc-cons-threshold 'standard-value)))))
+(unless (featurep 'mps)
+  (setq gc-cons-threshold (truncate (* (/ (+ 5 gcs-done) 5.0)
+                                       (car (get 'gc-cons-threshold 'standard-value))))))
 ;; adjust by GC invocations during startup
 
 ;; Local Variables:

@@ -1,4 +1,4 @@
-(setq gc-cons-threshold (* 8 gc-cons-threshold))
+(unless (featurep 'mps) (setq gc-cons-threshold (* 8 gc-cons-threshold)))
 (setq package-enable-at-startup nil)
 
 (setq native-comp-always-compile t
