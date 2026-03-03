@@ -130,6 +130,10 @@ If you don’t like the package, you can remove the corresponding =elpacaLF= inv
 ** Headerline
 The Headerline is mostly just a propertized default modeline.  It uses =face-remapping-alist= to change the face for =headerline-buffer-status= depending on =(buffer-modified-p)=.  The name of the current buffer is relative to the project root (if found).  The name of the current buffer is cached (borrowed from doom-modeline’s "light" variant).  +The active buffer also has two indicators on either extreme end.+
 
+** Tree-Sitter
+When compiled with =--with-tree-sitter=, Emacs requires per-language grammar binaries for tree-sitter functionality.  These go in =user-emacs-directory/tree-sitter=.  You can compile the ones you want manually, or pick and choose from the excellent [[https://github.com/emacs-tree-sitter/tree-sitter-langs][tree-sitter-langs]] repo.
+The =.so= files need to  be prepended with the string =libtree-sitter-=.
+
 * Making it your own
 
 - Clone to =~/.emacs.d=.  Alternatively, use [[https://github.com/plexus/chemacs2][Chemacs]] to enable multiple configs.
