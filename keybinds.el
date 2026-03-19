@@ -146,6 +146,7 @@
   "tl" 'display-line-numbers-mode
   "ti" 'highlight-indent-guides-mode
   "tf" 'follow-mode
+  "tt" 'toggle-truncate-lines
   "tc" 'corfu-mode
   "tC" 'corfu-toggle-autocomplete
   "teb" 'toggle-eldoc-box

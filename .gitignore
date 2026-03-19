@@ -9,3 +9,6 @@ tramp
 /.cacheold/
 /eln-cache/
 /ielm-history.eld
+/history
+/games/
+/transient/

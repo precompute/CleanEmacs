@@ -592,6 +592,40 @@ Otherwise, kill it." ;; Can use `color-values’ instead.
   (interactive)
   (vterm 't))
 
+;;;; Format Buffer
+(defun format-buffer-prettier-c ()
+  "Call bun x prettier to format the current buffer or the active region."
+  (interactive)
+  (let ((b (current-buffer))
+        (s (if (use-region-p) (region-beginning) (point-min)))
+        (e (if (use-region-p) (region-end) (point-max)))
+        (f (pcase major-mode
+             ((or 'mhtml-mode 'html-mode 'mhtml-ts-mode 'html-ts-mode) "html")
+             ((or 'markdown-mode 'markdown-ts-mode) "markdown")
+             ('less-css-mode "less")
+             ('scss-mode "scss")
+             ((or 'css-mode 'css-ts-mode 'css-base-mode) "css")
+             ((or 'js-mode 'js-ts-mode 'js-jsx-mode 'js-base-mode) "babel")
+             ('typescript-ts-mode "typescript")
+             ((or 'json-mode 'json-ts-mode) "json"))))
+    (unless f (user-error "Format function does not support %s." major-mode))
+    (let ((temp-buf (generate-new-buffer (generate-new-buffer-name "format-prettier")))
+          (error-buf (get-buffer-create "*format-prettier-error*"))
+          (error-file "/tmp/emacs-format-prettier-error"))
+      (with-current-buffer error-buf (erase-buffer))
+      (unwind-protect
+          (let ((q (call-process-region
+                    s e "bun" nil (list temp-buf error-file) nil "x" "prettier@3.8.1" "--parser" f)))
+            (if (zerop q)
+                (save-excursion
+                  (with-current-buffer b
+                    (goto-char s)
+                    (delete-region s e)
+                    (insert-buffer-substring temp-buf)))
+              (with-current-buffer error-buf (insert-file-contents error-file))
+              (display-buffer error-buf)))
+        (and (buffer-name temp-buf) (kill-buffer temp-buf))))))
+
 ;;;; Frame Functions
 (defun delete-frame-force-c ()
   "`delete-frame’ with FORCE set to t."
