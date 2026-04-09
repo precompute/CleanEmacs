@@ -73,8 +73,8 @@
   "br" 'revert-buffer
   "bb" 'switch-to-buffer
   "bB" 'switch-to-buffer-other-window
-  "bn" 'previous-buffer
-  "bp" 'next-buffer
+  "bn" 'next-buffer
+  "bp" 'previous-buffer
   "bi" 'ibuffer-other-window
   "bc" 'clone-indirect-buffer-other-window
 

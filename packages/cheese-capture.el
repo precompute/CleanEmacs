@@ -2,4 +2,6 @@
   :ensure ( :depth 1
             :host github
             :repo "precompute/cheese-capture"
-            :build (:not elpaca--byte-compile)))
+            ;; :repo "~/44.2/cheese-capture"
+            :build (:not elpaca--byte-compile)
+            ))

@@ -47,6 +47,8 @@
 
 (setq display-line-numbers-width 5)
 
+(setq redisplay-skip-fontification-on-input t)
+
 (setq revert-without-query '(".")) ;; no query for revert
 
 (setq confirm-kill-emacs 'y-or-n-p)
@@ -77,6 +79,8 @@
 
 (setq compilation-scroll-output t)
 
+(setq help-window-select t)
+
 (defmacro setcache-c (var file)
   "Macro to set file location for VAR to `user-cache-directory'/FILE."
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))
@@ -98,10 +102,12 @@
 
 (winner-mode 1)
 (fringe-mode '(7 . 7))
-(savehist-mode 1)
 (save-place-mode 1)
 (recentf-mode 1)
 (undelete-frame-mode 1)
+
+(savehist-mode 1)
+(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
 
 (setq-default help-at-pt-display-when-idle t
               help-at-pt-timer-delay 0.5)
@@ -121,7 +127,9 @@
       kept-new-versions 30
       backup-directory-alist `(("." . ,(expand-file-name "backup/" user-cache-directory))))
 
+(setq bidi-inhibit-bpa t)
+
 (dolist (z (delete (expand-file-name "elpaca" user-cache-directory)
-            (directory-files user-cache-directory t "^[^.].*")))
+                   (directory-files user-cache-directory t "^[^.].*")))
   (add-to-list 'recentf-exclude (expand-file-name z user-cache-directory)))
 

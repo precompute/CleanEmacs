@@ -596,7 +596,8 @@ Otherwise, kill it." ;; Can use `color-values’ instead.
 (defun format-buffer-prettier-c ()
   "Call bun x prettier to format the current buffer or the active region."
   (interactive)
-  (let ((b (current-buffer))
+  (let ((p (point))
+        (b (current-buffer))
         (s (if (use-region-p) (region-beginning) (point-min)))
         (e (if (use-region-p) (region-end) (point-max)))
         (f (pcase major-mode
@@ -617,11 +618,13 @@ Otherwise, kill it." ;; Can use `color-values’ instead.
           (let ((q (call-process-region
                     s e "bun" nil (list temp-buf error-file) nil "x" "prettier@3.8.1" "--parser" f)))
             (if (zerop q)
-                (save-excursion
-                  (with-current-buffer b
-                    (goto-char s)
-                    (delete-region s e)
-                    (insert-buffer-substring temp-buf)))
+                (progn
+                  (save-excursion
+                    (with-current-buffer b
+                      (goto-char s)
+                      (delete-region s e)
+                      (insert-buffer-substring temp-buf)))
+                  (goto-char p))
               (with-current-buffer error-buf (insert-file-contents error-file))
               (display-buffer error-buf)))
         (and (buffer-name temp-buf) (kill-buffer temp-buf))))))

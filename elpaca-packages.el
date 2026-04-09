@@ -247,6 +247,8 @@
 (elpacaLF "inf-elixir")
 ;;;; CSV
 (elpacaLF "csv-mode")
+;;;; Racket
+(elpacaLF "racket-mode")
 
 ;;; Misc
 ;;;; sqlite3
