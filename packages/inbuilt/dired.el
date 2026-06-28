@@ -8,4 +8,5 @@
   ;; (dired-listing-switches "-AGFhlv --group-directories-first --time-style=long-iso")
   (dired-dwim-target t)
   (dired-create-destination-dirs t)
-  (dired-auto-revert-buffer t))
+  (dired-auto-revert-buffer t)
+  (dired-guess-shell-alist-user '(("\\.pdf\\'" "zathura"))))

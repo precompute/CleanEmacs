@@ -882,6 +882,39 @@ Then place point at end of #+begin statement for metadata insertion."
                        str)))
 
 ;;;;; batch main log refile
+(defun main-log-transient-insert-l1-above ()
+  "Insert a L1 heading above the current heading."
+  (interactive)
+  (save-excursion (evil-open-above 0)
+                  (insert (concat "* [" main-log-init-date "]"))))
+
+(defun main-log-transient-increment-day ()
+  "Increment day in the var `main-log-init-date'."
+  (interactive)
+  (let* ((daycount '((01 . 31) (02 . 29) (03 . 31) (04 . 30)
+                     (05 . 31) (06 . 30) (07 . 31) (08 . 31)
+                     (09 . 30) (10 . 31) (11 . 30) (12 . 31)))
+         (year (string-to-number (substring main-log-init-date 0 2)))
+         (month (string-to-number (substring main-log-init-date 3 5)))
+         (day (string-to-number (substring main-log-init-date 6 8)))
+         (incmonth (if (>= day (cdr (assoc month daycount))) t))
+         (incyear (if (and incmonth (>= month 12)) t))
+         (day (if incmonth 1 (1+ day)))
+         (month (if incmonth (1+ month) month))
+         (year (if incyear (1+ year) year)))
+    (setq main-log-init-date
+          (format "%02d-%02d-%02d" year month day))))
+
+(defun main-log-transient-increment-month ()
+  "Increment month in the var `main-log-init-date'."
+  (interactive)
+  (let ((newmid (+ 1 (string-to-number (substring main-log-init-date 3 5)))))
+    (setq main-log-init-date
+          (concat (substring main-log-init-date 0 2) "-"
+                  (if (= (length (number-to-string newmid)) 1) "0")
+                  (number-to-string newmid) "-"
+                  (substring main-log-init-date 6 8)))))
+
 (transient-define-prefix main-log-refile-transient ()
   "A transient for inserting Level 1 date headings at appropriate points."
   :transient-suffix     'transient--do-stay
@@ -899,63 +932,37 @@ Then place point at end of #+begin statement for metadata insertion."
                     (concat "Current Date: "
                             (propertize main-log-init-date
                                         'face 'font-lock-keyword-face))))
-    ("b" "Insert L1 Above Current"
-     (lambda () (interactive)
-       (save-excursion
-         (evil-open-above 0)
-         (insert
-          (concat "* ["
-                  main-log-init-date
-                  "]")))))]
-   [("i" "Increment Day"
-     (lambda () (interactive)
-       (let* ((daycount '((01 . 31) (02 . 29) (03 . 31) (04 . 30)
-                          (05 . 31) (06 . 30) (07 . 31) (08 . 31)
-                          (09 . 30) (10 . 31) (11 . 30) (12 . 31)))
-              (year (string-to-number (substring main-log-init-date 0 2)))
-              (month (string-to-number (substring main-log-init-date 3 5)))
-              (day (string-to-number (substring main-log-init-date 6 8)))
-              (incmonth (if (>= day (cdr (assoc month daycount))) t))
-              (incyear (if (and incmonth (>= month 12)) t))
-              (day (if incmonth 1 (1+ day)))
-              (month (if incmonth (1+ month) month))
-              (year (if incyear (1+ year) year)))
-         (setq main-log-init-date
-               (format "%02d-%02d-%02d" year month day)))))
-    ;; (let ((newlast (+ 1 (string-to-number
-    ;;                      (substring main-log-init-date 6 8)))))
-    ;;   (setq main-log-init-date
-    ;;         (concat (substring main-log-init-date 0 6)
-    ;;                 (if (= (length (number-to-string newlast)) 1)
-    ;;                     "0")
-    ;;                 (number-to-string newlast))))
-    ("I" "Increment Month"
-     (lambda () (interactive)
-       (let ((newmid (+ 1 (string-to-number
-                           (substring main-log-init-date 3 5)))))
-         (setq main-log-init-date
-               (concat (substring main-log-init-date 0 2) "-"
-                       (if (= (length (number-to-string newmid)) 1)
-                           "0")
-                       (number-to-string newmid) "-"
-                       (substring main-log-init-date 6 8))))))]
-   ]
+    ("b" "Insert L1 Above Current" main-log-transient-insert-l1-above)]
+   [("i" "Increment Day" main-log-transient-increment-day)
+    ("I" "Increment Month" main-log-transient-increment-month)]]
   ["Movement"
    [("n" "Next Heading" outline-next-heading)
-    ("e" "Prev Heading" outline-previous-heading)]
-   [("j" "Next Line" next-line)
-    ("k" "Prev Line" previous-line)]
-   [("h" "previous level" org-up-element)
-    ("l" "next level" org-down-element)]
-   [("<down>" "Next Match"
+    ("e" "Prev Heading" outline-previous-heading)
+    ("<down>" "Next Match"
      (lambda () (interactive)
        (search-forward main-log-init-date)))
     ("<up>" "Prev Match"
      (lambda () (interactive)
-       (search-backward main-log-init-date)))]]
+       (search-backward main-log-init-date)))]
+   [("j" "Next Line" next-line)
+    ("k" "Prev Line" previous-line)
+    ("<next>" "Next \" 1\" Match"
+     (lambda () (interactive)
+       (search-forward (concat main-log-init-date " 1"))))
+    ("<prior>" "Prev \" 1\" Match"
+     (lambda () (interactive)
+       (search-backward (concat main-log-init-date " 1"))))]
+    ;; ("h" "previous level" org-up-element)
+    ;; ("l" "next level" org-down-element)
+    ]
   ["Ops"
    [("o" "cycle local" org-cycle)
-    ("O" "cycle global" org-shifttab)]
+    ("O" "cycle global" org-shifttab)
+    ("z" "insert on prev and increment"
+     (lambda () (interactive)
+       (outline-previous-heading)
+       (main-log-transient-insert-l1-above)
+       (main-log-transient-increment-day)))]
    [;; ("C" "equalize" org-headings-equalize)
     ("-" "timelogrefile" org-timelogrefile-c)
     ("J05" "timelogrefile next 5" (lambda () (interactive)

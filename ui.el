@@ -191,11 +191,13 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Myriad Pro" :size 15 :width 'semi-condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "SuisseIntl" :size 15 :width 'condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Celeste Sans Pro" :size 17))
+    (set-face-font 'variable-pitch (font-spec :family "Ocean Sans MT Pro" :size 17))
     ;; (set-face-font 'variable-pitch (font-spec :family "SangBleu Kingdom" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'light))
-    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'regular))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))
@@ -226,7 +228,9 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia eText" :size 12))
     ;; (set-face-font 'variable-pitch (font-spec :family "Meta Serif Offc" :size 16))
 
-    (set-face-font 'fixed-pitch-numbers (font-spec :family "Info Text Offc Pro" :size 16))
+    ;; (set-face-font 'fixed-pitch-numbers (font-spec :family "Info Text Offc Pro" :size 16))
+    ;; (set-face-font 'fixed-pitch-numbers (font-spec :family "Signa SC Offc Pro" :size 15))
+    (set-face-font 'fixed-pitch-numbers (font-spec :family "Dagny Offc Pro" :size 13))
     ;; (set-face-font 'fixed-pitch-numbers (font-spec :family "Meta Serif SC Offc Pro" :size 17 :weight 'bold))
 
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
