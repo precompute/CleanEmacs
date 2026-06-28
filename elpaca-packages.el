@@ -281,7 +281,7 @@
 (elpacaLF "loccur")
 ;;;; Context-based cursor-line flash
 ;; (elpacaLF "beacon")
-(elpacaLF "pulsar")
+;; (elpacaLF "pulsar")
 ;;;; tiny (generate ranges)
 (elpacaLF "tiny")
 ;;;; LLM
@@ -303,7 +303,7 @@
 ;; ;;;; MuCoCo
 ;; (elpacaLF "mucoco")
 ;;;; Cheese Capture
-(elpacaLF "cheese-capture")
+;; (elpacaLF "cheese-capture")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!

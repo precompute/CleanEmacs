@@ -1,4 +1,4 @@
-;;;; Tree-sitter
+;;;; Tree-sitter  -*- lexical-binding: t; -*-
 
 (defun treesit-verify-and-remap-major-mode (reset alist)
   "Verify a treesit grammar (TREESIT-GRAMMAR) exists, then add

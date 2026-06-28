@@ -1,4 +1,4 @@
-;;; Functions
+;;; Functions  -*- lexical-binding: t; -*-
 ;;;; timestamp
 (defun timestamp ()
   "Insert string for the current time."

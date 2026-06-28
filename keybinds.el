@@ -1,4 +1,4 @@
-;;;; General
+;;;; General  -*- lexical-binding: t; -*-
 ;;;;; Global nice-to-haves
 (general-define-key
  [f5] 'delete-window

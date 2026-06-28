@@ -1,4 +1,4 @@
-;;; Custom Faces
+;;; Custom Faces  -*- lexical-binding: t; -*-
 (cl-loop for level from 1 to 8 for size in '(1.6 1.525 1.45 1.375 1.3 1.225 1.15 1.075)
          do (dolist (z '("org-level-%s" "outline-%s" "outline-minor-%s"))
               (custom-set-faces `(,(intern (format z level)) ((t :extend t :height ,size))))))
