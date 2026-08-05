@@ -136,7 +136,8 @@
   "o\"" 'vertico-repeat-select
   "o-" 'echo-current-buffer-path
   "o RET" 'echo-current-time
-  "ot" 'vterm
+  "ot" 'vterm-new-instance
+  "o C-t" 'vterm
   "oT" 'project-vterm
   "os" 'scratchiest
   "oc" 'quick-calc

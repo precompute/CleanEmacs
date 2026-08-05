@@ -100,7 +100,14 @@
                   breadcrumb-project-crumbs-face))
       (set-face-attribute z nil :background 'unspecified :inherit nil))))
 
-(dolist (f '(set-breadcrumb-face-c
+(defun set-vertico-face-c (&optional theme)
+  "Set faces for vertico.  Optional THEME for `enable-theme-functions’."
+  (interactive)
+  (when (featurep 'vertico)
+    (set-face-attribute 'vertico-prefix-face-c nil :foreground current--constant-face-foreground)))
+
+(dolist (f '(set-vertico-face-c
+             set-breadcrumb-face-c
              set-pulsar-face-c
              set-dired-posframe-face-c
              set-eldoc-box-faces-c
@@ -143,7 +150,7 @@ Ignore REST."
       show-paren-style 'expression)
 
 ;;;; transparency
-(setq transparency-value-c 97)
+(setq transparency-value-c 95)
 
 ;;;; window-divider
 (setq window-divider-default-places t

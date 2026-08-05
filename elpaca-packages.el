@@ -249,6 +249,8 @@
 (elpacaLF "csv-mode")
 ;;;; Racket
 (elpacaLF "racket-mode")
+;;;; Kotlin
+(elpacaLF "kotlin-mode")
 
 ;;; Misc
 ;;;; sqlite3
