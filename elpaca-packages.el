@@ -116,6 +116,8 @@
 (elpacaLF "highlight-quoted")
 ;;; Highlight Defined
 (elpacaLF "highlight-defined") ;; Slows everything down
+;;; Highlight Thing
+(elpacaLF "highlight-thing")
 ;;; imenu
 (elpacaLF "imenu-list")
 (elpacaLF "flimenu") ;; flatten imenu
@@ -189,8 +191,8 @@
 (elpacaLF "org-super-agenda")
 ;;;; Show Markup when under point
 (elpacaLF "org-appear")
-;;;; Sliced Images
-(elpacaLF "org-sliced-images")
+;; ;;;; Sliced Images
+;; (elpacaLF "org-sliced-images")
 ;; ;;; Hyperbole
 ;; (elpacaLF "hyperbole")
 ;;; Hippie-Expand

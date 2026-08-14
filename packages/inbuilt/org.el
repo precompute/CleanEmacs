@@ -27,6 +27,8 @@
         org-enforce-todo-dependencies t
         org-todo-log-states t
         org-log-done 'time
+        org-image-max-width 'window
+        org-image-actual-width nil
         org-tags-column 0
         org-treat-insert-todo-heading-as-state-change t
         org-lowest-priority ?L
@@ -338,6 +340,7 @@ When ORG-PROP is t, add appropriate property drawer prefixes."
                  (if (eq (org-element-property :todo-type context) 'done) 'todo 'done))))
          (org-update-checkbox-count)
          (org-update-parent-todo-statistics))
+        ('link (org-open-at-point))
         ((guard (org-element-property :checkbox (org-element-lineage context '(item) t)))
          (let ((match (and (org-at-item-checkbox-p) (match-string 1))))
            (org-toggle-checkbox (if (equal match "[ ]") '(16))))

@@ -370,7 +370,8 @@
  :keymaps 'org-mode-map
  :states '(visual normal)
  ">" 'evil-org->
- "<" 'evil-org-<)
+ "<" 'evil-org-<
+ "RET" 'org-dwim-c)
 
 (general-define-key
  :keymaps 'org-mode-map
