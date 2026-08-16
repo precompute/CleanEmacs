@@ -201,6 +201,8 @@
 (elpacaLF "ispell" t)
 ;;; Email
 (elpacaLF "notmuch")
+;;;; Mailcap
+(elpacaLF "mailcap" t)
 ;;; Language
 ;;;; Prog-mode
 (elpacaLF "prog-mode" t)
@@ -290,6 +292,8 @@
 (elpacaLF "tiny")
 ;;;; LLM
 (elpacaC "ancilla")
+;;;; Jinx (Spellcheck)
+(elpacaLF "jinx")
 ;;;; Evil-Lispops
 (elpacaLF "evil-lispops")
 ;;;; Breadcrumb
