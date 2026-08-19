@@ -162,6 +162,7 @@ Ignore REST."
 (defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
 
 (defface text-face-c '((t :family "Guardi LT Std")) "Custom face for text.")
+;; (set-face-attribute 'text-face-c nil :family "GT Pressura LCGV Text")
 
 (defun set-face-font-c (spec)
   "Set SPEC to faces `default’ and `fixed-pitch’.
