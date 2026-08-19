@@ -215,6 +215,7 @@
   "d" '(:ignore t :wk "other")
   "ds" 'lexic-search-word-at-point
   "dS" 'lexic-search
+  "d ESC" 'screenshot-png-c
 
   "m" '(:ignore t :wk "mark")
   "ml" 'whack-a-thing-whack-line

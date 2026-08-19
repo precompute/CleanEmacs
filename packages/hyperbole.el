@@ -1,2 +1,3 @@
 (use-package hyperbole
-  :ensure (:depth 1))
+  :ensure (:files ("*" "man/*" (:exclude "man")))
+  :init (require 'dired))

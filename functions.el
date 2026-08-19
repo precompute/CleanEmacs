@@ -334,12 +334,13 @@ Set limit ARG."
 ;;;; screenshot
 (defun screenshot-png-c ()
   "Save a screenshot of the current frame as an PNG image.
-Saves to a temp file and puts the filename in the kill ring."
+Saves to a file and puts the filename in the kill ring."
   (interactive)
-  (let* ((filename (make-temp-file "Emacs" nil ".png"))
+  (let* ((dir "/tmp/Emacs_ss/")
+         (filename (concat dir "Emacs_" (format-time-string "%y-%m-%d_%H:%M:%S.%3N") ".png"))
          (data (x-export-frames nil 'png)))
-    (with-temp-file filename
-      (insert data))
+    (unless (file-exists-p dir) (make-directory dir t))
+    (with-temp-file filename (insert data))
     (kill-new filename)
     (message filename)))
 
