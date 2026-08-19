@@ -103,16 +103,26 @@
   "S C-SPC" 'consult-fd-local-at-point-c
   "Sh" 'highlight-at-point-c
 
-  "TAB" '(:ignore t :wk "perspective")
-  "TAB TAB" 'persp-switch
-  "TAB d" 'persp-kill
-  "TAB r" 'persp-rename
-  "TAB n" 'persp-next
-  "TAB p" 'persp-prev
-  "TAB a" 'persp-add-buffer
-  "TAB A" 'persp-set-buffer
-  "TAB b" 'persp-switch-to-buffer
-  "TAB x" 'persp-remove-buffer
+  "TAB" '(:ignore t :wk "wspc-tab")
+  "TAB TAB" 'tab-bar-switch-to-recent-tab
+  "TAB <backtab>" 'tab-bar-switch-to-tab
+  "TAB x" 'tab-bar-close-tab
+  "TAB X" 'tab-bar-close-other-tabs
+  "TAB u" 'tab-bar-undo-close-tab
+  "TAB r" 'tab-bar-rename-tab
+  "TAB R" 'tab-bar-rename-tab-by-name
+  "TAB f" 'tab-bar-switch-to-next-tab
+  "TAB b" 'tab-bar-switch-to-prev-tab
+  "TAB F" 'tab-bar-move-tab
+  "TAB B" 'tab-bar-move-tab-backward
+  "TAB c" 'tab-bar-duplicate-tab
+  "TAB n" 'tab-bar-new-tab
+  "TAB N" 'tab-bar-new-tab-to
+  "TAB d" 'tab-bar-detach-tab
+  "TAB +" 'tab-bar-merge-tabs
+  "TAB -" 'tab-bar-split-tab
+  "TAB h f" 'tab-bar-history-forward
+  "TAB h b" 'tab-bar-history-back
 
   "RET" 'consult-bookmark
 

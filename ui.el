@@ -28,6 +28,14 @@
            (val (when (facep face) (face-attribute face type))))
       (if (eq val 'unspecified) (set var nil) (set var val)))))
 
+(defun get-face-prop-c (face prop)
+  "Get PROP of FACE.  Like `headerline-get-color-prop' without fallback."
+  ((lambda (z) (if (or (not z) (= 35 (aref z 0))) z
+                 (apply #'color-rgb-to-hex (append (color-name-to-rgb z) (list 2)))))
+   (let ((face? (face-attribute face prop)))
+     (if (or (eq nil face?) (eq 'unspecified face?) (string-equal "unspecified" face?))
+         nil face?))))
+
 (defun set-org-mode-faces-c (&optional theme)
   "Set faces for `org-mode’.  Optional THEME for `enable-theme-functions’."
   (interactive)
@@ -106,7 +114,30 @@
   (when (featurep 'vertico)
     (set-face-attribute 'vertico-prefix-face-c nil :foreground current--constant-face-foreground)))
 
-(dolist (f '(set-vertico-face-c
+(defun set-tab-bar-face-c (&optional theme)
+  "Modify tab-bar faces.  Optional THEME for `enable-theme-functions’."
+  (interactive)
+  (let ((tbt-u (get-face-prop-c 'tab-bar-tab :underline))
+        (tbt-f (get-face-prop-c 'tab-bar-tab :foreground))
+        (tbti-u (get-face-prop-c 'tab-bar-tab-inactive :underline))
+        (tbti-f (get-face-prop-c 'tab-bar-tab-inactive :foreground)))
+    (dolist (z '(tab-bar tab-bar-tab tab-bar-tab-inactive tab-bar-tab-highlight))
+            (set-face-attribute z nil :inherit 'fixed-pitch :background nil :box nil))
+    (unless tbt-u (set-face-attribute 'tab-bar-tab nil :underline current--builtin-face-foreground))
+    (unless tbt-f (set-face-attribute 'tab-bar-tab nil :foreground current--type-face-foreground))
+    (unless tbti-u (set-face-attribute 'tab-bar-tab-inactive nil :underline current--builtin-face-foreground))
+    (unless tbti-f (set-face-attribute 'tab-bar-tab-inactive nil :foreground current--doc-face-foreground)))
+  ;; (set-face-attribute 'tab-bar-tab nil :inherit 'fixed-pitch :underline current--builtin-face-foreground)
+  ;; (set-face-attribute 'tab-bar-tab-inactive nil :inherit 'fixed-pitch :underline current--builtin-face-foreground)
+  ;; (when (facep 'tab-bar-separator-face-c)
+  ;;   (set-face-attribute 'tab-bar-separator-face-c nil
+  ;;                       :foreground current--constant-face-foreground :weight 'bold)
+  ;;   (setq tab-bar-separator (propertize (substring-no-properties tab-bar-separator)
+  ;;                                       'face 'tab-bar-separator-face-c)))
+  )
+
+(dolist (f '(set-tab-bar-face-c
+             set-vertico-face-c
              set-breadcrumb-face-c
              set-pulsar-face-c
              set-dired-posframe-face-c

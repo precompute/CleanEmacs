@@ -123,8 +123,8 @@
 (elpacaLF "flimenu") ;; flatten imenu
 (elpacaLF "keycast") ;; show keys in modeline
 (elpacaLF "bicycle") ;; cyclic imenu entries
-;;; perspective (workspace)
-(elpacaLF "perspective")
+;; ;;; perspective (workspace) ;; [26-08-19 19:11:19] using built-in tab-bar instead
+;; (elpacaLF "perspective")
 ;; ;;;; frame integration
 ;; (elpacaLF "nameframe")
 ;; (elpacaLF "nameframe-project")
@@ -179,6 +179,8 @@
 (elpacaLF "electric" t)
 ;;; imenu
 (elpacaLF "imenu" t)
+;;; tab-bar
+(elpacaLF "tab-bar" t)
 ;;; project
 (elpacaLF "project" t)
 ;;; Org
@@ -193,15 +195,15 @@
 (elpacaLF "org-appear")
 ;; ;;;; Sliced Images
 ;; (elpacaLF "org-sliced-images")
-;; ;;; Hyperbole
-;; (elpacaLF "hyperbole")
+;;; Hyperbole
+(elpacaLF "hyperbole")
 ;;; Hippie-Expand
 (elpacaLF "hippie-exp" t)
 ;;; Ispell
 (elpacaLF "ispell" t)
 ;;; Email
 (elpacaLF "notmuch")
-;;;; Mailcap
+;;; Mailcap
 (elpacaLF "mailcap" t)
 ;;; Language
 ;;;; Prog-mode
