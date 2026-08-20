@@ -278,6 +278,25 @@ Copies to system clipboard."
       (message (format "Opening previous file: %s" f))
       (find-file f))))
 
+;;;;; tab-bar
+(defun tab-bar-next-tab-c (&optional prev?)
+  "Switch to the next tab if PREV? is nil.  If PREV? is non-nil, switch to the previous tab.
+Create it if it doesn't exist."
+  (interactive)
+  (let* ((tabs (tab-bar-tabs))
+         (ntabs (length tabs))
+         (i (tab-bar--current-tab-index tabs)))
+    (cond ((= 1 ntabs) (tab-bar-new-tab))
+          ((and prev? (= 0 i)) (tab-bar-new-tab -1))
+          ((and (not prev?) (= (1- ntabs) i)) (tab-bar-new-tab))
+          (prev? (tab-bar-switch-to-prev-tab))
+          (t (tab-bar-switch-to-next-tab)))))
+
+(defun tab-bar-prev-tab-c ()
+  "Call `tab-bar-next-tab-c' with PREV? set to t."
+  (interactive)
+  (tab-bar-next-tab-c t))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.
