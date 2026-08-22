@@ -10,6 +10,7 @@
           zig-mode
           lua-mode) . eglot-ensure)
   :config
+  (setq eglot-extend-to-xref t)
   (dolist (mode-server '((zig-mode . ("zls"))
                          (elixir-ts-mode . ("elixir-ls"))
                          ((go-mode go-ts-mode) . ("gopls"))

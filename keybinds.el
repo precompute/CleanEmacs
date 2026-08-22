@@ -303,8 +303,8 @@
 ;;;;;;; Misc/Custom
 (general-define-key
  :states 'normal
- "s-[" 'outline-previous-heading
- "s-]" 'outline-next-heading
+ "s-[" 'outline-previous-heading-c
+ "s-]" 'outline-next-heading-c
  "\\" 'repeat
  "C-/" 'toggle-modes-transient-c
 
@@ -449,4 +449,5 @@
  :states 'normal
  :keymaps 'eglot-mode-map
  :prefix "SPC"
- "cr" 'eglot-rename)
+ "cr" 'eglot-rename
+ "ca" 'eglot-code-actions)

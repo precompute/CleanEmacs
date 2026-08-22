@@ -20,7 +20,7 @@
 (setq-default indicate-buffer-boundaries
               '((top . left) (bottom . left) (up . right) (down . right)))
 (setq-default indicate-empty-lines t)
-(setq scroll-margin 25)
+(setq scroll-margin 10)
 (setq scroll-conservatively 101)
 
 (setq process-adaptive-read-buffering nil)

@@ -297,6 +297,19 @@ Create it if it doesn't exist."
   (interactive)
   (tab-bar-next-tab-c t))
 
+;;;;; Outline
+(defun outline-next-heading-c ()
+  "Move one heading forward and recenter."
+  (interactive)
+  (outline-next-heading)
+  (recenter 0))
+
+(defun outline-previous-heading-c ()
+  "Move one heading back and recenter."
+  (interactive)
+  (outline-previous-heading)
+  (recenter 0))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.

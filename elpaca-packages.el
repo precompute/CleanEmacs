@@ -313,7 +313,7 @@
 ;; ;;;; MuCoCo
 ;; (elpacaLF "mucoco")
 ;;;; Cheese Capture
-;; (elpacaLF "cheese-capture")
+(elpacaLF "cheese-capture")
 
 ;;; Themes (that I never really use)
 ;; (elpacaLF "orangey-bits-theme") ;; Orange!
