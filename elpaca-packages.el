@@ -112,8 +112,8 @@
 (elpacaLF "outline-minor-faces")
 ;;; Highlight Numbers
 (elpacaLF "highlight-numbers")
-;;; Highlight Quoted
-(elpacaLF "highlight-quoted")
+;; ;;; Highlight Quoted
+;; (elpacaLF "highlight-quoted")
 ;;; Highlight Defined
 (elpacaLF "highlight-defined") ;; Slows everything down
 ;;; Highlight Thing
@@ -210,6 +210,8 @@
 (elpacaLF "prog-mode" t)
 ;;;; Eglot
 (elpacaLF "eglot" t)
+;;;; Elisp-mode
+(elpacaLF "elisp-mode" t)
 ;;;; Elisp
 (elpacaLF "elisp-slime-nav")
 ;;;; Markdown
@@ -229,7 +231,7 @@
 ;;;; Javascript
 (elpacaLF "js" t)
 ;;;; Rust
-(elpacaLF "rustic")
+;; (elpacaLF "rustic")
 ;;;; Haskell
 ;; (elpacaLF "haskell-mode")
 ;;;; Janet

@@ -29,7 +29,8 @@ you want to `nil’ the alist before operation"
                  (cons "\\.jsx\\'" 'js-jsx-mode)
                  (cons "\\.ex\\'" 'elixir-ts-mode)
                  (cons "\\.exs\\'" 'elixir-ts-mode)
-                 (cons "\\.elixir\\'" 'elixir-ts-mode)))
+                 (cons "\\.elixir\\'" 'elixir-ts-mode)
+                 (cons "\\.toml\\'" 'toml-ts-mode)))
   (add-to-list 'auto-mode-alist z))
 
 ;;;; ffap

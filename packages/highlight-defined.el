@@ -1,6 +1,7 @@
+;; -*- lexical-binding: t; -*-
 (use-package highlight-defined
   :ensure (:depth 1)
-  :hook (emacs-lisp-mode . highlight-defined-mode)
+  ;; :hook (emacs-lisp-mode . highlight-defined-mode)
   :config
   (setq highlight-defined-face-use-itself t)
   (set-face-attribute 'highlight-defined-builtin-function-name-face nil

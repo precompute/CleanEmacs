@@ -9,12 +9,14 @@
         tab-bar-new-button-show nil
         tab-bar-close-button-show nil
         tab-bar-tab-hints t
+        tab-bar-truncate t
         tab-bar-show 1
         tab-bar-new-tab-choice "*scratch*"
         tab-bar-tab-name-function #'tab-bar-tab-name-current
         tab-bar-forward-button ""
         tab-bar-back-button ""
-        tab-bar-separator "")
+        tab-bar-separator ""
+        tab-bar-define-keys nil)
   (defun tab-bar-tab-name-format-hints (name _tab i)
     "Re-defining the original.  Probably not a good idea.
 Pad tab name on both sides.  It has effect when `tab-bar-tab-hints' is non-nil."
