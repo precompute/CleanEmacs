@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package llvm-mode
   :ensure nil
   :config

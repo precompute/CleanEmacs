@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package ancilla
   :ensure ( :host github
             :repo "shouya/ancilla.el"

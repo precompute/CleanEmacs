@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package wgrep
   :ensure (:depth 1)
   :bind (:map wgrep-mode-map

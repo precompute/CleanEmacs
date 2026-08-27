@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package markdown-ts-mode
   :ensure nil
   :mode ("\\.md\\'" "\\.mdx\\'" "\\.markdown\\'")

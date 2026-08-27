@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package highlight-indent-guides
   :defer t
   :config

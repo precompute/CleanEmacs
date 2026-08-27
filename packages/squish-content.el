@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package squish-content
   :ensure ( :depth 1
             :repo "~/44.2/squish-content/")

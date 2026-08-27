@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package undo-tree
   :bind ("C-x u" . undo-tree-visualize)
   :defer t

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package info-colors
   :ensure (:depth 1)
   :config

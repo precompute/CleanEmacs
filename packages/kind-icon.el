@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package kind-icon
   :after corfu
   :custom (kind-icon-default-face 'corfu-default)

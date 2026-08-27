@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package rustic
   :ensure (:depth 1)
   :config

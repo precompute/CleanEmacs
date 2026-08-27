@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package perspective
   :custom
   (persp-suppress-no-prefix-key-warning t)

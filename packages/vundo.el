@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package vundo
   :bind ("C-x u" . vundo)
   :defer t

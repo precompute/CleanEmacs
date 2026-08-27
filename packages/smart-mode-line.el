@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package smart-mode-line
   :config
   (setq sml/no-confirm-load-theme t)

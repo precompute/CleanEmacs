@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package beacon
   :ensure (:depth 1)
   :config

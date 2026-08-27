@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package git-timemachine
   :ensure (:depth 1)
   :config

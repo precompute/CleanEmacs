@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package llvm-ts-mode
   :ensure (:depth 1)
   ;; :hook (llvm-ts-mode . turn-off-hideshow)

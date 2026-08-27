@@ -1,3 +1,3 @@
+;; -*- lexical-binding: t; -*-
 (use-package clojure-ts-mode
-:ensure (:depth 1)
-)
+  :ensure (:depth 1))

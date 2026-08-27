@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package dired-subtree
   :ensure (:depth 1)
   :after dired

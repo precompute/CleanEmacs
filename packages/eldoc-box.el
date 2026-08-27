@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package eldoc-box
   :ensure (:depth 1)
   :hook (prog-mode . eldoc-box-hover-mode)

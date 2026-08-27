@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package mixed-pitch
   :ensure ( :host github
             :repo "precompute/mixed-pitch")

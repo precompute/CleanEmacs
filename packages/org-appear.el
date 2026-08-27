@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package org-appear
   :ensure (:depth 1)
   :hook org-mode

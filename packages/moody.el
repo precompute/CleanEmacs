@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package moody
   :config
   (setq x-underline-at-descent-line t)

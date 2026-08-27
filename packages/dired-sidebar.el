@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package dired-sidebar
   :hook (dired-sidebar . toggle-truncate-lines)
   :commands (dired-sidebar-toggle-sidebar)

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package cheese-capture
   :ensure ( :depth 1
             ;; :host github

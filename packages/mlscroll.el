@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package mlscroll
   :ensure (:depth 1)
   :defer t

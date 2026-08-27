@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package undo-fu-session
   :config
   (setq undo-fu-session-directory

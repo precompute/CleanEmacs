@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package consult
   :custom
   (setq consult-ripgrep-args

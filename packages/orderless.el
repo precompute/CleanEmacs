@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package orderless
   :custom
   (orderless-matching-styles '(orderless-literal

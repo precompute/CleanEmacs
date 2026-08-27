@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package hyperstitional-themes
   :ensure ( :depth 1
             :host github

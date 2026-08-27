@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package evil-goggles
   :after evil
   :config

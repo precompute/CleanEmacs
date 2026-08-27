@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package backline
   :ensure (:depth 1)
   :after outline

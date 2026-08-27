@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package janet-ts-mode
   :ensure ( :host github
             :repo "sogaiu/janet-ts-mode"

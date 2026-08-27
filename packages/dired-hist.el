@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package dired-hist
   :ensure (:depth 1)
   :hook (dired-mode . dired-hist-mode)

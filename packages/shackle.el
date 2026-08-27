@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package shackle
   :config
   (setq shackle-rules '((magit-status-mode :size 0.5  :align right :select t)

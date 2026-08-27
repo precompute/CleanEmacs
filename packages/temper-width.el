@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package temper-width
   :ensure ( :depth 1
             :repo "~/44.2/temper-width")

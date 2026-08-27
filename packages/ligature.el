@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package ligature
   :hook (prog-mode . ligature-mode)
   :config

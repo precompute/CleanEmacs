@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package org
   :ensure nil
   :hook (org-mode . visual-line-mode)

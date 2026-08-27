@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package olivetti
   :hook ((prog-mode
 	  text-mode

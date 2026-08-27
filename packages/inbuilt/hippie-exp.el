@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package hippie-exp
   :ensure nil
   :config

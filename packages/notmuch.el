@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package notmuch
   :ensure (:depth 1)
   :config

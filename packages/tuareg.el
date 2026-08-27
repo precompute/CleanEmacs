@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package tuareg
   :ensure (:depth 1)
   :config

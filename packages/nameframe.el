@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package nameframe
   :ensure (:depth 1)
   :init

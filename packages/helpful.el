@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package helpful
   :preface
   (global-set-key [remap describe-function] #'helpful-callable)

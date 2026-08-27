@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package minions
   :config
   (setq minions-mode-line-lighter ""

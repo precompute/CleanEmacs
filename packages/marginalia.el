@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package marginalia
   :custom
   (marginalia-align 'right)

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package jinx
   :ensure (:depth 1)
   :bind (:map jinx-mode-map

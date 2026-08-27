@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package perfect-margin
   :ensure (:depth 1)
   :hook ((prog-mode

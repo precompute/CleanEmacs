@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package vertico
   :ensure ( :host github
             :repo "minad/vertico"

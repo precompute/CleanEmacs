@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package popwin
   :config
   (push '(helpful-mode :position bottom :height 0.2) popwin:special-display-config)

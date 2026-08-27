@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package legit
   :ensure ( :depth 1
             :repo "~/44.2/legit")

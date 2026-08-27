@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package corfu-candidate-overlay
   :ensure (:depth 1)
   :after corfu

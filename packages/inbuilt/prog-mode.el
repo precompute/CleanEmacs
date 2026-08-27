@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package prog-mode
   :ensure nil
   :hook ((prog-mode . hs-minor-mode)

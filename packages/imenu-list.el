@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package imenu-list
   :hook (imenu-mode . imenu-list-mode)
   :config

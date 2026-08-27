@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package org-sliced-images
   :ensure (:depth 1)
   :defer t

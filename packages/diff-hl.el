@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package diff-hl
   ;; :hook (prog-mode . diff-hl)
   :defer t

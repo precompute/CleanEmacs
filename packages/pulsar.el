@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package pulsar
   :hook ((windmove-mode
           imenu-after-jump

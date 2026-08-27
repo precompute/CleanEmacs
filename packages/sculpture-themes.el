@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package sculpture-themes
   :ensure ( :depth 1
             ;; :host github

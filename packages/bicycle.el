@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package bicycle
   :after prog-mode
   :bind (:map prog-mode-map
