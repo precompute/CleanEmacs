@@ -147,6 +147,8 @@
 (elpacaLF "alarm-clock")
 ;;; Dired
 (elpacaLF "dired" t)
+;;; Isearch
+(elpacaLF "isearch" t)
 ;;;; Dired Faces (font lock)
 (elpacaLF "diredfl")
 ;;;; Dired Sidebar
