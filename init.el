@@ -14,7 +14,7 @@
   (dolist (z (list "headerline-simple.el" "functions.el" "ui.el"))
     (native-compile (expand-file-name z user-emacs-directory)))
   (native-compile-directory (expand-file-name "packages/" user-emacs-directory)))
-(native-compile-user-programs)
+;; (native-compile-user-programs)
 
 (defun after-init-load-file ()
   (progn
