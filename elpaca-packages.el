@@ -100,6 +100,8 @@
 ;; (elpacaC "indent-bars")
 ;;; Which-Key
 (elpacaLF "which-key")
+;;; Find-File-At-Point
+(elpacaLF "ffap" t)
 ;;; Rainbow Delimiters
 (elpacaLF "rainbow-delimiters")
 ;;; Helpful (help buffers)
@@ -172,7 +174,7 @@
 ;;; Flymake (syntax errors)
 (elpacaLF "flymake" t)
 ;;; Tree-Sitter (syntax highlighting)
-;; (elpacaLF "treesit" t)
+(elpacaLF "treesit" t)
 ;;; Eldoc (documentation in echo area)
 (elpacaLF "eldoc" t)
 ;;;; Eldoc Box (documentation in childframe)
@@ -218,6 +220,7 @@
 (elpacaLF "elisp-slime-nav")
 ;;;; Markdown
 (elpacaLF "markdown-mode")
+;; (elpacaLF "markdown-ts-mode" t)
 ;;;; Lua
 (elpacaLF "lua-mode")
 ;;;; Go
@@ -237,7 +240,7 @@
 ;;;; Haskell
 ;; (elpacaLF "haskell-mode")
 ;;;; Janet
-(elpacaC "janet-ts-mode")
+;; (elpacaC "janet-ts-mode")
 ;;;; Clojure
 (elpacaLF "clojure-mode")
 ;; (elpacaLF "clojure-ts-mode")
@@ -253,6 +256,7 @@
 ;;;; PHP
 (elpacaLF "php-mode")
 ;;;; Elixir
+(elpacaLF "elixir-ts-mode" t)
 ;;;;; REPL
 (elpacaLF "inf-elixir")
 ;;;; CSV
@@ -261,6 +265,12 @@
 (elpacaLF "racket-mode")
 ;;;; Kotlin
 (elpacaLF "kotlin-mode")
+;;;; Conf-Mode
+(elpacaLF "conf-mode" t)
+;;;; Java
+(elpacaLF "java-ts-mode" t)
+;;;; TOML
+(elpacaLF "toml-ts-mode" t)
 
 ;;; Misc
 ;;;; sqlite3
