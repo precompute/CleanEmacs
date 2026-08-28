@@ -75,8 +75,8 @@
 (elpacaLF "embark")
 ;;;;;; embark-consult
 (elpacaLF "embark-consult")
-;;;;;; wgrep (for embark-occur)
-(elpacaLF "wgrep")
+;; ;;;;;; wgrep (for embark-occur)
+;; (elpacaLF "wgrep")
 ;;;;; Consult (incremental functions)
 (elpacaLF "consult")
 ;;;;; Vertico-Posframe (center child frame)

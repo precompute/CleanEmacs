@@ -15,15 +15,14 @@
   :config
   (defun embark-export-write ()
     "Export the current vertico results to a writable buffer if possible.
-Supports exporting consult-grep to wgrep, file to wdeired, and consult-location to occur-edit"
+Supports exporting consult-grep to grep-edit, file to wdired, and consult-location to occur-edit"
     (interactive)
     (require 'embark)
-    (require 'wgrep)
     (let* ((edit-command
             (pcase-let ((`(,type . ,candidates)
                          (run-hook-with-args-until-success 'embark-candidate-collectors)))
               (pcase type
-                ('consult-grep #'wgrep-change-to-wgrep-mode)
+                ('consult-grep #'grep-change-to-grep-edit-mode)
                 ('file #'wdired-change-to-wdired-mode)
                 ('consult-location #'occur-edit-mode)
                 (x (user-error "embark category %S doesn't support writable export" x)))))

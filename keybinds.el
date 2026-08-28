@@ -10,7 +10,9 @@
  [f10] 'save-and-delete-window
  [f12] 'save-and-kill-buffer
 
- "C-x C-c" nil
+ "<menu>" 'execute-extended-command-for-buffer
+ "C-x C-c" 'kill-buffer-and-window
+ "C-x c" 'kill-current-buffer
 
  "C-<tab>" 'hippie-expand-small
  "C-<iso-lefttab>" 'hippie-unexpand
@@ -241,7 +243,7 @@
  "zp" 'delete-window
  "zs" 'save-buffer
  "zx" 'kill-current-buffer
- "zX" 'kill-current-buffer-and-window-c
+ "zX" 'kill-buffer-and-window
  "zZ" 'bury-buffer)
 
 ;;;;;;; Undo / Redo

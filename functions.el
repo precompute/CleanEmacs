@@ -40,12 +40,6 @@ DIR is the directory, INITIAL is the string."
     (save-buffer)
     (delete-window)))
 
-(defun kill-current-buffer-and-window-c ()
-  (interactive)
-  (progn
-    (kill-current-buffer)
-    (delete-window)))
-
 (defun load-current-file ()
   (interactive)
   (load-file buffer-file-name))
