@@ -73,20 +73,27 @@ Only works at the end of a word!  OLD is t on "
       (setq he-expand-list (cdr he-expand-list))
       t))
 
-  (defun hippie-expand-capf--collect (&optional fn limit)
-    "Collect LIMIT candidates from FN.
-LIMIT has a default value of 10."
-    (save-restriction
-      (cl-loop with fn = (or fn 'try-complete-lisp-symbol)
-               with limit = (or limit 10)
-               for i from 0
-               while (and (funcall fn (> i 0)) (< i limit))
-               collect (buffer-substring-no-properties he-string-beg he-string-end))))
-
   (defvar-local hippie-expand-capf--fn-list
     '( try-complete-lisp-symbol try-complete-lisp-symbol-partially
        try-expand-all-abbrevs try-expand-whole-kill
-       try-complete-file-name try-complete-file-name-partially))
+       try-complete-file-name try-complete-file-name-partially)
+    "List of functions for `hippie-expand-capf'.")
+
+  (defvar-local hippie-expand-capf--limit 15
+    "Number of candidates from every function in fn-list for `hippie-expand-capf'.")
+
+  (defun hippie-expand-capf--collect (fn &optional limit)
+    "Collect LIMIT candidates from FN.
+LIMIT is defined by `hippie-expand-capf--limit'."
+    (let ((c nil))
+      ;; prevent hippie-expand functions from writing to the buffer.
+      ;; Collect candidates instead.
+      (cl-letf (((symbol-function #'he-substitute-string)
+                 (lambda (z &rest _) (push z c))))
+        (cl-loop with limit = (or limit hippie-expand-capf--limit)
+                 for i from 0 while (and (funcall fn (> i 0)) (< i limit))
+                 finally return nil))
+      (nreverse c)))
 
   (defun hippie-expand-capf (&optional fn-list)
     "Completion-at-point function with Hippie-Expand candidates.
@@ -109,19 +116,14 @@ NOTE: Very Expensive!"
                 (cl-pushnew c z))))))
       (when z (list wb we (nreverse z) :exclusive 'no))))
 
-  (defun completion-at-point-hippie-capf ()
+  (defun completion-at-point-hippie-capf (&optional fn-list limit)
     "Call `completion-at-point' with `hippie-expand-capf' as the only function in `completion-at-point-functions'."
     (interactive)
-    (let ((completion-at-point-functions '(hippie-expand-capf t)))
+    (let ((completion-at-point-functions (list (lambda (&rest _) (hippie-expand-capf fn-list)) t))
+          (hippie-expand-capf--limit (or limit hippie-expand-capf--limit)))
       (funcall-interactively #'completion-at-point)))
 
-  (defun hippie-expand-capf-word-dict ()
-    "Call `hippie-expand-capf' with `try-complete-word-dict'."
-    (interactive)
-    (hippie-expand-capf '(try-complete-word-dict)))
-
   (defun completion-at-point-hippie-word-capf ()
-    "Call `completion-at-point' with `hippie-expand-capf-word-dict' as the only function in `completion-at-point-functions'."
+    "Call `completion-at-point-hippie-capf' with `hippie-expand-capf-word-dict' as the only function."
     (interactive)
-    (let ((completion-at-point-functions '(hippie-expand-capf-word-dict t)))
-      (funcall-interactively #'completion-at-point))))
+    (completion-at-point-hippie-capf '(hippie-expand-capf-word-dict 100))))
