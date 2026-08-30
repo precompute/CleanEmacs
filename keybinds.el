@@ -269,7 +269,10 @@
 (general-define-key
  :states 'normal
  :keymaps 'dired-mode-map
- "_" 'locate-git-file-c)
+ "_" 'locate-git-file-c
+ "<right>" 'dired-find-file
+ "<left>" 'dired-up-directory
+ "S-<right>" 'dired-subtree-toggle)
 
 (general-define-key
  :states 'normal
