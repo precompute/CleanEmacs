@@ -7,7 +7,9 @@
   (:map vertico-map
         ("DEL" . vertico-directory-delete-char) ;; delete entire folder names
         ("C-SPC" . vertico-quick-insert)
-        ("C-z" . vertico-quick-exit))
+        ("C-z" . vertico-quick-exit)
+        ("C-<up>" . vertico-previous-group)
+        ("C-<down>" . vertico-next-group))
   :custom
   (vertico-count 25)
   (vertico-scroll-margin 5)
@@ -37,5 +39,19 @@
                             ;; "▰ " "▱ ")
                             ;; "◆ " "◇ ")
                         'face 'vertico-prefix-face-c) cand))
+
+  ;; Add number of groups to count string
+  (defun vertico-format-count-c ()
+    "Add the length of `vertico--groups' to vertico--format-count.
+Ignore `vertico-count-format'."
+    (format "%-8s"
+            (format " [%d] %s/%s "
+                    (length vertico--groups)
+                    (cond ((>= vertico--index 0) (1+ vertico--index))
+                          (vertico--allow-prompt "*")
+                          (t "!"))
+                    vertico--total)))
+  (advice-add #'vertico--format-count :override #'vertico-format-count-c)
+
   :init
   (vertico-mode))
