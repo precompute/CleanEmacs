@@ -60,7 +60,10 @@ Only works at the end of a word!  OLD is t on "
         (add-to-list 'he-tried-table he-search-string))
       (if (string-blank-p he-search-string)
           (setq he-expand-list ())
-        (setq he-expand-list (ispell-lookup-words (concat he-search-string "*")))))
+        (setq he-expand-list
+              (if jinx-mode
+                  (mapcar #'substring-no-properties (jinx--correct-suggestions he-search-string))
+                (ispell-lookup-words (concat he-search-string "*"))))))
     (while (and he-expand-list (he-string-member (car he-expand-list) he-tried-table))
       (setq he-expand-list (cdr he-expand-list)))
     (if (null he-expand-list)
