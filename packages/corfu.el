@@ -16,23 +16,6 @@
         corfu-popupinfo-max-height 30
         corfu-popupinfo-hide nil)
   (setq corfu-separator ?\s)
-  ;; (define-key corfu-map (kbd "SPC") ;; Max lisp eval nesting depth
-  ;;             (lambda ()
-  ;;               (interactive)
-  ;;               (if current-prefix-arg
-  ;;                   (progn 
-  ;;                     (corfu-quit)
-  ;;                     (insert " "))
-  ;;                 (if (and (= (char-before) corfu-separator)
-  ;;                          (or
-  ;;                           (not (char-after))
-  ;;                           (= (char-after) ?\s)
-  ;;                           (= (char-after) ?\n)))
-  ;;                     (progn
-  ;;                       (corfu-insert)
-  ;;                       (insert " "))
-  ;;                   (corfu-insert-separator)))))
-  (global-set-key (kbd "C-SPC") 'completion-at-point)
   ;; (with-eval-after-load 'evil
   ;;   (setq evil-complete-next-func (lambda (_) (completion-at-point))))
 

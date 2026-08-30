@@ -14,6 +14,8 @@
  "C-x C-c" 'kill-buffer-and-window
  "C-x c" 'kill-current-buffer
 
+ "C-SPC" 'completion-at-point
+
  "C-<tab>" 'hippie-expand-small
  "C-<iso-lefttab>" 'hippie-unexpand
  "C-f" 'hippie-expand-all
@@ -357,12 +359,6 @@
  "H-w <" 'jump-to-previous-frame-c
  "H-w >" 'jump-to-next-frame-c)
 
-;;;;;;; Evil
-(general-define-key
- :states '(normal insert visual)
- "C-i" 'evil-jump-backward
- "C-o" 'evil-jump-forward)
-
 (general-define-key
  :states 'normal
  "C-z" 'legit-to-line
@@ -371,6 +367,16 @@
 (general-define-key
  :states 'insert
  "C-S-u" 'insert-base16-char-c
+ "C-t" 'completion-at-point-hippie-capf)
+
+;;;;;;; Evil
+(general-define-key
+ :states '(normal insert visual)
+ "C-i" 'evil-jump-backward
+ "C-o" 'evil-jump-forward)
+
+(general-define-key
+ :states 'insert
  "M-o" 'evil-open-below
  "M-O" 'evil-open-above)
 
@@ -395,7 +401,8 @@
 (general-define-key
  :keymaps 'org-mode-map
  :states 'insert
- "TAB" 'org-cycle)
+ "TAB" 'org-cycle
+ "C-t" 'completion-at-point-hippie-word-capf)
 
 (general-define-key
  :keymaps 'org-mode-map
