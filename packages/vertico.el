@@ -44,13 +44,14 @@
   (defun vertico-format-count-c ()
     "Add the length of `vertico--groups' to vertico--format-count.
 Ignore `vertico-count-format'."
-    (format "%-8s"
-            (format " [%d] %s/%s "
-                    (length vertico--groups)
-                    (cond ((>= vertico--index 0) (1+ vertico--index))
-                          (vertico--allow-prompt "*")
-                          (t "!"))
-                    vertico--total)))
+    (format "%-8s "
+            (let ((group-count (length vertico--groups)))
+              (concat (if (= group-count 0) "" (format "[%d] " group-count))
+                      (format "%s/%s "
+                              (cond ((>= vertico--index 0) (1+ vertico--index))
+                                    (vertico--allow-prompt "*")
+                                    (t "!"))
+                              vertico--total)))))
   (advice-add #'vertico--format-count :override #'vertico-format-count-c)
 
   :init
