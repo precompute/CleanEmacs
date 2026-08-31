@@ -24,7 +24,7 @@
 (setq scroll-conservatively 101)
 
 (setq process-adaptive-read-buffering nil)
-(setq read-process-output-max (* 4 1024 1024))
+(setq read-process-output-max (* 1 1024 1024))
 
 (setq history-length 150)
 
@@ -69,7 +69,7 @@
 
 (setq messages-buffer-max-lines 100000)
 
-(setq undo-limit (* 128 1024 1024))
+(setq undo-limit (* 256 1024 1024))
 
 (minibuffer-depth-indicate-mode t)
 

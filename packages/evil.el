@@ -51,16 +51,30 @@ point."
 
   (evil-define-text-object evil-textobj-entire-line (count &optional _beg _end type)
     "Text object for the current line"
-    (evil-range (pos-bol) (pos-eol) type))
+    (evil-range (pos-bol) (progn (forward-line count) (pos-eol)) type))
 
   (evil-define-text-object evil-textobj-forward-until-empty-line (count &optional _beg _end type)
     "Text object until the end of the current paragraph"
-    (evil-range (point) (re-search-forward "\\(?:$\\)\\(?:^\\)[[:space:]]*$") type))
+    (evil-range (point) (re-search-forward "\\(?:$\\)\\(?:^\\)[[:space:]]*$" nil t count) type))
 
   (evil-define-text-object evil-textobj-backward-until-empty-line (count &optional _beg _end type)
     "Text object until the start of the current paragraph"
-    (evil-range (point) (re-search-backward "\\(?:$\\)\\(?:^\\)[[:space:]]*$") type))
+    (evil-range (point) (re-search-backward "\\(?:$\\)\\(?:^\\)[[:space:]]*$" nil t count) type))
 
+  (evil-define-text-object evil-textobj-org-block (count &optional _beg _end type)
+    "Text object to select all the text inside the current org block."
+    (let ((start (save-excursion
+                   (re-search-backward "^[[:space:][:blank:]]*#\\+[Bb][Ee][Gg][Ii][Nn]_" nil t
+                                       (when (< count 0) count))
+                   (forward-line) (pos-bol)))
+          (end (save-excursion
+                 (re-search-forward "^[[:space:][:blank:]]*#\\+[Ee][Nn][Dd]_" nil t
+                                    (when (> count 1) count))
+                 (forward-line -1) (pos-eol))))
+      (evil-range start end type)))
+  
+  (rx bol (0+ (or blank space)) "#+" (or ?b ?B) (or ?e ?E) (or ?g ?G) (or ?i ?I) (or ?n ?N) "_")
+  
   (evil-define-operator evil-operator-eval-region (beg end)
     "Evaluate selection."
     :move-point nil

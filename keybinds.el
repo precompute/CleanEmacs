@@ -294,10 +294,11 @@
 (general-define-key
  :states 'motion
  "a g" 'evil-textobj-whole-buffer
- "a h" 'evil-textobj-visible-lines
+ "a v" 'evil-textobj-visible-lines
  "a f" 'evil-textobj-get-func
  "a l" 'evil-textobj-entire-line
- "a N P" 'evil-textobj-forward-until-empty-line
+ "a O b" 'evil-textobj-org-block
+ "a P N" 'evil-textobj-forward-until-empty-line
  "a P P" 'evil-textobj-backward-until-empty-line)
 
 ;;;;;;; loccur
