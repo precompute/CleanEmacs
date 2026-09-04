@@ -187,6 +187,8 @@
 (elpacaLF "tab-bar" t)
 ;;; project
 (elpacaLF "project" t)
+;;; paren
+(elpacaLF "paren" t)
 ;;; Org
 (elpacaLF "org" t)
 ;;;; Org Agenda

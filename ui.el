@@ -176,11 +176,6 @@ Ignore REST."
    'revert-buffer-if-not-modified))
 
 ;;; other
-;;;; show-paren
-(setq show-paren-delay 0.2
-      show-paren-style 'expression
-      show-paren-not-in-comments-or-strings t)
-
 ;;;; transparency
 (setq transparency-value-c 95)
 
