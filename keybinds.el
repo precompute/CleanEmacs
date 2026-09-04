@@ -1,4 +1,9 @@
 ;;;; General  -*- lexical-binding: t; -*-
+;;;;; Disable
+(general-define-key
+ "C-<home>" nil
+ "C-<end>" nil)
+
 ;;;;; Global nice-to-haves
 (general-define-key
  [f5] 'delete-window
@@ -136,7 +141,7 @@
   "'" 'vertico-repeat
 
   "i" '(:ignore t :wk "insert")
-  "iy" 'consult-yank-from-kill-ring
+  "iy" 'kill-from-kill-ring-c
   "ii" 'kill-new-from-global-paste-c
 
   "o" '(:ignore t :wk "other")

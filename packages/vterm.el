@@ -2,6 +2,7 @@
 (use-package vterm
   :ensure (:depth 1)
   :config
+  (setq vterm-max-scrollback 10000)
   (defun project-vterm ()
     "Start VTerm in the current project's root directory.
   If a buffer already exists for running VTerm in the project's root,

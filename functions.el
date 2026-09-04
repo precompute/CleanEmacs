@@ -345,6 +345,13 @@ Set limit ARG."
             (rlist (completing-read " " mylist))) ;; [23-12-15 00:48:07] Because I like my commas intact
        rlist))))
 
+;;;;; Kill from kill-ring
+(defun kill-from-kill-ring-c (string)
+  "Alternative to `yank-from-kill-ring'.  Does not insert string in the buffer.
+STRING from `read-from-kill-ring'."
+  (interactive (list (read-from-kill-ring "Kill from kill-ring: ")))
+  (kill-new string))
+
 ;;;; unicode
 (defun insert-base16-char-c ()
   "Insert a base16 char.  SPC terminates input."
