@@ -35,6 +35,7 @@
     (cand prefix suffix index start &context ((not (bound-and-true-p vertico-flat-mode)) (eql t)))
     (setq cand (cl-call-next-method cand prefix suffix index start))
     (concat (propertize (if (= vertico--index index)
+                            ;; "> " "  ")
                             "◼ " "◻ ")
                             ;; "▰ " "▱ ")
                             ;; "◆ " "◇ ")
