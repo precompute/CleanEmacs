@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 (use-package bicycle
-  :after prog-mode
+  :ensure t
   :bind (:map prog-mode-map
-              ([tab] . bicycle-cycle)
-              ([backtab] . bicycle-cycle-global)))
+              ("M-<tab>" . bicycle-cycle)
+              ("M-<iso-lefttab>" . bicycle-cycle-global)))

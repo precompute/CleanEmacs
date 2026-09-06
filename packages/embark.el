@@ -2,15 +2,12 @@
 (use-package embark
   :ensure (:depth 1)
   :defer t
-  :init
-  (setq prefix-help-command #'embark-prefix-help-command)
-  :bind
-  ("C-;" . embark-act)
-  (:map minibuffer-local-map
-        ("C-;" . embark-act)
-        ("C-c C-;" . embark-export)
-        ("C-c C-l" . embark-collect)
-        ("C-c C-e" . embark-export-write))
+  :init (setq prefix-help-command #'embark-prefix-help-command)
+  :bind ( :map minibuffer-local-map
+          ("C-;" . embark-act)
+          ("C-c C-;" . embark-export)
+          ("C-c C-l" . embark-collect)
+          ("C-c C-e" . embark-export-write))
   ([remap describe-bindings] . embark-bindings)
   :config
   (defun embark-export-write ()

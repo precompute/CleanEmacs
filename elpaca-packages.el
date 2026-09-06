@@ -187,6 +187,8 @@
 (elpacaLF "tab-bar" t)
 ;;; project
 (elpacaLF "project" t)
+;;; completion preview
+(elpacaLF "completion-preview" t)
 ;;; paren
 (elpacaLF "paren" t)
 ;;; Org
