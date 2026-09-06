@@ -124,6 +124,6 @@ NOTE: Very Expensive!"
       (funcall-interactively #'completion-at-point)))
 
   (defun completion-at-point-hippie-word-capf ()
-    "Call `completion-at-point-hippie-capf' with `hippie-expand-capf-word-dict' as the only function."
+    "Call `completion-at-point-hippie-capf' with `try-complete-word-dict' as the only function."
     (interactive)
-    (completion-at-point-hippie-capf '(hippie-expand-capf-word-dict 100))))
+    (completion-at-point-hippie-capf '(try-complete-word-dict) 100)))

@@ -621,10 +621,16 @@ Otherwise, kill it." ;; Can use `color-values’ instead.
   (interactive)
   (shell-command (concat "xfce4-terminal --working-directory=\"" (file-truename default-directory) "\"")))
 
-(defun vterm-new-instance ()
-  "Open a new instance of vterm in the current window."
-  (interactive)
-  (vterm 't))
+(defun vterm-new-instance (shell)
+  "Open a new instance of vterm with SHELL in the current window."
+  (interactive
+   (list (when (equal "ssh" (file-remote-p default-directory 'method))
+           (let* ((a (vterm--get-shell))
+                  (s (list "/bin/sh" "/bin/bash" "/bin/ash" a)))
+             (completing-read (format "Remote Shell [%s]: " a) s nil nil)))))
+  (let ((vterm-tramp-shells (when shell `(("ssh" ,shell))))
+        (vterm-kill-buffer-on-exit (if shell nil t)))
+    (vterm 't)))
 
 ;;;; Format Buffer
 (defun format-buffer-prettier-c ()

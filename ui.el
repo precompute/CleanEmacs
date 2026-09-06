@@ -189,7 +189,6 @@ Ignore REST."
 (defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
 
 (defface text-face-c '((t :family "Guardi LT Std")) "Custom face for text.")
-;; (set-face-attribute 'text-face-c nil :family "GT Pressura LCGV Text")
 
 (defun set-face-font-c (spec)
   "Set SPEC to faces `default’ and `fixed-pitch’.
@@ -225,7 +224,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Palatino Sans LT Pro" :size 17))
     ;; (set-face-font 'variable-pitch (font-spec :family "Palatino Sans Informal LT Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Frutiger Serif LT Pro" :size 14 :width 'condensed))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Myriad Pro" :size 15 :width 'semi-condensed))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Myriad Pro" :size 16 :width 'semi-condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "SuisseIntl" :size 15 :width 'condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Celeste Sans Pro" :size 17))
@@ -236,13 +235,13 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'light))
-    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'condensed :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT America LCG" :size 14 :width 'narrow :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT America LCG" :size 16 :width 'expanded :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Super Text" :size 14))
-    (set-face-font 'variable-pitch (font-spec :family "GT Sectra" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "GT Sectra" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Standard" :size 16 :weight 'normal :width 'condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Standard" :size 16 :weight 'normal :width 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Maru" :size 16))

@@ -531,6 +531,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                 magit-status-mode-hook
                 man-common-hook
                 vterm-mode-hook
+                shell-mode-hook
                 xref--xref-buffer-mode-hook
                 xref--transient-buffer-mode-hook
                 notmuch-hello-mode-hook
