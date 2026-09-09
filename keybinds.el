@@ -33,8 +33,10 @@
  "<mouse-8>" 'previous-buffer
  "<mouse-9>" 'next-buffer
 
- "C-<next>" 'tab-bar-next-tab-c
- "C-<prior>" 'tab-bar-prev-tab-c
+ "C-<next>" 'tab-bar-next-tab-nocreate-c
+ "C-<prior>" 'tab-bar-prev-tab-nocreate-c
+ "C-S-<next>" 'tab-bar-next-tab-c
+ "C-S-<prior>" 'tab-bar-prev-tab-c
 
  "<header-line> <mouse-2>" 'delete-window
  "<header-line> <mouse-3>" 'toggle-frame-fullscreen)

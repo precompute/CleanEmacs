@@ -273,16 +273,16 @@ Copies to system clipboard."
       (find-file f))))
 
 ;;;;; tab-bar
-(defun tab-bar-next-tab-c (&optional prev?)
+(defun tab-bar-next-tab-c (&optional prev? nocreate)
   "Switch to the next tab if PREV? is nil.  If PREV? is non-nil, switch to the previous tab.
-Create it if it doesn't exist."
+When at the last/first tab, create a new tab when NOCREATE is non-nil."
   (interactive)
   (let* ((tabs (tab-bar-tabs))
          (ntabs (length tabs))
          (i (tab-bar--current-tab-index tabs)))
-    (cond ((= 1 ntabs) (tab-bar-new-tab))
-          ((and prev? (= 0 i)) (tab-bar-new-tab -1))
-          ((and (not prev?) (= (1- ntabs) i)) (tab-bar-new-tab))
+    (cond ((and (not nocreate) (= 1 ntabs)) (tab-bar-new-tab))
+          ((and prev? (= 0 i)) (if nocreate (tab-bar-select-tab ntabs) (tab-bar-new-tab -1)))
+          ((and (not prev?) (= (1- ntabs) i)) (if nocreate (tab-bar-select-tab 1) (tab-bar-new-tab)))
           (prev? (tab-bar-switch-to-prev-tab))
           (t (tab-bar-switch-to-next-tab)))))
 
@@ -290,6 +290,16 @@ Create it if it doesn't exist."
   "Call `tab-bar-next-tab-c' with PREV? set to t."
   (interactive)
   (tab-bar-next-tab-c t))
+
+(defun tab-bar-next-tab-nocreate-c ()
+  "Call `tab-bar-next-tab-c' with NOCREATE set to t."
+  (interactive)
+  (tab-bar-next-tab-c nil t))
+
+(defun tab-bar-prev-tab-nocreate-c ()
+  "Call `tab-bar-next-tab-c' with PREV? and NOCREATE set to t."
+  (interactive)
+  (tab-bar-next-tab-c t t))
 
 ;;;;; Outline
 (defun outline-next-heading-c ()

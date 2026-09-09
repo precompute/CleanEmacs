@@ -8,6 +8,9 @@
                                     (replace-regexp-in-string "--search-zip" "" consult-ripgrep-args))
           " --ignore-case")))
   (consult-async-split-style 'semicolon)
+  (consult-async-input-debounce 0.1)
+  (consult-async-input-throttle 0.25)
+  (consult-async-refresh-delay 0.1)
   :preface
   (global-set-key [remap bookmark-jump] #'consult-bookmark)
   (global-set-key [remap evil-show-marks] #'consult-mark)
@@ -27,4 +30,4 @@
   (consult-customize consult-theme
                      :preview-key
                      '("C-SPC"
-                       :debounce 0.5 any)))
+                       :debounce 1 any)))
