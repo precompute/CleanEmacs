@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package paren
   :ensure nil
   :config
