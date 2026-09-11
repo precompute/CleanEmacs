@@ -537,6 +537,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                 notmuch-hello-mode-hook
                 sparro-append-chat-mode-hook
                 notmuch-search-mode-hook
+                compilation-mode-hook
                 ibuffer-hook
                 ibuffer-mode-hook))
   (add-hook hook 'headerline-simple-mode 100)

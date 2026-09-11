@@ -161,7 +161,12 @@ Ignore REST."
 
 ;;; display-buffer-alist
 (setq display-buffer-alist
-      '(("\\*[^z-a]*" (display-buffer-reuse-mode-window
+      '(("\\*compilation[^*]*\\*"
+         (display-buffer-in-direction)
+         (window-height . 0.4)
+         (direction . bottom)
+         (body-function . select-window))
+        ("\\*[^z-a]*" (display-buffer-reuse-mode-window
                        display-buffer-in-direction)
          (direction . bottom)
          (window-height . 0.3)

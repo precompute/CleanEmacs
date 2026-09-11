@@ -12,6 +12,8 @@
           rust-mode
           rust-ts-mode
           lua-mode) . eglot-ensure)
+  :bind (:map eglot-mode-map
+              ("C-M-/" . eglot-format))
   :config
   (setq eglot-extend-to-xref t
         eglot-autoshutdown t

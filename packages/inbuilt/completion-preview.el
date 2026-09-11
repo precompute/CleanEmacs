@@ -10,6 +10,6 @@
           ("M-p" . completion-preview-prev-candidate))
   :config
   (setq completion-preview-minimum-symbol-length 2
-        completion-preview-idle-delay 0.5
+        completion-preview-idle-delay 0.2
         completion-preview-message-format nil
         completion-preview-adapt-background-color nil))
