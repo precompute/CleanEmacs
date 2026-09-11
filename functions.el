@@ -280,7 +280,7 @@ When at the last/first tab, create a new tab when NOCREATE is non-nil."
   (let* ((tabs (tab-bar-tabs))
          (ntabs (length tabs))
          (i (tab-bar--current-tab-index tabs)))
-    (cond ((and (not nocreate) (= 1 ntabs)) (tab-bar-new-tab))
+    (cond ((= 1 ntabs) (tab-bar-new-tab))
           ((and prev? (= 0 i)) (if nocreate (tab-bar-select-tab ntabs) (tab-bar-new-tab -1)))
           ((and (not prev?) (= (1- ntabs) i)) (if nocreate (tab-bar-select-tab 1) (tab-bar-new-tab)))
           (prev? (tab-bar-switch-to-prev-tab))
