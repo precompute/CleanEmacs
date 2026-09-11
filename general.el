@@ -69,7 +69,9 @@
 
 (setq messages-buffer-max-lines 100000)
 
-(setq undo-limit (* 256 1024 1024))
+(setq undo-limit (* 256 1024 1024)
+      undo-strong-limit (* 384 1024 1024)
+      undo-outer-limit (* 512 1024 1024))
 
 (minibuffer-depth-indicate-mode t)
 

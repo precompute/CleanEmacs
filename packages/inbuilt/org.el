@@ -45,6 +45,9 @@
                              (74 . default)
                              (75 . default)
                              (76 . error)))
+  (require 'mailcap)
+  (dolist (z (list "mp4" "m4v" "wmv" "avi" "webm" "mkv" "gif" "mov" "mpeg"))
+    (mailcap-add (concat "video/" z) "mpv --loop-file %s"))
 ;;;;; propertize
   (font-lock-add-keywords 'org-mode
                           '(("^:PROPERTIES:\n" 0 '(face nil display "::"))
