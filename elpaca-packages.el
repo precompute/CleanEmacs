@@ -95,6 +95,8 @@
 ;; (elpacaLF "olivetti") ;; Slows everything down!
 ;; ;;; Perfect Margin
 ;; (elpacaLF "perfect-margin") ;; Better than olivetti!
+;;; Tramp
+(elpacaLF "tramp" t)
 ;;; Indent Guides
 (elpacaLF "highlight-indent-guides")
 ;; (elpacaC "indent-bars")
