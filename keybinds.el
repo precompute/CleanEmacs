@@ -439,8 +439,8 @@
 ;; c x p a q b z h
 (general-define-key
  :states '(normal insert visual)
- "H-c" 'clipboard-kill-ring-save-c
- "H-x" 'clipboard-kill-region
+ "H-c" 'save-to-system-clipboard-c
+ ;; "H-x" 'clipboard-kill-region
  "H-p" 'clipboard-yank)
 
 ;;;;;;; Completion

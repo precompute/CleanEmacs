@@ -182,14 +182,19 @@ If ARG is non-nil, kill path."
   (message (concat (propertize "HYPER" 'face 'font-lock-builtin-face)
                    (propertize " key enabled." 'face 'success))))
 
-;;;;; Save to kill ring
-(defun clipboard-kill-ring-save-c ()
-  "Run `clipboard-kill-ring-save’ if a region is active.
-If region is inactive, then copy from kill-ring to clipboard."
+;;;;; Save to system clipboard
+(defun save-to-system-clipboard-c (&optional s)
+  "Save active region to system clipboard if a region is active.
+Else, if S is a string, save S to system clipboard.
+Otherwise, if region is inactive, copy from kill-ring to clipboard."
   (interactive)
-  (if (use-region-p) ;; not `region-active-p’
-      (clipboard-kill-ring-save (region-beginning) (region-end))
-    (when kill-ring (gui-set-selection 'CLIPBOARD (current-kill 0 t)))))
+  (cond ((use-region-p)
+         (gui-set-selection 'CLIPBOARD (buffer-substring-no-properties
+                                        (region-beginning) (region-end)))
+         (deactivate-mark))
+        ((stringp s) (gui-set-selection 'CLIPBOARD s))
+        (t (if kill-ring (gui-set-selection 'CLIPBOARD (current-kill 0 t))
+             (message "Kill Ring is empty!")))))
 
 ;;;;; Fill Region
 (defun fill-region-custom-width-c (arg)
@@ -206,25 +211,24 @@ If region is inactive, then copy from kill-ring to clipboard."
       (fill-paragraph))))
 
 ;;;;; Export as Text
-(defun export-current-buffer-as-text (&optional buf)
+(defun export-current-buffer-as-text (&optional nokill buf buf-file-name)
   "Export current buffer as text for ingestion in other programs.
 Copies to system clipboard.
-When BUF is a buffer, return contents of buffer."
+When NOKILL is non-nil, don't kill to the clipboard.
+When BUF is a buffer, return contents of buffer.
+Optionally, provide the file name of the buffer as BUF-FILE-NAME."
   (interactive)
-  (let* ((b? (when buf (bufferp buf)))
-         (s-buf (if b? buf (current-buffer)))
+  (let* ((s-buf (if (bufferp buf) buf (current-buffer)))
          (text (with-current-buffer s-buf
                  (buffer-substring-no-properties (point-min) (point-max))))
-         (name (or (buffer-file-name s-buf) (buffer-name s-buf) "Unknown"))
+         (name (or buf-file-name (buffer-file-name s-buf) (buffer-name s-buf) "Unknown"))
          (bufsizekb (/ (buffer-size s-buf) 125.0))
-         (proglang (substring (format "%s" major-mode) 0 -5))
+         (proglang (with-current-buffer s-buf (substring (format "%s" major-mode) 0 -5)))
          (outstring (format "--- SIZE: %.1fkb FILE: %s ---\n```%s\n%s\n```" bufsizekb name proglang text)))
-    (if text (if b? (format "%s\n" outstring)
-               (with-temp-buffer
-                 (insert outstring)
-                 (clipboard-kill-ring-save (point-min) (point-max)))
-               (message (format "Saved file %s to Clipboard." name)))
-      (unless b? (message (format "Could not extract text from Buffer %s." s-buf))))))
+    (if text (if nokill (format "%s\n" outstring)
+               (save-to-system-clipboard-c outstring)
+               (message "Saved file %s to Clipboard." name))
+      (message "Could not extract text from Buffer %s." s-buf))))
 
 (defun export-selected-buffers-as-text ()
   "Export all buffers selected by user as text for ingestion in other programs.
@@ -233,10 +237,22 @@ Copies to system clipboard."
   (let ((buflist (completing-read-multiple
                   "Buffers:" (mapcar #'buffer-name (buffer-list)) nil t)))
     (cl-loop for b in buflist
-             concat (export-current-buffer-as-text (get-buffer b)) into text
-             finally (with-temp-buffer
-                       (insert text)
-                       (clipboard-kill-ring-save (point-min) (point-max))))))
+             concat (export-current-buffer-as-text t (get-buffer b)) into text
+             finally (save-to-system-clipboard-c text))))
+
+(defun export-marked-buffers-as-text ()
+  "Export all marked dired files as text for ingestion in other programs.
+Copies to system clipboard."
+  (interactive)
+  (when-let* ((mf (and (eq major-mode 'dired-mode)
+                       (seq-remove #'f-dir-p (dired-get-marked-files)))))
+    (save-to-system-clipboard-c
+     (mapconcat (lambda (f)
+                  (let ((buf (get-file-buffer f)))
+                    (if buf (export-current-buffer-as-text t buf f)
+                      (with-temp-buffer (insert-file-contents f)
+                                        (export-current-buffer-as-text t (current-buffer) f)))))
+                mf))))
 
 ;;;;; Next / Previous File
 (defun np-file--generate-file-list-c ()
