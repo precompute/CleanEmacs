@@ -73,7 +73,11 @@ point."
                  (forward-line -1) (pos-eol))))
       (evil-range start end type)))
   
-  (rx bol (0+ (or blank space)) "#+" (or ?b ?B) (or ?e ?E) (or ?g ?G) (or ?i ?I) (or ?n ?N) "_")
+  (evil-define-text-object evil-textobj-heading (count &optional _beg _end type)
+    "Text object to select all the text inside the current heading."
+    (let ((start (save-excursion (outline-back-to-heading t) (pos-bol)))
+          (end (save-excursion (outline-end-of-subtree) (pos-eol))))
+      (evil-range start end type)))
   
   (evil-define-operator evil-operator-eval-region (beg end)
     "Evaluate selection."

@@ -304,6 +304,7 @@
  "a v" 'evil-textobj-visible-lines
  "a f" 'evil-textobj-get-func
  "a l" 'evil-textobj-entire-line
+ "a h" 'evil-textobj-heading
  "a O b" 'evil-textobj-org-block
  "a P N" 'evil-textobj-forward-until-empty-line
  "a P P" 'evil-textobj-backward-until-empty-line)
