@@ -97,6 +97,8 @@
 ;; (elpacaLF "perfect-margin") ;; Better than olivetti!
 ;;; Tramp
 (elpacaLF "tramp" t)
+;;; Compile
+(elpacaLF "compile" t)
 ;;; Indent Guides
 (elpacaLF "highlight-indent-guides")
 ;; (elpacaC "indent-bars")
