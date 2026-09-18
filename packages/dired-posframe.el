@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 (use-package dired-posframe
   :ensure (:depth 1)
+  :after dired
   :bind (:map dired-mode-map
               ("M-p" . dired-posframe-mode))
   :config

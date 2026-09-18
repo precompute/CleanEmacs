@@ -724,6 +724,7 @@ Otherwise, kill it." ;; Can use `color-values’ instead.
     (call-process "wmctrl" nil nil nil "-i" "-a" id)))
 
 ;;;; Window Functions
+;;;;; Window Size
 ;; It's like golden-ratio but just one function.
 ;; width, then height.
 (defun make-window-larger-c (&optional ratio)
@@ -757,6 +758,7 @@ It switches the width before the height."
       ;; (if postv (olivetti-mode 1))
       )))
 
+;;;;; Window Size and Follow
 (defun split-enlarge-follow-mode-toggle nil
   "Split window, enlarge left and then enable follow-mode."
   (interactive)
@@ -764,6 +766,20 @@ It switches the width before the height."
     (call-interactively #'evil-window-vsplit)
     (call-interactively #'evil-window-left)
     (call-interactively #'follow-mode 1)))
+
+;;;;; Window History
+(defun window-history-prev-c (&optional forward?)
+  "Go backwards in window history.  Tab-bar aware.
+When FORWARD? is non-nil, go forwards in history."
+  (interactive)
+  (if (and tab-bar-mode tab-bar-history-mode)
+      (if forward? (tab-bar-history-forward) (tab-bar-history-back))
+    (if forward? (winner-redo) (winner-undo))))
+
+(defun window-history-next-c ()
+  "Call `window-history-prev-c' with non-nil FORWARD?."
+  (interactive)
+  (window-history-prev-c t))
 
 ;;;; org-*
 ;;;;; org-id-*

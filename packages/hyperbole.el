@@ -2,4 +2,6 @@
 (use-package hyperbole
   :ensure (:files ("*" "man/*" (:exclude "man")))
   :init (require 'dired)
-  :defer t)
+  :defer t
+  :config
+  (hyperbole-mode 1))

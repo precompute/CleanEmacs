@@ -256,12 +256,12 @@
  "zX" 'kill-buffer-and-window
  "zZ" 'bury-buffer)
 
-;;;;;;; Undo / Redo
+;;;;;;; Window Undo / Redo
 (general-define-key
  :states 'normal
  "C-w" '(:ignore t)
- "C-w C-u" 'winner-undo
- "C-w C-r" 'winner-redo)
+ "C-w C-u" 'window-history-prev-c
+ "C-w C-r" 'window-history-next-c)
 
 ;;;;;;; Nav/other
 (general-define-key
