@@ -121,20 +121,15 @@
         (tbt-f (get-face-prop-c 'tab-bar-tab :foreground))
         (tbti-f (get-face-prop-c 'tab-bar-tab-inactive :foreground)))
     (dolist (z '(tab-bar tab-bar-tab tab-bar-tab-inactive tab-bar-tab-highlight))
-      (set-face-attribute z nil :inherit 'fixed-pitch :background 'unspecified :box nil))
-    (unless tb-u ;; tab-bar[-tab[-inactive]] faces inherit tab-bar
-      (set-face-attribute 'tab-bar-tab nil :underline current--builtin-face-foreground)
-      (set-face-attribute 'tab-bar-tab-inactive nil :underline current--builtin-face-foreground))
+      (set-face-attribute z nil :inherit 'variable-pitch :background 'unspecified :box nil :underline nil))
+    (set-face-attribute 'tab-bar-tab nil
+                        :overline current--builtin-face-foreground
+                        :foreground current--builtin-face-foreground)
+    (set-face-attribute 'tab-bar-tab-inactive nil
+                        :overline current--default-face-background
+                        :background current--default-face-background)
     (unless tbt-f (set-face-attribute 'tab-bar-tab nil :foreground current--type-face-foreground))
-    (unless tbti-f (set-face-attribute 'tab-bar-tab-inactive nil :foreground current--doc-face-foreground)))
-  ;; (set-face-attribute 'tab-bar-tab nil :inherit 'fixed-pitch :underline current--builtin-face-foreground)
-  ;; (set-face-attribute 'tab-bar-tab-inactive nil :inherit 'fixed-pitch :underline current--builtin-face-foreground)
-  ;; (when (facep 'tab-bar-separator-face-c)
-  ;;   (set-face-attribute 'tab-bar-separator-face-c nil
-  ;;                       :foreground current--constant-face-foreground :weight 'bold)
-  ;;   (setq tab-bar-separator (propertize (substring-no-properties tab-bar-separator)
-  ;;                                       'face 'tab-bar-separator-face-c))))))
-  )
+    (unless tbti-f (set-face-attribute 'tab-bar-tab-inactive nil :foreground current--doc-face-foreground))))
 
 (dolist (f '(set-tab-bar-face-c
              set-vertico-face-c
