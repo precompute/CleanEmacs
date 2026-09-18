@@ -330,6 +330,14 @@ When at the last/first tab, create a new tab when NOCREATE is non-nil."
   (outline-previous-heading)
   (recenter 0))
 
+;;;;; Indent
+(defun indent-region-or-buffer-c ()
+  "If region is in use, indent region.  Otherwise indent the entire buffer."
+  (interactive)
+  (if (use-region-p)
+      (indent-region (region-beginning) (region-end))
+    (indent-region (point-min) (point-max))))
+
 ;;;; Exit Emacs
 (defun clean-exit ()
   "Exit Emacs cleanly.
