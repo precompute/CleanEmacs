@@ -14,6 +14,7 @@
  [f9] 'save-buffer
  [f10] 'save-and-delete-window
  [f12] 'save-and-kill-buffer
+ [f1] 'kill-current-buffer
 
  "<menu>" 'execute-extended-command-for-buffer
  "C-x C-c" 'kill-buffer-and-window
@@ -37,6 +38,8 @@
  "C-<prior>" 'tab-bar-prev-tab-nocreate-c
  "C-S-<next>" 'tab-bar-next-tab-c
  "C-S-<prior>" 'tab-bar-prev-tab-c
+ "C-s-<next>" 'tab-bar-move-tab
+ "C-s-<prior>" 'tab-bar-move-tab-backward
 
  "<header-line> <mouse-2>" 'delete-window
  "<header-line> <mouse-3>" 'toggle-frame-fullscreen)

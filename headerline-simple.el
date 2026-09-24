@@ -539,6 +539,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                 notmuch-search-mode-hook
                 compilation-mode-hook
                 eshell-mode-hook
+                pdf-view-mode-hook
                 lexic-mode-hook
                 ibuffer-hook
                 ibuffer-mode-hook))

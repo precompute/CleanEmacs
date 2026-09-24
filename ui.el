@@ -11,6 +11,10 @@
  '(org-ellipsis ((t :height 1.3 :weight bold)))
  '(magit-diff-file-heading ((t :height 1.3))))
 
+(defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
+(defface tab-bar-font-family-face '((t)) "Face for tab-bar's font family.")
+(defface text-face-c '((t :family "Guardi LT Std")) "Custom face for text.")
+
 ;;; Theme
 (defun get-face-colors-c (&rest rest)
   "Generate custom face color variables from the active theme’s colors.  Ignore REST."
@@ -124,14 +128,24 @@
       (set-face-attribute z nil :inherit 'variable-pitch :background 'unspecified :box nil :underline nil))
     (set-face-attribute 'tab-bar-tab nil
                         :overline current--builtin-face-foreground
-                        :foreground current--builtin-face-foreground)
+                        :foreground current--builtin-face-foreground
+                        :inherit 'tab-bar-font-family-face)
     (set-face-attribute 'tab-bar-tab-inactive nil
                         :overline current--default-face-background
-                        :background current--default-face-background)
+                        :background current--default-face-background
+                        :inherit 'tab-bar-font-family-face)
     (unless tbt-f (set-face-attribute 'tab-bar-tab nil :foreground current--type-face-foreground))
     (unless tbti-f (set-face-attribute 'tab-bar-tab-inactive nil :foreground current--doc-face-foreground))))
 
-(dolist (f '(set-tab-bar-face-c
+(defun set-dired-face-c (&optional theme)
+  "Modify dired faces.  Optional THEME for `enable-theme-functions'."
+  (interactive)
+  (when (facep 'dired-date-face-c)
+    (set-face-attribute 'dired-date-face-c nil
+                      :box `(:line-width (5 . -1) :color ,current--region-face-background))))
+
+(dolist (f '(set-dired-face-c
+             set-tab-bar-face-c
              set-vertico-face-c
              set-breadcrumb-face-c
              set-pulsar-face-c
@@ -140,6 +154,9 @@
              set-org-mode-faces-c
              get-face-colors-c))
   (add-to-list 'enable-theme-functions f))
+
+(dolist (z '(set-tab-bar-face-c))
+  (add-to-list 'after-make-frame-functions z))
 
 ;;;; Load Theme
 (load-theme 'sculpture-themes-dark t)
@@ -186,10 +203,6 @@ Ignore REST."
 (window-divider-mode)
 
 ;;; Fonts
-(defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
-
-(defface text-face-c '((t :family "Guardi LT Std")) "Custom face for text.")
-
 (defun set-face-font-c (spec)
   "Set SPEC to faces `default’ and `fixed-pitch’.
 `copy-face’ brings over the background setting, and more."
@@ -201,7 +214,7 @@ Ignore REST."
   (interactive)
   (progn
     ;; (set-face-font-c (font-spec :family "JuliaMono" :size 13 :weight 'medium))
-    (set-face-font-c (font-spec :family "JuliaMono" :size 15 :weight 'regular))
+    (set-face-font-c (font-spec :family "JuliaMono" :size 15 :weight 'medium))
     ;; (set-face-font-c (font-spec :family "Luculent" :size 12))
     ;; (set-face-font-c (font-spec :family "GT Standard Mono" :size 15 :weight 'medium :width 'condensed))
     ;; (set-face-font-c (font-spec :family "GT Alpina Typewriter" :size 16 :weight 'light))
@@ -221,11 +234,12 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Sabon LT Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Cisalpin LT Std" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Adobe Caslon Pro" :size 14))
-    (set-face-font 'variable-pitch (font-spec :family "Palatino eText" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Livory" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Palatino eText" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Palatino Sans LT Pro" :size 17))
     ;; (set-face-font 'variable-pitch (font-spec :family "Palatino Sans Informal LT Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Frutiger Serif LT Pro" :size 14 :width 'condensed))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Myriad Pro" :size 16 :width 'semi-condensed))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Myriad Pro" :size 17 :width 'semi-condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "SuisseIntl" :size 15 :width 'condensed))
     ;; (set-face-font 'variable-pitch (font-spec :family "Minion Pro" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Celeste Sans Pro" :size 17))
@@ -234,7 +248,7 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Pressura" :size 17 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 15 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'light))
-    ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'regular :weight 'regular))
+    (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'regular :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 16 :width 'condensed :weight 'light))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'regular))
     ;; (set-face-font 'variable-pitch (font-spec :family "GT Flexa" :size 16 :width 'expanded :weight 'light))
@@ -254,15 +268,18 @@ Ignore REST."
     ;; (set-face-font 'variable-pitch (font-spec :family "Inter" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Larsseit" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica" :size 14))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 14))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue eText Pro" :size 17 :weight 'normal))
     ;; (set-face-font 'variable-pitch (font-spec :family "Helvetica Neue LT W1G" :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Zwo Offc Pro" :size 16))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Amasis eText" :size 17 :weight 'normal))
     ;; (set-face-font 'variable-pitch (font-spec :family "Megano Offc Pro" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Univers LT Std" :width 'expanded :size 14))
     ;; (set-face-font 'variable-pitch (font-spec :family "Info Text Offc Pro" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "DIN Round Offc Pro" :size 16))
     ;; (set-face-font 'variable-pitch (font-spec :family "Alegreya Sans" :size 18))
-    ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia eText" :size 12))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia eText" :size 17))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia Com" :size 17))
+    ;; (set-face-font 'variable-pitch (font-spec :family "Caecilia LT Std" :size 17))
     ;; (set-face-font 'variable-pitch (font-spec :family "Meta Serif Offc" :size 16))
 
     ;; (set-face-font 'fixed-pitch-numbers (font-spec :family "Info Text Offc Pro" :size 16))
@@ -270,6 +287,8 @@ Ignore REST."
     (set-face-font 'fixed-pitch-numbers (font-spec :family "Dagny Offc Pro" :size 13))
     ;; (set-face-font 'fixed-pitch-numbers (font-spec :family "Meta Serif SC Offc Pro" :size 17 :weight 'bold))
 
+    ;; (set-face-font 'tab-bar-font-family-face (font-spec :family "Helvetica Neue eText Pro" :size 17 :weight 'bold))
+    (set-face-font 'tab-bar-font-family-face (font-spec :family "GT Alpina" :size 18 :width 'condensed :weight 'bold))
     ;; (set-face-font 'default ":antialias=false:hinting=true") ;; feeling edgy?
     ;; (copy-face 'default 'fixed-pitch)
     (set-fontset-font t 'symbol (font-spec :family "Symbola"))
