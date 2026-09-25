@@ -36,21 +36,36 @@ I’ve been using Doom Emacs for four years, and I wanted my config to be a ligh
 
 I don’t aim for this config to be minimal, but rather to be easy to understand.
 
-- Recommended Emacs Version :: =31.0.50=
+- Recommended Emacs Version :: =32.0.50=
 
-- Commit :: =91c9e9883488d715a30877dfd7641ef4b3c62658=
+- Commit :: =bac04df0cf7c0ec22f91645090a20381f5720a4d= 
 
-- Branch :: =feature/igc=
+- Date :: [26-09-25 20:00:00] 
+
+- Branch :: =feature/igc3=
 
 - Recommended OS :: I use Debian Stable.  This config /might/ work on MacOS and WSL.  I don’t use either, so no guarantees.
 
 Configured with (=C-h v= ~system-configuration-options~):
 
 #+BEGIN_SRC
-'CPPFLAGS=-I/opt/customlibs/mps_artifacts -I/opt/customlibs/tree-sitter/include'
-'LDFLAGS=-L/opt/customlibs/mps_artifacts -L/opt/customlibs/tree-sitter/lib -Wl,-rpath,/opt/customlibs/tree-sitter/lib'
-'CFLAGS=-O4 -flto -fuse-linker-plugin -march=native -mtune=native -fomit-frame-pointer'
-'CXXFLAGS=-O4 -flto -fuse-linker-plugin -march=native -mtune=native -fomit-frame-pointer'
+'CPPFLAGS=-I/home/sys2/temp/git/emacs260925/mps_artifacts
+-I/opt/customlibs/tree-sitter/include'
+'LDFLAGS=-L/home/sys2/temp/git/emacs260925/mps_artifacts
+-L/opt/customlibs/tree-sitter/lib
+-Wl,-rpath,/opt/customlibs/tree-sitter/lib'
+'CFLAGS=-O2
+-flto
+-fuse-linker-plugin
+-march=native
+-mtune=native
+-fomit-frame-pointer'
+'CXXFLAGS=-O2
+-flto
+-fuse-linker-plugin
+-march=native
+-mtune=native
+-fomit-frame-pointer'
 --with-native-compilation=aot
 --prefix=/opt/emacs/
 --with-mps=yes
