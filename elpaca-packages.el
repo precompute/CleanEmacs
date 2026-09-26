@@ -99,6 +99,12 @@
 (elpacaLF "tramp" t)
 ;;; Compile
 (elpacaLF "compile" t)
+;;; Recentf
+(elpacaLF "recentf" t)
+;;; Help At Point
+(elpacaLF "help-at-pt" t)
+;;; Savehist
+(elpacaLF "savehist" t)
 ;;; Indent Guides
 (elpacaLF "highlight-indent-guides")
 ;; (elpacaC "indent-bars")

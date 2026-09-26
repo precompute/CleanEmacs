@@ -62,7 +62,6 @@
   "fF" 'find-file-other-window
   "f C-f" 'find-file-other-frame
   "fr" 'consult-recent-file
-  "fR" 'recentf-open-files
   "fd" 'make-directory
   "fe" 'rename-visited-file
   "f C-n" 'np-file-next-file

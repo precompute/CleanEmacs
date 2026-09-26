@@ -28,9 +28,6 @@
 
 (setq history-length 150)
 
-(setq recentf-max-menu-items 150
-      recentf-max-saved-items 150)
-
 (setq load-prefer-newer t)
 
 (setq enable-recursive-minibuffers t)
@@ -63,9 +60,6 @@
 (setq disabled-command-function nil)
 
 (mouse-avoidance-mode 'exile)
-
-(setq lazy-highlight-cleanup nil
-      lazy-highlight-initial-delay 0.1)
 
 (setq messages-buffer-max-lines 100000)
 
@@ -105,15 +99,7 @@
 (winner-mode 1)
 (fringe-mode '(7 . 7))
 (save-place-mode 1)
-(recentf-mode 1)
 (undelete-frame-mode 1)
-
-(savehist-mode 1)
-(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
-
-(setq-default help-at-pt-display-when-idle t
-              help-at-pt-timer-delay 0.5)
-(help-at-pt-set-timer) ;; hints in the echo area
 
 (auto-save-mode 1)
 (setcache-c auto-save-list-file-prefix ".saves-")

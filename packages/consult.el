@@ -1,12 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 (use-package consult
   :custom
-  (setq consult-ripgrep-args
-        (string-clean-whitespace
-         (concat
-          (replace-regexp-in-string "--smart-case" ""
-                                    (replace-regexp-in-string "--search-zip" "" consult-ripgrep-args))
-          " --ignore-case")))
   (consult-async-split-style 'semicolon)
   (consult-async-input-debounce 0.1)
   (consult-async-input-throttle 0.25)
@@ -21,7 +15,7 @@
   (global-set-key [remap locate] #'consult-locate)
   (global-set-key [remap load-theme] #'consult-theme)
   ;; (global-set-key [remap man] #'consult-man)
-  ;; (global-set-key [remap recentf-open-files] #'consult-recent-file)
+  (global-set-key [remap recentf-open-files] #'consult-recent-file)
   (global-set-key [remap switch-to-buffer] #'consult-buffer)
   (global-set-key [remap switch-to-buffer-other-window] #'consult-buffer-other-window)
   (global-set-key [remap switch-to-buffer-other-frame]  #'consult-buffer-other-frame)
