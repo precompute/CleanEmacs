@@ -26,7 +26,7 @@
 (setq process-adaptive-read-buffering nil)
 (setq read-process-output-max (* 1 1024 1024))
 
-(setq history-length 150)
+(setq history-length 250)
 
 (setq load-prefer-newer t)
 
@@ -53,7 +53,7 @@
 (setq blink-cursor-delay 0.16
       blink-cursor-interval 0.16
       blink-cursor-blinks 0)
-(blink-cursor-mode 1)
+(blink-cursor-mode -1)
 
 (setq-default fill-column 97)
 
@@ -63,9 +63,9 @@
 
 (setq messages-buffer-max-lines 100000)
 
-(setq undo-limit (* 256 1024 1024)
-      undo-strong-limit (* 384 1024 1024)
-      undo-outer-limit (* 512 1024 1024))
+(setq undo-limit (* 24 1024 1024)
+      undo-strong-limit (* 30 1024 1024)
+      undo-outer-limit (* 48 1024 1024))
 
 (minibuffer-depth-indicate-mode t)
 

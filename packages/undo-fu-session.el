@@ -4,6 +4,6 @@
   (setq undo-fu-session-directory
         (expand-file-name ".undo-fu-session/"
                           user-cache-directory)
-        undo-fu-session-compression 'zst)
+        undo-fu-session-compression 'gz)
   :init
   (undo-fu-session-global-mode))
