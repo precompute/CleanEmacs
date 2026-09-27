@@ -30,6 +30,7 @@
         evil-emacs-state-cursor 'bar)
   (setq evil-want-fine-undo t)
   (setq-default evil-mode-line-format nil)
+  (setq evil-auto-balance-windows nil)
   (evil-put-command-property 'evil-yank-line :motion 'evil-end-of-line-or-visual-line) ;; workaround for evil-want-Y-yank-to-eol
 
   (evil-define-text-object evil-textobj-whole-buffer (count &optional _beg _end type)

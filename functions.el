@@ -772,6 +772,17 @@ It switches the width before the height."
     (call-interactively #'evil-window-left)
     (call-interactively #'follow-mode 1)))
 
+;;;;; Root Window Split and Follow
+(defun split-root-window-below-and-follow-c ()
+  "Switch to window returned by `split-root-window-below'."
+  (interactive)
+  (select-window (split-root-window-below)))
+
+(defun split-root-window-right-and-follow-c ()
+  "Switch to window returned by `split-root-window-right'."
+  (interactive)
+  (select-window (split-root-window-right)))
+
 ;;;;; Window History
 (defun window-history-prev-c (&optional forward?)
   "Go backwards in window history.  Tab-bar aware.

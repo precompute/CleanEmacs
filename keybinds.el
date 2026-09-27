@@ -196,8 +196,8 @@
   "wj" 'windmove-swap-states-left
   "wl" 'windmove-swap-states-down
   "wu" 'windmove-swap-states-up
-  "ww" 'split-root-window-below
-  "wW" 'split-root-window-right
+  "ww" 'split-root-window-below-and-follow-c
+  "wW" 'split-root-window-right-and-follow-c
   "wy" 'windmove-swap-states-right
   "wb" 'balance-windows-area
   "wB" 'balance-windows
