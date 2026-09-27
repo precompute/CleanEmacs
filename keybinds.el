@@ -284,7 +284,9 @@
  "_" 'locate-git-file-c
  "<right>" 'dired-find-file
  "<left>" 'dired-up-directory
- "S-<right>" 'dired-subtree-toggle)
+ "S-<right>" 'dired-subtree-toggle
+ "gt" 'dired-open-marked-in-new-tab
+ "gf" 'dired-open-marked-in-new-frame)
 
 (general-define-key
  :states 'normal

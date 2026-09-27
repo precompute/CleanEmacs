@@ -117,7 +117,8 @@ If ARG is non-nil, kill path."
                                 :height 1.95
                                 :box (list :line-width 2)))))
 
-;;;;; Dired jump other window
+;;;;; Dired
+;;;;;; Dired jump other window
 (defun dired-jump-other-window ()
   "`dired-jump’ with OTHER-WINDOW as t."
   (interactive)
@@ -141,6 +142,45 @@ If ARG is non-nil, kill path."
 ;; (defun clone-indirect-buffer-with-action-split ()
 ;;   (interactive)
 ;;   (clone-indirect-buffer-with-action 'display-buffer-below-selected))
+
+;;;;;; Open Marked in new tab
+(defun dired-open-marked-in-new-tab (tabname arg)
+  "Open marked files in a new tab named TABNAME.
+With \\[universal-argument], don't unmark files."
+  (interactive "sTab Name: \nP")
+  (when-let* (tab-bar-mode
+              (markedfiles (and (eq major-mode 'dired-mode)
+                                (dired-get-marked-files)))
+              (tabnumber (1+ (tab-bar--current-tab-index (tab-bar-tabs)))))
+    (save-excursion
+      (tab-bar-new-tab)
+      (when (and tabname (not (string-empty-p tabname)))
+        (tab-bar-rename-tab tabname))
+      (mapc (lambda (z) (find-file z) (select-window (split-window)))
+            markedfiles)
+      (delete-window)
+      (balance-windows))
+    (tab-bar-select-tab tabnumber)
+    (unless arg (dired-unmark-all-marks))))
+
+;;;;;; Open Marked in new frame
+(defun dired-open-marked-in-new-frame (arg)
+  "Open marked files in a new frame.
+With \\[universal-argument], don't unmark files."
+  (interactive "P")
+  (when-let* ((markedfiles (and (eq major-mode 'dired-mode)
+                                (dired-get-marked-files)))
+              (originalframe (selected-frame))
+              (newframe (make-frame)))
+    (save-excursion
+      (select-frame newframe)
+      (toggle-frame-maximized)
+      (mapc (lambda (z) (find-file z) (select-window (split-window)))
+            markedfiles)
+      (delete-window)
+      (balance-windows))
+    (select-frame originalframe)
+    (unless arg (dired-unmark-all-marks))))
 
 ;;;;; Undo
 (defun undo-with-prefix ()
