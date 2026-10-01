@@ -226,7 +226,6 @@
   "hM" 'woman
   "h C-f" 'elisp-show-callable-definition-c
   "h C-v" 'elisp-show-variable-definition-c
-  ;; `elisp-slime-nav-describe-elisp-thing-at-point` is not adequate
 
   "d" '(:ignore t :wk "other")
   "ds" 'lexic-search-word-at-point
@@ -266,11 +265,6 @@
  "C-w C-r" 'window-history-next-c)
 
 ;;;;;;; Nav/other
-(general-define-key
- :states 'normal
- :keymaps 'emacs-lisp-mode-map
- "K" 'elisp-slime-nav-describe-elisp-thing-at-point)
-
 (general-define-key
  "s-C-w s-C-h" 'windmove-left
  "s-C-w s-C-j" 'windmove-down

@@ -28,8 +28,8 @@
 (elpacaLF "evil")
 ;;;; number of matches
 (elpacaLF "evil-anzu")
-;;;; textobjects
-(elpacaLF "evil-args")
+;; ;;;; textobjects
+;; (elpacaLF "evil-args")
 ;;;; keybinds
 (elpacaLF "evil-collection")
 ;;;; exchange
@@ -42,14 +42,14 @@
 (elpacaLF "evil-numbers")
 ;;;; visual hints
 (elpacaLF "evil-goggles")
-;;;; quick jump
-(elpacaLF "evil-snipe")
+;; ;;;; quick jump
+;; (elpacaLF "evil-snipe")
 ;;;; delimiter add/remove/replace
 (elpacaLF "evil-surround")
 ;;;; search with *
 (elpacaLF "evil-visualstar")
-;;;; indentation textobjects
-(elpacaLF "evil-indent-plus")
+;; ;;;; indentation textobjects
+;; (elpacaLF "evil-indent-plus")
 ;;; Themes
 ;;;; Sculpture-Themes
 (elpacaLF "sculpture-themes")
@@ -103,8 +103,8 @@
 (elpacaLF "help-at-pt" t)
 ;;; Savehist
 (elpacaLF "savehist" t)
-;;; Indent Guides
-(elpacaLF "highlight-indent-guides")
+;; ;;; Indent Guides
+;; (elpacaLF "highlight-indent-guides")
 ;; (elpacaC "indent-bars")
 ;;; Which-Key
 (elpacaLF "which-key")
@@ -205,8 +205,8 @@
 (elpacaLF "org-agenda" t)
 ;;;; Org Bullets
 (elpacaLF "org-bullets")
-;;;; Org Super Agenda
-(elpacaLF "org-super-agenda")
+;; ;;;; Org Super Agenda
+;; (elpacaLF "org-super-agenda")
 ;;;; Show Markup when under point
 (elpacaLF "org-appear")
 ;; ;;;; Sliced Images
@@ -228,11 +228,11 @@
 (elpacaLF "eglot" t)
 ;;;; Elisp-mode
 (elpacaLF "elisp-mode" t)
-;;;; Elisp
-(elpacaLF "elisp-slime-nav")
+;; ;;;; Elisp
+;; (elpacaLF "elisp-slime-nav")
 ;;;; Markdown
-(elpacaLF "markdown-mode")
-;; (elpacaLF "markdown-ts-mode" t)
+;; (elpacaLF "markdown-mode")
+(elpacaLF "markdown-ts-mode" t)
 ;;;; Lua
 (elpacaLF "lua-mode")
 ;;;; Go
