@@ -86,6 +86,12 @@ point."
     (interactive "<r>")
     (eval-region beg end))
 
+  (evil-define-operator evil-operator-comment-region (beg end)
+    "Comment or uncomment a region."
+    :move-point nil
+    (interactive "<r>")
+    (comment-or-uncomment-region beg end))
+
   (defun evil-reselect-paste ()
     "Return to visual mode and reselect the last pasted region.
 Copied from Doom’s +evil/reselect-paste."

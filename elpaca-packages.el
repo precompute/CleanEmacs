@@ -36,8 +36,8 @@
 (elpacaLF "evil-exchange")
 ;;;; align
 (elpacaLF "evil-lion")
-;;;; comments
-(elpacaLF "evil-nerd-commenter")
+;; ;;;; comments
+;; (elpacaLF "evil-nerd-commenter")
 ;;;; numbers
 (elpacaLF "evil-numbers")
 ;;;; visual hints
@@ -99,8 +99,6 @@
 (elpacaLF "tramp" t)
 ;;; Compile
 (elpacaLF "compile" t)
-;;; Recentf
-(elpacaLF "recentf" t)
 ;;; Help At Point
 (elpacaLF "help-at-pt" t)
 ;;; Savehist

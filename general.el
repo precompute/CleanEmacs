@@ -28,6 +28,9 @@
 
 (setq history-length 250)
 
+(setq recentf-max-menu-items 250
+      recentf-max-saved-items 250)
+
 (setq load-prefer-newer t)
 
 (setq enable-recursive-minibuffers t)
@@ -80,7 +83,7 @@
 (defmacro setcache-c (var file)
   "Macro to set file location for VAR to `user-cache-directory'/FILE."
   `(setq-default ,var (expand-file-name ,file user-cache-directory)))
-(setcache-c recentf-save-file "recentf")
+(setcache-c recentf-save-file "recentf.eld")
 (setcache-c project-list-file "projects")
 (setcache-c savehist-file "history")
 (setcache-c transient-history-file "transient/history")
@@ -99,6 +102,7 @@
 (winner-mode 1)
 (fringe-mode '(7 . 7))
 (save-place-mode 1)
+(recentf-mode 1)
 (undelete-frame-mode 1)
 
 (auto-save-mode 1)

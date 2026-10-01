@@ -181,8 +181,8 @@
   "c" '(:ignore t :wk "code diagnostics")
   "cd" 'flymake-show-buffer-diagnostics
   "cR" 'consult-flymake
-  "cC" 'compile
-  "cc" 'recompile
+  "cC" 'project-compile
+  "cc" 'project-recompile
   "cE" 'load-current-file
 
   "w" '(:ignore t :wk "window")
@@ -298,8 +298,8 @@
 (general-define-key
  :states 'normal
  "g" '(:ignore t)
- "g c" 'evilnc-comment-operator
- "g g" 'evil-goto-first-line
+ "g c" 'evil-operator-comment-region
+;;  "g g" 'evil-goto-first-line
  "g e" 'evil-operator-eval-region
  "g p" 'evil-reselect-paste)
 
