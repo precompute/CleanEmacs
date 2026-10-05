@@ -182,6 +182,15 @@ With \\[universal-argument], don't unmark files."
     (select-frame originalframe)
     (unless arg (dired-unmark-all-marks))))
 
+;;;;;; Create Empty File
+(defun create-empty-file-c ()
+  "If in dired-mode, create an empty file.  Otherwise find-file."
+  (interactive)
+  (if (derived-mode-p 'dired-mode)
+      (let ((dired-create-empty-file-in-current-directory t))
+        (call-interactively #'dired-create-empty-file))
+    (call-interactively #'find-file)))
+
 ;;;;; Undo
 (defun undo-with-prefix ()
   (interactive)

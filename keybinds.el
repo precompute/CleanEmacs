@@ -64,6 +64,7 @@
   "fr" 'consult-recent-file
   "fd" 'make-directory
   "fe" 'rename-visited-file
+  "fn" 'create-empty-file-c
   "f C-n" 'np-file-next-file
   "f C-p" 'np-file-previous-file
 

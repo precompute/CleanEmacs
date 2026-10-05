@@ -11,16 +11,12 @@
  '(org-ellipsis ((t :height 1.3 :weight bold)))
  '(magit-diff-file-heading ((t :height 1.3))))
 
-(defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
-(defface tab-bar-font-family-face '((t)) "Face for tab-bar's font family.")
-(defface text-face-c '((t :family "Guardi LT Std")) "Custom face for text.")
-
-;;; Theme
 (defun get-face-colors-c (&rest rest)
   "Generate custom face color variables from the active theme’s colors.  Ignore REST."
   (interactive)
   (dolist (z (cl-loop for z in '( default region error success
-                                  builtin keyword constant string regexp type doc)
+                                  builtin keyword constant string regexp type doc
+                                  punctuation)
                       append (cl-loop for y in '(background foreground)
                                       collect (list (if (memq z '(default region error success)) z
                                                       (intern (format "font-lock-%s-face" z)))
@@ -32,6 +28,13 @@
            (val (when (facep face) (face-attribute face type))))
       (if (eq val 'unspecified) (set var nil) (set var val)))))
 
+(defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
+(defface tab-bar-font-family-face '((t)) "Face for tab-bar's font family.")
+(defface text-face-c '((t :family "Guardi LT Std")) "Custom face for text.")
+(defface inverted-default-face `((t)) "The default face, but inverted.")
+(defface quotes-face `((t)) "Custom face for quoted text.")
+
+;;; Theme
 (defun get-face-prop-c (face prop)
   "Get PROP of FACE.  Like `headerline-get-color-prop' without fallback."
   ((lambda (z) (if (or (not z) (= 35 (aref z 0))) z
@@ -71,6 +74,12 @@
                           :inherit 'fixed-pitch
                           :box `(:color ,current--default-face-background)
                           :background current--string-face-foreground)))
+
+(defun set-custom-faces-c (&optional theme)
+  "Set custom faces.  Optional THEME for `enable-theme-functions'."
+  (interactive)
+  (set-face-attribute 'quotes-face nil :foreground current--punctuation-face-foreground)
+  (set-face-attribute 'inverted-default-face nil :foreground current--default-face-background))
 
 (defun set-eldoc-box-faces-c (&optional theme)
   "Set faces for eldoc-box.  Optional THEME for `enable-theme-functions’."
@@ -152,6 +161,7 @@
              set-dired-posframe-face-c
              set-eldoc-box-faces-c
              set-org-mode-faces-c
+             set-custom-faces-c
              get-face-colors-c))
   (add-to-list 'enable-theme-functions f))
 

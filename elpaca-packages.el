@@ -99,6 +99,8 @@
 (elpacaLF "tramp" t)
 ;;; Compile
 (elpacaLF "compile" t)
+;;; XRef
+(elpacaLF "xref" t)
 ;;; Help At Point
 (elpacaLF "help-at-pt" t)
 ;;; Savehist
