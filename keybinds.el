@@ -300,6 +300,7 @@
 
 (general-define-key
  :states 'motion
+ "i ," 'evil-textobj-comma
  "a g" 'evil-textobj-whole-buffer
  "a v" 'evil-textobj-visible-lines
  "a f" 'evil-textobj-get-func

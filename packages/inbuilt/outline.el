@@ -1,28 +1,22 @@
 ;; -*- lexical-binding: t; -*-
 (use-package outline
   :ensure nil
-  :hook ((clojure-mode
-          clojure-ts-mode
-          emacs-lisp-mode
-          sh-mode
-          lua-mode
-          lua-ts-mode
-          c-mode
-          c-ts-mode
-          c++-mode
-          c++-ts-mode
-          ;; python-mode
-          ;; python-ts-mode
-          js-mode
-          js-base-mode
-          rust-mode
-          rust-ts-mode) . outline-minor-mode)
+  :hook (( clojure-mode clojure-ts-mode
+           emacs-lisp-mode
+           sh-mode
+           lua-mode lua-ts-mode
+           c-mode c-ts-mode c++-mode c++-ts-mode
+           ;; python-mode python-ts-mode
+           js-mode js-base-mode
+           rust-mode rust-ts-mode) . outline-minor-mode)
   ((js-mode js-base-mode) . (lambda () (setq-local outline-regexp js-mode-outline-regexp-c
                                                    outline-level #'outline-level-group-1-c)))
   (sh-mode . (lambda () (setq-local outline-regexp sh-mode-outline-regexp-c
                                     outline-level #'outline-level-group-1-c)))
-  ((c-mode c++-mode) . (lambda () (setq-local outline-regexp c-mode-outline-regexp-c
-                                              outline-level #'outline-level-group-1-c)))
+  ((c-mode c++-mode c-ts-mode c++-ts-mode) .
+   (lambda () (setq-local outline-regexp c-mode-outline-regexp-c
+                          outline-level #'outline-level-group-1-c
+                          outline-search-function nil))) ; Used to be treesit-outline-search
   :preface (setq outline-minor-mode-map nil)
   :config
   (setq js-mode-outline-regexp-c (rx (* (or space blank)) (= 2 ?/) (or space blank) (group (+ "*"))))
@@ -30,4 +24,4 @@
   (setq c-mode-outline-regexp-c (rx bol "///" (or space blank) (group (+ "*"))))
   (defun outline-level-group-1-c ()
     "Calculate the characters in the first group of the match."
-    (- (match-end 1) (match-beginning 1))))
+    (when-let* ((a (match-end 1)) (b (match-beginning 1))) (- a b))))

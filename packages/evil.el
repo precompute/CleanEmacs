@@ -80,6 +80,12 @@ point."
           (end (save-excursion (outline-end-of-subtree) (pos-eol))))
       (evil-range start end type)))
   
+  (evil-define-text-object evil-textobj-comma (count &optional _beg _end type)
+    "Text object for text between commas."
+    (let ((start (1+ (save-excursion (search-backward "," nil t))))
+          (end (1- (save-excursion (search-forward "," nil t (when (> count 0) count))))))
+      (evil-range start end type)))
+
   (evil-define-operator evil-operator-eval-region (beg end)
     "Evaluate selection."
     :move-point nil
