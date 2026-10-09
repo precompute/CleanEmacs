@@ -31,6 +31,7 @@
 (defface fixed-pitch-numbers '((t)) "Face for fixed-pitch numbers.")
 (defface tab-bar-font-family-face '((t)) "Face for tab-bar's font family.")
 (defface text-face-c '((t :family "Guardi LT Std")) "Custom face for text.")
+(defface text-face-1-c '((t :family "GT America LCG" :weight light :width normal)) "Custom face 1 for text.")
 (defface inverted-default-face `((t)) "The default face, but inverted.")
 (defface quotes-face `((t)) "Custom face for quoted text.")
 
@@ -151,7 +152,7 @@
   (interactive)
   (when (facep 'dired-date-face-c)
     (set-face-attribute 'dired-date-face-c nil
-                      :box `(:line-width (5 . -1) :color ,current--region-face-background))))
+                        :box `(:line-width (5 . -1) :color ,current--region-face-background))))
 
 (dolist (f '(set-dired-face-c
              set-tab-bar-face-c

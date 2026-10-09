@@ -30,6 +30,10 @@
  "s-l" 'evil-forward-char
  "s-j" 'evil-next-line
  "s-k" 'evil-previous-line
+ "C-s-h" 'left-word
+ "C-s-l" 'right-word
+ "C-s-j" 'forward-paragraph
+ "C-s-k" 'backward-paragraph
 
  "<mouse-8>" 'previous-buffer
  "<mouse-9>" 'next-buffer

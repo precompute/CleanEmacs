@@ -304,6 +304,8 @@ Copies to system clipboard."
                 mf))))
 
 ;;;;; Next / Previous File
+(setq listfiles-executable-c (executable-find "listfiles"))
+
 (defun np-file--generate-file-list-c ()
   "Generate a list of files in the current directory, with the file in the current buffer as the pivot."
   (when-let* ((path (buffer-file-name))
@@ -319,23 +321,48 @@ Copies to system clipboard."
                                 filelist)
                            dir))))))
 
-(defun np-file-next-file ()
+(defun np-file-next-file (arg &optional inverse?)
   "Visit the next file in the current directory."
-  (interactive)
-  (let ((f (cdr (np-file--generate-file-list-c))))
-    (if (string-equal f (buffer-file-name))
-        (message (format "No more files after the current file." f))
-      (message (format "Opening next file: %s" f))
-      (find-file f))))
+  (interactive "P")
+  (if listfiles-executable-c
+      (when-let*
+          (buffer-file-name
+           (file (file-truename (buffer-file-name)))
+           (dir (file-name-directory file))
+           (sortprop (if arg (completing-read "Sort Order: "
+                                              (list "alpha" "size" "time") nil t)
+                       "alpha"))
+           (mimetype (if arg (read-string "Mimetype Prefix: " "text") "text"))
+           (returnnum (if arg (read-number "Number of results: " 1) 1))
+           (z (with-temp-buffer (call-process "listfiles"
+                                              nil t nil
+                                              "-d" dir "-f" file
+                                              "-s" (if inverse? "desc" "asc")
+                                              "-p" sortprop "-m" mimetype
+                                              "-r" (number-to-string returnnum))
+                                (string-trim (buffer-string))))
+           (flist (split-string z))
+           (flistl (length flist)))
+        (if (= 0 flistl)
+            (message "No files found %s the current file." (if inverse? "before" "after"))
+          (if (= 1 flistl)
+              (find-file (car flist))
+            (message "Opening %s files." flistl)
+            (dolist (y flist)
+              (set-window-buffer (split-window-below) (find-file-noselect y))
+              (balance-windows)))))
+    (let ((f (if inverse?
+                 (car (np-file--generate-file-list-c))
+               (cdr (np-file--generate-file-list-c)))))
+      (if (string-equal f (buffer-file-name))
+          (message "No more files % the current file." (if inverse? "before" "after"))
+        (message "Opening %s file: %s" (if inverse? "previous" "next") f)
+        (find-file f)))))
 
-(defun np-file-previous-file ()
+(defun np-file-previous-file (arg)
   "Visit the next file in the current directory."
-  (interactive)
-  (let ((f (car (np-file--generate-file-list-c))))
-    (if (string-equal f (buffer-file-name))
-        (message (format "No more files before the current file." f))
-      (message (format "Opening previous file: %s" f))
-      (find-file f))))
+  (interactive "P")
+  (np-file-next-file arg t))
 
 ;;;;; tab-bar
 (defun tab-bar-next-tab-c (arg &optional prev? nocreate)
@@ -1107,9 +1134,9 @@ Then place point at end of #+begin statement for metadata insertion."
     ("<prior>" "Prev \" 1\" Match"
      (lambda () (interactive)
        (search-backward (concat main-log-init-date " 1"))))]
-    ;; ("h" "previous level" org-up-element)
-    ;; ("l" "next level" org-down-element)
-    ]
+   ;; ("h" "previous level" org-up-element)
+   ;; ("l" "next level" org-down-element)
+   ]
   ["Ops"
    [("o" "cycle local" org-cycle)
     ("O" "cycle global" org-shifttab)

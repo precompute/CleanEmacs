@@ -247,6 +247,8 @@
 (elpacaLF "lfe-mode")
 ;;;; Javascript
 (elpacaLF "js" t)
+;;;; Typescript
+(elpacaLF "typescript-ts-mode" t)
 ;;;; Rust
 ;; (elpacaLF "rustic")
 ;;;; Haskell

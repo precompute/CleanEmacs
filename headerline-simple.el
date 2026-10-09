@@ -541,6 +541,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                 eshell-mode-hook
                 pdf-view-mode-hook
                 lexic-mode-hook
+                imenu-list-major-mode-hook
                 ibuffer-hook
                 ibuffer-mode-hook))
   (add-hook hook 'headerline-simple-mode 100)

@@ -21,7 +21,7 @@
   :config
   (setq js-mode-outline-regexp-c (rx (* (or space blank)) (= 2 ?/) (or space blank) (group (+ "*"))))
   (setq sh-mode-outline-regexp-c (rx bol "###" (or space blank) (group (+ "*"))))
-  (setq c-mode-outline-regexp-c (rx bol "///" (or space blank) (group (+ "*"))))
+  (setq c-mode-outline-regexp-c (rx bol (* (or space blank)) "///" (or space blank) (group (+ "*"))))
   (defun outline-level-group-1-c ()
     "Calculate the characters in the first group of the match."
     (when-let* ((a (match-end 1)) (b (match-beginning 1))) (- a b))))
