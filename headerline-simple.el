@@ -127,6 +127,7 @@ TYPE can be `:error', `:warning' or `:note'."
 (defface headerline-flymake-err-face '((t)) "Face for Flymake Err-Diagnostics.")
 (defface headerline-flymake-warn-face '((t)) "Face for Flymake Warn-Diagnostics.")
 (defface headerline-flymake-note-face '((t)) "Face for Flymake Note-Diagnostics.")
+(defface headerline-custom-stat-face '((t)) "Face for custom stats.")
 (defface headerline-custom-space-face '((t)) "Face for spaces.")
 (defface headerline-evil-insert-active-face '((t)) "Face for when evil insert is active.")
 
@@ -165,9 +166,9 @@ TYPE can be `:error', `:warning' or `:note'."
          (height 1.3)
          (height2 1.0)
          (mix1 (headerline-mix-colors (if (not (eq 'unspecified fl-variable)) fl-variable
-                             (if (not (eq 'unspecified fl-type))
-                                 fl-type
-                               fl-string)) regionface 0.6)))
+                                        (if (not (eq 'unspecified fl-type))
+                                            fl-type
+                                          fl-string)) regionface 0.6)))
     (let ((c (headerline-mix-colors regionface (if light-theme? defaultfg fl-doc) (if light-theme? 0.75 0.25))))
       (set-face-attribute 'headerline-base-face nil
                           :inherit 'variable-pitch
@@ -266,6 +267,15 @@ TYPE can be `:error', `:warning' or `:note'."
                         :height 1.25
                         :foreground flymake-note-color
                         :box `(:color ,flymake-note-color :line-width (1 . -1)))
+    (set-face-attribute 'headerline-custom-stat-face nil
+                        :inherit 'fixed-pitch-numbers
+                        :background 'unspecified
+                        :weight 'bold
+                        :foreground fl-type
+                        :height 1.25
+                        :underline `(:color ,fl-type :style dots)
+                        :box nil
+                        :overline nil)
     (set-face-attribute 'headerline-evil-insert-active-face nil
                         :foreground (headerline-mix-colors fl-keyword fl-builtin)
                         :background 'unspecified)
@@ -469,6 +479,19 @@ Specific to the current window."
 Functionally equivalent to `mode-line-format-right-align’."
   `(:eval (mode--line-format-right-align)))
 
+(defvar-local headerline-custom-stat-function-c nil)
+(defvar-local headerline-custom-stat-suffix-c "")
+(defun headerline-custom-stat-c ()
+  "When the buffer-local variable `headerline-custom-stat-function-c' is set, funcall it and
+display its value."
+  (if headerline-custom-stat-function-c
+      (concat " "
+              (propertize
+               (format "%s%s" (funcall headerline-custom-stat-function-c)
+                       headerline-custom-stat-suffix-c)
+               'face 'headerline-custom-stat-face)
+              " ")))
+
 ;;;;; Headerline Construction
 (defun headerline-simple-mode ()
   "Custom Header-Line mode.  Changes `header-line-format’ for the current buffer (with `setq-local’)."
@@ -492,6 +515,7 @@ Functionally equivalent to `mode-line-format-right-align’."
                                                headerline-line-number-c
                                                headerline-custom-space
                                                headerline-buffer-percent-c
+                                               (headerline-custom-stat-c)
                                                headerline-custom-space
                                                mode-line-misc-info))))
 
