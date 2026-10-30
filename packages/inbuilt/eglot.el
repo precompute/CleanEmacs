@@ -10,8 +10,7 @@
           elixir-ts-mode
           zig-mode
           rust-mode
-          rust-ts-mode
-          lua-mode) . eglot-ensure)
+          rust-ts-mode) . eglot-ensure)
   :bind (:map eglot-mode-map
               ("C-M-/" . eglot-format))
   :config

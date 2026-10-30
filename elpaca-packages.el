@@ -155,6 +155,8 @@
 ;; (elpacaLF "backline")
 ;;; PDF Tools
 (elpacaLF "pdf-tools")
+;; ;;; PDF Reader
+;; (elpacaLF "reader")
 ;;; Alarm Clock
 (elpacaLF "alarm-clock")
 ;;; Dired

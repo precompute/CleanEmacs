@@ -374,7 +374,7 @@
  "H-w >" 'jump-to-next-frame-c)
 
 (general-define-key
- :states 'normal
+ :states '(normal insert)
  "C-z" 'legit-to-line
  "C-S-z" 'legit-from-line)
 
