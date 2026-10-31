@@ -175,9 +175,11 @@
   "oC" 'calc
 
   "t" '(:ignore t :wk "toggle")
-  "tl" 'display-line-numbers-mode
+  "tl" 'toggle-line-numbers-c
+  "tL" 'toggle-relative-line-numbers-c
   "ti" 'highlight-indent-guides-mode
   "tf" 'follow-mode
+  "th" 'toggle-hl-line-c
   "tt" 'toggle-truncate-lines
   "tc" 'corfu-mode
   "tC" 'corfu-toggle-autocomplete

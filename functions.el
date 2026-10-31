@@ -75,6 +75,29 @@ DIR is the directory, INITIAL is the string."
             (propertize "REVERTING." 'face '(variable-pitch success))))
           (revert-buffer t t))))))
 
+(defun toggle-line-numbers-c (arg)
+  "Display line numbers in the current buffer.
+When ARG is non-nil, toggle it globally."
+  (interactive "P")
+  (if arg
+      (global-display-line-numbers-mode (if global-display-line-numbers-mode -1 1))
+    (display-line-numbers-mode (if display-line-numbers-mode -1 1))))
+
+(defun toggle-relative-line-numbers-c (arg)
+  "Display relative line numbers in the current buffer.
+When ARG is non-nil, toggle it globally."
+  (interactive "P")
+  (let ((display-line-numbers-type 'relative))
+    (toggle-line-numbers-c arg)))
+
+(defun toggle-hl-line-c (arg)
+  "Toggle line highlight in the current buffer.
+When ARG is non-nil, toggle it globally."
+  (interactive "P")
+  (if arg
+      (global-hl-line-mode (if global-hl-line-mode -1 1))
+    (hl-line-mode (if hl-line-mode -1 1))))
+
 ;;;;; Eldoc-box
 (defun toggle-eldoc-box ()
   (interactive)
